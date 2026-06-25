@@ -1,0 +1,36 @@
+{
+  "name": "finvesta-clone",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "scrape": "node scripts/scrape.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "^11.7.0",
+      "onFail": "download"
+    }
+  },
+  "pnpm": {
+    "ignoredBuiltDependencies": [
+      "sharp"
+    ]
+  },
+  "type": "module",
+  "dependencies": {
+    "lucide-react": "^1.21.0",
+    "next": "^16.2.9",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
+  },
+  "devDependencies": {
+    "cheerio": "^1.2.0"
+  }
+}

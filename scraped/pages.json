@@ -1,0 +1,1783 @@
+{
+  "pages": [
+    {
+      "route": "/",
+      "slug": "home",
+      "url": "https://www.finvesta.eco",
+      "meta": {
+        "title": "Finvesta Ecosystem | Bonds, Printers & Brain Governance on PulseChain",
+        "description": "Finvesta is a decentralized PulseChain ecosystem connecting Bondsmen, Printers, and autonomous smart-contract systems for governance, research, and protocol experimentation.",
+        "ogTitle": "Finvesta Ecosystem | Bonds, Printers & Brain Governance on PulseChain",
+        "ogDescription": "Finvesta is a decentralized PulseChain ecosystem connecting Bondsmen, Printers, and autonomous smart-contract systems for governance, research, and protocol experimentation.",
+        "ogImage": "https://static.wixstatic.com/media/237c51_dba7ffa03e9c47f883f4388238f5c9dc~mv2.png/v1/fill/w_1643,h_890,al_c/237c51_dba7ffa03e9c47f883f4388238f5c9dc~mv2.png",
+        "canonical": "https://www.finvesta.eco"
+      },
+      "favicon": "https://static.wixstatic.com/media/237c51_2134b3f30991438fb50dbabc6642b69a%7Emv2.png/v1/fill/w_192%2Ch_192%2Clg_1%2Cusm_0.66_1.00_0.01/237c51_2134b3f30991438fb50dbabc6642b69a%7Emv2.png",
+      "links": [
+        {
+          "text": "FINVESTA.ECO",
+          "href": "https://www.finvesta.eco/"
+        },
+        {
+          "text": "👀 Pulsewatch",
+          "href": "https://pulsewatch.app/"
+        },
+        {
+          "text": "📈 Tracker",
+          "href": "https://ogprinters.pulsewatch.app/"
+        },
+        {
+          "text": "WHITE PAPER",
+          "href": "https://www.finvesta.eco/whitepaper"
+        },
+        {
+          "text": "FINVESTA CHART",
+          "href": "https://dexscreener.com/pulsechain/0x615cfd552e98eb97e5557b03aa41d0e85e98167b"
+        },
+        {
+          "text": "ENTER DAPP",
+          "href": "https://dao.finvesta.eco/"
+        },
+        {
+          "text": "WHITEPAPER",
+          "href": "https://www.finvesta.eco/whitepaper"
+        },
+        {
+          "text": "👀 Pulsewatch",
+          "href": "https://pulsewatch.app/"
+        },
+        {
+          "text": "📈 Tracker",
+          "href": "https://ogprinters.pulsewatch.app/"
+        },
+        {
+          "text": "WHITE PAPER",
+          "href": "https://www.finvesta.eco/whitepaper"
+        }
+      ],
+      "imageInfos": [
+        {
+          "uri": "237c51_2134b3f30991438fb50dbabc6642b69a~mv2.png",
+          "alt": "image.png",
+          "width": 800,
+          "height": 800,
+          "original": "https://static.wixstatic.com/media/237c51_2134b3f30991438fb50dbabc6642b69a~mv2.png"
+        },
+        {
+          "uri": "237c51_4c6e12b3de2f47979f79b0d4a64656f2~mv2.png",
+          "alt": "MMMMM.png",
+          "width": 1885,
+          "height": 1043,
+          "original": "https://static.wixstatic.com/media/237c51_4c6e12b3de2f47979f79b0d4a64656f2~mv2.png"
+        },
+        {
+          "uri": "237c51_4c6e12b3de2f47979f79b0d4a64656f2~mv2.png",
+          "alt": "MMMMM.png",
+          "width": 1885,
+          "height": 1043,
+          "original": "https://static.wixstatic.com/media/237c51_4c6e12b3de2f47979f79b0d4a64656f2~mv2.png"
+        },
+        {
+          "uri": "237c51_a0235b8a386343338c20009246783de2~mv2.png",
+          "alt": "gas money.png",
+          "width": 500,
+          "height": 500,
+          "original": "https://static.wixstatic.com/media/237c51_a0235b8a386343338c20009246783de2~mv2.png"
+        },
+        {
+          "uri": "237c51_65c9fef5e9be46ec9c6510eb90e69c2e~mv2.png",
+          "alt": "wgpp.png",
+          "width": 512,
+          "height": 512,
+          "original": "https://static.wixstatic.com/media/237c51_65c9fef5e9be46ec9c6510eb90e69c2e~mv2.png"
+        },
+        {
+          "uri": "237c51_49d55fb19baa4690ab0037b14a33a0ea~mv2.png",
+          "alt": "rrr.png",
+          "width": 500,
+          "height": 500,
+          "original": "https://static.wixstatic.com/media/237c51_49d55fb19baa4690ab0037b14a33a0ea~mv2.png"
+        },
+        {
+          "uri": "237c51_769a11f196114b87892a401064e94709~mv2.png",
+          "alt": "Abstract Star Icons",
+          "width": 1920,
+          "height": 1920,
+          "original": "https://static.wixstatic.com/media/237c51_769a11f196114b87892a401064e94709~mv2.png"
+        }
+      ],
+      "textBlocks": [
+        {
+          "tag": "p",
+          "text": "FINVESTA.ECO"
+        },
+        {
+          "tag": "li",
+          "text": "👀 Pulsewatch"
+        },
+        {
+          "tag": "li",
+          "text": "📈 Tracker"
+        },
+        {
+          "tag": "li",
+          "text": "WHITE PAPER"
+        },
+        {
+          "tag": "span",
+          "text": "Menu"
+        },
+        {
+          "tag": "span",
+          "text": "Close"
+        },
+        {
+          "tag": "a",
+          "text": "FINVESTA CHART"
+        },
+        {
+          "tag": "p",
+          "text": "Autonomous contract systems and governance experiments"
+        },
+        {
+          "tag": "h1",
+          "text": "FINVESTA ECOSYSTEM PRINTER PROTOCOL"
+        },
+        {
+          "tag": "span",
+          "text": "FINVESTA ECOSYSTEM"
+        },
+        {
+          "tag": "p",
+          "text": "Explore the FINVESTA protocol ecosystem on PulseChain"
+        },
+        {
+          "tag": "a",
+          "text": "ENTER DAPP"
+        },
+        {
+          "tag": "p",
+          "text": "VPS"
+        },
+        {
+          "tag": "p",
+          "text": "Exploit Prevention"
+        },
+        {
+          "tag": "p",
+          "text": "Autonomous Strategy"
+        },
+        {
+          "tag": "p",
+          "text": "PRINTER TOKENS... WHAT ARE THEY?"
+        },
+        {
+          "tag": "h2",
+          "text": "ACCESS NFTS & PRINTERS"
+        },
+        {
+          "tag": "p",
+          "text": "​"
+        },
+        {
+          "tag": "p",
+          "text": "Wallets holding a TrifectaBond NFT may satisfy the contract’s access conditions for certain public functions, including randomizeAll(), subject entirely to deployed contract rules."
+        },
+        {
+          "tag": "span",
+          "text": "NFT"
+        },
+        {
+          "tag": "p",
+          "text": "Printer tokens like REMEMBER or \"World's Greatest pDAI Printer\" are PRC20 tokens used within the protocol’s contract-defined mechanics. Users may interact with printer tokens directly, or hold a TrifectaBond NFT to satisfy access conditions for certain protocol-defined functions. The \"brains\" which are contracts on Pulsechain run transactions when someone calls the \"randomizeAll\" function. These contracts execute predefined checks and contract interactions when randomizeAll() is called."
+        },
+        {
+          "tag": "span",
+          "text": "REMEMBER"
+        },
+        {
+          "tag": "span",
+          "text": "World's Greatest pDAI Printer"
+        },
+        {
+          "tag": "span",
+          "text": "randomizeAll()"
+        },
+        {
+          "tag": "p",
+          "text": "​"
+        },
+        {
+          "tag": "p",
+          "text": "Printer token contracts may hold token balances as part of their contract-defined mechanics. On-chain balances can be reviewed through public block explorers."
+        },
+        {
+          "tag": "span",
+          "text": "may hold token balances as part of their contract-defined mechanics."
+        },
+        {
+          "tag": "span",
+          "text": "."
+        },
+        {
+          "tag": "p",
+          "text": "​"
+        },
+        {
+          "tag": "p",
+          "text": "Brains automate. Access NFTs satisfy eligibility conditions. Printers route contract-defined interactions."
+        },
+        {
+          "tag": "p",
+          "text": "​"
+        },
+        {
+          "tag": "p",
+          "text": "Each TrifectaBond records the LP token units initially associated with the position, but these balances remain subject to contract mechanics and market conditions and may decrease or be lost."
+        },
+        {
+          "tag": "span",
+          "text": "TrifectaBond"
+        },
+        {
+          "tag": "p",
+          "text": "​"
+        },
+        {
+          "tag": "p",
+          "text": "A TrifectaBond is an NFT-based access credential that records protocol-specific eligibility and state under the contract’s rules."
+        },
+        {
+          "tag": "span",
+          "text": "TrifectaBond"
+        },
+        {
+          "tag": "p",
+          "text": "​"
+        },
+        {
+          "tag": "p",
+          "text": "The contract includes token mint functionality under its deployed rules. Users should review current permissions, supply mechanics, and associated risks before interacting."
+        },
+        {
+          "tag": "p",
+          "text": "Protocol behavior may be influenced by PulseChain market structure and on-chain arbitrage activity."
+        },
+        {
+          "tag": "p",
+          "text": "​"
+        },
+        {
+          "tag": "h2",
+          "text": "FEATURED PRINTER TOKENS"
+        },
+        {
+          "tag": "p",
+          "text": "WARNING"
+        },
+        {
+          "tag": "p",
+          "text": "Printer token mechanics may route tokens according to contract logic, including liquidity operations, burns, or other configured actions."
+        },
+        {
+          "tag": "p",
+          "text": "​"
+        },
+        {
+          "tag": "p",
+          "text": "No gain is guaranteed, and losses may occur."
+        },
+        {
+          "tag": "h1",
+          "text": "GAS MONEY"
+        },
+        {
+          "tag": "h1",
+          "text": "PDAI PRINTER"
+        },
+        {
+          "tag": "h1",
+          "text": "REMEMBER"
+        },
+        {
+          "tag": "p",
+          "text": "TRANSPARENCY IS KEY"
+        },
+        {
+          "tag": "h2",
+          "text": "WANT A FULL BREAKDOWN?"
+        },
+        {
+          "tag": "p",
+          "text": "Review the whitepaper for a technical overview of contract mechanics and protocol interactions."
+        },
+        {
+          "tag": "a",
+          "text": "WHITEPAPER"
+        },
+        {
+          "tag": "h3",
+          "text": "Self-executing automation"
+        },
+        {
+          "tag": "p",
+          "text": "Certain automated processes may interact with liquidity pools and token balances according to contract logic. These interactions can affect price, liquidity, and user outcomes."
+        },
+        {
+          "tag": "h3",
+          "text": "Swapback Function"
+        },
+        {
+          "tag": "p",
+          "text": "This function may sell tokens held by the token contract itself, subject to contract conditions. This mechanism may affect price, liquidity, and execution outcomes. This is a risk."
+        },
+        {
+          "tag": "h5",
+          "text": "DISCLAIMER Everything on this website is provided for informational purposes only. All tokens and interfaces described here are experimental. Nothing on this website is a promise, guarantee, or expectation of value, performance, or distributions. Users are solely responsible for their own decisions and should independently review all contracts, permissions, and risks before interacting."
+        },
+        {
+          "tag": "span",
+          "text": "DISCLAIMER"
+        },
+        {
+          "tag": "span",
+          "text": "Everything on this website is provided for informational purposes only. All tokens and interfaces described here are experimental. Nothing on this website is a promise, guarantee, or expectation of value, performance, or distributions. Users are solely responsible for their own decisions and should independently review all contracts, permissions, and risks before interacting."
+        },
+        {
+          "tag": "li",
+          "text": "👀 Pulsewatch"
+        },
+        {
+          "tag": "li",
+          "text": "📈 Tracker"
+        },
+        {
+          "tag": "li",
+          "text": "WHITE PAPER"
+        }
+      ]
+    },
+    {
+      "route": "/arbitrage",
+      "slug": "arbitrage",
+      "url": "https://www.finvesta.eco/arbitrage",
+      "meta": {
+        "title": "ARBITRAGE | Finvesta Ecosystem",
+        "description": "",
+        "ogTitle": "ARBITRAGE | Finvesta Ecosystem",
+        "ogDescription": "",
+        "ogImage": "https://static.wixstatic.com/media/237c51_2134b3f30991438fb50dbabc6642b69a%7Emv2.png/v1/fit/w_2500,h_1330,al_c/237c51_2134b3f30991438fb50dbabc6642b69a%7Emv2.png",
+        "canonical": "https://www.finvesta.eco/arbitrage"
+      },
+      "favicon": "https://static.wixstatic.com/media/237c51_2134b3f30991438fb50dbabc6642b69a%7Emv2.png/v1/fill/w_192%2Ch_192%2Clg_1%2Cusm_0.66_1.00_0.01/237c51_2134b3f30991438fb50dbabc6642b69a%7Emv2.png",
+      "links": [
+        {
+          "text": "FINVESTA.ECO",
+          "href": "https://www.finvesta.eco/"
+        },
+        {
+          "text": "👀 Pulsewatch",
+          "href": "https://pulsewatch.app/"
+        },
+        {
+          "text": "📈 Tracker",
+          "href": "https://ogprinters.pulsewatch.app/"
+        },
+        {
+          "text": "WHITE PAPER",
+          "href": "https://www.finvesta.eco/whitepaper"
+        },
+        {
+          "text": "FINVESTA CHART",
+          "href": "https://dexscreener.com/pulsechain/0x615cfd552e98eb97e5557b03aa41d0e85e98167b"
+        },
+        {
+          "text": "👀 Pulsewatch",
+          "href": "https://pulsewatch.app/"
+        },
+        {
+          "text": "📈 Tracker",
+          "href": "https://ogprinters.pulsewatch.app/"
+        },
+        {
+          "text": "WHITE PAPER",
+          "href": "https://www.finvesta.eco/whitepaper"
+        }
+      ],
+      "imageInfos": [
+        {
+          "uri": "237c51_2134b3f30991438fb50dbabc6642b69a~mv2.png",
+          "alt": "image.png",
+          "width": 800,
+          "height": 800,
+          "original": "https://static.wixstatic.com/media/237c51_2134b3f30991438fb50dbabc6642b69a~mv2.png"
+        }
+      ],
+      "textBlocks": [
+        {
+          "tag": "p",
+          "text": "FINVESTA.ECO"
+        },
+        {
+          "tag": "li",
+          "text": "👀 Pulsewatch"
+        },
+        {
+          "tag": "li",
+          "text": "📈 Tracker"
+        },
+        {
+          "tag": "li",
+          "text": "WHITE PAPER"
+        },
+        {
+          "tag": "span",
+          "text": "Menu"
+        },
+        {
+          "tag": "span",
+          "text": "Close"
+        },
+        {
+          "tag": "a",
+          "text": "FINVESTA CHART"
+        },
+        {
+          "tag": "h1",
+          "text": "ARBITRAGE ON PULSE"
+        },
+        {
+          "tag": "h2",
+          "text": "How Arbitrage Bots Work with Printer Tokens"
+        },
+        {
+          "tag": "h3",
+          "text": "Arbitrage activity may affect token prices across PulseChain whenever a token trades across two or more liquidity pools with different relative pricing. Example: REMEMBER/PLS v2 and REMEMBER/pDAI v2 In general, arbitrage activity observes price differences between pools and may execute transactions that bring pricing closer together across available routes. These transactions may occur when price differences, fees, and available liquidity make the route executable. For example, assume three stable assets are each intended to track the same reference value. Example liquidity pools: 1 USDT / 1 USDC (1:1) 1 USDT / 0.5 eDAI (2:1) If one pool reflects a materially different price than another, arbitrage activity may interact with both pools in sequence. This can affect balances, ratios, and execution prices across the connected pools. HOW THIS RELATES TO PRINTER TOKENS Printer token contracts may hold token balances and execute contract-defined actions under specified conditions. When these contracts interact with liquidity pools, arbitrage activity may influence pricing, pool ratios, and transaction outcomes across connected markets."
+        },
+        {
+          "tag": "h5",
+          "text": "DISCLAIMER Everything on this website is provided for informational purposes only. All tokens and interfaces described here are experimental. Nothing on this website is a promise, guarantee, or expectation of value, performance, or distributions. Users are solely responsible for their own decisions and should independently review all contracts, permissions, and risks before interacting."
+        },
+        {
+          "tag": "span",
+          "text": "DISCLAIMER"
+        },
+        {
+          "tag": "span",
+          "text": "Everything on this website is provided for informational purposes only. All tokens and interfaces described here are experimental. Nothing on this website is a promise, guarantee, or expectation of value, performance, or distributions. Users are solely responsible for their own decisions and should independently review all contracts, permissions, and risks before interacting."
+        },
+        {
+          "tag": "li",
+          "text": "👀 Pulsewatch"
+        },
+        {
+          "tag": "li",
+          "text": "📈 Tracker"
+        },
+        {
+          "tag": "li",
+          "text": "WHITE PAPER"
+        }
+      ]
+    },
+    {
+      "route": "/braindsandbonds",
+      "slug": "braindsandbonds",
+      "url": "https://www.finvesta.eco/braindsandbonds",
+      "meta": {
+        "title": "BRAINS AND BONDS | Finvesta Ecosystem",
+        "description": "",
+        "ogTitle": "BRAINS AND BONDS | Finvesta Ecosystem",
+        "ogDescription": "",
+        "ogImage": "https://static.wixstatic.com/media/237c51_2134b3f30991438fb50dbabc6642b69a%7Emv2.png/v1/fit/w_2500,h_1330,al_c/237c51_2134b3f30991438fb50dbabc6642b69a%7Emv2.png",
+        "canonical": "https://www.finvesta.eco/braindsandbonds"
+      },
+      "favicon": "https://static.wixstatic.com/media/237c51_2134b3f30991438fb50dbabc6642b69a%7Emv2.png/v1/fill/w_192%2Ch_192%2Clg_1%2Cusm_0.66_1.00_0.01/237c51_2134b3f30991438fb50dbabc6642b69a%7Emv2.png",
+      "links": [
+        {
+          "text": "FINVESTA.ECO",
+          "href": "https://www.finvesta.eco/"
+        },
+        {
+          "text": "👀 Pulsewatch",
+          "href": "https://pulsewatch.app/"
+        },
+        {
+          "text": "📈 Tracker",
+          "href": "https://ogprinters.pulsewatch.app/"
+        },
+        {
+          "text": "WHITE PAPER",
+          "href": "https://www.finvesta.eco/whitepaper"
+        },
+        {
+          "text": "FINVESTA CHART",
+          "href": "https://dexscreener.com/pulsechain/0x615cfd552e98eb97e5557b03aa41d0e85e98167b"
+        },
+        {
+          "text": "👀 Pulsewatch",
+          "href": "https://pulsewatch.app/"
+        },
+        {
+          "text": "📈 Tracker",
+          "href": "https://ogprinters.pulsewatch.app/"
+        },
+        {
+          "text": "WHITE PAPER",
+          "href": "https://www.finvesta.eco/whitepaper"
+        }
+      ],
+      "imageInfos": [
+        {
+          "uri": "237c51_2134b3f30991438fb50dbabc6642b69a~mv2.png",
+          "alt": "image.png",
+          "width": 800,
+          "height": 800,
+          "original": "https://static.wixstatic.com/media/237c51_2134b3f30991438fb50dbabc6642b69a~mv2.png"
+        }
+      ],
+      "textBlocks": [
+        {
+          "tag": "p",
+          "text": "FINVESTA.ECO"
+        },
+        {
+          "tag": "li",
+          "text": "👀 Pulsewatch"
+        },
+        {
+          "tag": "li",
+          "text": "📈 Tracker"
+        },
+        {
+          "tag": "li",
+          "text": "WHITE PAPER"
+        },
+        {
+          "tag": "span",
+          "text": "Menu"
+        },
+        {
+          "tag": "span",
+          "text": "Close"
+        },
+        {
+          "tag": "a",
+          "text": "FINVESTA CHART"
+        },
+        {
+          "tag": "h1",
+          "text": "BRAINS AND BONDS"
+        },
+        {
+          "tag": "h5",
+          "text": "DISCLAIMER Everything on this website is provided for informational purposes only. All tokens and interfaces described here are experimental. Nothing on this website is a promise, guarantee, or expectation of value, performance, or distributions. Users are solely responsible for their own decisions and should independently review all contracts, permissions, and risks before interacting."
+        },
+        {
+          "tag": "span",
+          "text": "DISCLAIMER"
+        },
+        {
+          "tag": "span",
+          "text": "Everything on this website is provided for informational purposes only. All tokens and interfaces described here are experimental. Nothing on this website is a promise, guarantee, or expectation of value, performance, or distributions. Users are solely responsible for their own decisions and should independently review all contracts, permissions, and risks before interacting."
+        },
+        {
+          "tag": "li",
+          "text": "👀 Pulsewatch"
+        },
+        {
+          "tag": "li",
+          "text": "📈 Tracker"
+        },
+        {
+          "tag": "li",
+          "text": "WHITE PAPER"
+        }
+      ]
+    },
+    {
+      "route": "/company",
+      "slug": "company",
+      "url": "https://www.finvesta.eco/company",
+      "meta": {
+        "title": "📈 Printer Tracker | Finvesta Ecosystem",
+        "description": "",
+        "ogTitle": "📈 Printer Tracker | Finvesta Ecosystem",
+        "ogDescription": "",
+        "ogImage": "https://static.wixstatic.com/media/237c51_2134b3f30991438fb50dbabc6642b69a%7Emv2.png/v1/fit/w_2500,h_1330,al_c/237c51_2134b3f30991438fb50dbabc6642b69a%7Emv2.png",
+        "canonical": "https://www.finvesta.eco/company"
+      },
+      "favicon": "https://static.wixstatic.com/media/237c51_2134b3f30991438fb50dbabc6642b69a%7Emv2.png/v1/fill/w_192%2Ch_192%2Clg_1%2Cusm_0.66_1.00_0.01/237c51_2134b3f30991438fb50dbabc6642b69a%7Emv2.png",
+      "links": [
+        {
+          "text": "FINVESTA.ECO",
+          "href": "https://www.finvesta.eco/"
+        },
+        {
+          "text": "👀 Pulsewatch",
+          "href": "https://pulsewatch.app/"
+        },
+        {
+          "text": "📈 Tracker",
+          "href": "https://ogprinters.pulsewatch.app/"
+        },
+        {
+          "text": "WHITE PAPER",
+          "href": "https://www.finvesta.eco/whitepaper"
+        },
+        {
+          "text": "FINVESTA CHART",
+          "href": "https://dexscreener.com/pulsechain/0x615cfd552e98eb97e5557b03aa41d0e85e98167b"
+        },
+        {
+          "text": "[email protected]",
+          "href": "https://www.finvesta.eco/cdn-cgi/l/email-protection#8dc4e3ebe2cde0f4fee4f9e8a3eee2e0"
+        },
+        {
+          "text": "[email protected]",
+          "href": "https://www.finvesta.eco/cdn-cgi/l/email-protection#e2ab8c848da28f9b918b9687cc818d8f"
+        },
+        {
+          "text": "[email protected]",
+          "href": "https://www.finvesta.eco/cdn-cgi/l/email-protection#c881a6aea788a5b1bba1bcade6aba7a5"
+        },
+        {
+          "text": "[email protected]",
+          "href": "https://www.finvesta.eco/cdn-cgi/l/email-protection#e3aa8d858ca38e9a908a9786cd808c8e"
+        },
+        {
+          "text": "[email protected]",
+          "href": "https://www.finvesta.eco/cdn-cgi/l/email-protection#2d64434b426d40545e445948034e4240"
+        },
+        {
+          "text": "[email protected]",
+          "href": "https://www.finvesta.eco/cdn-cgi/l/email-protection#0b42656d644b667278627f6e25686466"
+        },
+        {
+          "text": "👀 Pulsewatch",
+          "href": "https://pulsewatch.app/"
+        },
+        {
+          "text": "📈 Tracker",
+          "href": "https://ogprinters.pulsewatch.app/"
+        },
+        {
+          "text": "WHITE PAPER",
+          "href": "https://www.finvesta.eco/whitepaper"
+        }
+      ],
+      "imageInfos": [
+        {
+          "uri": "237c51_2134b3f30991438fb50dbabc6642b69a~mv2.png",
+          "alt": "image.png",
+          "width": 800,
+          "height": 800,
+          "original": "https://static.wixstatic.com/media/237c51_2134b3f30991438fb50dbabc6642b69a~mv2.png"
+        },
+        {
+          "uri": "511164_35739c3bb3804e1a9952ab2d17cc6da9~mv2.jpg",
+          "alt": "Image (22).jpg",
+          "width": 1194,
+          "height": 602,
+          "original": "https://static.wixstatic.com/media/511164_35739c3bb3804e1a9952ab2d17cc6da9~mv2.jpg"
+        },
+        {
+          "uri": "511164_2224204ebe344249ae7919225dd0ace0~mv2.jpg",
+          "alt": "Image Placeholder.jpg",
+          "width": 320,
+          "height": 300,
+          "original": "https://static.wixstatic.com/media/511164_2224204ebe344249ae7919225dd0ace0~mv2.jpg"
+        },
+        {
+          "uri": "511164_400f793827944005a434cd35a211e6de~mv2.jpg",
+          "alt": "Image Placeholder2.jpg",
+          "width": 320,
+          "height": 300,
+          "original": "https://static.wixstatic.com/media/511164_400f793827944005a434cd35a211e6de~mv2.jpg"
+        },
+        {
+          "uri": "511164_5f831fd3d6db4088a8a2b4b900d42f7d~mv2.jpg",
+          "alt": "Image Placeholder3.jpg",
+          "width": 320,
+          "height": 300,
+          "original": "https://static.wixstatic.com/media/511164_5f831fd3d6db4088a8a2b4b900d42f7d~mv2.jpg"
+        }
+      ],
+      "textBlocks": [
+        {
+          "tag": "p",
+          "text": "FINVESTA.ECO"
+        },
+        {
+          "tag": "li",
+          "text": "👀 Pulsewatch"
+        },
+        {
+          "tag": "li",
+          "text": "📈 Tracker"
+        },
+        {
+          "tag": "li",
+          "text": "WHITE PAPER"
+        },
+        {
+          "tag": "span",
+          "text": "Menu"
+        },
+        {
+          "tag": "span",
+          "text": "Close"
+        },
+        {
+          "tag": "a",
+          "text": "FINVESTA CHART"
+        },
+        {
+          "tag": "p",
+          "text": "About us"
+        },
+        {
+          "tag": "h1",
+          "text": "WE'RE SIKURA"
+        },
+        {
+          "tag": "span",
+          "text": "WE'RE"
+        },
+        {
+          "tag": "p",
+          "text": "Our Mission"
+        },
+        {
+          "tag": "p",
+          "text": "Exploit Prevention"
+        },
+        {
+          "tag": "h2",
+          "text": "We’re on a mission to protect your business and end users so you can relax"
+        },
+        {
+          "tag": "p",
+          "text": "This is the space to introduce visitors to the business or brand. Briefly explain who's behind it, what it does and what makes it unique. Share its core values and what this site has to offer."
+        },
+        {
+          "tag": "p",
+          "text": "150"
+        },
+        {
+          "tag": "p",
+          "text": "employees"
+        },
+        {
+          "tag": "p",
+          "text": "+100"
+        },
+        {
+          "tag": "p",
+          "text": "customers"
+        },
+        {
+          "tag": "p",
+          "text": "50"
+        },
+        {
+          "tag": "p",
+          "text": "supported platforms"
+        },
+        {
+          "tag": "p",
+          "text": "1 million"
+        },
+        {
+          "tag": "p",
+          "text": "daily active users"
+        },
+        {
+          "tag": "p",
+          "text": "Leaders"
+        },
+        {
+          "tag": "h2",
+          "text": "MEET THE TEAM"
+        },
+        {
+          "tag": "span",
+          "text": "MEET THE"
+        },
+        {
+          "tag": "h3",
+          "text": "Agnes Mickelson"
+        },
+        {
+          "tag": "p",
+          "text": "CEO and Founder"
+        },
+        {
+          "tag": "h3",
+          "text": "Gustavo de Silva"
+        },
+        {
+          "tag": "p",
+          "text": "VP Sales"
+        },
+        {
+          "tag": "h3",
+          "text": "Halou Wang"
+        },
+        {
+          "tag": "p",
+          "text": "CTO and Founder"
+        },
+        {
+          "tag": "h2",
+          "text": "CORE TEAM"
+        },
+        {
+          "tag": "span",
+          "text": "CORE"
+        },
+        {
+          "tag": "h3",
+          "text": "Bernie Black"
+        },
+        {
+          "tag": "p",
+          "text": "Product Manager"
+        },
+        {
+          "tag": "p",
+          "text": "[email protected]"
+        },
+        {
+          "tag": "h3",
+          "text": "Arlo Jenkins"
+        },
+        {
+          "tag": "p",
+          "text": "Partnerships Director"
+        },
+        {
+          "tag": "p",
+          "text": "[email protected]"
+        },
+        {
+          "tag": "h3",
+          "text": "Laurent DeAngelo"
+        },
+        {
+          "tag": "p",
+          "text": "UX"
+        },
+        {
+          "tag": "p",
+          "text": "[email protected]"
+        },
+        {
+          "tag": "h3",
+          "text": "Richard White"
+        },
+        {
+          "tag": "p",
+          "text": "Sales"
+        },
+        {
+          "tag": "p",
+          "text": "[email protected]"
+        },
+        {
+          "tag": "h3",
+          "text": "Danielle Marco"
+        },
+        {
+          "tag": "p",
+          "text": "Automation Engineer"
+        },
+        {
+          "tag": "p",
+          "text": "[email protected]"
+        },
+        {
+          "tag": "h3",
+          "text": "Artem Gurevich"
+        },
+        {
+          "tag": "p",
+          "text": "C++ Developer"
+        },
+        {
+          "tag": "p",
+          "text": "[email protected]"
+        },
+        {
+          "tag": "h5",
+          "text": "DISCLAIMER Everything on this website is provided for informational purposes only. All tokens and interfaces described here are experimental. Nothing on this website is a promise, guarantee, or expectation of value, performance, or distributions. Users are solely responsible for their own decisions and should independently review all contracts, permissions, and risks before interacting."
+        },
+        {
+          "tag": "span",
+          "text": "DISCLAIMER"
+        },
+        {
+          "tag": "span",
+          "text": "Everything on this website is provided for informational purposes only. All tokens and interfaces described here are experimental. Nothing on this website is a promise, guarantee, or expectation of value, performance, or distributions. Users are solely responsible for their own decisions and should independently review all contracts, permissions, and risks before interacting."
+        },
+        {
+          "tag": "li",
+          "text": "👀 Pulsewatch"
+        },
+        {
+          "tag": "li",
+          "text": "📈 Tracker"
+        },
+        {
+          "tag": "li",
+          "text": "WHITE PAPER"
+        }
+      ]
+    },
+    {
+      "route": "/ecointent",
+      "slug": "ecointent",
+      "url": "https://www.finvesta.eco/ecointent",
+      "meta": {
+        "title": "Project Intent | Finvesta Ecosystem",
+        "description": "",
+        "ogTitle": "Project Intent | Finvesta Ecosystem",
+        "ogDescription": "",
+        "ogImage": "https://static.wixstatic.com/media/237c51_2134b3f30991438fb50dbabc6642b69a%7Emv2.png/v1/fit/w_2500,h_1330,al_c/237c51_2134b3f30991438fb50dbabc6642b69a%7Emv2.png",
+        "canonical": "https://www.finvesta.eco/ecointent"
+      },
+      "favicon": "https://static.wixstatic.com/media/237c51_2134b3f30991438fb50dbabc6642b69a%7Emv2.png/v1/fill/w_192%2Ch_192%2Clg_1%2Cusm_0.66_1.00_0.01/237c51_2134b3f30991438fb50dbabc6642b69a%7Emv2.png",
+      "links": [
+        {
+          "text": "FINVESTA.ECO",
+          "href": "https://www.finvesta.eco/"
+        },
+        {
+          "text": "👀 Pulsewatch",
+          "href": "https://pulsewatch.app/"
+        },
+        {
+          "text": "📈 Tracker",
+          "href": "https://ogprinters.pulsewatch.app/"
+        },
+        {
+          "text": "WHITE PAPER",
+          "href": "https://www.finvesta.eco/whitepaper"
+        },
+        {
+          "text": "FINVESTA CHART",
+          "href": "https://dexscreener.com/pulsechain/0x615cfd552e98eb97e5557b03aa41d0e85e98167b"
+        },
+        {
+          "text": "👀 Pulsewatch",
+          "href": "https://pulsewatch.app/"
+        },
+        {
+          "text": "📈 Tracker",
+          "href": "https://ogprinters.pulsewatch.app/"
+        },
+        {
+          "text": "WHITE PAPER",
+          "href": "https://www.finvesta.eco/whitepaper"
+        }
+      ],
+      "imageInfos": [
+        {
+          "uri": "237c51_2134b3f30991438fb50dbabc6642b69a~mv2.png",
+          "alt": "image.png",
+          "width": 800,
+          "height": 800,
+          "original": "https://static.wixstatic.com/media/237c51_2134b3f30991438fb50dbabc6642b69a~mv2.png"
+        }
+      ],
+      "textBlocks": [
+        {
+          "tag": "p",
+          "text": "FINVESTA.ECO"
+        },
+        {
+          "tag": "li",
+          "text": "👀 Pulsewatch"
+        },
+        {
+          "tag": "li",
+          "text": "📈 Tracker"
+        },
+        {
+          "tag": "li",
+          "text": "WHITE PAPER"
+        },
+        {
+          "tag": "span",
+          "text": "Menu"
+        },
+        {
+          "tag": "span",
+          "text": "Close"
+        },
+        {
+          "tag": "a",
+          "text": "FINVESTA CHART"
+        },
+        {
+          "tag": "h1",
+          "text": "ECO INTENTIONS"
+        },
+        {
+          "tag": "h5",
+          "text": "DISCLAIMER Everything on this website is provided for informational purposes only. All tokens and interfaces described here are experimental. Nothing on this website is a promise, guarantee, or expectation of value, performance, or distributions. Users are solely responsible for their own decisions and should independently review all contracts, permissions, and risks before interacting."
+        },
+        {
+          "tag": "span",
+          "text": "DISCLAIMER"
+        },
+        {
+          "tag": "span",
+          "text": "Everything on this website is provided for informational purposes only. All tokens and interfaces described here are experimental. Nothing on this website is a promise, guarantee, or expectation of value, performance, or distributions. Users are solely responsible for their own decisions and should independently review all contracts, permissions, and risks before interacting."
+        },
+        {
+          "tag": "li",
+          "text": "👀 Pulsewatch"
+        },
+        {
+          "tag": "li",
+          "text": "📈 Tracker"
+        },
+        {
+          "tag": "li",
+          "text": "WHITE PAPER"
+        }
+      ]
+    },
+    {
+      "route": "/whitepaper",
+      "slug": "whitepaper",
+      "url": "https://www.finvesta.eco/whitepaper",
+      "meta": {
+        "title": "WHITE PAPER | Finvesta Ecosystem",
+        "description": "",
+        "ogTitle": "WHITE PAPER | Finvesta Ecosystem",
+        "ogDescription": "",
+        "ogImage": "https://static.wixstatic.com/media/237c51_2134b3f30991438fb50dbabc6642b69a%7Emv2.png/v1/fit/w_2500,h_1330,al_c/237c51_2134b3f30991438fb50dbabc6642b69a%7Emv2.png",
+        "canonical": "https://www.finvesta.eco/whitepaper"
+      },
+      "favicon": "https://static.wixstatic.com/media/237c51_2134b3f30991438fb50dbabc6642b69a%7Emv2.png/v1/fill/w_192%2Ch_192%2Clg_1%2Cusm_0.66_1.00_0.01/237c51_2134b3f30991438fb50dbabc6642b69a%7Emv2.png",
+      "links": [
+        {
+          "text": "FINVESTA.ECO",
+          "href": "https://www.finvesta.eco/"
+        },
+        {
+          "text": "👀 Pulsewatch",
+          "href": "https://pulsewatch.app/"
+        },
+        {
+          "text": "📈 Tracker",
+          "href": "https://ogprinters.pulsewatch.app/"
+        },
+        {
+          "text": "WHITE PAPER",
+          "href": "https://www.finvesta.eco/whitepaper"
+        },
+        {
+          "text": "FINVESTA CHART",
+          "href": "https://dexscreener.com/pulsechain/0x615cfd552e98eb97e5557b03aa41d0e85e98167b"
+        },
+        {
+          "text": "INTENT",
+          "href": "https://www.finvesta.eco/ecointent"
+        },
+        {
+          "text": "ARBITRAGE",
+          "href": "https://www.finvesta.eco/arbitrage"
+        },
+        {
+          "text": "ON CHAIN LOGIC",
+          "href": "https://www.finvesta.eco/braindsandbonds"
+        },
+        {
+          "text": "HOW LOOPS WORK",
+          "href": "https://www.finvesta.eco/systemloops"
+        },
+        {
+          "text": "DISCLOSURE",
+          "href": "https://www.finvesta.eco/legal"
+        },
+        {
+          "text": "👀 Pulsewatch",
+          "href": "https://pulsewatch.app/"
+        },
+        {
+          "text": "📈 Tracker",
+          "href": "https://ogprinters.pulsewatch.app/"
+        },
+        {
+          "text": "WHITE PAPER",
+          "href": "https://www.finvesta.eco/whitepaper"
+        }
+      ],
+      "imageInfos": [
+        {
+          "uri": "237c51_2134b3f30991438fb50dbabc6642b69a~mv2.png",
+          "alt": "image.png",
+          "width": 800,
+          "height": 800,
+          "original": "https://static.wixstatic.com/media/237c51_2134b3f30991438fb50dbabc6642b69a~mv2.png"
+        }
+      ],
+      "textBlocks": [
+        {
+          "tag": "p",
+          "text": "FINVESTA.ECO"
+        },
+        {
+          "tag": "li",
+          "text": "👀 Pulsewatch"
+        },
+        {
+          "tag": "li",
+          "text": "📈 Tracker"
+        },
+        {
+          "tag": "li",
+          "text": "WHITE PAPER"
+        },
+        {
+          "tag": "span",
+          "text": "Menu"
+        },
+        {
+          "tag": "span",
+          "text": "Close"
+        },
+        {
+          "tag": "a",
+          "text": "FINVESTA CHART"
+        },
+        {
+          "tag": "p",
+          "text": "WHITE PAPER"
+        },
+        {
+          "tag": "h1",
+          "text": "PRINTER TOKENS"
+        },
+        {
+          "tag": "h2",
+          "text": "ECO INTENT"
+        },
+        {
+          "tag": "p",
+          "text": "This section outlines the protocol’s design goals and broader ecosystem context."
+        },
+        {
+          "tag": "a",
+          "text": "INTENT"
+        },
+        {
+          "tag": "h2",
+          "text": "ARBITRAGE"
+        },
+        {
+          "tag": "p",
+          "text": "This section explains how arbitrage activity on PulseChain may affect and interact with printer tokens and related PRC20 contracts."
+        },
+        {
+          "tag": "a",
+          "text": "ARBITRAGE"
+        },
+        {
+          "tag": "h2",
+          "text": "BRAINS AND BONDS"
+        },
+        {
+          "tag": "p",
+          "text": "This section explains how brains, bonds, and related contract interactions operate, including liquidity-related actions and other protocol-defined mechanics observable on-chain."
+        },
+        {
+          "tag": "a",
+          "text": "ON CHAIN LOGIC"
+        },
+        {
+          "tag": "h2",
+          "text": "SYSTEM LOOPS"
+        },
+        {
+          "tag": "p",
+          "text": "This section explains recurring contract interactions involving Remember, Gas Money, liquidity brains, ALB-related mechanics, and other protocol-defined processes."
+        },
+        {
+          "tag": "a",
+          "text": "HOW LOOPS WORK"
+        },
+        {
+          "tag": "h2",
+          "text": "DEVELOPER DISCLOSURE"
+        },
+        {
+          "tag": "p",
+          "text": "This section describes contributor roles, related wallet disclosures, and other public-facing operational context."
+        },
+        {
+          "tag": "a",
+          "text": "DISCLOSURE"
+        },
+        {
+          "tag": "h5",
+          "text": "DISCLAIMER Everything on this website is provided for informational purposes only. All tokens and interfaces described here are experimental. Nothing on this website is a promise, guarantee, or expectation of value, performance, or distributions. Users are solely responsible for their own decisions and should independently review all contracts, permissions, and risks before interacting."
+        },
+        {
+          "tag": "span",
+          "text": "DISCLAIMER"
+        },
+        {
+          "tag": "span",
+          "text": "Everything on this website is provided for informational purposes only. All tokens and interfaces described here are experimental. Nothing on this website is a promise, guarantee, or expectation of value, performance, or distributions. Users are solely responsible for their own decisions and should independently review all contracts, permissions, and risks before interacting."
+        },
+        {
+          "tag": "li",
+          "text": "👀 Pulsewatch"
+        },
+        {
+          "tag": "li",
+          "text": "📈 Tracker"
+        },
+        {
+          "tag": "li",
+          "text": "WHITE PAPER"
+        }
+      ]
+    },
+    {
+      "route": "/product",
+      "slug": "product",
+      "url": "https://www.finvesta.eco/product",
+      "meta": {
+        "title": "👀 Pulsewatch | Finvesta Ecosystem",
+        "description": "",
+        "ogTitle": "👀 Pulsewatch | Finvesta Ecosystem",
+        "ogDescription": "",
+        "ogImage": "https://static.wixstatic.com/media/237c51_2134b3f30991438fb50dbabc6642b69a%7Emv2.png/v1/fit/w_2500,h_1330,al_c/237c51_2134b3f30991438fb50dbabc6642b69a%7Emv2.png",
+        "canonical": "https://www.finvesta.eco/product"
+      },
+      "favicon": "https://static.wixstatic.com/media/237c51_2134b3f30991438fb50dbabc6642b69a%7Emv2.png/v1/fill/w_192%2Ch_192%2Clg_1%2Cusm_0.66_1.00_0.01/237c51_2134b3f30991438fb50dbabc6642b69a%7Emv2.png",
+      "links": [
+        {
+          "text": "FINVESTA.ECO",
+          "href": "https://www.finvesta.eco/"
+        },
+        {
+          "text": "👀 Pulsewatch",
+          "href": "https://pulsewatch.app/"
+        },
+        {
+          "text": "📈 Tracker",
+          "href": "https://ogprinters.pulsewatch.app/"
+        },
+        {
+          "text": "WHITE PAPER",
+          "href": "https://www.finvesta.eco/whitepaper"
+        },
+        {
+          "text": "FINVESTA CHART",
+          "href": "https://dexscreener.com/pulsechain/0x615cfd552e98eb97e5557b03aa41d0e85e98167b"
+        },
+        {
+          "text": "WATCH DEMO",
+          "href": "https://www.wix.com/templateslp/studio-external-link"
+        },
+        {
+          "text": "👀 Pulsewatch",
+          "href": "https://pulsewatch.app/"
+        },
+        {
+          "text": "📈 Tracker",
+          "href": "https://ogprinters.pulsewatch.app/"
+        },
+        {
+          "text": "WHITE PAPER",
+          "href": "https://www.finvesta.eco/whitepaper"
+        }
+      ],
+      "imageInfos": [
+        {
+          "uri": "237c51_2134b3f30991438fb50dbabc6642b69a~mv2.png",
+          "alt": "image.png",
+          "width": 800,
+          "height": 800,
+          "original": "https://static.wixstatic.com/media/237c51_2134b3f30991438fb50dbabc6642b69a~mv2.png"
+        },
+        {
+          "uri": "511164_366e459460a74a9aaf7218088674da7c~mv2.png",
+          "alt": "Image (21).png",
+          "width": 1921,
+          "height": 1085,
+          "original": "https://static.wixstatic.com/media/511164_366e459460a74a9aaf7218088674da7c~mv2.png"
+        },
+        {
+          "uri": "511164_b72b9c8a2a51431a868dca8dc48b7185~mv2.jpg",
+          "alt": "Image (11).jpg",
+          "width": 1920,
+          "height": 1080,
+          "original": "https://static.wixstatic.com/media/511164_b72b9c8a2a51431a868dca8dc48b7185~mv2.jpg"
+        },
+        {
+          "uri": "511164_1faed4c4f7de4defa558e9209e987ce2~mv2.jpg",
+          "alt": "Image (20).jpg",
+          "width": 1920,
+          "height": 1080,
+          "original": "https://static.wixstatic.com/media/511164_1faed4c4f7de4defa558e9209e987ce2~mv2.jpg"
+        },
+        {
+          "uri": "511164_365aa99c70f04a348cd4273dc5c33b1c~mv2.jpg",
+          "alt": "Image (19).jpg",
+          "width": 1920,
+          "height": 1080,
+          "original": "https://static.wixstatic.com/media/511164_365aa99c70f04a348cd4273dc5c33b1c~mv2.jpg"
+        },
+        {
+          "uri": "511164_de79dad9382640b0be1f4e39865e10ca~mv2.jpg",
+          "alt": "Image (5).jpg",
+          "width": 1920,
+          "height": 1080,
+          "original": "https://static.wixstatic.com/media/511164_de79dad9382640b0be1f4e39865e10ca~mv2.jpg"
+        },
+        {
+          "uri": "511164_366e459460a74a9aaf7218088674da7c~mv2.png",
+          "alt": "Image (21).png",
+          "width": 1921,
+          "height": 1085,
+          "original": "https://static.wixstatic.com/media/511164_366e459460a74a9aaf7218088674da7c~mv2.png"
+        },
+        {
+          "uri": "511164_366e459460a74a9aaf7218088674da7c~mv2.png",
+          "alt": "Image (21).png",
+          "width": 1921,
+          "height": 1085,
+          "original": "https://static.wixstatic.com/media/511164_366e459460a74a9aaf7218088674da7c~mv2.png"
+        }
+      ],
+      "textBlocks": [
+        {
+          "tag": "p",
+          "text": "FINVESTA.ECO"
+        },
+        {
+          "tag": "li",
+          "text": "👀 Pulsewatch"
+        },
+        {
+          "tag": "li",
+          "text": "📈 Tracker"
+        },
+        {
+          "tag": "li",
+          "text": "WHITE PAPER"
+        },
+        {
+          "tag": "span",
+          "text": "Menu"
+        },
+        {
+          "tag": "span",
+          "text": "Close"
+        },
+        {
+          "tag": "a",
+          "text": "FINVESTA CHART"
+        },
+        {
+          "tag": "p",
+          "text": "We Protect Your Systems from Malware and Attacks"
+        },
+        {
+          "tag": "h1",
+          "text": "PRODUCT OVERVIEW"
+        },
+        {
+          "tag": "span",
+          "text": "PRODUCT"
+        },
+        {
+          "tag": "p",
+          "text": "This is the space to introduce the Product section and showcase the types of products available."
+        },
+        {
+          "tag": "p",
+          "text": "Cloud Security"
+        },
+        {
+          "tag": "p",
+          "text": "Exploit Prevention"
+        },
+        {
+          "tag": "h2",
+          "text": "LET SIKURA DO THE WORK"
+        },
+        {
+          "tag": "span",
+          "text": "LET SIKURA"
+        },
+        {
+          "tag": "p",
+          "text": "MONITOR, ASSES THREAT LEVEL AND TAKE ACTION"
+        },
+        {
+          "tag": "a",
+          "text": "WATCH DEMO"
+        },
+        {
+          "tag": "h2",
+          "text": "HOW IT WORKS"
+        },
+        {
+          "tag": "span",
+          "text": "WORKS"
+        },
+        {
+          "tag": "p",
+          "text": "Memory Security"
+        },
+        {
+          "tag": "p",
+          "text": "Cloud Security"
+        },
+        {
+          "tag": "p",
+          "text": "Exploit Prevention"
+        },
+        {
+          "tag": "h3",
+          "text": "MONITORING ACROSS ALL NETWORK"
+        },
+        {
+          "tag": "p",
+          "text": "Describe the service and how customers or clients can benefit from it."
+        },
+        {
+          "tag": "h3",
+          "text": "DETECTING & ASSESSING THREATS"
+        },
+        {
+          "tag": "p",
+          "text": "Describe the service and how customers or clients can benefit from it."
+        },
+        {
+          "tag": "h3",
+          "text": "TAKING ACTION TO PROTECT"
+        },
+        {
+          "tag": "p",
+          "text": "Describe the service and how customers or clients can benefit from it."
+        },
+        {
+          "tag": "h2",
+          "text": "POWERFFUL, VIGILANT AND EASY TO USE"
+        },
+        {
+          "tag": "span",
+          "text": "POWERFFUL, VIGILANT"
+        },
+        {
+          "tag": "p",
+          "text": "Sikura Keeps you protected"
+        },
+        {
+          "tag": "p",
+          "text": "Code to Cloud Security on All Channels"
+        },
+        {
+          "tag": "p",
+          "text": "Cloud Security"
+        },
+        {
+          "tag": "p",
+          "text": "Exploit Prevention"
+        },
+        {
+          "tag": "h5",
+          "text": "DISCLAIMER Everything on this website is provided for informational purposes only. All tokens and interfaces described here are experimental. Nothing on this website is a promise, guarantee, or expectation of value, performance, or distributions. Users are solely responsible for their own decisions and should independently review all contracts, permissions, and risks before interacting."
+        },
+        {
+          "tag": "span",
+          "text": "DISCLAIMER"
+        },
+        {
+          "tag": "span",
+          "text": "Everything on this website is provided for informational purposes only. All tokens and interfaces described here are experimental. Nothing on this website is a promise, guarantee, or expectation of value, performance, or distributions. Users are solely responsible for their own decisions and should independently review all contracts, permissions, and risks before interacting."
+        },
+        {
+          "tag": "li",
+          "text": "👀 Pulsewatch"
+        },
+        {
+          "tag": "li",
+          "text": "📈 Tracker"
+        },
+        {
+          "tag": "li",
+          "text": "WHITE PAPER"
+        }
+      ]
+    },
+    {
+      "route": "/legal",
+      "slug": "legal",
+      "url": "https://www.finvesta.eco/legal",
+      "meta": {
+        "title": "LEGAL NOTICE | Finvesta Ecosystem",
+        "description": "",
+        "ogTitle": "LEGAL NOTICE | Finvesta Ecosystem",
+        "ogDescription": "",
+        "ogImage": "https://static.wixstatic.com/media/237c51_2134b3f30991438fb50dbabc6642b69a%7Emv2.png/v1/fit/w_2500,h_1330,al_c/237c51_2134b3f30991438fb50dbabc6642b69a%7Emv2.png",
+        "canonical": "https://www.finvesta.eco/legal"
+      },
+      "favicon": "https://static.wixstatic.com/media/237c51_2134b3f30991438fb50dbabc6642b69a%7Emv2.png/v1/fill/w_192%2Ch_192%2Clg_1%2Cusm_0.66_1.00_0.01/237c51_2134b3f30991438fb50dbabc6642b69a%7Emv2.png",
+      "links": [
+        {
+          "text": "FINVESTA.ECO",
+          "href": "https://www.finvesta.eco/"
+        },
+        {
+          "text": "👀 Pulsewatch",
+          "href": "https://pulsewatch.app/"
+        },
+        {
+          "text": "📈 Tracker",
+          "href": "https://ogprinters.pulsewatch.app/"
+        },
+        {
+          "text": "WHITE PAPER",
+          "href": "https://www.finvesta.eco/whitepaper"
+        },
+        {
+          "text": "FINVESTA CHART",
+          "href": "https://dexscreener.com/pulsechain/0x615cfd552e98eb97e5557b03aa41d0e85e98167b"
+        },
+        {
+          "text": "👀 Pulsewatch",
+          "href": "https://pulsewatch.app/"
+        },
+        {
+          "text": "📈 Tracker",
+          "href": "https://ogprinters.pulsewatch.app/"
+        },
+        {
+          "text": "WHITE PAPER",
+          "href": "https://www.finvesta.eco/whitepaper"
+        }
+      ],
+      "imageInfos": [
+        {
+          "uri": "237c51_2134b3f30991438fb50dbabc6642b69a~mv2.png",
+          "alt": "image.png",
+          "width": 800,
+          "height": 800,
+          "original": "https://static.wixstatic.com/media/237c51_2134b3f30991438fb50dbabc6642b69a~mv2.png"
+        }
+      ],
+      "textBlocks": [
+        {
+          "tag": "p",
+          "text": "FINVESTA.ECO"
+        },
+        {
+          "tag": "li",
+          "text": "👀 Pulsewatch"
+        },
+        {
+          "tag": "li",
+          "text": "📈 Tracker"
+        },
+        {
+          "tag": "li",
+          "text": "WHITE PAPER"
+        },
+        {
+          "tag": "span",
+          "text": "Menu"
+        },
+        {
+          "tag": "span",
+          "text": "Close"
+        },
+        {
+          "tag": "a",
+          "text": "FINVESTA CHART"
+        },
+        {
+          "tag": "h1",
+          "text": "Developer and Contributor Disclosure"
+        },
+        {
+          "tag": "h2",
+          "text": "DISCLOSURE"
+        },
+        {
+          "tag": "h1",
+          "text": "Certain contributors or related wallets may interact with the protocol, public smart contracts, or interfaces in disclosed ways. Any such activity should be evaluated based on on-chain records, current contract permissions, and publicly available documentation. Contributor-held assets, if any, may be used only in disclosed ways permitted by the deployed contracts and related interfaces. Users should rely on on-chain records and current contract permissions when evaluating any such activity. Any contributor activity intended to interact with the protocol should be publicly observable through on-chain records where applicable. Automated Bot Functionality Public smart contracts may be callable by network participants; no promise is made that any person will continue operating auxiliary tools or interfaces. Protocol Automation These contracts are intended to operate according to their deployed code and publicly observable transactions. Automated contract interactions may include liquidity-related actions or other contract-defined functions. Such interactions may affect price, liquidity, and execution outcomes. The protocol includes public smart-contract functions that may be accessible to eligible participants under the contract rules. Refer to the DApp and contract documentation for details. Developer and Associate Roles Contributors or related wallets may receive or hold tokens through ordinary contract interactions, disclosed allocations, or other contract-permitted activity. Contributor-held assets, if any, should be disclosed transparently. No statement on this site should be understood as a promise of market support, value support, maintained outcomes, or similar effects. Contributors or service providers may receive token distributions in connection with disclosed development, operational, or ecosystem-related work, where applicable. Any such distributions should be disclosed transparently and evaluated based on their stated purpose, on-chain record, and current contract structure. Tokens held by any wallet may be subject to the same contract-defined mechanics that apply generally, depending on the deployed code and token design. Any contract-defined outputs, if present, depend on the deployed code, network activity, and protocol mechanics. No outcome is guaranteed. Contract behavior and any outputs depend on deployed code, network activity, market conditions, and user interaction."
+        },
+        {
+          "tag": "h5",
+          "text": "DISCLAIMER Everything on this website is provided for informational purposes only. All tokens and interfaces described here are experimental. Nothing on this website is a promise, guarantee, or expectation of value, performance, or distributions. Users are solely responsible for their own decisions and should independently review all contracts, permissions, and risks before interacting."
+        },
+        {
+          "tag": "span",
+          "text": "DISCLAIMER"
+        },
+        {
+          "tag": "span",
+          "text": "Everything on this website is provided for informational purposes only. All tokens and interfaces described here are experimental. Nothing on this website is a promise, guarantee, or expectation of value, performance, or distributions. Users are solely responsible for their own decisions and should independently review all contracts, permissions, and risks before interacting."
+        },
+        {
+          "tag": "li",
+          "text": "👀 Pulsewatch"
+        },
+        {
+          "tag": "li",
+          "text": "📈 Tracker"
+        },
+        {
+          "tag": "li",
+          "text": "WHITE PAPER"
+        }
+      ]
+    },
+    {
+      "route": "/systemloops",
+      "slug": "systemloops",
+      "url": "https://www.finvesta.eco/systemloops",
+      "meta": {
+        "title": "SYSTEM LOOPS | Finvesta Ecosystem",
+        "description": "",
+        "ogTitle": "SYSTEM LOOPS | Finvesta Ecosystem",
+        "ogDescription": "",
+        "ogImage": "https://static.wixstatic.com/media/237c51_2134b3f30991438fb50dbabc6642b69a%7Emv2.png/v1/fit/w_2500,h_1330,al_c/237c51_2134b3f30991438fb50dbabc6642b69a%7Emv2.png",
+        "canonical": "https://www.finvesta.eco/systemloops"
+      },
+      "favicon": "https://static.wixstatic.com/media/237c51_2134b3f30991438fb50dbabc6642b69a%7Emv2.png/v1/fill/w_192%2Ch_192%2Clg_1%2Cusm_0.66_1.00_0.01/237c51_2134b3f30991438fb50dbabc6642b69a%7Emv2.png",
+      "links": [
+        {
+          "text": "FINVESTA.ECO",
+          "href": "https://www.finvesta.eco/"
+        },
+        {
+          "text": "👀 Pulsewatch",
+          "href": "https://pulsewatch.app/"
+        },
+        {
+          "text": "📈 Tracker",
+          "href": "https://ogprinters.pulsewatch.app/"
+        },
+        {
+          "text": "WHITE PAPER",
+          "href": "https://www.finvesta.eco/whitepaper"
+        },
+        {
+          "text": "FINVESTA CHART",
+          "href": "https://dexscreener.com/pulsechain/0x615cfd552e98eb97e5557b03aa41d0e85e98167b"
+        },
+        {
+          "text": "👀 Pulsewatch",
+          "href": "https://pulsewatch.app/"
+        },
+        {
+          "text": "📈 Tracker",
+          "href": "https://ogprinters.pulsewatch.app/"
+        },
+        {
+          "text": "WHITE PAPER",
+          "href": "https://www.finvesta.eco/whitepaper"
+        }
+      ],
+      "imageInfos": [
+        {
+          "uri": "237c51_2134b3f30991438fb50dbabc6642b69a~mv2.png",
+          "alt": "image.png",
+          "width": 800,
+          "height": 800,
+          "original": "https://static.wixstatic.com/media/237c51_2134b3f30991438fb50dbabc6642b69a~mv2.png"
+        }
+      ],
+      "textBlocks": [
+        {
+          "tag": "p",
+          "text": "FINVESTA.ECO"
+        },
+        {
+          "tag": "li",
+          "text": "👀 Pulsewatch"
+        },
+        {
+          "tag": "li",
+          "text": "📈 Tracker"
+        },
+        {
+          "tag": "li",
+          "text": "WHITE PAPER"
+        },
+        {
+          "tag": "span",
+          "text": "Menu"
+        },
+        {
+          "tag": "span",
+          "text": "Close"
+        },
+        {
+          "tag": "a",
+          "text": "FINVESTA CHART"
+        },
+        {
+          "tag": "h1",
+          "text": "SYSTEM LOOPS"
+        },
+        {
+          "tag": "h5",
+          "text": "DISCLAIMER Everything on this website is provided for informational purposes only. All tokens and interfaces described here are experimental. Nothing on this website is a promise, guarantee, or expectation of value, performance, or distributions. Users are solely responsible for their own decisions and should independently review all contracts, permissions, and risks before interacting."
+        },
+        {
+          "tag": "span",
+          "text": "DISCLAIMER"
+        },
+        {
+          "tag": "span",
+          "text": "Everything on this website is provided for informational purposes only. All tokens and interfaces described here are experimental. Nothing on this website is a promise, guarantee, or expectation of value, performance, or distributions. Users are solely responsible for their own decisions and should independently review all contracts, permissions, and risks before interacting."
+        },
+        {
+          "tag": "li",
+          "text": "👀 Pulsewatch"
+        },
+        {
+          "tag": "li",
+          "text": "📈 Tracker"
+        },
+        {
+          "tag": "li",
+          "text": "WHITE PAPER"
+        }
+      ]
+    }
+  ],
+  "assetMap": {
+    "https://static.wixstatic.com/media/237c51_2134b3f30991438fb50dbabc6642b69a%7Emv2.png/v1/fill/w_192%2Ch_192%2Clg_1%2Cusm_0.66_1.00_0.01/237c51_2134b3f30991438fb50dbabc6642b69a%7Emv2.png": "/assets/087371ebd736.png",
+    "https://static.wixstatic.com/media/237c51_dba7ffa03e9c47f883f4388238f5c9dc~mv2.png": "/assets/8c21679f7d5e.png",
+    "https://static.wixstatic.com/media/237c51_2134b3f30991438fb50dbabc6642b69a~mv2.png": "/assets/d999b788a605.png",
+    "https://static.wixstatic.com/media/237c51_4c6e12b3de2f47979f79b0d4a64656f2~mv2.png": "/assets/2ffeea2692b5.png",
+    "https://static.wixstatic.com/media/237c51_a0235b8a386343338c20009246783de2~mv2.png": "/assets/dbcdb87ff249.png",
+    "https://static.wixstatic.com/media/237c51_65c9fef5e9be46ec9c6510eb90e69c2e~mv2.png": "/assets/287a45faa452.png",
+    "https://static.wixstatic.com/media/237c51_49d55fb19baa4690ab0037b14a33a0ea~mv2.png": "/assets/22b80acb44d2.png",
+    "https://static.wixstatic.com/media/237c51_769a11f196114b87892a401064e94709~mv2.png": "/assets/3c84cacad662.png",
+    "https://static.wixstatic.com/media/237c51_2134b3f30991438fb50dbabc6642b69a%7Emv2.png": "/assets/e9146d21f883.png",
+    "https://static.wixstatic.com/media/511164_35739c3bb3804e1a9952ab2d17cc6da9~mv2.jpg": "/assets/e27471cb6be7.jpg",
+    "https://static.wixstatic.com/media/511164_2224204ebe344249ae7919225dd0ace0~mv2.jpg": "/assets/6ebe3889db7e.jpg",
+    "https://static.wixstatic.com/media/511164_400f793827944005a434cd35a211e6de~mv2.jpg": "/assets/80b624181bed.jpg",
+    "https://static.wixstatic.com/media/511164_5f831fd3d6db4088a8a2b4b900d42f7d~mv2.jpg": "/assets/a038473b4bf1.jpg",
+    "https://static.wixstatic.com/media/511164_67986808d0b4489695f170c326fafb35~mv2.jpg": "/assets/d739d455a1fc.jpg",
+    "https://static.wixstatic.com/media/511164_366e459460a74a9aaf7218088674da7c~mv2.png": "/assets/b3c35428b39e.png",
+    "https://static.wixstatic.com/media/511164_b72b9c8a2a51431a868dca8dc48b7185~mv2.jpg": "/assets/dbba2876ed7b.jpg",
+    "https://static.wixstatic.com/media/511164_1faed4c4f7de4defa558e9209e987ce2~mv2.jpg": "/assets/0d3ce3216783.jpg",
+    "https://static.wixstatic.com/media/511164_365aa99c70f04a348cd4273dc5c33b1c~mv2.jpg": "/assets/c7f2e8cc3dfc.jpg",
+    "https://static.wixstatic.com/media/511164_de79dad9382640b0be1f4e39865e10ca~mv2.jpg": "/assets/4634b53f31ef.jpg"
+  }
+}

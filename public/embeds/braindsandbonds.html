@@ -1,0 +1,119 @@
+<style>
+  #brains-bonds-flow {
+    font-family: 'Segoe UI', sans-serif;
+    color: #eaeaea;
+    background: #0a0f14;
+    padding: 2rem 2rem 0 2rem;
+    line-height: 1.6;
+    box-sizing: border-box;
+    margin: 0 !important;
+  }
+
+  #brains-bonds-flow > *:last-child {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  pre {
+    background: #111;
+    color: #ffb84d;
+    padding: 1rem;
+    border-radius: 8px;
+    overflow-x: auto;
+  }
+
+  @media (max-width: 767px) {
+    #brains-bonds-flow {
+      padding: 1.25rem 1rem 0 1rem;
+      font-size: 0.9rem;
+    }
+    #brains-bonds-flow h2 { font-size: 1.25rem; }
+    #brains-bonds-flow em { font-size: 0.85rem; }
+    #brains-bonds-flow pre {
+      font-size: 0.75rem;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+    #brains-bonds-flow ul, #brains-bonds-flow p { font-size: 0.9rem; }
+  }
+
+  [class*="HtmlSection"], [data-testid*="HtmlSection"],
+  [id*="brainsandbonds"], #comp-brainsandbonds {
+    margin: 0 !important;
+    padding: 0 !important;
+    min-height: auto !important;
+    height: auto !important;
+    background: transparent !important;
+  }
+</style>
+<section id="brains-bonds-flow">
+  <h2 style="color:#ffb84d;">🧠 BRAINS &amp; BONDS SYSTEM</h2>
+  <em style="color:#aaa;">(Autonomous Liquidity Brain + Trifecta Bond Access Layer)</em>
+
+  <p>
+    The <strong>Brains &amp; Bonds</strong> layer describes a set of on-chain contract interactions within the Finvesta ecosystem.
+    This framework combines liquidity-related automation, public smart-contract functions, and bond-based eligibility rules.
+  </p>
+
+  <pre>
+┌──────────────────────────────────┐
+│   ALB DISTRIBUTOR (Brain Hub)    │
+│   Controller for connected ALBs  │
+└──────────────────────────────────┘
+              │
+              │ manages multiple AutonomousLiquidityBrain contracts
+              │ processes contract-defined calls
+              │
+              │ bond-based eligibility → TrifectaBond
+              │ eligible participants may call randomizeAll()
+              ▼
+┌─────────────────────────────────────┐
+│ AUTONOMOUS LIQUIDITY BRAIN (ALB)    │
+│ - On-chain liquidity logic          │
+│ - Ratio-based contract actions      │
+│ - Contract-defined state changes    │
+│ - Observable on-chain execution     │
+└─────────────────────────────────────┘
+              │
+              │ when triggered through allowed functions:
+              │   executes protocol-defined actions
+              │   emits observable transaction data
+              ▼
+┌─────────────────────────────────────┐
+│  RELATED CONTRACT INTERACTIONS      │
+│  - Balance routing                  │
+│  - Liquidity-related actions        │
+│  - Public state transitions         │
+│  - Observable transaction effects   │
+└─────────────────────────────────────┘
+              │
+              ▼
+┌─────────────────────────────────────┐
+│  TRIFECTA BOND (NFT ACCESS LAYER)   │
+│  - Uses a defined asset recipe      │
+│  - Non-transferable                 │
+│  - Establishes eligibility status   │
+│  - Grants access to set functions   │
+└─────────────────────────────────────┘
+  </pre>
+
+  <h3 style="color:#00b7ff;">⚙️ FUNCTIONAL BREAKDOWN</h3>
+  <ul>
+    <li><strong>AutonomousLiquidityBrain</strong> — Reads on-chain conditions and executes protocol-defined actions according to deployed contract logic.</li>
+    <li><strong>ALB Distributor</strong> — Coordinates interactions across connected ALB contracts and applies contract-defined access rules, routing logic, and execution flow.</li>
+    <li><strong>TrifectaBond</strong> — A non-transferable NFT-based access layer tied to defined eligibility requirements under the contract rules.</li>
+  </ul>
+
+  <h3 style="color:#00b7ff;">🔍 ACCESS LOGIC</h3>
+  <ul>
+    <li><code>Fund()</code> — Sends PLS into a Brain contract, subject to contract behavior and state.</li>
+    <li><code>Randomize()</code> — Executes protocol-defined actions according to contract logic.</li>
+    <li><code>deposit()</code> — Processes balances through distributor logic, subject to contract conditions.</li>
+    <li><code>randomizeAll()</code> — A bond-gated call that triggers connected Brain interactions, subject to eligibility and current state.</li>
+    <li><code>eligible(address)</code> — In the Bond contract, returns <code>true</code> if the wallet satisfies the contract’s active eligibility rules.</li>
+  </ul>
+
+  <p>
+    Through this bonded and contract-driven structure, the ecosystem coordinates liquidity-related actions and other observable on-chain interactions according to deployed code, current state, and user-triggered execution.
+  </p>
+</section>

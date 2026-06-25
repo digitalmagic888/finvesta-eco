@@ -1,0 +1,119 @@
+<style>
+  #system-loops {
+    font-family: 'Segoe UI', sans-serif;
+    color: #eaeaea;
+    background: #0a0f14;
+    padding: 2rem 2rem 0 2rem;
+    line-height: 1.6;
+    box-sizing: border-box;
+    margin: 0 !important;
+  }
+
+  #system-loops > *:last-child {
+    margin-bottom: 0 !important;
+    padding-bottom: 0 !important;
+  }
+
+  pre {
+    background: #111;
+    color: #ffb84d;
+    padding: 1rem;
+    border-radius: 8px;
+    overflow-x: auto;
+  }
+
+  @media (max-width: 767px) {
+    #system-loops {
+      padding: 1.25rem 1rem 0 1rem;
+      font-size: 0.9rem;
+    }
+    #system-loops h2 { font-size: 1.25rem; }
+    #system-loops em { font-size: 0.85rem; }
+    #system-loops pre {
+      font-size: 0.75rem;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+    #system-loops ul, #system-loops p { font-size: 0.9rem; }
+  }
+
+  [class*="HtmlSection"], [data-testid*="HtmlSection"],
+  [id*="systemloops"], #comp-systemloops {
+    margin: 0 !important;
+    padding: 0 !important;
+    min-height: auto !important;
+    height: auto !important;
+    background: transparent !important;
+  }
+</style>
+<section id="system-loops">
+  <h2 style="color:#ffb84d;">🔁 SYSTEM LOOPS</h2>
+  <em style="color:#aaa;">(Recurring contract interactions across printers, brains, and related protocol components)</em>
+
+  <p>
+    This section describes recurring on-chain interactions involving the
+    <strong>Native Gas Token Printers</strong> — <span style="color:#00b7ff;">Gas Money</span> and
+    <span style="color:#00b7ff;">Remember</span> — together with the
+    <strong>liquidity automation network</strong> and related protocol contracts.
+    When defined contract conditions are met, these systems may route tokens or PLS between components,
+    including liquidity-related contracts and ALB-associated logic.
+  </p>
+
+  <pre>
+┌──────────────────────────────┐
+│   NATIVE PRINTERS            │
+│  (REMEMBER / GAS MONEY)      │
+│   Contract-defined routing   │
+│   of balances / fee logic    │
+└──────────────┬───────────────┘
+               │
+               ▼
+     ┌───────────────────────────────┐
+     │  ALB DISTRIBUTOR / CONTROLLER │
+     │  • Receives routed balances   │
+     │  • Interacts with ALB slots   │
+     │  • Applies contract logic     │
+     └──────────────┬────────────────┘
+                    │
+                    ▼
+     ┌───────────────────────────────┐
+     │ AUTONOMOUS LIQUIDITY BRAINS   │
+     │  • Execute contract actions   │
+     │  • Interact with liquidity    │
+     │  • Respond to set conditions  │
+     └──────────────┬────────────────┘
+                    │
+                    ▼
+     ┌───────────────────────────────┐
+     │   RELATED PROTOCOL OUTPUTS    │
+     │  • Public on-chain effects    │
+     │  • Token / PLS movements      │
+     │  • Observable state changes   │
+     └───────────────────────────────┘
+  </pre>
+
+  <h3 style="color:#00b7ff;">⚙️ SYSTEM DYNAMICS</h3>
+  <ul>
+    <li><strong>Remember / Gas Money Printers</strong> may route balances according to deployed contract logic.</li>
+    <li><strong>Brains</strong> may execute liquidity-related actions or other protocol-defined interactions.</li>
+    <li><strong>ALB Distributor</strong> may interact with stored balances and other connected protocol components.</li>
+    <li><strong>Eligible participants</strong> may call public functions such as <code>randomizeAll()</code>, subject to contract rules and current state.</li>
+  </ul>
+
+  <h3 style="color:#00b7ff;">📈 OBSERVABLE CONDITIONS</h3>
+  <ul>
+    <li>Protocol behavior may vary based on market conditions, contract state, and on-chain activity.</li>
+    <li>Ratios, balances, and liquidity positions may influence how contract-defined actions execute.</li>
+    <li>No outcome is guaranteed; interactions may affect price, liquidity, and execution results.</li>
+  </ul>
+
+  <h3 style="color:#00b7ff;">💠 PUBLIC REVIEW</h3>
+  <p>
+    Users can review wallet activity, contract balances, and transaction history through public block explorers and the protocol interface.
+    All interactions should be evaluated independently based on deployed code, permissions, and current on-chain conditions.
+  </p>
+
+  <p style="color:#aaa;">
+    These systems are experimental and operate according to contract logic, network activity, and user interaction.
+  </p>
+</section>
