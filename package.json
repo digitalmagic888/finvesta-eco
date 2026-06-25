@@ -12,11 +12,11 @@
   "author": "",
   "license": "ISC",
   "devEngines": {
-    "packageManager": {
-      "name": "pnpm",
-      "version": "pnpm@10.11.1",
-      "onFail": "download"
-    }
+  "packageManager": {
+    "name": "pnpm",
+    "version": "10.11.1",
+    "onFail": "download"
+  }
   },
   "pnpm": {
     "ignoredBuiltDependencies": [
