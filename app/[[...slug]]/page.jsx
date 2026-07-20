@@ -26,7 +26,7 @@ const embeddedPages = {
 
 const assets = {
   logo: "/assets/d999b788a605.png",
-  favicon: "/assets/087371ebd736.png",
+  favicon: "/favicon.png",
   hero: "/assets/2ffeea2692b5.png",
   og: "/assets/8c21679f7d5e.png",
   gas: "/assets/dbcdb87ff249.png",
