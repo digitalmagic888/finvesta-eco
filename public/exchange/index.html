@@ -7,6 +7,7 @@
   <link rel="icon" sizes="192x192" href="/favicon.png" type="image/png"/>
   <link rel="shortcut icon" href="/favicon.png" type="image/png"/>
   <link rel="apple-touch-icon" href="/favicon.png" type="image/png"/>
+  <link rel="preload" href="/favicon.png" as="image" fetchpriority="high">
   <meta name="description" content="Finvesta V3 liquidity positions and swap console for PulseChain.">
   <title>Finvesta V3 DEX · PulseChain</title>
   <style>
@@ -102,6 +103,17 @@
     .primary:disabled{opacity:.4;filter:grayscale(.45);cursor:not-allowed}
     .secondary{min-height:42px;padding:0 14px;border:1px solid var(--line2);border-radius:4px;background:var(--panel2);color:var(--teal);font-size:10px;font-weight:900;cursor:pointer}
     .secondary:hover{border-color:rgba(0,246,255,.4)}
+    .position-actions{align-items:stretch}
+    .position-create-cta{min-height:54px;position:relative;isolation:isolate;overflow:hidden;padding:7px 17px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:11px;border:1px solid rgba(183,255,125,.74);border-radius:6px;background:linear-gradient(105deg,#00f6ff 0%,#65dbe8 50%,#b7ff7d 100%);color:#041013;text-align:left;cursor:pointer;box-shadow:0 0 0 1px rgba(0,246,255,.17),0 14px 36px rgba(0,246,255,.21),0 0 34px rgba(183,255,125,.1);animation:positionCtaGlow 2.4s ease-in-out infinite alternate}
+    .position-create-cta::before{content:"";position:absolute;inset:-2px;z-index:-1;background:linear-gradient(110deg,transparent 22%,rgba(255,255,255,.65) 44%,transparent 64%);transform:translateX(-115%);animation:positionCtaSweep 3.4s ease-in-out infinite}
+    .position-create-cta:hover{transform:translateY(-2px);filter:brightness(1.07);box-shadow:0 18px 44px rgba(0,246,255,.31),0 0 45px rgba(183,255,125,.16)}
+    .position-create-cta__plus{width:31px;height:31px;display:grid;place-items:center;border:1px solid rgba(4,16,19,.24);border-radius:50%;background:rgba(255,255,255,.3);font-size:18px;font-weight:1000}
+    .position-create-cta>span:nth-child(2){display:grid;gap:2px}
+    .position-create-cta strong{font-size:11px;font-weight:1000;letter-spacing:.045em;text-transform:uppercase}
+    .position-create-cta small{color:rgba(4,16,19,.68);font-size:7px;font-weight:900;letter-spacing:.03em}
+    .position-create-cta>span:last-child{font-size:17px;font-weight:1000}
+    .positions-hero__aside{display:grid;align-self:end;gap:17px}
+    .positions-hero__aside .position-create-cta{width:100%;min-height:64px;padding-inline:20px}
     .link-button{padding:0;border:0;background:none;color:var(--teal);font-size:9px;font-weight:800;cursor:pointer}
     .detail-toggle{width:100%;padding:13px 1px 3px;display:flex;justify-content:space-between;border:0;background:transparent;color:#708994;font-size:9px;cursor:pointer}
     dl.details{margin:9px 0 0;padding-top:8px;border-top:1px solid rgba(101,219,232,.09)}
@@ -285,10 +297,24 @@
     .range-slider-row label{color:#78919b;font-size:8px;font-weight:900;text-transform:uppercase}
     .range-slider-row output{padding:5px 7px;border:1px solid rgba(101,219,232,.12);border-radius:3px;color:var(--text);font:800 8px/1 ui-monospace,SFMono-Regular,Menlo,monospace;text-align:right}
     .range-slider-row input[type=range]{width:100%;accent-color:var(--cyan);cursor:pointer}
-    .range-presets{display:flex;flex-wrap:wrap;gap:5px;margin-top:10px}
-    .range-presets button{padding:5px 8px;border:1px solid rgba(101,219,232,.14);border-radius:3px;background:#0a1215;color:#8ca3ad;font-size:7px;font-weight:900;cursor:pointer}
+    .range-presets{display:grid;grid-template-columns:1.35fr repeat(4,1fr);gap:6px;margin-top:10px}
+    .range-presets button{min-height:42px;padding:5px 8px;border:1px solid rgba(101,219,232,.14);border-radius:4px;background:#0a1215;color:#8ca3ad;font-size:8px;font-weight:1000;cursor:pointer}
     .range-presets button:hover{border-color:rgba(0,246,255,.42);color:var(--cyan)}
+    .range-presets button.active{border-color:rgba(0,246,255,.58);background:linear-gradient(135deg,rgba(0,246,255,.14),rgba(183,255,125,.07));color:var(--cyan);box-shadow:inset 0 0 0 1px rgba(0,246,255,.08)}
     .range-presets button:disabled{cursor:not-allowed;opacity:.35}
+    .price-range-cards{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:11px}
+    .price-range-card{min-height:112px;padding:15px 12px;display:grid;place-items:center;align-content:center;gap:8px;border:1px solid rgba(101,219,232,.16);border-radius:9px;background:linear-gradient(145deg,rgba(18,31,36,.96),rgba(10,18,22,.98));text-align:center}
+    .price-range-card small{color:var(--green);font-size:8px;font-weight:1000;letter-spacing:.08em}
+    .price-range-card strong{max-width:100%;color:var(--text);font:1000 clamp(20px,4vw,28px)/1 var(--display);overflow:hidden;text-overflow:ellipsis}
+    .price-range-card span{max-width:100%;color:#8da5af;font-size:8px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+    .mint-deposit-stack{display:grid;gap:8px}
+    .mint-deposit-card{min-height:92px;padding:13px 14px;display:grid;grid-template-columns:minmax(125px,.8fr) minmax(120px,1fr);align-items:center;gap:10px;border:1px solid rgba(101,219,232,.15);border-radius:8px;background:linear-gradient(145deg,rgba(18,31,36,.96),rgba(10,18,22,.98))}
+    .mint-deposit-card>div{min-width:0;display:grid;gap:5px}
+    .mint-deposit-token{color:var(--text);font:1000 13px/1 var(--display)}
+    .mint-deposit-card>div strong{color:#78919b;font-size:8px;line-height:1.35;overflow-wrap:anywhere}
+    .mint-deposit-card>input{width:100%;height:46px;padding:0 10px;border:0;border-bottom:1px solid rgba(101,219,232,.18);background:transparent;color:var(--text);font:1000 24px/1 var(--display);outline:0;text-align:right}
+    .mint-deposit-card>input:focus{border-color:var(--cyan)}
+    .mint-deposit-card>.field-percentages{grid-column:1/-1}
     .range-context{margin-top:10px;padding:9px;border-left:2px solid var(--cyan);background:rgba(0,246,255,.035);color:#9bb0b9;font-size:8px;line-height:1.5}
     .range-context.warn{border-color:var(--orange);background:rgba(255,101,61,.05)}
     .locked-range{margin-top:12px;padding:12px;border:1px solid rgba(101,219,232,.13);border-radius:5px;background:#080f12}
@@ -393,6 +419,12 @@
     .admin-actions .secondary{flex:0 0 auto}
     @keyframes pricePulse{50%{box-shadow:0 0 0 5px rgba(255,155,61,.11),0 14px 38px rgba(255,101,61,.15)}}
     .wallet-list,.token-list{display:grid;gap:7px}
+    .modal #tokenList{max-height:min(48vh,430px);overflow:auto;padding-right:3px;overscroll-behavior:contain}
+    .token-search-summary{margin:21px 0 8px;display:flex;align-items:end;justify-content:space-between;gap:12px}
+    .token-search-summary span{color:var(--cyan);font-size:8px;font-weight:1000;letter-spacing:.1em;text-transform:uppercase}
+    .token-search-summary small{color:#718995;font-size:7px;text-align:right}
+    .token-search-empty{min-height:100px;padding:20px;display:grid;place-items:center;align-content:center;gap:6px;border:1px dashed rgba(101,219,232,.2);border-radius:5px;color:#718995;text-align:center}
+    .token-search-empty strong{color:#b7cad2;font-size:10px}.token-search-empty span{max-width:330px;font-size:8px;line-height:1.5}
     .choice-button{min-height:59px;padding:9px 11px;display:flex;align-items:center;gap:11px;border:1px solid rgba(101,219,232,.12);border-radius:5px;background:#0b1215;text-align:left;cursor:pointer}
     .choice-button:hover{border-color:rgba(0,246,255,.4);background:rgba(0,246,255,.035)}
     .wallet-icon{width:37px;height:37px;display:grid;place-items:center;overflow:hidden;border-radius:9px;background:var(--panel3);font-weight:900}
@@ -422,6 +454,57 @@
     .toast.success{border-color:rgba(183,255,125,.25);border-left-color:var(--green)}
     .skeleton{position:relative;overflow:hidden;background:#172329!important;color:transparent!important}
     .skeleton::after{content:"";position:absolute;inset:0;transform:translateX(-100%);background:linear-gradient(90deg,transparent,rgba(255,255,255,.05),transparent);animation:shimmer 1.4s infinite}
+    body>.topbar,body>.main,body>.footer,body>.mobile-nav{transition:filter .75s cubic-bezier(.22,1,.36,1),opacity .75s cubic-bezier(.22,1,.36,1),transform .75s cubic-bezier(.22,1,.36,1)}
+    body.app-loading{overflow:hidden}
+    body.app-loading>.topbar,body.app-loading>.main,body.app-loading>.footer,body.app-loading>.mobile-nav{filter:blur(12px) saturate(.62);opacity:.31;transform:scale(.992);pointer-events:none;user-select:none}
+    .app-preloader{position:fixed;inset:0;z-index:300;display:grid;place-items:center;padding:clamp(18px,4vw,46px);overflow:auto;background:radial-gradient(circle at 50% 42%,rgba(0,246,255,.11),transparent 31%),radial-gradient(circle at 78% 18%,rgba(255,59,212,.075),transparent 28%),linear-gradient(135deg,rgba(4,9,12,.72),rgba(5,8,12,.82));-webkit-backdrop-filter:blur(10px) saturate(.72);backdrop-filter:blur(10px) saturate(.72);transition:opacity .38s ease,visibility .38s ease}
+    .app-preloader::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.38;background:linear-gradient(rgba(101,219,232,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(101,219,232,.045) 1px,transparent 1px);background-size:46px 46px;mask-image:radial-gradient(circle at center,#000,transparent 78%)}
+    .app-preloader.is-leaving{opacity:0;visibility:hidden;pointer-events:none}
+    .preloader-card{position:relative;width:min(530px,100%);padding:clamp(25px,5vw,42px);overflow:hidden;border:1px solid rgba(101,219,232,.22);border-radius:12px;background:linear-gradient(145deg,rgba(15,24,28,.94),rgba(7,12,15,.96));box-shadow:0 36px 120px rgba(0,0,0,.58),0 0 80px rgba(0,246,255,.055);transition:transform .58s cubic-bezier(.22,1,.36,1),border-color .35s ease}
+    .preloader-card::before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(115deg,transparent 18%,rgba(0,246,255,.035) 48%,transparent 72%);transform:translateX(-100%);animation:preloadSweep 2.7s ease-in-out infinite}
+    .preloader-visual{height:118px;display:grid;place-items:center;margin-bottom:20px}
+    .preloader-orbit{position:relative;width:112px;height:112px;display:grid;place-items:center}
+    .preloader-orbit::before,.preloader-orbit::after{content:"";position:absolute;border-radius:50%;border:1px solid rgba(0,246,255,.36);animation:preloadOrbit 5.8s linear infinite}
+    .preloader-orbit::before{inset:0;border-left-color:transparent;border-bottom-color:rgba(255,59,212,.5);box-shadow:0 0 24px rgba(0,246,255,.075)}
+    .preloader-orbit::after{inset:11px;border-right-color:transparent;border-top-color:rgba(255,155,61,.6);animation-direction:reverse;animation-duration:3.9s}
+    .preloader-orbit i{position:absolute;inset:21px;border-radius:50%;background:radial-gradient(circle,rgba(0,246,255,.2),rgba(106,108,255,.08) 52%,transparent 72%);box-shadow:0 0 44px rgba(0,246,255,.2);animation:preloadGlow 1.8s ease-in-out infinite alternate}
+    .preloader-orbit img{position:relative;z-index:2;width:58px;height:58px;object-fit:contain;filter:drop-shadow(0 12px 22px rgba(0,0,0,.45)) drop-shadow(0 0 16px rgba(0,246,255,.25));animation:preloadLogo 2.2s ease-in-out infinite}
+    .preloader-kicker{margin:0 0 9px;color:var(--cyan);font-size:8px;font-weight:1000;letter-spacing:.22em;text-align:center;text-transform:uppercase}
+    .preloader-card h1{margin:0;text-align:center;font:900 clamp(30px,7vw,43px)/.97 var(--display);letter-spacing:-.04em;text-transform:uppercase}
+    .preloader-card h1 em{font-style:normal;color:transparent;-webkit-text-stroke:1px rgba(101,219,232,.78)}
+    .preloader-status{min-height:42px;margin:16px auto 18px;max-width:390px;color:#9cb3bd;font-size:11px;font-weight:650;line-height:1.6;text-align:center}
+    .preloader-progress{height:7px;position:relative;overflow:hidden;border:1px solid rgba(101,219,232,.16);border-radius:999px;background:#071014;box-shadow:inset 0 1px 3px rgba(0,0,0,.5)}
+    .preloader-progress__fill{width:4%;height:100%;position:relative;border-radius:inherit;background:linear-gradient(90deg,var(--cyan),#62e3ff 48%,var(--pink));box-shadow:0 0 18px rgba(0,246,255,.36);transition:width .42s cubic-bezier(.22,1,.36,1)}
+    .preloader-progress__fill::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.7),transparent);transform:translateX(-100%);animation:preloadProgress 1.35s ease-in-out infinite}
+    .preloader-progress-meta{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-top:9px;color:#637d88;font-size:8px;font-weight:900;letter-spacing:.1em;text-transform:uppercase}
+    .preloader-progress-meta strong{color:#dffbff;font-size:9px}
+    .preloader-steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-top:22px}
+    .preloader-step{min-width:0;padding:10px;border:1px solid rgba(101,219,232,.1);border-radius:5px;background:rgba(101,219,232,.025)}
+    .preloader-step span{display:flex;align-items:center;gap:6px;color:#6f8792;font-size:7px;font-weight:900;letter-spacing:.08em;text-transform:uppercase}
+    .preloader-step span::before{content:"";width:6px;height:6px;flex:0 0 auto;border-radius:50%;background:#40535c}
+    .preloader-step strong{display:block;overflow:hidden;margin-top:6px;color:#a6bbc4;font-size:9px;text-overflow:ellipsis;white-space:nowrap}
+    .preloader-step.is-active span::before{background:var(--cyan);box-shadow:0 0 10px rgba(0,246,255,.7);animation:preloadPulse 1.1s ease-in-out infinite alternate}
+    .preloader-step.is-ready{border-color:rgba(183,255,125,.18);background:rgba(183,255,125,.035)}
+    .preloader-step.is-ready span::before{background:var(--green);box-shadow:0 0 9px rgba(183,255,125,.55)}
+    .preloader-step.is-ready strong{color:var(--green)}
+    .preloader-step.has-error{border-color:rgba(255,107,120,.28);background:rgba(255,107,120,.045)}
+    .preloader-step.has-error span::before{background:var(--red);box-shadow:0 0 9px rgba(255,107,120,.45)}
+    .preloader-step.has-error strong{color:#ff9ba5}
+    .preloader-note{margin:17px 0 0;color:#58717c;font-size:8px;line-height:1.55;text-align:center}
+    .preloader-retry{min-height:43px;margin:18px auto 0;padding:0 18px;border:1px solid rgba(255,107,120,.42);border-radius:4px;background:rgba(255,107,120,.08);color:#ffc0c7;font-size:10px;font-weight:1000;cursor:pointer}
+    .preloader-retry:hover{border-color:var(--red);background:rgba(255,107,120,.13)}
+    .app-preloader.has-error .preloader-card{border-color:rgba(255,107,120,.3)}
+    .app-preloader.has-error .preloader-orbit::before{border-color:rgba(255,107,120,.5);border-left-color:transparent}
+    .app-preloader.is-ready .preloader-card{transform:translateY(-5px);border-color:rgba(183,255,125,.26)}
+    .journey,.contract-registry{content-visibility:auto;contain-intrinsic-size:1px 760px}
+    @keyframes preloadOrbit{to{transform:rotate(360deg)}}
+    @keyframes preloadLogo{0%,100%{transform:translateY(2px) scale(.98)}50%{transform:translateY(-4px) scale(1.03)}}
+    @keyframes preloadGlow{to{transform:scale(1.14);opacity:.72}}
+    @keyframes preloadSweep{0%,18%{transform:translateX(-100%)}72%,100%{transform:translateX(100%)}}
+    @keyframes preloadProgress{50%,100%{transform:translateX(100%)}}
+    @keyframes preloadPulse{to{transform:scale(1.35);opacity:.6}}
+    @keyframes positionCtaGlow{to{box-shadow:0 0 0 1px rgba(0,246,255,.25),0 17px 42px rgba(0,246,255,.3),0 0 45px rgba(183,255,125,.17)}}
+    @keyframes positionCtaSweep{0%,35%{transform:translateX(-115%)}75%,100%{transform:translateX(115%)}}
     @keyframes route{from{left:0}to{left:calc(100% - 7px)}}
     @keyframes shimmer{to{transform:translateX(100%)}}
     @keyframes toastIn{from{opacity:0;transform:translateY(8px)}}
@@ -433,11 +516,31 @@
     }
     @media(max-width:900px){.protocol-fee-hero__grid,.protocol-transparency__grid{grid-template-columns:1fr}.protocol-fee-hero h1{max-width:720px}.fee-allocation{max-width:620px}.protocol-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
     @media(max-width:620px){.protocol-fee-hero{margin-top:35px;padding:22px}.protocol-fee-hero__top{align-items:flex-start;flex-direction:column;margin-bottom:22px}.protocol-fee-badge{white-space:normal}.protocol-fee-hero h1{margin-bottom:21px;font-size:clamp(39px,13vw,56px)}.protocol-fee-statement{font-size:14px;line-height:1.58}.fee-allocation{padding:15px}.fee-allocation__bar{height:68px}.fee-allocation__zero{font-size:25px}.protocol-transparency{margin-top:34px;padding-top:28px}.protocol-transparency__intro h2{font-size:29px}.protocol-transparency__intro p{font-size:11px;line-height:1.67}.treasury-panel,.fee-tier-panel{padding:15px}.treasury-route{grid-template-columns:1fr auto 1fr}.treasury-route span:nth-of-type(3){grid-column:1/-1}.treasury-route i:last-of-type{display:none}.fee-tier-panel__head{flex-direction:column}.fee-tier-panel__head span{max-width:none;text-align:left}.protocol-assurance{grid-template-columns:1fr;gap:11px}.protocol-assurance p{padding:11px 0 0;border-left:0;border-top:1px solid rgba(183,255,125,.19)}.contract-registry__head{align-items:flex-start;flex-direction:column}.contract-registry__head>p{text-align:left}.protocol-grid{grid-template-columns:1fr}.mobile-nav button{white-space:nowrap}}
+    @media(max-width:620px){.app-preloader{place-items:center;padding:14px}.preloader-card{padding:24px 18px}.preloader-visual{height:96px;margin-bottom:17px}.preloader-orbit{width:92px;height:92px}.preloader-orbit img{width:49px;height:49px}.preloader-card h1{font-size:clamp(29px,10.5vw,38px)}.preloader-status{margin-top:13px;font-size:10px}.preloader-steps{grid-template-columns:1fr;gap:6px;margin-top:17px}.preloader-step{display:grid;grid-template-columns:1fr auto;align-items:center;padding:8px 10px}.preloader-step strong{margin:0;max-width:160px;text-align:right}.preloader-note{margin-top:13px}.positions-hero__aside{width:100%;gap:14px}.positions-hero__aside .position-create-cta{min-height:68px}.position-actions,.position-actions .secondary{width:100%}.range-presets{grid-template-columns:repeat(2,1fr)}.range-presets #mintFullStrategy{grid-column:1/-1}.price-range-card{min-height:96px;padding-inline:8px}.mint-deposit-card{grid-template-columns:1fr}.mint-deposit-card>input{text-align:left}.mint-deposit-card>.field-percentages{grid-column:auto}}
     @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
   </style>
 </head>
-<body>
-  <header class="topbar">
+<body class="app-loading" aria-busy="true">
+  <section class="app-preloader" id="appPreloader" aria-labelledby="preloaderTitle" aria-describedby="preloaderStatus">
+    <div class="preloader-card">
+      <div class="preloader-visual" aria-hidden="true"><div class="preloader-orbit"><i></i><img src="/favicon.png" alt="" width="58" height="58" fetchpriority="high"></div></div>
+      <p class="preloader-kicker">Finvesta execution layer · Chain 369</p>
+      <h1 id="preloaderTitle">Making DeFi<br><em>Fun Again.</em></h1>
+      <p class="preloader-status" id="preloaderStatus" role="status" aria-live="polite" aria-atomic="true">Opening a verified PulseChain read session…</p>
+      <div class="preloader-progress" id="preloaderProgress" role="progressbar" aria-label="Asset registry synchronization" aria-valuemin="0" aria-valuemax="100" aria-valuenow="4"><div class="preloader-progress__fill" id="preloaderProgressFill"></div></div>
+      <div class="preloader-progress-meta"><span id="preloaderProgressLabel">Preparing registry</span><strong id="preloaderProgressCount">0 / 14</strong></div>
+      <div class="preloader-steps" aria-label="Startup readiness">
+        <div class="preloader-step is-active" id="preloaderRpcStep"><span>PulseChain RPC</span><strong id="preloaderRpcValue">Verifying</strong></div>
+        <div class="preloader-step" id="preloaderNativeStep"><span>Native PLS</span><strong id="preloaderNativeValue">Waiting</strong></div>
+        <div class="preloader-step" id="preloaderAssetsStep"><span>Asset registry</span><strong id="preloaderAssetsValue">0 settled</strong></div>
+      </div>
+      <button class="preloader-retry" id="preloaderRetry" type="button" hidden>Retry PulseChain sync</button>
+      <p class="preloader-note">Token metadata is resolved directly from PulseChain. No wallet connection or approval is requested during startup.</p>
+      <noscript><p class="preloader-status" style="color:var(--red)">JavaScript is required to resolve the asset registry.</p></noscript>
+    </div>
+  </section>
+
+  <header class="topbar" inert aria-hidden="true">
     <div class="shell topbar__in">
       <a href="#swap" class="brand" aria-label="Finvesta V3 home">
         <span class="brand__mark"><img src="/favicon.png" width="25px" height="25px"></span><span class="brand__copy"><strong>FINVESTA</strong><small>V3 · PULSECHAIN</small></span>
@@ -455,7 +558,7 @@
     </div>
   </header>
 
-  <main class="main">
+  <main class="main" inert aria-hidden="true">
     <section class="view active" id="view-swap">
       <div class="shell">
         <div class="hero">
@@ -551,7 +654,7 @@
       <div class="shell">
         <div class="hero positions-hero">
           <div><p class="eyebrow"><i></i>V3 liquidity positions</p><h1>Liquidity,<br><em>under control.</em></h1></div>
-          <p class="hero__copy"><strong>Your wallet is the source of truth.</strong> Position NFTs, ticks, liquidity, and collectible amounts are read directly from the on-chain position manager.</p>
+          <div class="positions-hero__aside"><p class="hero__copy"><strong>Your wallet is the source of truth.</strong> Position NFTs, ticks, liquidity, and collectible amounts are read directly from the on-chain position manager.</p><button class="position-create-cta" id="newPositionButton"><span class="position-create-cta__plus">＋</span><span><strong>New position</strong><small>Create or initialize liquidity</small></span><span aria-hidden="true">→</span></button></div>
         </div>
         <div class="summary-grid">
           <article class="summary-card"><span>POSITION NFTS</span><strong id="positionCount">—</strong><small id="positionCountNote">Connect a wallet to scan</small></article>
@@ -560,7 +663,7 @@
         </div>
         <div class="section-head">
           <div><p class="kicker">Concentrated liquidity</p><h2>Your positions</h2></div>
-          <div class="tools"><button class="secondary" id="manualPositionButton">Load token ID</button><button class="secondary" id="newPositionButton">＋ New position</button></div>
+          <div class="tools position-actions"><button class="secondary" id="manualPositionButton">Load token ID</button></div>
         </div>
         <div class="positions-layout">
           <div class="position-list" id="positionList">
@@ -670,8 +773,8 @@
     </section>
   </main>
 
-  <footer class="footer"><div class="shell footer__in"><span>FINVESTA V3 · PULSECHAIN</span><span>Self-custodial interface · Verify every wallet prompt</span><span id="footerBlock">RPC —</span></div></footer>
-  <nav class="mobile-nav" aria-label="Mobile navigation"><button data-nav="swap" class="active">SWAP</button><button data-nav="positions">POSITIONS</button><button data-nav="protocol">PROTOCOL FEES</button></nav>
+  <footer class="footer" inert aria-hidden="true"><div class="shell footer__in"><span>FINVESTA V3 · PULSECHAIN</span><span>Self-custodial interface · Verify every wallet prompt</span><span id="footerBlock">RPC —</span></div></footer>
+  <nav class="mobile-nav" aria-label="Mobile navigation" inert aria-hidden="true"><button data-nav="swap" class="active">SWAP</button><button data-nav="positions">POSITIONS</button><button data-nav="protocol">PROTOCOL FEES</button></nav>
   <div class="modal-layer" id="modalLayer" hidden><div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"></div></div>
   <div class="toast-stack" id="toastStack" aria-live="polite"></div>
 
@@ -703,6 +806,23 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
     router:"0x02111F79b8fd68f76cc616214fe7662f93273FEF",
     wpls:"0xA1077a294dDE1B09bB078844df40758a5D0f9a27"
   });
+  var DEFAULT_TOKEN_ADDRESSES=Object.freeze([
+    ADDR.wpls,
+    "0x41B6D8bA2acC273Fe7b319fcEd7DD59f69592951",
+    "0x2556F7f8d82EbcdD7b821b0981C38D9dA9439CdD",
+    "0x24F0154C1dCe548AdF15da2098Fdd8B8A3B8151D",
+    "0xB709276c0e8d3A5372A13d4fEA886496F396feA1",
+    "0x15D38573d2feeb82e7ad5187aB8c1D52810B1f07",
+    "0x770CFA2FB975E7bCAEDDe234D92c3858C517Adca",
+    "0x042b48a98B37042D58Bc8defEEB7cA4eC76E6106",
+    "0x6B175474E89094C44Da98b954EedeAC495271d0F",
+    "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+    "0x57fde0a71132198BBeC939B98976993d8D89D225",
+    "0x2b591e99afE9f32eAA6214f7B7629768c40Eeb39",
+    "0x95B303987A60C71504D99Aa1b13B4DA07b0790ab",
+    "0x2fa878Ab3F87CC1C9737Fc071108F904c0B0C95d"
+  ]);
+  var MAX_SAVED_TOKEN_RESTORES=40,STARTUP_WORKERS=4;
   var ADMIN_EOA="0x369418f70ccE4D4FeE21934CB7a13CD009C59888";
   var ABI = Object.freeze({
     erc20:[
@@ -758,7 +878,8 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
     descriptor:[]
   });
   var MAX_UINT128=(1n<<128n)-1n, Q96=1n<<96n, Q192=1n<<192n, MIN_TICK=-887272, MAX_TICK=887272, NATIVE_MAX_GAS_UNITS=1500000n;
-  var readProvider = new E.JsonRpcProvider(CHAIN.rpc,{name:"pulsechain",chainId:369},{staticNetwork:true,batchMaxCount:1});
+  var rpcRequest=new E.FetchRequest(CHAIN.rpc);rpcRequest.timeout=18000;
+  var readProvider = new E.JsonRpcProvider(rpcRequest,{name:"pulsechain",chainId:369},{staticNetwork:true,batchMaxCount:1});
   var contracts = {
     factory:new E.Contract(ADDR.factory,ABI.factory,readProvider),
     router:new E.Contract(ADDR.router,ABI.router,readProvider),
@@ -775,6 +896,7 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
     positions:[],selectedPosition:null,dexCache:new Map(),adminNonce:0,adminConfig:null,adminPool:null,
     settings:{slippageBps:50,deadlineMinutes:20,unlimitedApproval:false}
   };
+  var startupState={startedAt:Date.now(),inFlight:false,slowTimer:null,releaseTimer:null,lastReport:null};
 
   function $(id){return document.getElementById(id)}
   function esc(value){return String(value==null?"":value).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
@@ -802,17 +924,20 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
     if(!s||s==="."||/^0*(?:\.0*)?$/.test(s))return 0n;
     return E.parseUnits(s,decimals)
   }
+  function formatInteger(value){
+    if(value==null)return "—";var s=String(value);return /^-?\d+$/.test(s)?s.replace(/\B(?=(\d{3})+(?!\d))/g,","):s
+  }
+  function formatDecimal(value){
+    if(value==null)return "—";var s=String(value),match=s.match(/^(-?\d+)(\.\d+)?$/);return match?formatInteger(match[1])+(match[2]||""):s
+  }
   function trimUnits(value,decimals,digits){
     if(value==null)return "—";
     var s=E.formatUnits(value,decimals), p=s.split("."), d=digits==null?6:digits;
     var frac=(p[1]||"").slice(0,d).replace(/0+$/,"");
-    var whole=p[0].replace(/\B(?=(\d{3})+(?!\d))/g,",");
+    var whole=formatInteger(p[0]);
     return frac?whole+"."+frac:whole
   }
-  function compactBig(value){
-    var s=String(value==null?0:value); if(s.length<=6)return s;
-    return s.slice(0,3)+"."+s.slice(3,4)+"e"+String(s.length-1)
-  }
+  function compactBig(value){return formatInteger(value==null?0:value)}
   function feeLabel(fee){return (Number(fee)/10000).toFixed(Number(fee)%10000===0?0:2)+"%"}
   function safeError(error){
     var seen=new Set(),q=[error],msgs=[];
@@ -836,6 +961,49 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
   function setBusy(button,busy,label){
     if(!button)return; if(busy){button.dataset.old=button.innerHTML;button.disabled=true;button.textContent=label||"Working…"}
     else{button.disabled=false;if(button.dataset.old){button.innerHTML=button.dataset.old;delete button.dataset.old}}
+  }
+  function waitMs(ms){return new Promise(function(resolve){setTimeout(resolve,ms)})}
+  function afterNextPaint(){return new Promise(function(resolve){requestAnimationFrame(function(){requestAnimationFrame(resolve)})})}
+  function setStartupStep(id,status,value){
+    var step=$(id);if(!step)return;step.classList.remove("is-active","is-ready","has-error");if(status)step.classList.add(status);var strong=step.querySelector("strong");if(strong&&value!=null)strong.textContent=value
+  }
+  function setStartupPercent(value,label,count){
+    var percent=Math.max(0,Math.min(100,Math.round(value))),bar=$("preloaderProgress"),fill=$("preloaderProgressFill");
+    if(bar)bar.setAttribute("aria-valuenow",String(percent));if(fill)fill.style.width=String(percent)+"%";
+    if(label!=null&&$("preloaderProgressLabel"))$("preloaderProgressLabel").textContent=label;
+    if(count!=null&&$("preloaderProgressCount"))$("preloaderProgressCount").textContent=count
+  }
+  function setStartupStatus(message){if($("preloaderStatus"))$("preloaderStatus").textContent=message}
+  function updateStartupProgress(report){
+    startupState.lastReport=report;var total=report.total||DEFAULT_TOKEN_ADDRESSES.length,settled=report.settled||0,percent=10+(total?settled/total*84:0),count=formatInteger(settled)+" / "+formatInteger(total);
+    setStartupPercent(percent,"Resolving contracts",count);setStartupStep("preloaderAssetsStep",settled>=total?"is-ready":"is-active",settled>=total?formatInteger(report.loaded)+" ready":formatInteger(settled)+" settled");
+    if(report.wplsReady)setStartupStep("preloaderNativeStep","is-ready","PLS route ready");
+    else setStartupStep("preloaderNativeStep","is-active","Resolving WPLS");
+    if(report.token)setStartupStatus(report.token.symbol+" ready · "+count+" contracts settled");
+    else if(report.error)setStartupStatus("Contract "+count+" settled with an RPC error · continuing safely");
+    else setStartupStatus("Synchronizing "+formatInteger(total)+" known assets from PulseChain…")
+  }
+  function setAppInteractive(interactive){
+    document.querySelectorAll("header,main,footer,.mobile-nav").forEach(function(el){el.inert=!interactive;if(interactive){el.removeAttribute("inert");el.removeAttribute("aria-hidden")}else{el.setAttribute("inert","");el.setAttribute("aria-hidden","true")}})
+  }
+  function resetPreloader(){
+    clearTimeout(startupState.slowTimer);var loader=$("appPreloader");if(!loader)return;loader.hidden=false;loader.classList.remove("has-error","is-ready","is-leaving");loader.setAttribute("aria-busy","true");
+    $("preloaderTitle").innerHTML="Making DeFi<br><em>Fun Again.</em>";$("preloaderStatus").setAttribute("role","status");$("preloaderRetry").hidden=true;
+    document.body.classList.add("app-loading");document.body.setAttribute("aria-busy","true");setAppInteractive(false);setStartupPercent(4,"Preparing registry","0 / "+formatInteger(DEFAULT_TOKEN_ADDRESSES.length));
+    setStartupStep("preloaderRpcStep","is-active","Verifying");setStartupStep("preloaderNativeStep",null,"Waiting");setStartupStep("preloaderAssetsStep",null,"0 settled");setStartupStatus("Opening a verified PulseChain read session…");
+    startupState.slowTimer=setTimeout(function(){if(startupState.inFlight)setStartupStatus("PulseChain is responding slowly · keeping asset selection locked until the registry is complete…")},8000)
+  }
+  async function releasePreloader(report){
+    clearTimeout(startupState.slowTimer);var loader=$("appPreloader"),skipped=report&&report.failedSaved?report.failedSaved.length:0,coreCount=DEFAULT_TOKEN_ADDRESSES.length;
+    setStartupStep("preloaderRpcStep","is-ready","Chain 369 live");setStartupStep("preloaderNativeStep","is-ready","PLS route ready");setStartupStep("preloaderAssetsStep","is-ready",skipped?formatInteger(report.loaded)+" ready":formatInteger(coreCount)+" core ready");
+    setStartupPercent(100,"Registry synchronized",formatInteger(report.settled)+" / "+formatInteger(report.total));setStartupStatus(skipped?formatInteger(coreCount)+" core assets ready · "+formatInteger(skipped)+" unavailable saved token"+(skipped===1?"":"s")+" skipped":"Native PLS and all "+formatInteger(coreCount)+" core assets are ready.");loader.classList.add("is-ready");
+    await waitMs(Math.max(0,240-(Date.now()-startupState.startedAt)));await afterNextPaint();setAppInteractive(true);document.body.classList.remove("app-loading");document.body.removeAttribute("aria-busy");loader.classList.add("is-leaving");
+    await waitMs(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches?30:400);loader.hidden=true;loader.setAttribute("aria-busy","false")
+  }
+  function failPreloader(error){
+    clearTimeout(startupState.slowTimer);var loader=$("appPreloader"),message=safeError(error);if(!loader)return;loader.classList.add("has-error");loader.setAttribute("aria-busy","false");
+    $("preloaderTitle").innerHTML="Sync needs<br><em>another pass.</em>";$("preloaderStatus").setAttribute("role","alert");setStartupStatus("Asset sync paused · "+message);setStartupStep("preloaderAssetsStep","has-error","Retry required");
+    if(!state.tokens.has(ADDR.wpls.toLowerCase()))setStartupStep("preloaderNativeStep","has-error","WPLS unavailable");var retry=$("preloaderRetry");retry.hidden=false;setTimeout(function(){retry.focus()},0)
   }
   function openModal(html,wide){
     if($("modalLayer").hidden)state.modalReturnFocus=document.activeElement;state.modalNonce++;state.modalLocked=false;state.modalAccountHandler=null;var modalId=state.modalNonce;
@@ -872,7 +1040,7 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
           if(stage==="pending"){broadcastHash=String(detail||"");stepWallet.className="done";stepWallet.querySelector("i").textContent="✓";stepChain.className="active";stepChain.querySelector("small").textContent=shortAddress(detail);btn.textContent="Transaction pending…"}
         });
         if(!ownsModal())return;
-        stepChain.className="done";stepChain.querySelector("i").textContent="✓";stepChain.querySelector("small").textContent="Confirmed in block "+String(tx.blockNumber||"—");
+        stepChain.className="done";stepChain.querySelector("i").textContent="✓";stepChain.querySelector("small").textContent="Confirmed in block "+formatInteger(tx.blockNumber||"—");
         btn.textContent=options.autoContinue?"Confirmed · continuing…":"Confirmed";toast(options.successMessage||"Transaction confirmed","success");
         var shouldContinue=true;if(options.onSuccess)shouldContinue=(await options.onSuccess(tx))!==false;
         if(!ownsModal())return;setCloseLock(false);
@@ -883,7 +1051,7 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
         }else setTimeout(function(){if(ownsModal())closeModal(true)},1500)
       }catch(err){
         if(!ownsModal())return;setCloseLock(false);
-        if(tx&&tx.blockNumber!=null){btn.textContent="Confirmed · refresh failed";btn.disabled=true;stepChain.className="done";stepChain.querySelector("i").textContent="✓";stepChain.querySelector("small").textContent="Confirmed in block "+String(tx.blockNumber);toast("Transaction confirmed, but the interface refresh failed: "+safeError(err),"error");setTimeout(function(){if(ownsModal())closeModal(true)},2200);return}
+        if(tx&&tx.blockNumber!=null){btn.textContent="Confirmed · refresh failed";btn.disabled=true;stepChain.className="done";stepChain.querySelector("i").textContent="✓";stepChain.querySelector("small").textContent="Confirmed in block "+formatInteger(tx.blockNumber);toast("Transaction confirmed, but the interface refresh failed: "+safeError(err),"error");setTimeout(function(){if(ownsModal())closeModal(true)},2200);return}
         if(broadcastHash&&err&&err.code==="TRANSACTION_REPLACED"&&err.cancelled){btn.disabled=true;btn.textContent="Original action cancelled";stepWallet.className="done";stepWallet.querySelector("i").textContent="✓";stepChain.className="";stepChain.querySelector("small").textContent="The replacement cancelled the reviewed action";toast("The reviewed transaction was cancelled or replaced and did not settle. Close this review before trying again.","error");return}
         if(broadcastHash){btn.disabled=true;btn.textContent="Broadcast · receipt status unknown";stepWallet.className="done";stepWallet.querySelector("i").textContent="✓";stepChain.className="active";stepChain.querySelector("small").textContent=shortAddress(broadcastHash)+" · verify in wallet/explorer";closers.forEach(function(close){close.title="Transaction was broadcast; closing cannot cancel it"});toast("Transaction "+shortAddress(broadcastHash)+" was broadcast. Do not resend; verify its receipt in your wallet or explorer.","error");return}
         if(accountInvalidated){closeModal(true);toast("The wallet request ended without a broadcast after the connected account changed. Reopen the flow for the active account. "+safeError(err),"error");return}
@@ -901,7 +1069,7 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
   async function waitForReadBlock(blockNumber){
     if(blockNumber==null)return;var target=Number(blockNumber);
     for(var i=0;i<60;i++){if(await readProvider.getBlockNumber()>=target)return;await new Promise(function(resolve){setTimeout(resolve,500)})}
-    throw new Error("Transaction confirmed, but the read RPC has not reached block "+String(target)+" yet. Wait a moment and resume the flow.")
+    throw new Error("Transaction confirmed, but the read RPC has not reached block "+formatInteger(target)+" yet. Wait a moment and resume the flow.")
   }
   async function currentDeadline(){
     var block=await readProvider.getBlock("latest");state.latestBlock=Number(block.number);state.latestTimestamp=Number(block.timestamp);
@@ -941,7 +1109,7 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
     document.querySelectorAll("[data-nav]").forEach(function(b){b.classList.toggle("active",b.dataset.nav===name)});
     if(!replace)history.replaceState(null,"","#"+name);
     if(name==="positions"&&state.account)loadPositions();
-    if(name==="protocol"){loadProtocol();renderAdminAccess(true)}
+    if(name==="protocol"){if(!document.body.classList.contains("app-loading"))loadProtocol();renderAdminAccess(true)}
     window.scrollTo({top:0,behavior:"smooth"})
   }
 
@@ -1033,9 +1201,9 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
     if(!state.browserProvider)throw new Error("Wallet provider is unavailable");
     var health=await Promise.all([readProvider.getBlock("latest"),state.browserProvider.getBlockNumber()]),readBlock=health[0],walletBlock=Number(health[1]);
     var age=Math.floor(Date.now()/1000)-Number(readBlock.timestamp),gap=Math.abs(Number(readBlock.number)-walletBlock);
-    if(age>180)throw new Error("PulseChain read RPC is stale by "+String(age)+" seconds");
-    if(gap>24)throw new Error("Read RPC and wallet provider differ by "+String(gap)+" blocks");
-    if(age>75)toast("PulseChain RPC block is "+String(age)+" seconds old; transaction simulation will revalidate.","error");
+    if(age>180)throw new Error("PulseChain read RPC is stale by "+formatInteger(age)+" seconds");
+    if(gap>24)throw new Error("Read RPC and wallet provider differ by "+formatInteger(gap)+" blocks");
+    if(age>75)toast("PulseChain RPC block is "+formatInteger(age)+" seconds old; transaction simulation will revalidate.","error");
     return state.browserProvider.getSigner(state.account)
   }
 
@@ -1071,23 +1239,35 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
     state.tokens.forEach(function(token){if(!isWpls(token))add(token,false)});
     return choices
   }
-  async function restoreTokens(){
-    var list=[
-    ADDR.wpls,
-    "0x41B6D8bA2acC273Fe7b319fcEd7DD59f69592951",
-    "0x2556F7f8d82EbcdD7b821b0981C38D9dA9439CdD",
-    "0x24F0154C1dCe548AdF15da2098Fdd8B8A3B8151D",
-    "0xB709276c0e8d3A5372A13d4fEA886496F396feA1",
-    "0x15D38573d2feeb82e7ad5187aB8c1D52810B1f07",
-    "0x770CFA2FB975E7bCAEDDe234D92c3858C517Adca",
-    "0x042b48a98B37042D58Bc8defEEB7cA4eC76E6106",
-    "0x6B175474E89094C44Da98b954EedeAC495271d0F",
-    "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
-    "0x57fde0a71132198BBeC939B98976993d8D89D225",
-    "0x2b591e99afE9f32eAA6214f7B7629768c40Eeb39",
-    "0x95B303987A60C71504D99Aa1b13B4DA07b0790ab",
-    "0x2fa878Ab3F87CC1C9737Fc071108F904c0B0C95d"];try{list=list.concat(JSON.parse(localStorage.getItem("finvesta.v3.tokens")||"[]"))}catch(_){}
-    var seen=new Set();for(var i=0;i<list.length;i++){try{var a=E.getAddress(list[i]);if(!seen.has(a.toLowerCase())){seen.add(a.toLowerCase());await loadToken(a,false)}}catch(_){}}
+  async function verifyStartupChain(){
+    state.rpcOk=false;$("rpcChip").classList.remove("online");$("rpcChip").querySelector("span").textContent="RPC checking";setStartupStatus("Verifying Chain 369 and the latest PulseChain block…");setStartupPercent(7,"Verifying network","0 / "+formatInteger(DEFAULT_TOKEN_ADDRESSES.length));
+    var results=await Promise.all([readProvider.send("eth_chainId",[]),readProvider.getBlock("latest")]),chainHex=results[0],block=results[1];
+    if(BigInt(chainHex)!==CHAIN.id)throw new Error("The configured RPC returned chain "+String(chainHex)+" instead of PulseChain 369");
+    state.rpcOk=true;state.latestBlock=Number(block.number);state.latestTimestamp=Number(block.timestamp);$("rpcChip").classList.add("online");$("rpcChip").querySelector("span").textContent="RPC · "+formatInteger(block.number);$("routeBlock").textContent="#"+formatInteger(block.number);$("footerBlock").textContent="BLOCK "+formatInteger(block.number);
+    setStartupStep("preloaderRpcStep","is-ready","Chain 369 live");setStartupPercent(10,"Network ready","0 / "+formatInteger(DEFAULT_TOKEN_ADDRESSES.length))
+  }
+  async function restoreTokens(onProgress){
+    var saved=[];try{saved=JSON.parse(localStorage.getItem("finvesta.v3.tokens")||"[]");if(!Array.isArray(saved))saved=[]}catch(_){saved=[]}
+    saved=saved.slice(-MAX_SAVED_TOKEN_RESTORES);var coreSet=new Set(DEFAULT_TOKEN_ADDRESSES.map(function(address){return address.toLowerCase()})),requested=DEFAULT_TOKEN_ADDRESSES.concat(saved),seen=new Set(),entries=[];
+    requested.forEach(function(raw){try{var address=E.getAddress(raw),key=address.toLowerCase();if(!seen.has(key)){seen.add(key);entries.push({address:address,key:key,core:coreSet.has(key)})}}catch(_){}});
+    var report={total:entries.length,settled:0,loaded:0,failedCore:[],failedSaved:[],wplsReady:false},cursor=0;
+    function emit(extra){if(onProgress)onProgress(Object.assign({},report,extra||{}))}
+    async function settle(entry){
+      var token=null,error=null,maxAttempts=entry.core?2:1;
+      for(var attempt=1;attempt<=maxAttempts;attempt++){
+        try{token=await loadToken(entry.address,false);error=null;break}catch(err){error=err;if(attempt<maxAttempts)await waitMs(320)}
+      }
+      if(token)report.loaded++;else(entry.core?report.failedCore:report.failedSaved).push({address:entry.address,error:safeError(error)});
+      report.settled++;report.wplsReady=state.tokens.has(ADDR.wpls.toLowerCase());emit({token:token,error:error,address:entry.address});return token
+    }
+    emit();var wplsEntry=entries.find(function(entry){return same(entry.address,ADDR.wpls)}),wpls=wplsEntry?await settle(wplsEntry):null;
+    if(!wpls)throw new Error("Native PLS could not be prepared because WPLS metadata is unavailable. Check the PulseChain RPC and retry.");
+    var rest=entries.filter(function(entry){return !same(entry.address,ADDR.wpls)});
+    async function worker(){while(cursor<rest.length){var index=cursor++;await settle(rest[index])}}
+    var workers=[];for(var i=0;i<Math.min(STARTUP_WORKERS,rest.length);i++)workers.push(worker());await Promise.all(workers);
+    var unordered=state.tokens,ordered=new Map();entries.forEach(function(entry){var token=unordered.get(entry.key);if(token)ordered.set(entry.key,token)});unordered.forEach(function(token,key){if(!ordered.has(key))ordered.set(key,token)});state.tokens=ordered;report.wplsReady=state.tokens.has(ADDR.wpls.toLowerCase());emit({complete:true});
+    if(report.failedCore.length)throw new Error(formatInteger(report.failedCore.length)+" required asset"+(report.failedCore.length===1?"":"s")+" could not be restored: "+report.failedCore.map(function(item){return shortAddress(item.address)}).join(", ")+". Retry to open the complete registry.");
+    return report
   }
   async function refreshBalances(){
     var nonce=++state.balanceNonce;if(!state.account){state.nativeBalance=null;state.nativeBalanceError=null;state.balanceBlock=null;state.balanceFetchedAt=null;state.tokens.forEach(function(t){t.balance=null;t.balanceError=null});renderTokenSides();return}
@@ -1116,7 +1296,7 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
       if(result.status==="fulfilled")balances.set(t.address.toLowerCase(),result.value)
       else{var balanceError=safeError(result.reason);balances.set(t.address.toLowerCase(),null);if(!(options.nativeWpls&&same(t.address,ADDR.wpls)))errors.push(t.symbol+" ("+shortAddress(t.address)+"): "+balanceError)}
     });
-    if(errors.length)throw new Error("Could not verify PRC-20 funding at PulseChain block "+String(block)+". "+errors.join(" · "));
+    if(errors.length)throw new Error("Could not verify PRC-20 funding at PulseChain block "+formatInteger(block)+". "+errors.join(" · "));
     var nativeResult=settled[settled.length-1];
     return {block:block,account:account,balances:balances,nativeBalance:nativeResult.status==="fulfilled"?nativeResult.value:null,nativeError:nativeResult.status==="rejected"?safeError(nativeResult.reason):null}
   }
@@ -1147,32 +1327,35 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
     }).join("")+(items.some(function(item){return same(item.token.address,ADDR.wpls)})?(plan.useNative?"<div class='notice info' style='grid-column:1/-1;margin:0'>Native mode sends the full WPLS desired cap as PLS transaction value. The position manager wraps only actual WPLS consumption at 1:1 and atomically refunds unused PLS. Existing WPLS is untouched; position withdrawals return WPLS.</div>":"<div class='notice info' style='grid-column:1/-1;margin:0'>This flow is using existing WPLS PRC-20 funding."+(plan.supportsNative?" Select native PLS funding above to wrap WPLS 1:1 and refund unused PLS in the same transaction.":"")+"</div>"):"")
   }
   function openTokenModal(side){
-    openModal(modalHeader("Contract-resolved assets",side==="from"?"Choose input token":"Choose output token")+
-      "<div class='modal-body'><div class='field'><label for='tokenAddressInput'>PRC-20 contract address</label><input id='tokenAddressInput' class='mono' placeholder='0x…' autocomplete='off'></div><button class='primary' id='importToken'><span>Load token</span><span>＋</span></button>"+
-      "<p class='kicker' style='margin-top:21px'>Known in this browser</p><div class='live-balance' style='margin-bottom:9px'><span id='tokenBalanceSnapshot'>Refreshing live balances…</span><button type='button' id='tokenRefreshBalances'>↻ Refresh</button></div><div class='token-list' id='tokenList'></div><div class='notice info'>PLS is the native default for WPLS pools. Select WPLS explicitly when you want PRC-20 balance and allowance settlement instead.</div><div class='notice'>Only standard PRC-20 behavior is assumed. Fee-on-transfer, rebasing, and reflection tokens may be incompatible with V3.</div></div>");
+    openModal(modalHeader("Select token",side==="from"?"You pay":"You receive")+
+      "<div class='modal-body'><div class='field'><label for='tokenAddressInput'>Name, symbol, or address</label><input id='tokenAddressInput' type='search' placeholder='pNAS, USDC, WPLS, or 0x…' autocomplete='off' autocapitalize='off' spellcheck='false' aria-controls='tokenList'></div><button class='primary' id='importToken' disabled><span id='importTokenLabel'>Add contract</span><span>＋</span></button>"+
+      "<div class='token-search-summary'><span id='preferredTokenCount'>Preferred assets</span></div><div class='live-balance' style='margin-bottom:9px'><span id='tokenBalanceSnapshot'>Refreshing…</span><button type='button' id='tokenRefreshBalances'>↻ Refresh</button></div><div class='token-list' id='tokenList'></div><div class='notice info'>PLS is native. Choose WPLS for token settlement.</div><div class='notice'>Non-standard tokens may not work with V3.</div></div>");
     var tokenModalId=state.modalNonce,importNonce=0;
     function draw(){
-      var list=$("tokenList");list.innerHTML="";
+      var list=$("tokenList"),input=$("tokenAddressInput"),query=(input.value||"").trim().toLowerCase(),allChoices=knownAssetChoices(),choices=allChoices.filter(function(choice){return !query||[choice.symbol,choice.name,choice.token.address].join(" ").toLowerCase().indexOf(query)>=0});list.innerHTML="";
       function addChoice(choice){
         var t=choice.token,nativeMode=choice.nativeMode;
-        var b=document.createElement("button");b.className="choice-button";b.type="button";
+        var b=document.createElement("button");b.className="choice-button";b.type="button";b.dataset.address=t.address.toLowerCase();
         b.innerHTML=tokenMarkHtml(Object.assign({},t,{symbol:choice.symbol}),false)+"<span><strong>"+esc(choice.symbol)+(choice.isDefault?" · DEFAULT":"")+"</strong><small>"+esc(choice.name)+" · "+esc(shortAddress(t.address))+"</small></span><span style='margin-left:auto;text-align:right'><strong>"+esc(trimUnits(choice.balance,t.decimals,5))+"</strong><small>"+esc(choice.balanceLabel)+"</small></span>";
         if((side==="from"&&state.to&&same(t.address,state.to.address))||(side==="to"&&state.from&&same(t.address,state.from.address)))b.disabled=true;
         b.addEventListener("click",function(){state[side]=t;if(isWpls(t))state.swapNativePls=Boolean(nativeMode);state.swapFillNonce++;state.simulatedOut=null;state.minOut=null;closeModal();renderTokenSides();discoverBestPool()});list.appendChild(b)
       }
-      knownAssetChoices().forEach(addChoice);if($("tokenBalanceSnapshot"))$("tokenBalanceSnapshot").textContent=state.account?(state.balanceBlock==null?"Live snapshot unavailable":"PulseChain block #"+String(state.balanceBlock)+" · "+String(Math.max(0,Math.round((Date.now()-(state.balanceFetchedAt||Date.now()))/1000)))+"s ago"):"Connect a wallet to read balances"
+      choices.forEach(addChoice);if(!choices.length)list.innerHTML="<div class='token-search-empty'><strong>No preferred-token match</strong><span>Try another name or symbol, or paste a complete contract address to import it.</span></div>";
+      $("preferredTokenCount").textContent=query?formatInteger(choices.length)+" preferred match"+(choices.length===1?"":"es"):formatInteger(choices.length)+" preferred assets";
+      var button=$("importToken"),validAddress=E.isAddress(input.value.trim()),alreadyListed=validAddress&&allChoices.some(function(choice){return same(choice.token.address,input.value.trim())});if(!button.dataset.old){button.disabled=!validAddress||alreadyListed;$("importTokenLabel").textContent=alreadyListed?"Already listed · choose below":validAddress?"Add this contract":"Add contract"}
+      if($("tokenBalanceSnapshot"))$("tokenBalanceSnapshot").textContent=state.account?(state.balanceBlock==null?"Live snapshot unavailable":"PulseChain block #"+formatInteger(state.balanceBlock)+" · "+formatInteger(Math.max(0,Math.round((Date.now()-(state.balanceFetchedAt||Date.now()))/1000)))+"s ago"):"Connect a wallet to read balances"
     }
-    draw();
+    draw();$("tokenAddressInput").addEventListener("input",draw);$("tokenAddressInput").addEventListener("keydown",function(event){if(event.key!=="Enter")return;event.preventDefault();var value=this.value.trim(),available=Array.from($("tokenList").querySelectorAll(".choice-button:not(:disabled)"));if(E.isAddress(value)){var exact=available.filter(function(button){return same(button.dataset.address,value)});if(exact.length===1)return exact[0].click();if(exact.length>1)return;if(!$("importToken").disabled)return $("importToken").click()}if(available.length===1)available[0].click()});
     async function refreshPickerBalances(){await refreshBalances();if(state.modalNonce===tokenModalId)draw()}
     $("tokenRefreshBalances").addEventListener("click",refreshPickerBalances);if(state.account)refreshPickerBalances();
-    $("importToken").addEventListener("click",async function(){var btn=this,request=++importNonce,modal=tokenModalId,address=$("tokenAddressInput").value;setBusy(btn,true,"Reading contract…");try{var token=await loadToken(address,true);if(state.modalNonce!==modal||request!==importNonce)return;await refreshBalances();if(state.modalNonce!==modal||request!==importNonce||!document.body.contains(btn))return;state[side]=token;if(isWpls(token))state.swapNativePls=true;state.swapFillNonce++;state.simulatedOut=null;state.minOut=null;closeModal();renderTokenSides();discoverBestPool()}catch(err){if(state.modalNonce===modal&&request===importNonce)toast(safeError(err),"error")}finally{if(state.modalNonce===modal&&request===importNonce&&document.body.contains(btn)&&btn.dataset.old)setBusy(btn,false)}});
+    $("importToken").addEventListener("click",async function(){var btn=this,request=++importNonce,modal=tokenModalId,address=$("tokenAddressInput").value.trim();if(!E.isAddress(address))return;setBusy(btn,true,"Reading contract…");try{var token=await loadToken(address,true);if(state.modalNonce!==modal||request!==importNonce)return;state[side]=token;if(isWpls(token))state.swapNativePls=true;state.swapFillNonce++;state.simulatedOut=null;state.minOut=null;closeModal();renderTokenSides();discoverBestPool();refreshBalances().catch(function(){})}catch(err){if(state.modalNonce===modal&&request===importNonce)toast(safeError(err),"error")}finally{if(state.modalNonce===modal&&request===importNonce&&document.body.contains(btn)){if(btn.dataset.old)setBusy(btn,false);draw()}}});
     state.modalAccountHandler=function(phase){if(state.modalNonce!==tokenModalId)return;if(phase==="invalidate"){importNonce++;var button=$("importToken");if(button&&button.dataset.old)setBusy(button,false);draw();$("tokenBalanceSnapshot").textContent="Connected account changed · refreshing balances…";return}if(phase==="refresh")draw()}
   }
   function renderTokenSides(){
     [["from",state.from],["to",state.to]].forEach(function(x){
       var side=x[0],t=x[1],symbol=t?swapSymbol(t):"Select",name=t?swapName(t):"Token",balance=t?swapBalance(t):null;$(side+"TokenSymbol").textContent=symbol;$(side+"TokenName").textContent=name;
       var mark=$(side+"TokenMark");mark.textContent=t?symbol.slice(0,2):"?";mark.style.setProperty("--token",tokenColor(t&&t.address));
-      $(side+"BalanceLabel").textContent="Balance "+(t&&state.account?trimUnits(balance,t.decimals,5):"—")+(t&&state.account&&state.balanceBlock!=null?" · #"+String(state.balanceBlock):"");
+      $(side+"BalanceLabel").textContent="Balance "+(t&&state.account?trimUnits(balance,t.decimals,5):"—")+(t&&state.account&&state.balanceBlock!=null?" · #"+formatInteger(state.balanceBlock):"");
       $("route"+(side==="from"?"From":"To")+"Symbol").textContent=t?symbol:"TOKEN "+(side==="from"?"A":"B");
       var rmark=$("route"+(side==="from"?"From":"To")+"Mark");rmark.textContent=t?symbol.slice(0,2):"?";rmark.style.setProperty("--token",tokenColor(t&&t.address))
     });
@@ -1187,8 +1370,8 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
     try{
       var chainHex=await readProvider.send("eth_chainId",[]);if(BigInt(chainHex)!==CHAIN.id)throw new Error("RPC returned unexpected chain ID "+chainHex);
       var block=await readProvider.getBlock("latest");state.rpcOk=true;state.latestBlock=Number(block.number);state.latestTimestamp=Number(block.timestamp);
-      $("rpcChip").classList.add("online");$("rpcChip").querySelector("span").textContent="RPC · "+String(block.number);
-      $("routeBlock").textContent="#"+String(block.number);$("footerBlock").textContent="BLOCK "+String(block.number);
+      $("rpcChip").classList.add("online");$("rpcChip").querySelector("span").textContent="RPC · "+formatInteger(block.number);
+      $("routeBlock").textContent="#"+formatInteger(block.number);$("footerBlock").textContent="BLOCK "+formatInteger(block.number);
       var candidates=[100,500,2500,3000,10000],tiers=[];
       for(var i=0;i<candidates.length;i++){
         try{var sp=await contracts.factory.feeAmountTickSpacing(candidates[i]),extra=await contracts.factory.feeAmountTickSpacingExtraInfo(candidates[i]);
@@ -1265,8 +1448,8 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
       setAdminOwnerStatus(verified?"OWNER VERIFIED":"OWNER MISMATCH",verified);
       $("adminTreasury").value=same(distribution.treasury,E.ZeroAddress)?"":distribution.treasury;$("adminBuyback").value=same(distribution.buyback,E.ZeroAddress)?"":distribution.buyback;
       $("adminTreasuryShare").value=String(distribution.treasuryShare);$("adminBuybackShare").value=String(distribution.buybackShare);
-      $("adminDistributionCurrent").innerHTML="Live at block <strong>#"+esc(block)+"</strong><br>Treasury: <span class='mono'>"+esc(distribution.treasury)+"</span> · "+esc(distribution.treasuryShare)+" bps<br>Buyback: <span class='mono'>"+esc(distribution.buyback)+"</span> · "+esc(distribution.buybackShare)+" bps";
-      $("adminSnapshot").textContent=verified?"Factory owner verified · PulseChain block #"+String(block):"Safety lock: factory owner is "+owner+", not the configured admin EOA.";refreshAdminButtons()
+      $("adminDistributionCurrent").innerHTML="Live at block <strong>#"+esc(formatInteger(block))+"</strong><br>Treasury: <span class='mono'>"+esc(distribution.treasury)+"</span> · "+esc(formatInteger(distribution.treasuryShare))+" bps<br>Buyback: <span class='mono'>"+esc(distribution.buyback)+"</span> · "+esc(formatInteger(distribution.buybackShare))+" bps";
+      $("adminSnapshot").textContent=verified?"Factory owner verified · PulseChain block #"+formatInteger(block):"Safety lock: factory owner is "+owner+", not the configured admin EOA.";refreshAdminButtons()
     }catch(err){
       if(!adminRequestCurrent(nonce,account))return;state.adminConfig=null;setAdminOwnerStatus("VERIFICATION FAILED",false);$("adminDistributionCurrent").textContent="Could not read factory owner/configuration: "+safeError(err);$("adminSnapshot").textContent="Admin writes remain locked until live ownership is verified.";refreshAdminButtons();toast("Admin verification failed: "+safeError(err),"error")
     }
@@ -1285,7 +1468,7 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
       state.adminPool={address:address,factory:factory,token0:token0,token1:token1,fee:fee,packed:packed,raw0:raw0,raw1:raw1,block:block};
       var fee0Label=document.querySelector("label[for='adminFee0']"),fee1Label=document.querySelector("label[for='adminFee1']");if(fee0Label)fee0Label.textContent=token0.symbol+" · token0 protocol share · %";if(fee1Label)fee1Label.textContent=token1.symbol+" · token1 protocol share · %";
       $("adminFee0").value=raw0===0?"0":(raw0/100).toFixed(2);$("adminFee1").value=raw1===0?"0":(raw1/100).toFixed(2);
-      $("adminPoolCurrent").innerHTML="Verified at block <strong>#"+esc(block)+"</strong> · pool fee "+esc(feeLabel(fee))+"<br>token0: <strong>"+esc(token0.symbol)+"</strong> · <span class='mono'>"+esc(token0Address)+"</span> · protocol "+esc(formatProtocolUnits(raw0))+"<br>token1: <strong>"+esc(token1.symbol)+"</strong> · <span class='mono'>"+esc(token1Address)+"</span> · protocol "+esc(formatProtocolUnits(raw1));refreshAdminButtons()
+      $("adminPoolCurrent").innerHTML="Verified at block <strong>#"+esc(formatInteger(block))+"</strong> · pool fee "+esc(feeLabel(fee))+"<br>token0: <strong>"+esc(token0.symbol)+"</strong> · <span class='mono'>"+esc(token0Address)+"</span> · protocol "+esc(formatProtocolUnits(raw0))+"<br>token1: <strong>"+esc(token1.symbol)+"</strong> · <span class='mono'>"+esc(token1Address)+"</span> · protocol "+esc(formatProtocolUnits(raw1));refreshAdminButtons()
     }catch(err){
       if(!adminRequestCurrent(nonce,account))return;state.adminPool=null;$("adminPoolCurrent").textContent="Pool verification failed: "+safeError(err);refreshAdminButtons();throw err
     }
@@ -1302,7 +1485,7 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
       if(treasuryShare+buybackShare>10000)throw new Error("Treasury and buyback shares may total at most 10,000 bps");var proposed={treasury:parseAdminRecipient($("adminTreasury").value,treasuryShare,"Treasury recipient"),buyback:parseAdminRecipient($("adminBuyback").value,buybackShare,"Buyback recipient"),treasuryShare:treasuryShare,buybackShare:buybackShare};
       var block=await readProvider.getBlockNumber(),values=await Promise.all([contracts.factory.owner({blockTag:block}),contracts.factory.feeProtocolDistributionInfo({blockTag:block})]),owner=E.getAddress(values[0]),current=readDistributionResult(values[1]);
       if(!same(owner,ADMIN_EOA)||!same(account,ADMIN_EOA))throw new Error("The connected EOA is not the live factory owner");if(sameDistribution(current,proposed))throw new Error("Treasury and buyback configuration is already set to these values");
-      reviewTransaction({kicker:"Factory owner action",title:"Review treasury & buyback",notice:"The factory configuration is re-read and setFeeProtocolDistributionInfo is simulated again after you confirm. No transaction is sent from this review screen.",rows:[["Factory",ADDR.factory,"mono"],["Current treasury",current.treasury+" · "+current.treasuryShare+" bps","mono"],["New treasury",proposed.treasury+" · "+proposed.treasuryShare+" bps","mono"],["Current buyback",current.buyback+" · "+current.buybackShare+" bps","mono"],["New buyback",proposed.buyback+" · "+proposed.buybackShare+" bps","mono"],["Combined share",String(proposed.treasuryShare+proposed.buybackShare)+" / 10,000 bps"]],confirmLabel:"Update configuration",successMessage:"Treasury and buyback configuration confirmed",execute:async function(progress){
+      reviewTransaction({kicker:"Factory owner action",title:"Review treasury & buyback",notice:"The factory configuration is re-read and setFeeProtocolDistributionInfo is simulated again after you confirm. No transaction is sent from this review screen.",rows:[["Factory",ADDR.factory,"mono"],["Current treasury",current.treasury+" · "+formatInteger(current.treasuryShare)+" bps","mono"],["New treasury",proposed.treasury+" · "+formatInteger(proposed.treasuryShare)+" bps","mono"],["Current buyback",current.buyback+" · "+formatInteger(current.buybackShare)+" bps","mono"],["New buyback",proposed.buyback+" · "+formatInteger(proposed.buybackShare)+" bps","mono"],["Combined share",formatInteger(proposed.treasuryShare+proposed.buybackShare)+" / 10,000 bps"]],confirmLabel:"Update configuration",successMessage:"Treasury and buyback configuration confirmed",execute:async function(progress){
         if(!same(state.account,account)||!isAdminAccount(state.account))throw new Error("Connected account changed after review");var signer=await getSigner();if(!same(await signer.getAddress(),ADMIN_EOA))throw new Error("Connected signer is not the configured owner EOA");
         var freshValues=await Promise.all([contracts.factory.owner(),contracts.factory.feeProtocolDistributionInfo()]),freshOwner=E.getAddress(freshValues[0]),fresh=readDistributionResult(freshValues[1]);if(!same(freshOwner,ADMIN_EOA))throw new Error("Factory ownership changed after review");if(!sameDistribution(fresh,current))throw new Error("Treasury or buyback configuration changed. Reopen this review with the live values.");
         var factory=new E.Contract(ADDR.factory,ABI.factory,signer);await factory.setFeeProtocolDistributionInfo.staticCall(proposed.treasury,proposed.buyback,proposed.treasuryShare,proposed.buybackShare);await factory.setFeeProtocolDistributionInfo.estimateGas(proposed.treasury,proposed.buyback,proposed.treasuryShare,proposed.buybackShare);progress("wallet");var tx=await factory.setFeeProtocolDistributionInfo(proposed.treasury,proposed.buyback,proposed.treasuryShare,proposed.buybackShare);progress("pending",tx.hash);return awaitReceipt(tx)
@@ -1343,7 +1526,7 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
       return
     }
     $("routeStatus").innerHTML="<i class='live-dot online'></i>POOL LIVE";$("routeFee").textContent=feeLabel(p.fee);$("routeLiquidity").textContent=compactBig(p.liquidity);
-    $("poolSignal").textContent="Tick "+String(p.tick)+" · "+shortAddress(p.address);$("detailFee").textContent=feeLabel(p.fee);
+    $("poolSignal").textContent="Tick "+formatInteger(p.tick)+" · "+shortAddress(p.address);$("detailFee").textContent=feeLabel(p.fee);
     $("detailPool").textContent=shortAddress(p.address);$("detailPool").title=p.address
   }
   async function discoverBestPool(){
@@ -1547,13 +1730,13 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
       var block=await readProvider.getBlockNumber(),ids=[];
       if(nonce!==state.positionsNonce||generation!==state.syncToken||!same(account,state.account))return;
       if(manualTokenId!=null){
-        var owner=await contracts.manager.ownerOf(manualTokenId,{blockTag:block});if(!same(owner,account))throw new Error("Connected account does not own position #"+String(manualTokenId));ids=[BigInt(manualTokenId)]
+        var owner=await contracts.manager.ownerOf(manualTokenId,{blockTag:block});if(!same(owner,account))throw new Error("Connected account does not own position #"+formatInteger(manualTokenId));ids=[BigInt(manualTokenId)]
       }else{
         var count=await contracts.manager.balanceOf(account,{blockTag:block}),limit=count>24n?24:Number(count);
         for(var i=0;i<limit;i++){if(nonce!==state.positionsNonce||generation!==state.syncToken||!same(account,state.account))return;ids.push(await contracts.manager.tokenOfOwnerByIndex(account,i,{blockTag:block}))}
       }
       var list=[];for(var j=0;j<ids.length;j++){try{list.push(await buildPosition(ids[j],block))}catch(err){console.warn("Position read failed",ids[j],err)}}
-      if(nonce!==state.positionsNonce||generation!==state.syncToken||!same(account,state.account))return;state.positions=list;if(manualTokenId==null)$("positionCountNote").textContent=count>24n?"Showing first 24 of "+String(count):"Read at block "+String(block);await refreshBalances();
+      if(nonce!==state.positionsNonce||generation!==state.syncToken||!same(account,state.account))return;state.positions=list;if(manualTokenId==null)$("positionCountNote").textContent=count>24n?"Showing first 24 of "+formatInteger(count):"Read at block "+formatInteger(block);await refreshBalances();
       if(nonce!==state.positionsNonce||generation!==state.syncToken||!same(account,state.account))return;
       if(manualTokenId!=null&&list[0])state.selectedPosition=list[0];else if(!state.selectedPosition||!list.some(function(p){return p.tokenId===state.selectedPosition.tokenId}))state.selectedPosition=list[0]||null;
       renderPositions()
@@ -1571,22 +1754,22 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
     target.innerHTML=html+(p&&p.tick!=null?"<span class='range-visual__tick' style='left:"+String(positionTickPct(p))+"%'></span>":"")
   }
   function renderPositions(){
-    $("positionCount").textContent=state.account?String(state.positions.length):"—";
-    $("activeCount").textContent=state.account?String(state.positions.filter(function(p){return p.status==="active"}).length):"—";
+    $("positionCount").textContent=state.account?formatInteger(state.positions.length):"—";
+    $("activeCount").textContent=state.account?formatInteger(state.positions.filter(function(p){return p.status==="active"}).length):"—";
     var list=$("positionList");
     if(!state.account){
       list.innerHTML="<div class='empty-state'><div><span class='token-mark'>◇</span><h3>Connect to discover positions</h3><p>Finvesta reads enumerable V3 position NFTs owned by the connected address.</p><button class='secondary' data-connect>Connect wallet</button></div></div>";
       list.querySelector("[data-connect]").addEventListener("click",openWalletModal);renderPositionDetail();return
     }
     if(!state.positions.length){
-      list.innerHTML="<div class='empty-state'><div><span class='token-mark'>＋</span><h3>No V3 positions found</h3><p>This deployment currently has no pools. Initialize the first pool and mint its position through the guarded creation flow.</p><button class='secondary' id='emptyNewPosition'>Create first position</button></div></div>";
+      list.innerHTML="<div class='empty-state'><div><span class='token-mark'>＋</span><h3>No V3 positions found</h3><p>This deployment currently has no pools. Initialize the first pool and mint its position through the guarded creation flow.</p><button class='position-create-cta' id='emptyNewPosition'><span class='position-create-cta__plus'>＋</span><span><strong>Create first position</strong><small>Initialize liquidity</small></span><span aria-hidden='true'>→</span></button></div></div>";
       $("emptyNewPosition").addEventListener("click",openNewPositionModal);renderPositionDetail();return
     }
     list.innerHTML=state.positions.map(function(p){
       var pct=positionTickPct(p),active=state.selectedPosition&&state.selectedPosition.tokenId===p.tokenId;
       return "<article class='position-card "+(active?"active":"")+"' data-position='"+String(p.tokenId)+"'>"+
-        "<div class='pair'><div class='pair-marks'>"+tokenMarkHtml(p.token0,true)+tokenMarkHtml(p.token1,true)+"</div><div><h3>"+esc(p.token0.symbol)+" / "+esc(p.token1.symbol)+"</h3><p>V3 · "+esc(feeLabel(p.fee))+" · NFT #"+esc(String(p.tokenId))+"</p></div></div>"+
-        "<div class='range-mini'><span class='status "+(p.status==="active"?"":"out")+"'>"+esc(positionStatusLabel(p))+"</span><div class='range-mini__track'><span></span><i style='left:"+String(pct)+"%'></i></div><small><span>"+String(p.tickLower)+"</span><span>"+String(p.tickUpper)+"</span></small></div>"+
+        "<div class='pair'><div class='pair-marks'>"+tokenMarkHtml(p.token0,true)+tokenMarkHtml(p.token1,true)+"</div><div><h3>"+esc(p.token0.symbol)+" / "+esc(p.token1.symbol)+"</h3><p>V3 · "+esc(feeLabel(p.fee))+" · NFT #"+esc(formatInteger(p.tokenId))+"</p></div></div>"+
+        "<div class='range-mini'><span class='status "+(p.status==="active"?"":"out")+"'>"+esc(positionStatusLabel(p))+"</span><div class='range-mini__track'><span></span><i style='left:"+String(pct)+"%'></i></div><small><span>"+formatInteger(p.tickLower)+"</span><span>"+formatInteger(p.tickUpper)+"</span></small></div>"+
         "<div class='position-stat'><span>LIQUIDITY</span><strong>"+esc(compactBig(p.liquidity))+"</strong><span>POOL "+esc(shortAddress(p.poolAddress))+"</span></div><button class='secondary'>Manage</button></article>"
     }).join("");
     list.querySelectorAll("[data-position]").forEach(function(card){card.addEventListener("click",function(){var id=BigInt(card.dataset.position);state.selectedPosition=state.positions.find(function(p){return p.tokenId===id});renderPositions()})});
@@ -1599,15 +1782,15 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
       renderRangeBars($("rangeBars"));return
     }
     var canBurn=p.liquidity===0n&&p.tokensOwed0===0n&&p.tokensOwed1===0n;
-    d.innerHTML="<p class='kicker'>Finvesta V3 position · #"+esc(String(p.tokenId))+"</p><div class='pair'>"+tokenMarkHtml(p.token0,true)+tokenMarkHtml(p.token1,true)+"<div><h2>"+esc(p.token0.symbol)+" / "+esc(p.token1.symbol)+"</h2><p class='position-detail__meta'>"+esc(feeLabel(p.fee))+" fee · tick spacing "+esc(String(p.spacing==null?"—":p.spacing))+"</p></div></div>"+
+    d.innerHTML="<p class='kicker'>Finvesta V3 position · #"+esc(formatInteger(p.tokenId))+"</p><div class='pair'>"+tokenMarkHtml(p.token0,true)+tokenMarkHtml(p.token1,true)+"<div><h2>"+esc(p.token0.symbol)+" / "+esc(p.token1.symbol)+"</h2><p class='position-detail__meta'>"+esc(feeLabel(p.fee))+" pool fee · concentrated liquidity</p></div></div>"+
       "<div class='range-visual'><div class='range-visual__bars' id='rangeBars'></div></div>"+
-      "<dl class='details' style='display:block'><div><dt>Status</dt><dd><span class='status "+(p.status==="active"?"":"out")+"'>"+esc(positionStatusLabel(p))+"</span></dd></div><div><dt>Current tick</dt><dd>"+esc(p.tick==null?"Unavailable":String(p.tick))+"</dd></div><div><dt>Active range</dt><dd>"+String(p.tickLower)+" → "+String(p.tickUpper)+"</dd></div><div><dt>Liquidity</dt><dd>"+esc(String(p.liquidity))+"</dd></div><div><dt>Wallet "+esc(p.token0.symbol)+"</dt><dd>"+esc(walletBalanceLabel(p.token0))+"</dd></div><div><dt>Wallet "+esc(p.token1.symbol)+"</dt><dd>"+esc(walletBalanceLabel(p.token1))+"</dd></div>"+(isWpls(p.token0)||isWpls(p.token1)?"<div><dt>Wallet native PLS</dt><dd>"+esc(state.nativeBalance==null?(state.nativeBalanceError?"Unavailable":"Loading…"):trimUnits(state.nativeBalance,18,8)+" PLS")+"</dd></div>":"")+"<div><dt>Balance snapshot</dt><dd>"+esc(state.balanceBlock==null?"Loading…":"PulseChain #"+String(state.balanceBlock))+"</dd></div><div><dt>Recorded owed</dt><dd>"+esc(trimUnits(p.tokensOwed0,p.token0.decimals,6))+" "+esc(p.token0.symbol)+" · "+esc(trimUnits(p.tokensOwed1,p.token1.decimals,6))+" "+esc(p.token1.symbol)+"</dd></div><div><dt>Pool</dt><dd class='mono'>"+esc(shortAddress(p.poolAddress))+"</dd></div></dl>"+
+      "<dl class='details' style='display:block'><div><dt>Status</dt><dd><span class='status "+(p.status==="active"?"":"out")+"'>"+esc(positionStatusLabel(p))+"</span></dd></div><div><dt>Current tick</dt><dd>"+esc(p.tick==null?"Unavailable":formatInteger(p.tick))+"</dd></div><div><dt>Active range</dt><dd>"+formatInteger(p.tickLower)+" → "+formatInteger(p.tickUpper)+"</dd></div><div><dt>Liquidity</dt><dd>"+esc(formatInteger(p.liquidity))+"</dd></div><div><dt>Wallet "+esc(p.token0.symbol)+"</dt><dd>"+esc(walletBalanceLabel(p.token0))+"</dd></div><div><dt>Wallet "+esc(p.token1.symbol)+"</dt><dd>"+esc(walletBalanceLabel(p.token1))+"</dd></div>"+(isWpls(p.token0)||isWpls(p.token1)?"<div><dt>Wallet native PLS</dt><dd>"+esc(state.nativeBalance==null?(state.nativeBalanceError?"Unavailable":"Loading…"):trimUnits(state.nativeBalance,18,8)+" PLS")+"</dd></div>":"")+"<div><dt>Balance snapshot</dt><dd>"+esc(state.balanceBlock==null?"Loading…":"PulseChain #"+formatInteger(state.balanceBlock))+"</dd></div><div><dt>Recorded owed</dt><dd>"+esc(trimUnits(p.tokensOwed0,p.token0.decimals,6))+" "+esc(p.token0.symbol)+" · "+esc(trimUnits(p.tokensOwed1,p.token1.decimals,6))+" "+esc(p.token1.symbol)+"</dd></div><div><dt>Pool</dt><dd class='mono'>"+esc(shortAddress(p.poolAddress))+"</dd></div></dl>"+
       "<div class='action-grid'><button class='primary' id='collectButton'><span>Collect fees</span><span>→</span></button><button class='secondary' id='increaseButton'>＋ Add liquidity</button><button class='secondary' id='removeButton'>Remove liquidity</button>"+(canBurn?"<button class='secondary' id='burnButton' style='grid-column:1/-1'>Burn empty NFT</button>":"")+"</div>"+
       "<div class='notice info'>Current collectible fees are previewed with collect.staticCall from your account. Recorded owed values above may lag until the position is touched.</div>";
     renderRangeBars($("rangeBars"),p);$("collectButton").addEventListener("click",function(){previewCollect(p)});$("increaseButton").addEventListener("click",function(){openIncreaseModal(p)});$("removeButton").addEventListener("click",function(){openRemoveModal(p)});if($("burnButton"))$("burnButton").addEventListener("click",function(){previewBurn(p)})
   }
   async function assertPositionOwner(p,expectedAccount){
-    expectedAccount=expectedAccount||state.account;if(!expectedAccount||!same(state.account,expectedAccount))throw new Error("Connected account changed for position #"+String(p.tokenId));var owner=await contracts.manager.ownerOf(p.tokenId);if(!same(owner,expectedAccount))throw new Error("Connected account no longer owns position #"+String(p.tokenId));return owner
+    expectedAccount=expectedAccount||state.account;if(!expectedAccount||!same(state.account,expectedAccount))throw new Error("Connected account changed for position #"+formatInteger(p.tokenId));var owner=await contracts.manager.ownerOf(p.tokenId);if(!same(owner,expectedAccount))throw new Error("Connected account no longer owns position #"+formatInteger(p.tokenId));return owner
   }
   async function previewCollect(p){
     try{
@@ -1615,7 +1798,7 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
       var out=await pm.collect.staticCall(params);
       reviewTransaction({
         kicker:"Fee collection preview",title:"Collect position fees",
-        rows:[["Position","#"+String(p.tokenId)],["Token 0",trimUnits(out.amount0,p.token0.decimals,8)+" "+p.token0.symbol],["Token 1",trimUnits(out.amount1,p.token1.decimals,8)+" "+p.token1.symbol],["Recipient",account,"mono"],["Position manager",ADDR.positionManager,"mono"]],
+        rows:[["Position","#"+formatInteger(p.tokenId)],["Token 0",trimUnits(out.amount0,p.token0.decimals,8)+" "+p.token0.symbol],["Token 1",trimUnits(out.amount1,p.token1.decimals,8)+" "+p.token1.symbol],["Recipient",account,"mono"],["Position manager",ADDR.positionManager,"mono"]],
         confirmLabel:"Collect in wallet",successMessage:"Position fees collected",
         execute:async function(progress){if(!same(state.account,account))throw new Error("Connected account changed after review");await assertPositionOwner(p,account);var s=await getSigner();if(!same(await s.getAddress(),account))throw new Error("Connected signer changed after review");var m=new E.Contract(ADDR.positionManager,ABI.manager,s),fresh=await m.collect.staticCall(params);
           if(fresh.amount0!==out.amount0||fresh.amount1!==out.amount1)throw new Error("Collectible amounts changed. Review the refreshed position.");
@@ -1626,10 +1809,10 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
   }
   function openRemoveModal(p){
     openModal(modalHeader("Atomic decrease + collect","Remove liquidity")+
-      "<div class='modal-body'><div class='field'><div class='field-label'><label for='removePercent'>Percentage to remove</label><span class='field-percentages'>"+[25,50,75,100].map(function(value){return "<button type='button' class='field-percent' data-remove-percent='"+String(value)+"'>"+(value===100?"MAX":String(value)+"%")+"</button>"}).join("")+"</span></div><input id='removePercent' type='range' min='1' max='100' step='1' value='50'><div class='live-balance'><strong id='removePercentValue'>50% of current NFT liquidity</strong><span>"+esc(String(p.liquidity))+" total liquidity</span></div></div>"+
+      "<div class='modal-body'><div class='field'><div class='field-label'><label for='removePercent'>Percentage to remove</label><span class='field-percentages'>"+[25,50,75,100].map(function(value){return "<button type='button' class='field-percent' data-remove-percent='"+String(value)+"'>"+(value===100?"MAX":String(value)+"%")+"</button>"}).join("")+"</span></div><input id='removePercent' type='range' min='1' max='100' step='1' value='50'><div class='live-balance'><strong id='removePercentValue'>50% of current NFT liquidity</strong><span>"+esc(formatInteger(p.liquidity))+" total liquidity</span></div></div>"+
       "<div class='notice info'>The position manager will decrease liquidity and collect the resulting principal plus fees atomically. Output minima come from a fresh simulation.</div>"+
       "<button class='primary' id='prepareRemove'><span>Simulate removal</span><span>→</span></button></div>");
-    function renderRemovePercent(){var value=Number($("removePercent").value);$("removePercentValue").textContent=String(value)+"% · "+String(p.liquidity*BigInt(value)/100n)+" liquidity selected"}
+    function renderRemovePercent(){var value=Number($("removePercent").value);$("removePercentValue").textContent=String(value)+"% · "+formatInteger(p.liquidity*BigInt(value)/100n)+" liquidity selected"}
     $("removePercent").addEventListener("input",renderRemovePercent);document.querySelectorAll("[data-remove-percent]").forEach(function(button){button.addEventListener("click",function(){$("removePercent").value=button.dataset.removePercent;renderRemovePercent()})});renderRemovePercent();
     $("prepareRemove").addEventListener("click",async function(){
       var btn=this,pct=Number($("removePercent").value),account=state.account;if(!Number.isFinite(pct)||pct<=0||pct>100)return toast("Choose a percentage above 0 and at most 100","error");
@@ -1644,7 +1827,7 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
         await pm.multicall.staticCall(calls);closeModal();
         reviewTransaction({
           kicker:"Protected position withdrawal",title:"Remove "+pct.toFixed(2).replace(/\.00$/,"")+"%",
-          rows:[["Position","#"+String(p.tokenId)],["Liquidity removed",String(liq)],["Minimum "+p.token0.symbol,trimUnits(min0,p.token0.decimals,8)],["Minimum "+p.token1.symbol,trimUnits(min1,p.token1.decimals,8)],["Flow","decreaseLiquidity → collect"],["Recipient",account,"mono"],["Deadline",new Date(Number(deadline)*1000).toLocaleTimeString()]],
+          rows:[["Position","#"+formatInteger(p.tokenId)],["Liquidity removed",formatInteger(liq)],["Minimum "+p.token0.symbol,trimUnits(min0,p.token0.decimals,8)],["Minimum "+p.token1.symbol,trimUnits(min1,p.token1.decimals,8)],["Flow","decreaseLiquidity → collect"],["Recipient",account,"mono"],["Deadline",new Date(Number(deadline)*1000).toLocaleTimeString()]],
           confirmLabel:"Remove in wallet",successMessage:"Liquidity removed and assets collected",
           execute:async function(progress){if(!same(state.account,account))throw new Error("Connected account changed after review");await assertPositionOwner(p,account);var s=await getSigner();if(!same(await s.getAddress(),account))throw new Error("Connected signer changed after review");var m=new E.Contract(ADDR.positionManager,ABI.manager,s);await m.multicall.staticCall(calls);await m.multicall.estimateGas(calls);progress("wallet");var tx=await m.multicall(calls);progress("pending",tx.hash);return awaitReceipt(tx)},
           onSuccess:async function(){await loadPositions()}
@@ -1669,8 +1852,8 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
   }
   function openIncreaseModal(p,seed){
     seed=seed||{};var hasWpls=isWpls(p.token0)||isWpls(p.token1);
-    openModal(modalHeader("Increase liquidity · Step 1 of 3","Fund position #"+String(p.tokenId))+
-      "<div class='modal-body'>"+flowStrip(1)+"<div class='locked-range'><div class='range-composer__head'><span><strong>Fixed NFT range</strong><small> · current ratio drives paired fills</small></span><span class='status "+(p.status==="active"?"":"out")+"' id='increaseRangeStatus'>"+esc(positionStatusLabel(p))+"</span></div><div class='locked-range__track'><span></span>"+(p.tick!=null?"<i id='increaseTickMarker' style='left:"+String(positionTickPct(p))+"%'></i>":"")+"</div><div class='locked-range__labels'><span>"+String(p.tickLower)+"</span><span id='increaseCurrentTick'>current "+esc(p.tick==null?"unavailable":String(p.tick))+"</span><span>"+String(p.tickUpper)+"</span></div><div class='range-context' id='increaseRatioStatus'>This NFT's range is fixed. A different range requires a new position.</div></div>"+
+    openModal(modalHeader("Increase liquidity · Step 1 of 3","Fund position #"+formatInteger(p.tokenId))+
+      "<div class='modal-body'>"+flowStrip(1)+"<div class='locked-range'><div class='range-composer__head'><span><strong>Fixed NFT range</strong><small> · current ratio drives paired fills</small></span><span class='status "+(p.status==="active"?"":"out")+"' id='increaseRangeStatus'>"+esc(positionStatusLabel(p))+"</span></div><div class='locked-range__track'><span></span>"+(p.tick!=null?"<i id='increaseTickMarker' style='left:"+String(positionTickPct(p))+"%'></i>":"")+"</div><div class='locked-range__labels'><span>"+formatInteger(p.tickLower)+"</span><span id='increaseCurrentTick'>current "+esc(p.tick==null?"unavailable":formatInteger(p.tick))+"</span><span>"+formatInteger(p.tickUpper)+"</span></div><div class='range-context' id='increaseRatioStatus'>This NFT's range is fixed. A different range requires a new position.</div></div>"+
       "<div class='field-row'><div class='field'><div class='field-label'><label id='increaseLabel0' for='increase0'>"+esc(p.token0.symbol)+" desired</label><span class='field-percentages'>"+percentageChips("increase",0)+"</span></div><input id='increase0' inputmode='decimal' value='"+esc(seed.amount0||"")+"'><div class='live-balance'><strong id='increaseBalance0'>Live balance loading…</strong></div></div><div class='field'><div class='field-label'><label id='increaseLabel1' for='increase1'>"+esc(p.token1.symbol)+" desired</label><span class='field-percentages'>"+percentageChips("increase",1)+"</span></div><input id='increase1' inputmode='decimal' value='"+esc(seed.amount1||"")+"'><div class='live-balance'><strong id='increaseBalance1'>Live balance loading…</strong></div></div></div><div class='live-balance' style='margin-top:7px'><span id='increaseBalanceBlock'>Querying one PulseChain block snapshot…</span><button type='button' id='increaseRefreshBalances' title='Refresh both token balances, native PLS, and the pool price from one PulseChain block'>↻ Refresh live data</button></div>"+
       (hasWpls?"<div class='native-funding'><label class='choice-button'><input id='increaseUseNativePls' type='checkbox' "+(seed.useNativePls!==false?"checked":"")+"><span><strong>Use native PLS for the WPLS side · default</strong><small>Finvesta sends the WPLS cap as PLS, wraps only actual consumption 1:1, and refunds unused PLS atomically. Uncheck to fund with WPLS PRC-20 instead.</small></span></label></div>":"")+ 
       "<div id='increaseFunding' class='funding-grid' hidden></div>"+
@@ -1694,8 +1877,8 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
         });
         increaseSnapshot=snapshot;increaseContext={sqrtPriceX96:slot.sqrtPriceX96,tick:Number(slot.tick),available0:available[0],available1:available[1],reserve:reserve};
         var sqrtLower=sqrtRatioAtTick(p.tickLower),sqrtUpper=sqrtRatioAtTick(p.tickUpper),active0=increaseContext.sqrtPriceX96<sqrtUpper,active1=increaseContext.sqrtPriceX96>sqrtLower;document.querySelectorAll("[data-increase-percent]").forEach(function(button){var side=Number(button.dataset.side),active=side===0?active0:active1,token=side===0?p.token0:p.token1,spendLabel=useNative&&isWpls(token)?"native PLS":token.symbol;button.disabled=!active;button.title=active?"Use this share of the live "+spendLabel+" balance and derive its paired cap":"Current price makes this a one-sided "+(active0?p.token0.symbol:p.token1.symbol)+" range"});
-        $("increaseBalanceBlock").textContent="Live at PulseChain block #"+String(snapshot.block)+(useNative?" · gas reserve "+trimUnits(reserve,18,6)+" PLS":"");
-        $("increaseCurrentTick").textContent="current "+String(increaseContext.tick);$("increaseRangeStatus").textContent=increaseContext.tick<p.tickLower?"BELOW RANGE":increaseContext.tick>=p.tickUpper?"ABOVE RANGE":"IN RANGE";$("increaseRangeStatus").className="status "+(increaseContext.tick>=p.tickLower&&increaseContext.tick<p.tickUpper?"":"out");
+        $("increaseBalanceBlock").textContent="Live at PulseChain block #"+formatInteger(snapshot.block)+(useNative?" · gas reserve "+trimUnits(reserve,18,6)+" PLS":"");
+        $("increaseCurrentTick").textContent="current "+formatInteger(increaseContext.tick);$("increaseRangeStatus").textContent=increaseContext.tick<p.tickLower?"BELOW RANGE":increaseContext.tick>=p.tickUpper?"ABOVE RANGE":"IN RANGE";$("increaseRangeStatus").className="status "+(increaseContext.tick>=p.tickLower&&increaseContext.tick<p.tickUpper?"":"out");
         var pct=Math.max(2,Math.min(98,Math.round((increaseContext.tick-p.tickLower)*100/(p.tickUpper-p.tickLower))));if($("increaseTickMarker"))$("increaseTickMarker").style.left=String(pct)+"%";
         $("increaseRatioStatus").className="range-context"+(increaseContext.tick<p.tickLower||increaseContext.tick>=p.tickUpper?" warn":"");$("increaseRatioStatus").textContent=(increaseContext.tick<p.tickLower?"Current price is below the range: ratio fills use "+p.token0.symbol+" only.":increaseContext.tick>=p.tickUpper?"Current price is above the range: ratio fills use "+p.token1.symbol+" only.":"Current price is inside the range: ratio fills derive both token caps and scale to the limiting live balance.")+" "+rangePriceLabel(p.tickLower,p.tickUpper,p.token0,p.token1)+". This NFT's ticks are fixed."
       }catch(err){if(nonce!==increaseBalanceNonce||state.modalNonce!==increaseModalId)return;$("increaseBalance0").textContent="Balance unavailable";$("increaseBalance1").textContent="Balance unavailable";$("increaseBalanceBlock").textContent=safeError(err)}
@@ -1732,7 +1915,7 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
         var protectedOut=await simulateIncrease(pm,params);if(!assertIncreasePrepare())return;var estimatedGas=await estimateIncrease(pm,params);if(!assertIncreasePrepare())return;if(protectedOut.amount0!==out.amount0||protectedOut.amount1!==out.amount1||protectedOut.liquidity!==out.liquidity)throw new Error("Deposit consumption changed during simulation");
         if(useNative){fundingPlan.gasReserve=nativeGasReserve(estimatedGas,await conservativeFeeData());if(!assertIncreasePrepare())return;renderFundingSnapshot("increaseFunding",funding,fundingItems,fundingPlan);assertFunding(funding,fundingItems,fundingPlan)}
         var usedWpls=useNative?(isWpls(p.token0)?out.amount0:out.amount1):0n,simulatedRefund=useNative?nativeValue-usedWpls:0n;if(simulatedRefund<0n)throw new Error("Simulation attempted to wrap more WPLS than the native PLS cap");
-        var rows=[["Position","#"+String(p.tokenId)],["Funding route",useNative?"Native PLS → WPLS 1:1 · atomic refund":"PRC-20 balances and allowances"],["Expected "+p.token0.symbol,trimUnits(out.amount0,p.token0.decimals,8)],["Expected "+p.token1.symbol,trimUnits(out.amount1,p.token1.decimals,8)],["Minimum "+p.token0.symbol,trimUnits(min0,p.token0.decimals,8)],["Minimum "+p.token1.symbol,trimUnits(min1,p.token1.decimals,8)],["Liquidity added",String(out.liquidity)],["Manager",ADDR.positionManager,"mono"]];
+        var rows=[["Position","#"+formatInteger(p.tokenId)],["Funding route",useNative?"Native PLS → WPLS 1:1 · atomic refund":"PRC-20 balances and allowances"],["Expected "+p.token0.symbol,trimUnits(out.amount0,p.token0.decimals,8)],["Expected "+p.token1.symbol,trimUnits(out.amount1,p.token1.decimals,8)],["Minimum "+p.token0.symbol,trimUnits(min0,p.token0.decimals,8)],["Minimum "+p.token1.symbol,trimUnits(min1,p.token1.decimals,8)],["Liquidity added",formatInteger(out.liquidity)],["Manager",ADDR.positionManager,"mono"]];
         if(useNative)rows.splice(2,0,["Native PLS sent · maximum",trimUnits(nativeValue,18,12)+" PLS"],["Simulated WPLS wrapped",trimUnits(usedWpls,18,12)+" WPLS"],["Simulated residual PLS refund",trimUnits(simulatedRefund,18,12)+" PLS"],["Estimated gas reserve · 20% buffer",trimUnits(fundingPlan.gasReserve,18,12)+" PLS"],["Existing WPLS","Untouched"],["Position asset / withdrawals","WPLS"]);if(!assertIncreasePrepare())return;increasePrepareInFlight=false;closeModal();
         reviewTransaction({
           kicker:"Increase liquidity · final transaction",title:"Review & add liquidity",flowStep:3,
@@ -1775,7 +1958,7 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
   }
   function formatUsd(value){
     var n=Number(value||0);if(!Number.isFinite(n)||n<0)return "$—";
-    if(n>=1000000)return "$"+(n/1000000).toFixed(2)+"m";if(n>=1000)return "$"+(n/1000).toFixed(2)+"k";if(n>=1)return "$"+n.toFixed(2);return "$"+n.toFixed(4)
+    return "$"+n.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:n>=1?2:4})
   }
   async function fetchDexJson(path,useCache){
     var url=DEX.api+path,cached=state.dexCache.get(url);if(useCache&&cached&&Date.now()-cached.at<DEX.cacheMs)return cached.value;
@@ -1822,7 +2005,7 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
   function usableTick(value,spacing,lower){
     if(value===""){return lower?Math.ceil(MIN_TICK/spacing)*spacing:Math.floor(MAX_TICK/spacing)*spacing}
     var n=Number(value);if(!Number.isInteger(n)||n<MIN_TICK||n>MAX_TICK)throw new Error("Ticks must be whole numbers within the V3 bounds");
-    if(n%spacing!==0)throw new Error("Tick "+String(n)+" is not aligned to spacing "+String(spacing));return n
+    if(n%spacing!==0)throw new Error("That range bound is not valid for the selected fee tier");return n
   }
   function sqrtRatioAtTick(tick){
     tick=Number(tick);if(!Number.isInteger(tick)||tick<MIN_TICK||tick>MAX_TICK)throw new Error("Reference tick is outside the V3 TickMath bounds");
@@ -1843,7 +2026,7 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
   }
   function priceAtTickLabel(tick,token0,token1){
     var log10=Number(tick)*Math.log10(1.0001)+Number(token0.decimals)-Number(token1.decimals),exponent=Math.floor(log10),mantissa=Math.pow(10,log10-exponent);
-    if(!Number.isFinite(mantissa))return "unavailable";if(exponent>=-5&&exponent<=8){var value=mantissa*Math.pow(10,exponent);return value.toLocaleString(undefined,{maximumSignificantDigits:8})}return mantissa.toFixed(5).replace(/0+$/,'').replace(/\.$/,'')+"e"+(exponent>=0?"+":"")+String(exponent)
+    if(!Number.isFinite(mantissa))return "unavailable";if(exponent>=-5&&exponent<=8){var value=mantissa*Math.pow(10,exponent);return value.toLocaleString("en-US",{maximumSignificantDigits:8})}return mantissa.toFixed(5).replace(/0+$/,'').replace(/\.$/,'')+"e"+(exponent>=0?"+":"")+String(exponent)
   }
   function rangePriceLabel(lower,upper,token0,token1){return "≈ "+priceAtTickLabel(lower,token0,token1)+" → "+priceAtTickLabel(upper,token0,token1)+" "+token1.symbol+" per "+token0.symbol}
   function liquidityForAmount0(amount,sqrtA,sqrtB){if(sqrtA>sqrtB){var s=sqrtA;sqrtA=sqrtB;sqrtB=s}return amount===0n?0n:amount*sqrtA*sqrtB/(Q96*(sqrtB-sqrtA))}
@@ -1851,7 +2034,7 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
   function amount0ForLiquidity(liquidity,sqrtA,sqrtB){if(sqrtA>sqrtB){var s=sqrtA;sqrtA=sqrtB;sqrtB=s}return liquidity===0n?0n:liquidity*(sqrtB-sqrtA)*Q96/(sqrtB*sqrtA)}
   function amount1ForLiquidity(liquidity,sqrtA,sqrtB){if(sqrtA>sqrtB){var s=sqrtA;sqrtA=sqrtB;sqrtB=s}return liquidity===0n?0n:liquidity*(sqrtB-sqrtA)/Q96}
   function amountsForRangeLiquidity(sqrtP,sqrtA,sqrtB,liquidity){
-    if(sqrtA>=sqrtB)throw new Error("Range must contain at least one tick-spacing interval");
+    if(sqrtA>=sqrtB)throw new Error("Range must have a valid minimum width");
     if(sqrtP<=sqrtA)return {amount0:amount0ForLiquidity(liquidity,sqrtA,sqrtB),amount1:0n,mode:"token0"};
     if(sqrtP>=sqrtB)return {amount0:0n,amount1:amount1ForLiquidity(liquidity,sqrtA,sqrtB),mode:"token1"};
     return {amount0:amount0ForLiquidity(liquidity,sqrtP,sqrtB),amount1:amount1ForLiquidity(liquidity,sqrtA,sqrtP),mode:"both"}
@@ -1865,29 +2048,28 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
     var liquidity=anchor<other?anchor:other;if(liquidity<=0n)throw new Error("The selected balance share rounds down to zero range liquidity");var amounts=amountsForRangeLiquidity(sqrtP,sqrtA,sqrtB,liquidity);if(mode==="both"&&(amounts.amount0===0n||amounts.amount1===0n))throw new Error("The selected balance share is too small to produce both in-range token amounts");
     amounts.liquidity=liquidity;amounts.limited=other<anchor;amounts.anchorSide=side;amounts.percent=percent;return amounts
   }
-  function percentageChips(prefix,side){return [25,50,75,100].map(function(p){return "<button type='button' class='field-percent' data-"+prefix+"-percent='"+String(p)+"' data-side='"+String(side)+"' title='Use "+(p===100?"the maximum":"up to "+String(p)+"%")+" of this live balance and derive the paired amount from the active V3 range ratio'>"+(p===100?"MAX":String(p)+"%")+"</button>"}).join("")}
+  function percentageChips(prefix,side){return [25,50,75,100].map(function(p){return "<button type='button' class='field-percent' data-"+prefix+"-percent='"+String(p)+"' data-side='"+String(side)+"' title='Use "+(p===100?"maximum":String(p)+"%")+" balance'>"+(p===100?"MAX":String(p)+"%")+"</button>"}).join("")}
   function openNewPositionModal(seed){
     seed=Object.assign({},seed||{});if(!seed.tokenA&&state.from)seed.tokenA=state.from.address;if(!seed.tokenB&&state.to)seed.tokenB=state.to.address;if(seed.useNativePls==null&&(same(seed.tokenA,ADDR.wpls)||same(seed.tokenB,ADDR.wpls)))seed.useNativePls=state.swapNativePls;var market=seed.market||null;
-    var options=(state.feeTiers.length?state.feeTiers:[{fee:100,spacing:1},{fee:500,spacing:10},{fee:2500,spacing:50},{fee:10000,spacing:200}]).map(function(t){return "<option value='"+String(t.fee)+"' "+(String(seed.fee||500)===String(t.fee)?"selected":"")+">"+esc(feeLabel(t.fee))+" · spacing "+String(t.spacing)+"</option>"}).join("");
+    var options=(state.feeTiers.length?state.feeTiers:[{fee:100,spacing:1},{fee:500,spacing:10},{fee:2500,spacing:50},{fee:10000,spacing:200}]).map(function(t){return "<option value='"+String(t.fee)+"' "+(String(seed.fee||500)===String(t.fee)?"selected":"")+">"+esc(feeLabel(t.fee))+"</option>"}).join("");
     var seedFull=(seed.lower==null||seed.lower==="")&&(seed.upper==null||seed.upper==="");
-    openModal(modalHeader("Create position · Step 1 of 3","Configure V3 position")+
+    openModal(modalHeader("New position","Choose pool and range")+
       "<div class='modal-body'>"+flowStrip(1)+
-      "<div class='setup-step'><b>1</b><span>Choose the pool assets</span></div><div class='mint-token-grid'><input id='mintTokenA' type='hidden' value='"+esc(seed.tokenA||"")+"'><input id='mintTokenB' type='hidden' value='"+esc(seed.tokenB||"")+"'><button type='button' class='mint-token-select' id='mintTokenSelectA' aria-haspopup='dialog' aria-controls='mintTokenDrawer' aria-expanded='false'><span id='mintTokenVisualA' class='token-mark small'>?</span><span><small>Token A</small><strong id='mintTokenSymbolA'>Select token</strong><em id='mintTokenMetaA'>Known or custom PRC-20</em></span><b>⌄</b></button><button type='button' class='mint-token-select' id='mintTokenSelectB' aria-haspopup='dialog' aria-controls='mintTokenDrawer' aria-expanded='false'><span id='mintTokenVisualB' class='token-mark small'>?</span><span><small>Token B</small><strong id='mintTokenSymbolB'>Select token</strong><em id='mintTokenMetaB'>Known or custom PRC-20</em></span><b>⌄</b></button></div>"+
-      "<div class='mint-token-drawer' id='mintTokenDrawer' role='dialog' aria-labelledby='mintTokenDrawerTitle' hidden><div class='mint-token-drawer__head'><span><strong id='mintTokenDrawerTitle'>Choose token</strong><small id='mintTokenPickerSnapshot'>Shared with Swap · live balances load at one block</small></span><button type='button' class='icon-button' id='mintTokenDrawerClose' aria-label='Close token selector'>×</button></div><div class='field'><label for='mintTokenSearch'>Search known tokens</label><input id='mintTokenSearch' autocomplete='off' placeholder='Symbol, name, or contract'></div><div class='token-list' id='mintKnownTokenList' role='group' aria-label='Known and imported token choices'></div><div class='mint-token-import'><div class='field'><label for='mintCustomTokenAddress'>Add custom PRC-20 contract</label><div class='field-action-row'><input id='mintCustomTokenAddress' class='mono' autocomplete='off' placeholder='0x…'><button type='button' class='secondary' id='mintImportCustomToken'>Verify & add</button></div></div></div></div>"+
-      "<div class='field' style='margin-top:11px'><label for='mintFee'>Enabled fee tier <span title='The fee tier also determines valid tick spacing.'>ⓘ</span></label><select id='mintFee'>"+options+"</select></div>"+
-      "<div class='setup-step'><b>2</b><span>Establish the price reference</span></div><section class='price-source-panel' id='mintPricePanel' aria-live='polite'><div class='price-source-panel__head'><span><strong>Price source</strong><small id='mintPriceGuide'>Choose both assets. Finvesta will check this fee tier for an initialized pool.</small></span><span class='price-state' id='mintPriceState'>CHOOSE PAIR</span></div><button type='button' class='price-discovery-cta' id='useMarketPrice' title='Use market price from the deepest exact-address PulseChain pair; no transaction is sent'><span><small id='mintMarketEyebrow'>Recommended · DEX Screener</small><strong>Use market price & unlock range</strong><em id='mintMarketCopy'>Sets the proposed first-pool price, reference tick, presets, and funding ratio. No transaction.</em></span><b>→</b></button><div class='price-divider'>or enter the starting price manually</div><label class='field' for='mintInitialPrice'>Token B per Token A</label><div class='price-input-wrap'><input id='mintInitialPrice' inputmode='decimal' value='"+esc(seed.price||"")+"' placeholder='Example: 1.25' aria-describedby='mintPriceReadback'><span id='mintPriceOrientation'>Token B per Token A</span></div><div class='price-readback' id='mintPriceReadback'>Both price orientations will appear here before review.</div><div id='marketPriceStatus' hidden></div></section>"+
-      "<div class='setup-step'><b>3</b><span>Choose the liquidity range</span></div><div class='range-composer "+(seedFull?"":"locked")+"' id='mintRangeComposer'><input id='mintFullRange' type='checkbox' "+(seedFull?"checked":"")+" hidden><div class='range-composer__head'><span><strong>Liquidity range</strong><small> · ticks align to the selected fee spacing</small></span><div class='range-strategy' aria-label='Range strategy'><button type='button' id='mintFullStrategy' class='"+(seedFull?"active":"")+"' title='Use the widest valid ticks'>FULL RANGE</button><button type='button' id='mintConcentratedStrategy' class='"+(seedFull?"":"active")+"' title='Requires a current pool or accepted initialization price'>CONCENTRATED</button></div></div><div class='range-presets'><button type='button' data-range-width='10' title='Center a narrow range 10 tick-spacing intervals on each side of the reference tick'>NARROW</button><button type='button' data-range-width='50' title='Center a balanced range 50 tick-spacing intervals on each side of the reference tick'>BALANCED</button><button type='button' data-range-width='200' title='Center a wide range 200 tick-spacing intervals on each side of the reference tick'>WIDE</button></div><div class='range-sliders' id='mintRangeSliders'><div class='range-slider-row'><label for='mintLowerSlider'>Lower tick</label><input id='mintLowerSlider' type='range'><output id='mintLowerOutput' for='mintLowerSlider'>—</output></div><div class='range-slider-row'><label for='mintUpperSlider'>Upper tick</label><input id='mintUpperSlider' type='range'><output id='mintUpperOutput' for='mintUpperSlider'>—</output></div></div><div class='field-row'><div class='field'><label for='mintLower'>Exact lower tick</label><input id='mintLower' inputmode='numeric' value='"+esc(seed.lower||"")+"'></div><div class='field'><label for='mintUpper'>Exact upper tick</label><input id='mintUpper' inputmode='numeric' value='"+esc(seed.upper||"")+"'></div></div><div class='range-context' id='mintRangeContext'>Resolving tick spacing and price context…</div><div class='range-gate' id='mintRangeGate'>Full range is available immediately. A current or proposed price unlocks concentrated presets and sliders.</div></div>"+
-      "<div class='setup-step'><b>4</b><span>Fund from live balances</span></div>"+
-      "<div class='field-row'><div class='field'><div class='field-label'><label for='mintAmountA'>Token A desired</label><span class='field-percentages'>"+percentageChips("mint",0)+"</span></div><input id='mintAmountA' inputmode='decimal' value='"+esc(seed.amountA||"")+"'><div class='live-balance'><strong id='mintBalanceA'>Live balance loading…</strong></div></div><div class='field'><div class='field-label'><label for='mintAmountB'>Token B desired</label><span class='field-percentages'>"+percentageChips("mint",1)+"</span></div><input id='mintAmountB' inputmode='decimal' value='"+esc(seed.amountB||"")+"'><div class='live-balance'><strong id='mintBalanceB'>Live balance loading…</strong></div></div></div><div class='live-balance' style='margin-top:7px'><span id='mintBalanceBlock'>Enter two token contracts to load balances.</span><button type='button' id='mintRefreshBalances' title='Refresh both token balances, native PLS, and the pool ratio from one PulseChain block'>↻ Refresh live data</button></div><div class='range-context' id='mintRatioStatus'>Percentage fills activate after a current pool price or initialization price is available.</div>"+
+      "<div class='setup-step'><b>1</b><span>Choose tokens</span></div><div class='mint-token-grid'><input id='mintTokenA' type='hidden' value='"+esc(seed.tokenA||"")+"'><input id='mintTokenB' type='hidden' value='"+esc(seed.tokenB||"")+"'><button type='button' class='mint-token-select' id='mintTokenSelectA' aria-haspopup='dialog' aria-controls='mintTokenDrawer' aria-expanded='false'><span id='mintTokenVisualA' class='token-mark small'>?</span><span><small>Token A</small><strong id='mintTokenSymbolA'>Select token</strong><em id='mintTokenMetaA'>Preferred or custom token</em></span><b>⌄</b></button><button type='button' class='mint-token-select' id='mintTokenSelectB' aria-haspopup='dialog' aria-controls='mintTokenDrawer' aria-expanded='false'><span id='mintTokenVisualB' class='token-mark small'>?</span><span><small>Token B</small><strong id='mintTokenSymbolB'>Select token</strong><em id='mintTokenMetaB'>Preferred or custom token</em></span><b>⌄</b></button></div>"+
+      "<div class='mint-token-drawer' id='mintTokenDrawer' role='dialog' aria-labelledby='mintTokenDrawerTitle' hidden><div class='mint-token-drawer__head'><span><strong id='mintTokenDrawerTitle'>Choose token</strong><small id='mintTokenPickerSnapshot'>Preferred tokens</small></span><button type='button' class='icon-button' id='mintTokenDrawerClose' aria-label='Close token selector'>×</button></div><div class='field'><label for='mintTokenSearch'>Search tokens</label><input id='mintTokenSearch' autocomplete='off' placeholder='Name, symbol, or address'></div><div class='token-list' id='mintKnownTokenList' role='group' aria-label='Known and imported token choices'></div><div class='mint-token-import'><div class='field'><label for='mintCustomTokenAddress'>Add by contract address</label><div class='field-action-row'><input id='mintCustomTokenAddress' class='mono' autocomplete='off' placeholder='0x…'><button type='button' class='secondary' id='mintImportCustomToken'>Add</button></div></div></div></div>"+
+      "<div class='field' style='margin-top:11px'><label for='mintFee'>Pool fee <span title='The fee charged on swaps through this pool.'>ⓘ</span></label><select id='mintFee'>"+options+"</select></div>"+
+      "<div class='setup-step'><b>2</b><span>Set price</span></div><section class='price-source-panel' id='mintPricePanel' aria-live='polite'><div class='price-source-panel__head'><span><strong>Starting price</strong><small id='mintPriceGuide'>Choose a pair.</small></span><span class='price-state' id='mintPriceState'>CHOOSE PAIR</span></div><button type='button' class='price-discovery-cta' id='useMarketPrice' title='Use the deepest exact-address PulseChain market; no transaction is sent'><span><small id='mintMarketEyebrow'>DEX Screener</small><strong>Use market price</strong><em id='mintMarketCopy'>No transaction</em></span><b>→</b></button><div class='price-divider'>or enter manually</div><label class='field' for='mintInitialPrice'>Token B per Token A</label><div class='price-input-wrap'><input id='mintInitialPrice' inputmode='decimal' value='"+esc(seed.price||"")+"' placeholder='Example: 1.25' aria-describedby='mintPriceReadback'><span id='mintPriceOrientation'>Token B per Token A</span></div><div class='price-readback' id='mintPriceReadback'>Enter a price.</div><div id='marketPriceStatus' hidden></div></section>"+
+      "<div class='setup-step'><b>3</b><span>Choose range</span></div><div class='range-composer "+(seedFull?"":"locked")+"' id='mintRangeComposer'><input id='mintFullRange' type='checkbox' "+(seedFull?"checked":"")+" hidden><div class='range-composer__head'><span><strong>Price range</strong></span></div><div class='price-range-cards' aria-live='polite'><div class='price-range-card'><small>MIN PRICE</small><strong id='mintMinPrice'>0</strong><span id='mintMinPriceUnit'>Token B per Token A</span></div><div class='price-range-card'><small>MAX PRICE</small><strong id='mintMaxPrice'>∞</strong><span id='mintMaxPriceUnit'>Token B per Token A</span></div></div><div class='range-presets' aria-label='Price range'><button type='button' id='mintFullStrategy' class='"+(seedFull?"active":"")+"'>FULL RANGE</button><button type='button' data-range-percent='75'>75%</button><button type='button' data-range-percent='50'>50%</button><button type='button' data-range-percent='25'>25%</button><button type='button' data-range-percent='10'>10%</button></div><div class='range-internals' hidden><div class='range-sliders' id='mintRangeSliders'><div class='range-slider-row'><label for='mintLowerSlider'>Lower</label><input id='mintLowerSlider' type='range'><output id='mintLowerOutput' for='mintLowerSlider'>—</output></div><div class='range-slider-row'><label for='mintUpperSlider'>Upper</label><input id='mintUpperSlider' type='range'><output id='mintUpperOutput' for='mintUpperSlider'>—</output></div></div><div class='field-row'><div class='field'><label for='mintLower'>Lower</label><input id='mintLower' inputmode='numeric' value='"+esc(seed.lower||"")+"'></div><div class='field'><label for='mintUpper'>Upper</label><input id='mintUpper' inputmode='numeric' value='"+esc(seed.upper||"")+"'></div></div></div><div class='range-context' id='mintRangeContext'>Full range</div><div class='range-gate' id='mintRangeGate'>Set a price to choose a range.</div></div>"+
+      "<div class='setup-step'><b>4</b><span>Enter amounts</span></div>"+
+      "<div class='mint-deposit-stack'><div class='mint-deposit-card'><div><span class='mint-deposit-token' id='mintAmountSymbolA'>Token A</span><strong id='mintBalanceA'>Loading…</strong></div><input id='mintAmountA' inputmode='decimal' value='"+esc(seed.amountA||"")+"' placeholder='0.00' aria-label='Token A amount'><span class='field-percentages'>"+percentageChips("mint",0)+"</span></div><div class='mint-deposit-card'><div><span class='mint-deposit-token' id='mintAmountSymbolB'>Token B</span><strong id='mintBalanceB'>Loading…</strong></div><input id='mintAmountB' inputmode='decimal' value='"+esc(seed.amountB||"")+"' placeholder='0.00' aria-label='Token B amount'><span class='field-percentages'>"+percentageChips("mint",1)+"</span></div></div><div class='live-balance' style='margin-top:7px'><span id='mintBalanceBlock'>Choose two tokens.</span><button type='button' id='mintRefreshBalances' title='Refresh balances and pool price'>↻ Refresh</button></div><div class='range-context' id='mintRatioStatus'>Choose a balance % or enter amounts.</div>"+
       "<div class='native-funding' id='nativeFundingChoice' hidden><label class='choice-button'><input id='useNativePls' type='checkbox' "+(seed.useNativePls!==false?"checked":"")+"><span><strong id='nativeFundingTitle'>Use native PLS for WPLS</strong><small id='nativeFundingCopy'>Wraps actual WPLS consumption 1:1 and refunds unused PLS in the same transaction.</small></span></label></div>"+
       "<div id='mintFunding' class='funding-grid' hidden></div>"+
-      "<div class='notice'>First-pool initialization is permissionless and price-critical. Desired amounts are caps, not a required ratio. Addresses are sorted into token0/token1, price conversion uses BigInt integer square-root math, and initialization + mint are simulated atomically.</div>"+
-      "<button class='primary' id='prepareMint' disabled><span>Choose pair & establish price</span><span>→</span></button></div>",true);
+      "<button class='primary' id='prepareMint' disabled><span>Continue</span><span>→</span></button></div>",true);
 
-    var mintModalId=state.modalNonce,mintPickerSide=null,mintPickerNonce=0,mintImportBusy=0,mintPickerReturnFocus=null,mintMarketNonce=0,mintMarketBusy=0,mintPrepareNonce=0,mintPrepareInFlight=false,pendingConcentrated=!seedFull&&!seed.lower,mintPriceMode="pair";
+    var mintModalId=state.modalNonce,mintPickerSide=null,mintPickerNonce=0,mintImportBusy=0,mintPickerReturnFocus=null,mintMarketNonce=0,mintMarketBusy=0,mintPrepareNonce=0,mintPrepareInFlight=false,mintRangePreset=seedFull?"full":String(seed.rangePercent||"custom"),mintPriceMode="pair";
     function mintTokenForSide(side){var value=$("mintToken"+side).value;if(!value)return null;try{return state.tokens.get(E.getAddress(value).toLowerCase())||null}catch(_){return null}}
     function renderMintTokenSelectors(){
-      ["A","B"].forEach(function(side){var token=mintTokenForSide(side),native=token&&isWpls(token)&&$("useNativePls").checked,symbol=token?(native?"PLS":token.symbol):"Select token",mark=$("mintTokenVisual"+side),balance=token?(native?state.nativeBalance:token.balance):null;$("mintTokenSymbol"+side).textContent=symbol;$("mintTokenMeta"+side).textContent=token?(token.name+" · "+shortAddress(token.address)+(state.account?" · Balance "+trimUnits(balance,token.decimals,6):"")):"Known or custom PRC-20";mark.textContent=token?symbol.slice(0,2):"?";mark.style.setProperty("--token",tokenColor(token&&token.address))})
+      ["A","B"].forEach(function(side){var token=mintTokenForSide(side),native=token&&isWpls(token)&&$("useNativePls").checked,symbol=token?(native?"PLS":token.symbol):"Select token",mark=$("mintTokenVisual"+side),balance=token?(native?state.nativeBalance:token.balance):null;$("mintTokenSymbol"+side).textContent=symbol;$("mintAmountSymbol"+side).textContent=token?symbol:"Token "+side;$("mintTokenMeta"+side).textContent=token?(token.name+" · "+shortAddress(token.address)+(state.account?" · "+trimUnits(balance,token.decimals,6):"")):"Preferred or custom token";mark.textContent=token?symbol.slice(0,2):"?";mark.style.setProperty("--token",tokenColor(token&&token.address))})
     }
     function cancelMintImportRequest(){mintPickerNonce++;mintImportBusy=0;var button=$("mintImportCustomToken");if(button&&button.dataset.old)setBusy(button,false)}
     function cancelMintMarketRequest(){mintMarketNonce++;mintMarketBusy=0;var button=$("useMarketPrice");if(button&&button.dataset.old)setBusy(button,false)}
@@ -1895,10 +2077,10 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
     function drawMintTokenChoices(){
       var list=$("mintKnownTokenList");if(!list||!mintPickerSide)return;list.innerHTML="";var query=$("mintTokenSearch").value.trim().toLowerCase(),other=mintPickerSide==="A"?"B":"A",otherAddress=$("mintToken"+other).value;
       knownAssetChoices().filter(function(choice){return !query||[choice.symbol,choice.name,choice.token.address].join(" ").toLowerCase().indexOf(query)>=0}).forEach(function(choice){var token=choice.token,b=document.createElement("button");b.type="button";b.className="choice-button";b.dataset.assetKey=choice.key;b.disabled=same(token.address,otherAddress);b.innerHTML=tokenMarkHtml(Object.assign({},token,{symbol:choice.symbol}),false)+"<span><strong>"+esc(choice.symbol)+(choice.isDefault?" · DEFAULT":"")+"</strong><small>"+esc(choice.name)+" · "+esc(shortAddress(token.address))+"</small></span><span style='margin-left:auto;text-align:right'><strong>"+esc(trimUnits(choice.balance,token.decimals,5))+"</strong><small>"+esc(choice.balanceLabel)+(b.disabled?" · already Token "+other:"")+"</small></span>";b.addEventListener("click",function(){applyMintTokenSelection(mintPickerSide,choice)});list.appendChild(b)});
-      if(!list.children.length)list.innerHTML="<div class='notice info'>No known token matches. Paste a PRC-20 contract below to verify and add it.</div>";$("mintTokenPickerSnapshot").textContent=state.account?(state.balanceBlock==null?"Live balance snapshot unavailable":"Live at PulseChain block #"+String(state.balanceBlock)+" · "+String(Math.max(0,Math.round((Date.now()-(state.balanceFetchedAt||Date.now()))/1000)))+"s ago"):"Shared token registry with Swap · connect for balances"
+      if(!list.children.length)list.innerHTML="<div class='notice info'>No match. Add a contract below.</div>";$("mintTokenPickerSnapshot").textContent=state.account?(state.balanceBlock==null?"Balances unavailable":"Block #"+formatInteger(state.balanceBlock)+" · "+formatInteger(Math.max(0,Math.round((Date.now()-(state.balanceFetchedAt||Date.now()))/1000)))+"s ago"):"Preferred tokens"
     }
     function openMintTokenDrawer(side){cancelMintImportRequest();mintPickerSide=side;var openRequest=++mintPickerNonce;mintPickerReturnFocus=$("mintTokenSelect"+side);$("mintTokenDrawerTitle").textContent="Choose Token "+side;$("mintTokenDrawer").hidden=false;["A","B"].forEach(function(s){$("mintTokenSelect"+s).setAttribute("aria-expanded",String(s===side))});$("mintTokenSearch").value="";drawMintTokenChoices();setTimeout(function(){if(state.modalNonce===mintModalId&&!$("mintTokenDrawer").hidden)$("mintTokenSearch").focus()},0);if(state.account){$("mintTokenPickerSnapshot").textContent="Refreshing live balances…";refreshBalances().then(function(){if(state.modalNonce===mintModalId&&mintPickerNonce===openRequest&&mintPickerSide===side)drawMintTokenChoices()})}}
-    function resetMintPairEconomics(){cancelMintMarketRequest();market=null;$("mintInitialPrice").value="";$("mintInitialPrice").disabled=false;$("mintAmountA").value="";$("mintAmountB").value="";mintAutoFilled=false;pendingConcentrated=false;$("mintFullRange").checked=true;$("mintLower").value="";$("mintUpper").value="";$("mintFunding").hidden=true;drawMarket();setMintPriceUi("checking","Checking this pair and fee tier for an initialized pool…");configureRange()}
+    function resetMintPairEconomics(){cancelMintMarketRequest();market=null;$("mintInitialPrice").value="";$("mintInitialPrice").disabled=false;$("mintAmountA").value="";$("mintAmountB").value="";mintAutoFilled=false;mintAmountAnchor=null;mintRangePreset="full";$("mintFullRange").checked=true;$("mintLower").value="";$("mintUpper").value="";$("mintFunding").hidden=true;drawMarket();setMintPriceUi("checking","Checking pool…");configureRange()}
     function applyMintTokenSelection(side,choice){
       if(!side||!choice)return;var other=side==="A"?"B":"A";if(same(choice.token.address,$("mintToken"+other).value))return toast("Token A and Token B must be different pool assets. PLS and WPLS are the same underlying WPLS contract.","error");
       $("mintToken"+side).value=choice.token.address;if(isWpls(choice.token))$("useNativePls").checked=Boolean(choice.nativeMode);resetMintPairEconomics();invalidateMintContext("Token pair changed. Live balances, price, and range context are refreshing.");syncNativeFundingChoice();renderMintTokenSelectors();closeMintTokenDrawer();scheduleMintRefresh()
@@ -1906,10 +2088,10 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
     function priceFromSqrtBPerA(sqrt,tokenA,tokenB,token0,token1){var square=sqrt*sqrt;if(token0===tokenA)return fractionToDecimal(square*(10n**BigInt(token0.decimals)),Q192*(10n**BigInt(token1.decimals)),36);return fractionToDecimal(Q192*(10n**BigInt(token1.decimals)),square*(10n**BigInt(token0.decimals)),36)}
     function updateMintPriceReadback(){
       var tokenA=mintTokenForSide("A"),tokenB=mintTokenForSide("B"),value=$("mintInitialPrice").value;$("mintPriceOrientation").textContent=(tokenB?tokenB.symbol:"Token B")+" per "+(tokenA?tokenA.symbol:"Token A");
-      if(!value){$("mintPriceReadback").textContent="Both price orientations will appear here before review.";return}try{var f=decimalFraction(value);$("mintPriceReadback").textContent="1 "+(tokenA?tokenA.symbol:"Token A")+" = "+value+" "+(tokenB?tokenB.symbol:"Token B")+" · 1 "+(tokenB?tokenB.symbol:"Token B")+" = "+fractionToDecimal(f[1],f[0],24)+" "+(tokenA?tokenA.symbol:"Token A")}catch(err){$("mintPriceReadback").textContent=safeError(err)}
+      if(!value){$("mintPriceReadback").textContent="Enter a price.";return}try{decimalFraction(value);$("mintPriceReadback").textContent="1 "+(tokenA?tokenA.symbol:"Token A")+" = "+formatDecimal(value)+" "+(tokenB?tokenB.symbol:"Token B")}catch(err){$("mintPriceReadback").textContent=safeError(err)}
     }
     function setMintPriceUi(status,detail){
-      mintPriceMode=status;var panel=$("mintPricePanel"),badge=$("mintPriceState"),guide=$("mintPriceGuide"),button=$("useMarketPrice"),prepare=$("prepareMint"),ready=status==="ready"||status==="pool";panel.classList.toggle("ready",ready);panel.classList.toggle("loading",status==="checking");badge.textContent={pair:"CHOOSE PAIR",checking:"CHECKING POOL",needs:"STARTING PRICE REQUIRED",review:"REVIEW MARKET",ready:"PRICE READY",pool:"ON-CHAIN PRICE READY",error:"PRICE NEEDED"}[status]||"PRICE SOURCE";guide.textContent=detail||"Choose both assets. Finvesta will check this fee tier for an initialized pool.";button.disabled=mintMarketBusy!==0||status==="pair"||status==="checking";var strong=button.querySelector("strong"),eyebrow=$("mintMarketEyebrow"),copy=$("mintMarketCopy");if(strong)strong.textContent=status==="pool"?"Compare with market":"Use market price & unlock range";if(eyebrow)eyebrow.textContent=status==="pool"?"Optional · DEX Screener":"Recommended · DEX Screener";if(copy)copy.textContent=status==="pool"?"Compares the live pool with an exact-address market. It never replaces the authoritative slot0 price.":"Sets the proposed first-pool price, reference tick, presets, and funding ratio. No transaction.";prepare.disabled=!ready||mintPrepareInFlight;if(ready){prepare.innerHTML="<span>Continue · resolve & simulate</span><span>→</span>"}else prepare.innerHTML="<span>Choose pair & establish price</span><span>→</span>";$("mintRangeComposer").classList.toggle("locked",!ready);$("mintRangeGate").className="range-gate"+(ready?" ready":"");$("mintRangeGate").textContent=ready?"Price context ready. Concentrated presets, sliders, and ratio-aware funding are unlocked.":"Choose or confirm the price above to unlock concentrated presets, sliders, and ratio-aware funding.";updateMintPriceReadback()
+      mintPriceMode=status;var panel=$("mintPricePanel"),badge=$("mintPriceState"),guide=$("mintPriceGuide"),button=$("useMarketPrice"),prepare=$("prepareMint"),ready=status==="ready"||status==="pool";panel.classList.toggle("ready",ready);panel.classList.toggle("loading",status==="checking");badge.textContent={pair:"CHOOSE PAIR",checking:"CHECKING",needs:"PRICE NEEDED",review:"REVIEW MARKET",ready:"PRICE READY",pool:"POOL PRICE",error:"PRICE NEEDED"}[status]||"PRICE";guide.textContent=detail||"Choose a pair.";button.disabled=mintMarketBusy!==0||status==="pair"||status==="checking";var strong=button.querySelector("strong"),eyebrow=$("mintMarketEyebrow"),copy=$("mintMarketCopy");if(strong)strong.textContent=status==="pool"?"Compare market":"Use market price";if(eyebrow)eyebrow.textContent="DEX Screener";if(copy)copy.textContent="No transaction";prepare.disabled=!ready||mintPrepareInFlight;prepare.innerHTML="<span>Continue</span><span>→</span>";$("mintRangeComposer").classList.toggle("locked",!ready);$("mintRangeGate").className="range-gate"+(ready?" ready":"");$("mintRangeGate").textContent=ready?"Choose a range.":"Set a price to choose a range.";updateMintPriceReadback()
     }
     function marketMatchesInputs(reference){
       try{return reference&&same(reference.tokenA,E.getAddress($("mintTokenA").value))&&same(reference.tokenB,E.getAddress($("mintTokenB").value))}catch(_){return false}
@@ -1921,109 +2103,120 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
     function nativeFundingSelected(){return !!nativeFundingSide()&&$("useNativePls").checked}
     function syncNativeFundingChoice(){
       var side=nativeFundingSide(),panel=$("nativeFundingChoice");panel.hidden=!side;
-      if(side){$("nativeFundingTitle").textContent="Use native PLS for Token "+side+" WPLS · default";$("nativeFundingCopy").textContent="Sends the full WPLS cap as PLS, wraps only actual consumption 1:1, and refunds any residual PLS atomically. Uncheck to fund with WPLS PRC-20; existing WPLS stays untouched in native mode."}
+      if(side){$("nativeFundingTitle").textContent="Use native PLS";$("nativeFundingCopy").textContent="Wraps to WPLS automatically."}
     }
-    var mintSnapshot=null,mintContext=null,mintBalanceNonce=0,mintRangeDirty=!seedFull,mintRefreshTimer=null,mintAutoFilled=false;
+    var mintSnapshot=null,mintContext=null,mintBalanceNonce=0,mintRangeDirty=!seedFull,mintRefreshTimer=null,mintAutoFilled=false,mintAmountAnchor=null;
     function mintTier(){var fee=Number($("mintFee").value),list=state.feeTiers.length?state.feeTiers:[{fee:100,spacing:1},{fee:500,spacing:10},{fee:2500,spacing:50},{fee:10000,spacing:200}],tier=list.find(function(t){return t.fee===fee});if(!tier)throw new Error("Selected fee tier is unavailable");return tier}
     function mintTickLimits(){var spacing=mintTier().spacing;return {spacing:spacing,min:Math.ceil(MIN_TICK/spacing)*spacing,max:Math.floor(MAX_TICK/spacing)*spacing}}
     function setMintRatioButtons(enabled){document.querySelectorAll("[data-mint-percent]").forEach(function(button){button.disabled=!enabled})}
-    function setMintPresetButtons(enabled){document.querySelectorAll("[data-range-width]").forEach(function(button){button.disabled=!enabled})}
-    function syncMintRangeStrategy(){var full=$("mintFullRange").checked,ready=!!mintContext;$("mintFullStrategy").classList.toggle("active",full);$("mintConcentratedStrategy").classList.toggle("active",!full&&ready);$("mintConcentratedStrategy").classList.toggle("waiting",pendingConcentrated&&!ready);$("mintRangeComposer").classList.toggle("locked",!ready);setMintPresetButtons(ready);if(!full&&!ready){$("mintLower").disabled=true;$("mintUpper").disabled=true;$("mintLowerSlider").disabled=true;$("mintUpperSlider").disabled=true}}
-    function clearMintAutoAmounts(message){if(!mintAutoFilled)return;$("mintAmountA").value="";$("mintAmountB").value="";mintAutoFilled=false;if(message){$("mintRatioStatus").className="range-context warn";$("mintRatioStatus").textContent=message}}
+    function setMintPresetButtons(enabled){document.querySelectorAll("[data-range-percent]").forEach(function(button){button.disabled=!enabled})}
+    function syncMintRangeStrategy(){var full=$("mintFullRange").checked,ready=!!mintContext;$("mintFullStrategy").classList.toggle("active",full);document.querySelectorAll("[data-range-percent]").forEach(function(button){button.classList.toggle("active",!full&&button.dataset.rangePercent===mintRangePreset)});$("mintRangeComposer").classList.toggle("locked",!ready);setMintPresetButtons(ready);if(!full&&!ready){$("mintLower").disabled=true;$("mintUpper").disabled=true;$("mintLowerSlider").disabled=true;$("mintUpperSlider").disabled=true}}
+    function clearMintAutoAmounts(message){if(!mintAutoFilled)return;if(mintAmountAnchor){$("mintAmount"+(mintAmountAnchor==="A"?"B":"A")).value=""}else{$("mintAmountA").value="";$("mintAmountB").value=""}mintAutoFilled=false;if(message){$("mintRatioStatus").className="range-context warn";$("mintRatioStatus").textContent=message}}
+    function syncMintManualAmounts(side){
+      try{
+        var otherSide=side==="A"?"B":"A";mintAmountAnchor=side;if(!$("mintAmount"+side).value.replace(/[,.0]/g,"")){$("mintAmount"+otherSide).value="";mintAmountAnchor=null;mintAutoFilled=false;return}if(!mintContext){$("mintAmount"+otherSide).value="";$("mintRatioStatus").className="range-context";$("mintRatioStatus").textContent="Checking price…";return}var anchorToken=mintContext["token"+side],otherToken=mintContext["token"+otherSide],amount=parseAmount($("mintAmount"+side).value,anchorToken.decimals);
+        if(amount===0n){$("mintAmount"+otherSide).value="";mintAutoFilled=false;return}
+        var range=mintRangeValues(),sqrtP=mintContext.sqrtPriceX96,sqrtA=sqrtRatioAtTick(range.lower),sqrtB=sqrtRatioAtTick(range.upper),anchorIs0=same(anchorToken.address,mintContext.token0.address),mode=sqrtP<=sqrtA?"token0":sqrtP>=sqrtB?"token1":"both",liquidity,paired;
+        if(anchorIs0){if(mode==="token1")throw new Error("This range currently uses "+mintContext.token1.symbol+" only");liquidity=liquidityForAmount0(amount,mode==="token0"?sqrtA:sqrtP,sqrtB);paired=amountsForRangeLiquidity(sqrtP,sqrtA,sqrtB,liquidity).amount1}
+        else{if(mode==="token0")throw new Error("This range currently uses "+mintContext.token0.symbol+" only");liquidity=liquidityForAmount1(amount,sqrtA,mode==="token1"?sqrtB:sqrtP);paired=amountsForRangeLiquidity(sqrtP,sqrtA,sqrtB,liquidity).amount0}
+        $("mintAmount"+otherSide).value=formatDecimal(E.formatUnits(paired,otherToken.decimals));mintAutoFilled=true;$("mintFunding").hidden=true;$("mintRatioStatus").className="range-context";$("mintRatioStatus").textContent=otherToken.symbol+" updated from "+anchorToken.symbol+"."
+      }catch(err){var other=side==="A"?"B":"A";$("mintAmount"+other).value="";mintAutoFilled=false;$("mintRatioStatus").className="range-context warn";$("mintRatioStatus").textContent=safeError(err)}
+    }
     function invalidateMintContext(message){mintBalanceNonce++;mintContext=null;setMintRatioButtons(false);setMintPresetButtons(false);clearMintAutoAmounts(message||"Pair or price changed. Refresh the live ratio before applying a percentage again.");syncMintRangeStrategy()}
     function updateMintSideChips(){
       if(!mintContext){setMintRatioButtons(false);return}var range;try{range=mintRangeValues()}catch(_){setMintRatioButtons(false);return}var sqrtA=sqrtRatioAtTick(range.lower),sqrtB=sqrtRatioAtTick(range.upper),active0=mintContext.sqrtPriceX96<sqrtB,active1=mintContext.sqrtPriceX96>sqrtA;
-      document.querySelectorAll("[data-mint-percent]").forEach(function(button){var uiSide=Number(button.dataset.side),token=uiSide===0?mintContext.tokenA:mintContext.tokenB,side0=same(token.address,mintContext.token0.address)?0:1,active=side0===0?active0:active1,spendLabel=nativeFundingSelected()&&isWpls(token)?"native PLS":token.symbol;button.disabled=!active;button.title=active?"Use this share of the live "+spendLabel+" balance and derive the paired cap from the selected range":"The reference price makes this a one-sided "+(active0?mintContext.token0.symbol:mintContext.token1.symbol)+" range"});
-      if(!active0||!active1){var only=active0?mintContext.token0:mintContext.token1,spend=nativeFundingSelected()&&isWpls(only)?"native PLS (wrapping to WPLS)":only.symbol;$("mintRatioStatus").className="range-context warn";$("mintRatioStatus").textContent="One-sided range at the reference price: only "+spend+" can fund this position right now. The unavailable side's percentage controls are intentionally disabled."}
+      document.querySelectorAll("[data-mint-percent]").forEach(function(button){var uiSide=Number(button.dataset.side),token=uiSide===0?mintContext.tokenA:mintContext.tokenB,side0=same(token.address,mintContext.token0.address)?0:1,active=side0===0?active0:active1;button.disabled=!active;button.title=active?"Use this balance share":"Not needed for this range"});
+      if(!active0||!active1){var only=active0?mintContext.token0:mintContext.token1,spend=nativeFundingSelected()&&isWpls(only)?"PLS":only.symbol;$("mintRatioStatus").className="range-context warn";$("mintRatioStatus").textContent="This range currently uses "+spend+" only."}
     }
-    function setCustomRange(lower,upper,message){
+    function concisePrice(value){var n=Number(value);if(!Number.isFinite(n)||n<=0)return formatDecimal(value);if(n>=1000000000||n<0.000001)return n.toExponential(5).replace(/\.0+e/,"e");return n.toLocaleString("en-US",{maximumSignificantDigits:8})}
+    function updateRangePriceCards(lower,upper){var tokenA=mintTokenForSide("A"),tokenB=mintTokenForSide("B"),unit=(tokenB?tokenB.symbol:"Token B")+" per "+(tokenA?tokenA.symbol:"Token A");$("mintMinPriceUnit").textContent=unit;$("mintMaxPriceUnit").textContent=unit;if(lower==null||upper==null||!mintContext){$("mintMinPrice").textContent="0";$("mintMaxPrice").textContent="∞";return}var first=priceFromSqrtBPerA(sqrtRatioAtTick(lower),mintContext.tokenA,mintContext.tokenB,mintContext.token0,mintContext.token1),second=priceFromSqrtBPerA(sqrtRatioAtTick(upper),mintContext.tokenA,mintContext.tokenB,mintContext.token0,mintContext.token1),a=decimalFraction(first),b=decimalFraction(second),ordered=a[0]*b[1]<=b[0]*a[1]?[first,second]:[second,first];$("mintMinPrice").textContent=concisePrice(ordered[0]);$("mintMaxPrice").textContent=concisePrice(ordered[1])}
+    function setCustomRange(lower,upper,message,preset){
       var limits=mintTickLimits(),spacing=limits.spacing;lower=Math.max(limits.min,Math.floor(Number(lower)/spacing)*spacing);upper=Math.min(limits.max,Math.ceil(Number(upper)/spacing)*spacing);
       if(lower>=upper){if(lower+spacing<=limits.max)upper=lower+spacing;else lower=upper-spacing}
-      $("mintFullRange").checked=false;pendingConcentrated=false;$("mintLower").disabled=false;$("mintUpper").disabled=false;$("mintLowerSlider").disabled=false;$("mintUpperSlider").disabled=false;
-      $("mintLower").value=String(lower);$("mintUpper").value=String(upper);$("mintLowerSlider").value=String(lower);$("mintUpperSlider").value=String(upper);$("mintLowerOutput").textContent=String(lower);$("mintUpperOutput").textContent=String(upper);mintRangeDirty=true;
-      clearMintAutoAmounts("Range changed. Choose a percentage again to recalculate both caps at the new ticks.");$("mintRangeContext").className="range-context";$("mintRangeContext").textContent=(message||"Concentrated range")+" · spacing "+String(spacing)+" · "+String(lower)+" → "+String(upper)+(mintContext?" · reference tick "+String(mintContext.tick)+" · "+rangePriceLabel(lower,upper,mintContext.token0,mintContext.token1):" · price context pending");syncMintRangeStrategy();updateMintSideChips()
+      $("mintFullRange").checked=false;mintRangePreset=preset==null?"custom":String(preset);$("mintLower").disabled=false;$("mintUpper").disabled=false;$("mintLowerSlider").disabled=false;$("mintUpperSlider").disabled=false;
+      $("mintLower").value=String(lower);$("mintUpper").value=String(upper);$("mintLowerSlider").value=String(lower);$("mintUpperSlider").value=String(upper);$("mintLowerOutput").textContent=formatInteger(lower);$("mintUpperOutput").textContent=formatInteger(upper);mintRangeDirty=true;
+      clearMintAutoAmounts("Range changed. Recalculating…");updateRangePriceCards(lower,upper);$("mintRangeContext").className="range-context";$("mintRangeContext").textContent=message||"Custom range";syncMintRangeStrategy();if(mintAmountAnchor)syncMintManualAmounts(mintAmountAnchor);updateMintSideChips()
     }
     function configureRange(){
       var limits=mintTickLimits(),full=$("mintFullRange").checked,lowerSlider=$("mintLowerSlider"),upperSlider=$("mintUpperSlider"),sliderMin=limits.min,sliderMax=limits.max;if(!full&&mintContext){var center=Math.floor(mintContext.tick/limits.spacing)*limits.spacing,typedLower=Number($("mintLower").value),typedUpper=Number($("mintUpper").value);sliderMin=Math.max(limits.min,center-1000*limits.spacing);sliderMax=Math.min(limits.max,center+1000*limits.spacing);if(Number.isFinite(typedLower))sliderMin=Math.max(limits.min,Math.min(sliderMin,typedLower));if(Number.isFinite(typedUpper))sliderMax=Math.min(limits.max,Math.max(sliderMax,typedUpper))}[lowerSlider,upperSlider].forEach(function(slider){slider.min=String(sliderMin);slider.max=String(sliderMax);slider.step=String(limits.spacing)});
-      if(full){$("mintLower").value="";$("mintUpper").value="";$("mintLower").disabled=true;$("mintUpper").disabled=true;lowerSlider.disabled=true;upperSlider.disabled=true;lowerSlider.value=String(limits.min);upperSlider.value=String(limits.max);$("mintLowerOutput").textContent="FULL · "+String(limits.min);$("mintUpperOutput").textContent="FULL · "+String(limits.max);$("mintRangeContext").className="range-context";$("mintRangeContext").textContent="Full range selected · valid bounds "+String(limits.min)+" → "+String(limits.max)+" · spacing "+String(limits.spacing)+(mintContext?" · reference tick "+String(mintContext.tick)+" · "+rangePriceLabel(limits.min,limits.max,mintContext.token0,mintContext.token1):"");syncMintRangeStrategy();updateMintSideChips();return}
+      if(full){mintRangePreset="full";$("mintLower").value="";$("mintUpper").value="";$("mintLower").disabled=true;$("mintUpper").disabled=true;lowerSlider.disabled=true;upperSlider.disabled=true;lowerSlider.value=String(limits.min);upperSlider.value=String(limits.max);$("mintLowerOutput").textContent="FULL";$("mintUpperOutput").textContent="FULL";updateRangePriceCards();$("mintRangeContext").className="range-context";$("mintRangeContext").textContent="Full range";syncMintRangeStrategy();if(mintAmountAnchor&&mintContext)syncMintManualAmounts(mintAmountAnchor);updateMintSideChips();return}
       $("mintLower").disabled=false;$("mintUpper").disabled=false;lowerSlider.disabled=false;upperSlider.disabled=false;
-      try{var lower=usableTick($("mintLower").value,limits.spacing,true),upper=usableTick($("mintUpper").value,limits.spacing,false);if($("mintLower").value===""||$("mintUpper").value===""||lower>=upper)throw new Error("Choose two aligned ticks");lowerSlider.value=String(lower);upperSlider.value=String(upper);$("mintLowerOutput").textContent=String(lower);$("mintUpperOutput").textContent=String(upper);$("mintRangeContext").className="range-context";$("mintRangeContext").textContent="Concentrated range · spacing "+String(limits.spacing)+" · "+String(lower)+" → "+String(upper)+(mintContext?" · reference tick "+String(mintContext.tick)+" · slider window ±1,000 spacing steps · "+rangePriceLabel(lower,upper,mintContext.token0,mintContext.token1):" · price context pending")}
-      catch(err){setMintRatioButtons(false);$("mintRangeContext").className="range-context warn";$("mintRangeContext").textContent=safeError(err)+". Both ticks must align to spacing "+String(limits.spacing)+"."}syncMintRangeStrategy();updateMintSideChips()
+      try{var lower=usableTick($("mintLower").value,limits.spacing,true),upper=usableTick($("mintUpper").value,limits.spacing,false);if($("mintLower").value===""||$("mintUpper").value===""||lower>=upper)throw new Error("Choose a range");lowerSlider.value=String(lower);upperSlider.value=String(upper);$("mintLowerOutput").textContent=formatInteger(lower);$("mintUpperOutput").textContent=formatInteger(upper);updateRangePriceCards(lower,upper);$("mintRangeContext").className="range-context";$("mintRangeContext").textContent=/^(75|50|25|10)$/.test(mintRangePreset)?mintRangePreset+"% around current price":"Custom range";if(mintAmountAnchor&&mintContext)syncMintManualAmounts(mintAmountAnchor)}
+      catch(err){setMintRatioButtons(false);$("mintRangeContext").className="range-context warn";$("mintRangeContext").textContent="Choose a range."}syncMintRangeStrategy();updateMintSideChips()
     }
-    function applyRangePreset(width){var limits=mintTickLimits(),center=mintContext?mintContext.tick:0,aligned=Math.floor(center/limits.spacing)*limits.spacing;setCustomRange(aligned-width*limits.spacing,aligned+width*limits.spacing,(width===10?"Narrow":width===50?"Balanced":"Wide")+" range centered on "+(mintContext?"the live/reference tick":"tick 0"))}
-    function mintRangeValues(){var tier=mintTier(),partial=($("mintLower").value==="")!==($("mintUpper").value==="");if(partial)throw new Error("Choose both range ticks or select Full range");var lower=usableTick($("mintLower").value,tier.spacing,true),upper=usableTick($("mintUpper").value,tier.spacing,false);if(lower>=upper)throw new Error("Lower tick must be less than upper tick");return {lower:lower,upper:upper}}
+    function applyRangePercent(percent){if(!mintContext)return;var p=Number(percent)/100,limits=mintTickLimits(),base=Math.log(1.0001),aIs0=same(mintContext.tokenA.address,mintContext.token0.address),lowerOffset=(aIs0?Math.log1p(-p):-Math.log1p(p))/base,upperOffset=(aIs0?Math.log1p(p):-Math.log1p(-p))/base,lower=Math.floor((mintContext.tick+lowerOffset)/limits.spacing)*limits.spacing,upper=Math.ceil((mintContext.tick+upperOffset)/limits.spacing)*limits.spacing;setCustomRange(lower,upper,String(percent)+"% around current price",String(percent))}
+    function mintRangeValues(){var tier=mintTier(),partial=($("mintLower").value==="")!==($("mintUpper").value==="");if(partial)throw new Error("Choose a range");var lower=usableTick($("mintLower").value,tier.spacing,true),upper=usableTick($("mintUpper").value,tier.spacing,false);if(lower>=upper)throw new Error("Choose a valid range");return {lower:lower,upper:upper}}
     async function loadMintBalances(){
-      if(state.modalNonce!==mintModalId)return;var nonce=++mintBalanceNonce;mintSnapshot=null;mintContext=null;setMintRatioButtons(false);setMintPriceUi("checking","Reading the selected fee tier, price state, and wallet balances from one PulseChain block…");$("mintBalanceBlock").textContent="Refreshing one PulseChain block snapshot…";
+      if(state.modalNonce!==mintModalId)return;var nonce=++mintBalanceNonce;mintSnapshot=null;mintContext=null;setMintRatioButtons(false);setMintPriceUi("checking","Checking pool…");$("mintBalanceBlock").textContent="Refreshing…";
       try{
         var account=state.account;if(!account)throw new Error("Connect a wallet to load position funding balances");var requestedA=E.getAddress($("mintTokenA").value),requestedB=E.getAddress($("mintTokenB").value);if(same(requestedA,requestedB))throw new Error("Choose two different token contracts");
         var tokenA=await loadToken(requestedA,true),tokenB=await loadToken(requestedB,true),useNative=nativeFundingSelected(),snapshot=await readFundingSnapshot([tokenA,tokenB],{nativeWpls:useNative,account:account}),reserve=0n;
         if(useNative){if(snapshot.nativeBalance==null)throw new Error("Could not verify native PLS balance");reserve=nativeGasReserve(NATIVE_MAX_GAS_UNITS,await conservativeFeeData())}
         if(nonce!==mintBalanceNonce||state.modalNonce!==mintModalId)return;tokenA.balance=snapshot.balances.get(tokenA.address.toLowerCase());tokenB.balance=snapshot.balances.get(tokenB.address.toLowerCase());state.nativeBalance=snapshot.nativeBalance;state.balanceBlock=snapshot.block;state.balanceFetchedAt=Date.now();var availableA=useNative&&isWpls(tokenA)?(snapshot.nativeBalance>reserve?snapshot.nativeBalance-reserve:0n):tokenA.balance,availableB=useNative&&isWpls(tokenB)?(snapshot.nativeBalance>reserve?snapshot.nativeBalance-reserve:0n):tokenB.balance;
         function balanceCopy(token,available){var raw=snapshot.balances.get(token.address.toLowerCase());return useNative&&isWpls(token)?"Usable native PLS "+trimUnits(available,18,8)+" · WPLS "+(raw==null?"unavailable":trimUnits(raw,token.decimals,8)):raw==null?"Balance unavailable":trimUnits(raw,token.decimals,8)+" "+token.symbol}
-        $("mintBalanceA").textContent=balanceCopy(tokenA,availableA);$("mintBalanceB").textContent=balanceCopy(tokenB,availableB);$("mintBalanceBlock").textContent="Live at PulseChain block #"+String(snapshot.block)+(useNative?" · gas reserve "+trimUnits(reserve,18,6)+" PLS":"");mintSnapshot=snapshot;renderMintTokenSelectors();if(mintPickerSide)drawMintTokenChoices();
+        $("mintBalanceA").textContent=balanceCopy(tokenA,availableA);$("mintBalanceB").textContent=balanceCopy(tokenB,availableB);$("mintBalanceBlock").textContent="Block #"+formatInteger(snapshot.block);mintSnapshot=snapshot;renderMintTokenSelectors();if(mintPickerSide)drawMintTokenChoices();
         var tier=mintTier(),token0=BigInt(tokenA.address)<BigInt(tokenB.address)?tokenA:tokenB,token1=token0===tokenA?tokenB:tokenA,pool=await contracts.factory.getPool(token0.address,token1.address,tier.fee,{blockTag:snapshot.block}),sqrt=0n,source="initialization price";
         if(pool!==E.ZeroAddress){var slot=await new E.Contract(pool,ABI.pool,readProvider).slot0({blockTag:snapshot.block});sqrt=slot.sqrtPriceX96;if(sqrt>0n)source="current pool price"}
         if(nonce!==mintBalanceNonce||state.modalNonce!==mintModalId)return;
-        if(sqrt===0n&&!$("mintInitialPrice").value){$("mintInitialPrice").disabled=false;setMintPriceUi("needs","No initialized pool exists at "+feeLabel(tier.fee)+". Use the highlighted market reference or enter the deliberate first-pool price to unlock range controls.");$("mintRatioStatus").className="range-context warn";$("mintRatioStatus").textContent="Balances are live. A starting price is required for ratio-aware percentages and concentrated ranges.";configureRange();return}
+        if(sqrt===0n&&!$("mintInitialPrice").value){$("mintInitialPrice").disabled=false;setMintPriceUi("needs","New pool. Set its starting price.");$("mintRatioStatus").className="range-context warn";$("mintRatioStatus").textContent="Set a price to continue.";configureRange();return}
         if(sqrt===0n){sqrt=initialSqrtPrice($("mintInitialPrice").value,tokenA,tokenB,token0,token1);source=market&&market.applied&&marketMatchesInputs(market)&&sameDecimal($("mintInitialPrice").value,market.selectedPrice||market.price)?"accepted DEX market price":"manual initialization price";$("mintInitialPrice").disabled=false}
         else{$("mintInitialPrice").value=priceFromSqrtBPerA(sqrt,tokenA,tokenB,token0,token1);$("mintInitialPrice").disabled=true}
         if(nonce!==mintBalanceNonce||state.modalNonce!==mintModalId)return;var available0=token0===tokenA?availableA:availableB,available1=token1===tokenB?availableB:availableA;if(available0==null||available1==null)throw new Error("Both funding balances must be available for ratio-aware percentage fills");
-        mintContext={tokenA:tokenA,tokenB:tokenB,token0:token0,token1:token1,available0:available0,available1:available1,sqrtPriceX96:sqrt,tick:tickAtSqrtRatio(sqrt),source:source,pool:pool,reserve:reserve,block:snapshot.block};setMintPriceUi(source==="current pool price"?"pool":"ready",source==="current pool price"?"Initialized pool found at block #"+String(snapshot.block)+". Its slot0 price is authoritative; DEX Screener is available only for comparison.":"Starting price accepted. Concentrated presets and ratio-aware funding are now available before simulation.");if(market)drawMarket();$("mintRatioStatus").className="range-context";$("mintRatioStatus").textContent="Ratio source: "+source+" · reference tick "+String(mintContext.tick)+" · percentage fills scale to the limiting live balance. Manager simulation remains authoritative.";if(pendingConcentrated){pendingConcentrated=false;applyRangePreset(50)}else configureRange();updateMintSideChips()
+        mintContext={tokenA:tokenA,tokenB:tokenB,token0:token0,token1:token1,available0:available0,available1:available1,sqrtPriceX96:sqrt,tick:tickAtSqrtRatio(sqrt),source:source,pool:pool,reserve:reserve,block:snapshot.block};setMintPriceUi(source==="current pool price"?"pool":"ready",source==="current pool price"?"Pool price loaded.":"Price ready.");if(market)drawMarket();$("mintRatioStatus").className="range-context";$("mintRatioStatus").textContent="Choose a balance % or enter amounts.";if(/^(75|50|25|10)$/.test(mintRangePreset))applyRangePercent(Number(mintRangePreset));else configureRange();updateMintSideChips()
       }catch(err){if(nonce!==mintBalanceNonce||state.modalNonce!==mintModalId)return;var message=safeError(err),hasPair=$("mintTokenA").value&&$("mintTokenB").value;if(!mintSnapshot){$("mintBalanceA").textContent="Balance unavailable";$("mintBalanceB").textContent="Balance unavailable";$("mintBalanceBlock").textContent=message}else $("mintRatioStatus").textContent=message;$("mintRatioStatus").className="range-context warn";setMintPriceUi(hasPair?"error":"pair",hasPair?message:"Choose Token A and Token B to check the pool and unlock the rest of the flow.");configureRange()}
     }
     async function fillMintPercent(uiSide,percent){
-      try{if(!mintContext)await loadMintBalances();if(!mintContext)throw new Error("Current or initialization price context is unavailable");var range=mintRangeValues(),selectedToken=uiSide===0?mintContext.tokenA:mintContext.tokenB,side0=same(selectedToken.address,mintContext.token0.address)?0:1,allocation=allocateRangePercent(side0,percent,mintContext.available0,mintContext.available1,mintContext.sqrtPriceX96,range.lower,range.upper),amountA=mintContext.token0===mintContext.tokenA?allocation.amount0:allocation.amount1,amountB=mintContext.token1===mintContext.tokenB?allocation.amount1:allocation.amount0;$("mintAmountA").value=E.formatUnits(amountA,mintContext.tokenA.decimals);$("mintAmountB").value=E.formatUnits(amountB,mintContext.tokenB.decimals);mintAutoFilled=true;$("mintFunding").hidden=true;$("mintRatioStatus").className="range-context"+(allocation.mode==="both"?"":" warn");$("mintRatioStatus").textContent=(allocation.mode==="both"?"Paired at the "+mintContext.source+" and chosen range.":allocation.mode==="token0"?"One-sided "+mintContext.token0.symbol+" fill because the reference price is below the chosen range.":"One-sided "+mintContext.token1.symbol+" fill because the reference price is above the chosen range.")+(allocation.limited?" Scaled down by the counterpart live balance.":" Anchored to "+String(percent)+"% of the selected live balance.");toast("Range-aware "+String(percent)+"% funding caps applied","success")}
+      try{if(!mintContext)await loadMintBalances();if(!mintContext)throw new Error("Set a price first");var range=mintRangeValues(),selectedToken=uiSide===0?mintContext.tokenA:mintContext.tokenB,side0=same(selectedToken.address,mintContext.token0.address)?0:1,allocation=allocateRangePercent(side0,percent,mintContext.available0,mintContext.available1,mintContext.sqrtPriceX96,range.lower,range.upper),amountA=mintContext.token0===mintContext.tokenA?allocation.amount0:allocation.amount1,amountB=mintContext.token1===mintContext.tokenB?allocation.amount1:allocation.amount0;$("mintAmountA").value=formatDecimal(E.formatUnits(amountA,mintContext.tokenA.decimals));$("mintAmountB").value=formatDecimal(E.formatUnits(amountB,mintContext.tokenB.decimals));mintAmountAnchor=null;mintAutoFilled=true;$("mintFunding").hidden=true;$("mintRatioStatus").className="range-context"+(allocation.mode==="both"?"":" warn");$("mintRatioStatus").textContent=allocation.mode==="both"?"Amounts updated.":"This range uses one token.";toast("Amounts updated","success")}
       catch(err){toast(safeError(err),"error")}
     }
     function scheduleMintRefresh(){clearTimeout(mintRefreshTimer);mintRefreshTimer=setTimeout(function(){if(state.modalNonce===mintModalId)loadMintBalances()},360)}
     function drawMarket(){
       var target=$("marketPriceStatus");if(!market){target.hidden=true;target.innerHTML="";return}target.hidden=false;
       var a=clampText(market.tokenASymbol,"Token A",16),b=clampText(market.tokenBSymbol,"Token B",16),risk=market.thin;
-      var stateText=mintPriceMode==="pool"?"COMPARISON ONLY":market.applied?"APPLIED TO PRICE FIELD":risk?"CONFIRMATION REQUIRED":"REFERENCE READY";
-      target.innerHTML="<div class='market-card "+(risk?"risk":"")+"'><div class='market-card__head'><strong>"+(risk?"EXTREMELY THIN MARKET REFERENCE":"DEX MARKET REFERENCE")+"</strong><span class='status "+(risk?"out":"")+"'>"+esc(stateText)+"</span></div>"+
-        "<p>1 "+esc(a)+" = "+esc(market.price)+" "+esc(b)+"<br>1 "+esc(b)+" = "+esc(market.inversePrice)+" "+esc(a)+"</p>"+
-        "<small>Source: "+esc(market.dexId)+(market.label?" · "+esc(market.label):"")+" · "+esc(shortAddress(market.pairAddress))+"<br>Liquidity: "+esc(formatUsd(market.liquidityUsd))+" · 24h volume: "+esc(formatUsd(market.volumeH24))+" · 24h trades: "+esc(String(market.tradesH24))+(market.tradesH6===0?" · no trades detected in 6h":"")+"<br>Retrieved "+esc(new Date(market.fetchedAt).toLocaleTimeString())+" · DEX Screener data is a reference, not an oracle. <a href='"+esc(market.url)+"' target='_blank' rel='noopener noreferrer'>Inspect pair ↗</a></small>"+
-        (risk&&!market.applied&&mintPriceMode!=="pool"?"<button type='button' class='primary' id='acceptThinMarket' title='Use thin-market price anyway only after reviewing its depth'><span>Accept thin-market price & unlock range</span><span>→</span></button>":"")+"</div>";
+      var stateText=mintPriceMode==="pool"?"COMPARE":market.applied?"SELECTED":risk?"THIN MARKET":"READY";
+      target.innerHTML="<div class='market-card "+(risk?"risk":"")+"'><div class='market-card__head'><strong>"+(risk?"THIN MARKET":"MARKET PRICE")+"</strong><span class='status "+(risk?"out":"")+"'>"+esc(stateText)+"</span></div>"+
+        "<p>1 "+esc(a)+" = "+esc(formatDecimal(market.price))+" "+esc(b)+"</p>"+
+        "<small>Liquidity "+esc(formatUsd(market.liquidityUsd))+" · Volume "+esc(formatUsd(market.volumeH24))+" · Trades "+esc(formatInteger(market.tradesH24))+" · <a href='"+esc(market.url)+"' target='_blank' rel='noopener noreferrer'>View source ↗</a></small>"+
+        (risk&&!market.applied&&mintPriceMode!=="pool"?"<button type='button' class='primary' id='acceptThinMarket' title='Review this low-liquidity market before using its price'><span>Use this price</span><span>→</span></button>":"")+"</div>";
       if($("acceptThinMarket"))$("acceptThinMarket").addEventListener("click",function(){
         if(!marketMatchesInputs(market)){market=null;drawMarket();return toast("Token addresses changed. Fetch a new market reference.","error")}
-        invalidateMintContext("Market price changed. Choose a percentage again after the refreshed ratio loads.");market.applied=true;market.selectedPrice=market.price;$("mintInitialPrice").value=market.price;drawMarket();loadMintBalances();toast("Thin-market reference copied to the price field. No transaction was sent.","success")
+        invalidateMintContext("Market price changed. Refreshing…");market.applied=true;market.selectedPrice=market.price;$("mintInitialPrice").value=market.price;drawMarket();loadMintBalances();toast("Market price selected","success")
       })
     }
     $("mintTokenSelectA").addEventListener("click",function(){openMintTokenDrawer("A")});$("mintTokenSelectB").addEventListener("click",function(){openMintTokenDrawer("B")});$("mintTokenDrawerClose").addEventListener("click",closeMintTokenDrawer);$("mintTokenSearch").addEventListener("input",drawMintTokenChoices);$("mintTokenDrawer").addEventListener("keydown",function(event){if(event.key==="Escape"){event.preventDefault();event.stopPropagation();closeMintTokenDrawer()}});
     $("mintImportCustomToken").addEventListener("click",async function(){if(mintImportBusy)return;var button=this,side=mintPickerSide,request=++mintPickerNonce,modal=mintModalId;mintImportBusy=request;setBusy(button,true,"Verifying…");try{if(!side)throw new Error("Choose Token A or Token B first");var token=await loadToken($("mintCustomTokenAddress").value,true);if(state.modalNonce!==modal||request!==mintPickerNonce||mintImportBusy!==request||mintPickerSide!==side)return;await refreshBalances();if(state.modalNonce!==modal||request!==mintPickerNonce||mintImportBusy!==request||mintPickerSide!==side)return;var choice=knownAssetChoices().find(function(item){return same(item.token.address,token.address)&&(!isWpls(token)||item.nativeMode)});applyMintTokenSelection(side,choice||{token:token,nativeMode:false,symbol:token.symbol,name:token.name,balance:token.balance,balanceLabel:"PRC-20",key:token.address});toast(token.symbol+" added to both LP and Swap selectors","success")}catch(err){if(state.modalNonce===modal&&request===mintPickerNonce&&mintImportBusy===request)toast(safeError(err),"error")}finally{if(state.modalNonce===modal&&request===mintPickerNonce&&mintImportBusy===request&&document.body.contains(button)){mintImportBusy=0;if(button.dataset.old)setBusy(button,false)}}});
     document.querySelectorAll("[data-mint-percent]").forEach(function(button){button.addEventListener("click",function(){fillMintPercent(Number(button.dataset.side),Number(button.dataset.mintPercent))})});
-    $("mintRefreshBalances").addEventListener("click",function(){clearMintAutoAmounts("Live data refreshed. Choose a percentage again to derive caps from the new snapshot.");loadMintBalances()});
-    $("mintFullStrategy").addEventListener("click",function(){pendingConcentrated=false;$("mintFullRange").checked=true;mintRangeDirty=false;clearMintAutoAmounts("Range changed. Choose a percentage again to recalculate both caps.");configureRange()});
-    $("mintConcentratedStrategy").addEventListener("click",function(){if(mintContext){$("mintFullRange").checked=false;applyRangePreset(50);return}pendingConcentrated=true;syncMintRangeStrategy();var panel=$("mintPricePanel");panel.classList.remove("attention");void panel.offsetWidth;panel.classList.add("attention");$("mintRangeGate").textContent="Concentrated intent saved. Apply a market or manual price above; Finvesta will open a Balanced range automatically.";$("useMarketPrice").focus();toast("Choose a price source to unlock the concentrated range","success")});
-    document.querySelectorAll("[data-range-width]").forEach(function(button){button.addEventListener("click",function(){applyRangePreset(Number(button.dataset.rangeWidth))})});
+    $("mintRefreshBalances").addEventListener("click",function(){clearMintAutoAmounts("Refreshed. Choose a balance % again.");loadMintBalances()});
+    $("mintFullStrategy").addEventListener("click",function(){mintRangePreset="full";$("mintFullRange").checked=true;mintRangeDirty=false;clearMintAutoAmounts("Range changed. Choose a balance % again.");configureRange()});
+    document.querySelectorAll("[data-range-percent]").forEach(function(button){button.addEventListener("click",function(){applyRangePercent(Number(button.dataset.rangePercent))})});
     $("mintLowerSlider").addEventListener("input",function(){var limits=mintTickLimits(),upper=Number($("mintUpperSlider").value),lower=Math.min(Number(this.value),upper-limits.spacing);setCustomRange(lower,upper,"Custom slider range")});
     $("mintUpperSlider").addEventListener("input",function(){var limits=mintTickLimits(),lower=Number($("mintLowerSlider").value),upper=Math.max(Number(this.value),lower+limits.spacing);setCustomRange(lower,upper,"Custom slider range")});
     ["mintLower","mintUpper"].forEach(function(id){$(id).addEventListener("input",function(){clearMintAutoAmounts("Range changed. Choose a percentage again to recalculate both caps.");mintRangeDirty=true;configureRange()})});
     $("mintFee").addEventListener("change",function(){
-      cancelMintMarketRequest();if(market){market=null;drawMarket()}if($("mintInitialPrice").disabled)$("mintInitialPrice").value="";$("mintInitialPrice").disabled=false;invalidateMintContext("Fee tier changed. Pool state, live ratio, and range funding are refreshing.");if($("mintFullRange").checked)configureRange();else{var lower=Number($("mintLower").value),upper=Number($("mintUpper").value);if(Number.isFinite(lower)&&Number.isFinite(upper))setCustomRange(lower,upper,"Range realigned to the new fee-tier spacing");else{mintContext=null;$("mintFullRange").checked=true;configureRange()}toast("Range aligned to the selected fee tier","success")}loadMintBalances()
+      cancelMintMarketRequest();if(market){market=null;drawMarket()}if($("mintInitialPrice").disabled)$("mintInitialPrice").value="";$("mintInitialPrice").disabled=false;invalidateMintContext("Fee changed. Refreshing…");if($("mintFullRange").checked)configureRange();loadMintBalances()
     });
-    ["mintTokenA","mintTokenB"].forEach(function(id){$(id).addEventListener("input",function(){invalidateMintContext("Token pair changed. Live balances and ratio are refreshing.");if(market&&!marketMatchesInputs(market)){market=null;drawMarket()}syncNativeFundingChoice();$("mintFunding").hidden=true;scheduleMintRefresh()})});
-    $("useNativePls").addEventListener("change",function(){invalidateMintContext("Funding asset changed. Live spendable balance is refreshing.");$("mintFunding").hidden=true;renderMintTokenSelectors();if(mintPickerSide)drawMintTokenChoices();loadMintBalances()});syncNativeFundingChoice();
+    ["mintTokenA","mintTokenB"].forEach(function(id){$(id).addEventListener("input",function(){invalidateMintContext("Pair changed. Refreshing…");if(market&&!marketMatchesInputs(market)){market=null;drawMarket()}syncNativeFundingChoice();$("mintFunding").hidden=true;scheduleMintRefresh()})});
+    $("useNativePls").addEventListener("change",function(){invalidateMintContext("Funding changed. Refreshing…");$("mintFunding").hidden=true;renderMintTokenSelectors();if(mintPickerSide)drawMintTokenChoices();loadMintBalances()});syncNativeFundingChoice();
     $("mintInitialPrice").addEventListener("input",function(){
-      cancelMintMarketRequest();invalidateMintContext("Initialization price changed. Ratio-aware percentages are refreshing.");updateMintPriceReadback();if(market&&market.applied){try{if(!sameDecimal(this.value,market.selectedPrice||market.price)){market.applied=false;drawMarket()}}catch(_){market.applied=false;drawMarket()}}setMintPriceUi(this.value?"checking":"needs",this.value?"Validating the manual price and resolving its reference tick…":"Enter a deliberate starting price or use the recommended market reference.");scheduleMintRefresh()
+      cancelMintMarketRequest();invalidateMintContext("Price changed. Refreshing…");updateMintPriceReadback();if(market&&market.applied){try{if(!sameDecimal(this.value,market.selectedPrice||market.price)){market.applied=false;drawMarket()}}catch(_){market.applied=false;drawMarket()}}setMintPriceUi(this.value?"checking":"needs",this.value?"Checking price…":"Enter or use market price.");scheduleMintRefresh()
     });
     $("useMarketPrice").addEventListener("click",async function(){
-      if(mintMarketBusy)return;var btn=this,request=++mintMarketNonce,modal=mintModalId;mintMarketBusy=request;setBusy(btn,true,"Finding exact-address market…");
+      if(mintMarketBusy)return;var btn=this,request=++mintMarketNonce,modal=mintModalId;mintMarketBusy=request;setBusy(btn,true,"Finding market…");
       try{
         var requestedA=E.getAddress($("mintTokenA").value),requestedB=E.getAddress($("mintTokenB").value);if(same(requestedA,requestedB))throw new Error("Choose two different token contracts");
         var tokenA=await loadToken(requestedA,true),tokenB=await loadToken(requestedB,true),reference=await findDexMarketReference(tokenA,tokenB);
         if(state.modalNonce!==modal||request!==mintMarketNonce)return;if(!same(requestedA,$("mintTokenA").value)||!same(requestedB,$("mintTokenB").value))throw new Error("Token addresses changed while the market reference was loading");
-        var comparisonOnly=mintPriceMode==="pool";if(!comparisonOnly)invalidateMintContext("Market price changed. Choose a percentage again after the refreshed ratio loads.");market=Object.assign({},reference,{tokenA:tokenA.address,tokenB:tokenB.address,tokenASymbol:tokenA.symbol,tokenBSymbol:tokenB.symbol,applied:!comparisonOnly&&!reference.thin});
-        if(market.applied){market.selectedPrice=market.price;$("mintInitialPrice").value=market.price;toast("Market reference applied. Range and ratio controls are unlocking now.","success")}else if(reference.thin&&!comparisonOnly)setMintPriceUi("review","This exact-address market is extremely thin. Review its depth and explicitly accept it, or enter a manual price.");drawMarket();if(comparisonOnly)setMintPriceUi("pool","The initialized pool price remains authoritative. DEX Screener is shown only as a market comparison.");else loadMintBalances()
+        var comparisonOnly=mintPriceMode==="pool";if(!comparisonOnly)invalidateMintContext("Market price selected. Refreshing…");market=Object.assign({},reference,{tokenA:tokenA.address,tokenB:tokenB.address,tokenASymbol:tokenA.symbol,tokenBSymbol:tokenB.symbol,applied:!comparisonOnly&&!reference.thin});
+        if(market.applied){market.selectedPrice=market.price;$("mintInitialPrice").value=market.price;toast("Market price selected","success")}else if(reference.thin&&!comparisonOnly)setMintPriceUi("review","Thin market. Review before using this price.");drawMarket();if(comparisonOnly)setMintPriceUi("pool","Pool price loaded.");else loadMintBalances()
       }catch(err){if(state.modalNonce===modal&&request===mintMarketNonce&&mintMarketBusy===request){toast(safeError(err),"error");setMintPriceUi("error",safeError(err)+" Enter the starting price manually to continue.")}}finally{if(state.modalNonce===modal&&request===mintMarketNonce&&mintMarketBusy===request&&document.body.contains(btn)){var status=mintPriceMode,detail=$("mintPriceGuide").textContent;mintMarketBusy=0;if(btn.dataset.old)setBusy(btn,false);setMintPriceUi(status,detail)}}
     });
-    ["mintAmountA","mintAmountB"].forEach(function(id){$(id).addEventListener("input",function(){mintAutoFilled=false})});renderMintTokenSelectors();setMintRatioButtons(false);setMintPresetButtons(false);configureRange();syncMintRangeStrategy();drawMarket();updateMintPriceReadback();if($("mintTokenA").value&&$("mintTokenB").value){setMintPriceUi("checking","Checking this pair and fee tier for an initialized pool…");scheduleMintRefresh()}else setMintPriceUi("pair","Choose Token A and Token B to check the pool and unlock pricing, range, and ratio controls.");
+    ["A","B"].forEach(function(side){var input=$("mintAmount"+side);input.addEventListener("input",function(){syncMintManualAmounts(side)});input.addEventListener("blur",function(){var token=mintTokenForSide(side),clean=cleanDecimalInput(this.value,token?token.decimals:18);if(clean&&clean!==".")this.value=formatDecimal(clean)})});renderMintTokenSelectors();setMintRatioButtons(false);setMintPresetButtons(false);configureRange();syncMintRangeStrategy();drawMarket();updateMintPriceReadback();if($("mintTokenA").value&&$("mintTokenB").value){setMintPriceUi("checking","Checking pool…");scheduleMintRefresh()}else setMintPriceUi("pair","Choose two tokens.");
 
     $("prepareMint").addEventListener("click",async function(){
       if(mintPrepareInFlight)return;
       mintPrepareInFlight=true;
       var btn=this,prepareRequest=++mintPrepareNonce,resumeLabel=btn.dataset.resumeLabel;delete btn.dataset.resumeLabel;
-      var form={tokenA:$("mintTokenA").value,tokenB:$("mintTokenB").value,fee:$("mintFee").value,lower:$("mintLower").value,upper:$("mintUpper").value,amountA:$("mintAmountA").value,amountB:$("mintAmountB").value,price:$("mintInitialPrice").value,market:market?Object.assign({},market):null,useNativePls:nativeFundingSelected()},account=state.account;
+      var form={tokenA:$("mintTokenA").value,tokenB:$("mintTokenB").value,fee:$("mintFee").value,lower:$("mintLower").value,upper:$("mintUpper").value,rangePercent:mintRangePreset,amountA:$("mintAmountA").value,amountB:$("mintAmountB").value,price:$("mintInitialPrice").value,market:market?Object.assign({},market):null,useNativePls:nativeFundingSelected()},account=state.account;
       function ownsPrepare(){return state.modalNonce===mintModalId&&prepareRequest===mintPrepareNonce&&document.body.contains(btn)}
       function mintIntentCurrent(){return ownsPrepare()&&same(state.account,account)&&form.tokenA===$("mintTokenA").value&&form.tokenB===$("mintTokenB").value&&form.fee===$("mintFee").value&&form.lower===$("mintLower").value&&form.upper===$("mintUpper").value&&form.amountA===$("mintAmountA").value&&form.amountB===$("mintAmountB").value&&form.price===$("mintInitialPrice").value&&form.useNativePls===nativeFundingSelected()}
       function assertPrepareCurrent(){if(!ownsPrepare())return false;if(!mintIntentCurrent())throw new Error("Position inputs changed during validation. Review the refreshed form and continue again.");return true}
@@ -2035,12 +2228,12 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
         if(!tier)throw new Error("Factory fee tier is not currently enabled");
         var extra=await contracts.factory.feeAmountTickSpacingExtraInfo(fee);if(!assertPrepareCurrent())return;if(!extra.enabled)throw new Error("Factory fee tier is no longer enabled");
         var token0=BigInt(tokenA.address)<BigInt(tokenB.address)?tokenA:tokenB,token1=token0===tokenA?tokenB:tokenA;
-        if((form.lower==="")!==(form.upper===""))throw new Error("Choose both range ticks or select Full range");var lower=usableTick(form.lower,tier.spacing,true),upper=usableTick(form.upper,tier.spacing,false);if(lower>=upper)throw new Error("Lower tick must be less than upper tick");
+        if((form.lower==="")!==(form.upper===""))throw new Error("Choose a range");var lower=usableTick(form.lower,tier.spacing,true),upper=usableTick(form.upper,tier.spacing,false);if(lower>=upper)throw new Error("Choose a valid range");
         var amountA=parseAmount(form.amountA,tokenA.decimals),amountB=parseAmount(form.amountB,tokenB.decimals);if(amountA===0n&&amountB===0n)throw new Error("Enter at least one desired token amount");
         var pool=await contracts.factory.getPool(token0.address,token1.address,fee);if(!assertPrepareCurrent())return;var poolWasAbsent=pool===E.ZeroAddress,isNew=poolWasAbsent,sqrt=0n,marketAtReview=null,marketMove=0n,existingPrice="",existingTick=null;
         if(!poolWasAbsent){var existingSlot=await new E.Contract(pool,ABI.pool,readProvider).slot0();if(!assertPrepareCurrent())return;if(existingSlot.sqrtPriceX96===0n)isNew=true;else{existingPrice=priceFromSqrtBPerA(existingSlot.sqrtPriceX96,tokenA,tokenB,token0,token1);existingTick=Number(existingSlot.tick)}}
         if(isNew){
-          if(!form.price)throw new Error("This pair is not initialized. Enter the deliberate initial Token B per Token A price.");sqrt=initialSqrtPrice(form.price,tokenA,tokenB,token0,token1);var initialTick=tickAtSqrtRatio(sqrt);if(initialTick<lower||initialTick>=upper)throw new Error("The first position range must contain the initialization tick "+String(initialTick)+" so both token minima can protect the reviewed price");
+          if(!form.price)throw new Error("This is a new pool. Enter its starting price.");sqrt=initialSqrtPrice(form.price,tokenA,tokenB,token0,token1);var initialTick=tickAtSqrtRatio(sqrt);if(initialTick<lower||initialTick>=upper)throw new Error("The selected range must include the starting price");
           if(form.market&&form.market.applied&&same(form.market.tokenA,tokenA.address)&&same(form.market.tokenB,tokenB.address)&&sameDecimal(form.price,form.market.selectedPrice||form.market.price)){
             var freshMarket=await refreshDexMarketReference(form.market,tokenA,tokenB);if(!assertPrepareCurrent())return;marketMove=decimalDeviationBps(form.price,freshMarket.price);
             if(marketMove>BigInt(DEX.maxDeviationBps))throw new Error("Market reference moved more than "+String(DEX.maxDeviationBps/100)+"% from the selected price. Fetch and review it again.");
@@ -2066,7 +2259,7 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
         var calls=(createData?[createData]:[]).concat([pm.interface.encodeFunctionData("mint",[protectedMint])]).concat(refundData?[refundData]:[]),finalResults=await pm.multicall.staticCall(calls,txOverrides);if(!assertPrepareCurrent())return;var finalDecoded=pm.interface.decodeFunctionResult("mint",finalResults[mintIndex]);if(finalDecoded.amount0!==used0||finalDecoded.amount1!==used1||finalDecoded.liquidity!==decoded.liquidity)throw new Error("Pool price or deposit consumption changed during protected simulation");
         if(useNative){var gasCheck=await Promise.all([pm.multicall.estimateGas(calls,txOverrides),conservativeFeeData()]);if(!assertPrepareCurrent())return;fundingPlan.gasReserve=nativeGasReserve(gasCheck[0],gasCheck[1]);renderFundingSnapshot("mintFunding",funding,fundingItems,fundingPlan);assertFunding(funding,fundingItems,fundingPlan)}
         var usedWpls=useNative?(same(token0.address,ADDR.wpls)?finalDecoded.amount0:finalDecoded.amount1):0n,nativeRefund=useNative?nativeValue-usedWpls:0n;if(nativeRefund<0n)throw new Error("Simulation attempted to wrap more WPLS than the native PLS cap");
-        var reviewRows=[["On-chain action",isNew?"Initialize reviewed pool price + mint position NFT":"Mint position NFT into the existing pool"],["Pair",token0.symbol+" / "+token1.symbol],["Token ordering",shortAddress(token0.address)+" < "+shortAddress(token1.address),"mono"],["Pool",isNew?(poolWasAbsent?"NEW · initialized in the mint multicall":"EXISTS · currently uninitialized"):pool,"mono"],[isNew?"Initial price":"Current pool price",isNew?form.price+" "+tokenB.symbol+" per "+tokenA.symbol:existingPrice+" "+tokenB.symbol+" per "+tokenA.symbol],["Price source",isNew?(marketAtReview?"DEX Screener reference · "+marketAtReview.dexId+(marketAtReview.label?" · "+marketAtReview.label:""):"Manual input"):"Existing pool slot0 · tick "+String(existingTick)],["Fee / ticks",feeLabel(fee)+" · "+String(lower)+" → "+String(upper)],["Funding route",useNative?"Native PLS → WPLS 1:1 · atomic refund":"PRC-20 balances and allowances"],["Desired amounts","Caps only · simulation determines consumption"],["Expected "+token0.symbol,trimUnits(finalDecoded.amount0,token0.decimals,8)],["Expected "+token1.symbol,trimUnits(finalDecoded.amount1,token1.decimals,8)],["Minimum "+token0.symbol,trimUnits(min0,token0.decimals,8)],["Minimum "+token1.symbol,trimUnits(min1,token1.decimals,8)],["Recipient",account,"mono"]];
+        var rangeLabel=form.rangePercent==="full"?"Full range":/^(75|50|25|10)$/.test(form.rangePercent)?form.rangePercent+"% around price":"Custom range",reviewRows=[["Action",isNew?"Create pool and position":"Create position"],["Pair",token0.symbol+" / "+token1.symbol],["Pool",isNew?"New pool":pool,"mono"],[isNew?"Starting price":"Pool price",formatDecimal(isNew?form.price:existingPrice)+" "+tokenB.symbol+" per "+tokenA.symbol],["Price source",isNew?(marketAtReview?"DEX Screener · "+marketAtReview.dexId:"Manual"):"On-chain pool"],["Fee / range",feeLabel(fee)+" · "+rangeLabel],["Funding",useNative?"PLS → WPLS automatically":"Token balances"],["Expected "+token0.symbol,trimUnits(finalDecoded.amount0,token0.decimals,8)],["Expected "+token1.symbol,trimUnits(finalDecoded.amount1,token1.decimals,8)],["Minimum "+token0.symbol,trimUnits(min0,token0.decimals,8)],["Minimum "+token1.symbol,trimUnits(min1,token1.decimals,8)],["Recipient",account,"mono"]];
         if(useNative){reviewRows.splice(8,0,["Native PLS sent · maximum",trimUnits(nativeValue,18,12)+" PLS"],["Simulated WPLS wrapped",trimUnits(usedWpls,18,12)+" WPLS"],["Simulated residual PLS refund",trimUnits(nativeRefund,18,12)+" PLS"],["Estimated gas reserve · 20% buffer",trimUnits(fundingPlan.gasReserve,18,12)+" PLS"],["Position asset / withdrawals","WPLS"]);if(managerNativeBefore>0n)reviewRows.splice(13,0,["Manager PLS already present",trimUnits(managerNativeBefore,18,12)+" PLS · refund may be higher"])}
         if(marketAtReview){reviewRows.splice(5,0,["Market pair",marketAtReview.pairAddress,"mono"],["Market depth",formatUsd(marketAtReview.liquidityUsd)+" liquidity · "+formatUsd(marketAtReview.volumeH24)+" 24h volume"+(marketAtReview.thin?" · EXTREMELY THIN":"")],["Reference movement",(Number(marketMove)/100).toFixed(2)+"% vs selected price"])}
         if(!assertPrepareCurrent())return;mintPrepareInFlight=false;closeModal();
@@ -2109,7 +2302,7 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
     var account=state.account;try{await assertPositionOwner(p,account)}catch(err){return toast(safeError(err),"error")}
     reviewTransaction({
       kicker:"Irreversible NFT cleanup",title:"Burn empty position",
-      rows:[["Position","#"+String(p.tokenId)],["Liquidity","0"],["Recorded owed","0 / 0"],["Owner",account,"mono"],["Position manager",ADDR.positionManager,"mono"]],
+      rows:[["Position","#"+formatInteger(p.tokenId)],["Liquidity","0"],["Recorded owed","0 / 0"],["Owner",account,"mono"],["Position manager",ADDR.positionManager,"mono"]],
       confirmLabel:"Burn in wallet",successMessage:"Empty position NFT burned",
       execute:async function(progress){if(!same(state.account,account))throw new Error("Connected account changed after review");await assertPositionOwner(p,account);var s=await getSigner();if(!same(await s.getAddress(),account))throw new Error("Connected signer changed after review");var m=new E.Contract(ADDR.positionManager,ABI.manager,s);await m.burn.staticCall(p.tokenId);await m.burn.estimateGas(p.tokenId);progress("wallet");var tx=await m.burn(p.tokenId);progress("pending",tx.hash);return awaitReceipt(tx)},
       onSuccess:async function(){state.selectedPosition=null;await loadPositions()}
@@ -2163,27 +2356,38 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
     });
     window.addEventListener("hashchange",function(){navigate(location.hash.slice(1)||"swap",true)})
   }
-  async function restoreIntent(){
+  async function restoreIntent(onProgress){
     try{
       var saved=JSON.parse(localStorage.getItem("finvesta.v3.settings")||"null");
       if(saved&&Number.isInteger(saved.slippageBps)&&saved.slippageBps>=1&&saved.slippageBps<=500&&Number.isInteger(saved.deadlineMinutes)&&saved.deadlineMinutes>=1&&saved.deadlineMinutes<=60)state.settings={slippageBps:saved.slippageBps,deadlineMinutes:saved.deadlineMinutes,unlimitedApproval:Boolean(saved.unlimitedApproval)}
     }catch(_){}
-    await restoreTokens();
+    await verifyStartupChain();var report=await restoreTokens(onProgress);
     var q=new URLSearchParams(location.search),from=q.get("from"),to=q.get("to"),amount=q.get("amount"),settle=q.get("settle");
     state.swapNativePls=settle!=="wpls";
-    try{state.from=from?await loadToken(from,true):state.tokens.get(ADDR.wpls.toLowerCase())||null}catch(err){toast("Input token URL was ignored: "+safeError(err),"error")}
+    try{state.from=from?await loadToken(from,true):state.tokens.get(ADDR.wpls.toLowerCase())||null}catch(err){state.from=state.tokens.get(ADDR.wpls.toLowerCase())||null;toast("Input token URL was ignored; native PLS was restored instead. "+safeError(err),"error")}
     try{state.to=to?await loadToken(to,true):null}catch(err){toast("Output token URL was ignored: "+safeError(err),"error")}
     if(amount)$("amountIn").value=cleanDecimalInput(amount,state.from?state.from.decimals:18);
-    renderTokenSides();refreshSwapState();if(state.from&&state.to)await discoverBestPool()
+    var choices=knownAssetChoices(),missing=DEFAULT_TOKEN_ADDRESSES.filter(function(address){return !state.tokens.has(address.toLowerCase())});
+    if(missing.length)throw new Error("The required asset registry is incomplete. Missing "+missing.map(shortAddress).join(", "));
+    if(!choices.some(function(choice){return choice.key==="native-pls"&&choice.symbol==="PLS"}))throw new Error("The native PLS settlement choice did not initialize");
+    if(!state.from)state.from=state.tokens.get(ADDR.wpls.toLowerCase())||null;renderTokenSides();refreshSwapState();
+    if(!from&&settle!=="wpls"&&(!isWpls(state.from)||!state.swapNativePls||$("fromTokenSymbol").textContent!=="PLS"))throw new Error("Native PLS did not reach the rendered default state");
+    return report
+  }
+  async function runStartup(){
+    if(startupState.inFlight)return;startupState.inFlight=true;startupState.startedAt=Date.now();resetPreloader();
+    try{
+      var report=await restoreIntent(updateStartupProgress);await releasePreloader(report);
+      if(state.from&&state.to)discoverBestPool();else if($("view-protocol").classList.contains("active"))loadProtocol();
+      setTimeout(function(){window.dispatchEvent(new Event("eip6963:requestProvider"))},350)
+    }catch(err){console.error(err);if(!state.rpcOk)setStartupStep("preloaderRpcStep","has-error","RPC unavailable");failPreloader(err)}
+    finally{startupState.inFlight=false}
   }
   async function init(){
     bindUi();renderWallet();renderPositions();renderRangeBars($("rangeBars"));renderAdminAccess(false);
-    navigate(location.hash.slice(1)||"swap",true);
-    await Promise.allSettled([loadProtocol(),restoreIntent()]);
-    renderTokenSides();refreshSwapState();
-    setTimeout(function(){window.dispatchEvent(new Event("eip6963:requestProvider"))},350)
+    navigate(location.hash.slice(1)||"swap",true);$("preloaderRetry").addEventListener("click",runStartup);await runStartup()
   }
-  init().catch(function(err){console.error(err);toast(safeError(err),"error")});
+  init().catch(function(err){console.error(err);failPreloader(err)});
   })();
   </script>
 </body>
