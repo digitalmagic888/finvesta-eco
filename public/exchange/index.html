@@ -160,8 +160,28 @@
     .empty-state div{max-width:420px}
     .empty-state h3{margin:12px 0 8px;color:var(--text);font:900 18px/1.1 var(--display)}
     .empty-state p{margin:0 0 18px;font-size:10px;line-height:1.6}
-    .position-card{padding:18px;display:grid;grid-template-columns:minmax(180px,1.2fr) minmax(180px,1fr) minmax(100px,.6fr) auto;gap:16px;align-items:center;border:1px solid rgba(101,219,232,.12);border-radius:6px;background:rgba(13,18,21,.78);cursor:pointer}
+    .position-card{overflow:hidden;border:1px solid rgba(101,219,232,.12);border-radius:6px;background:rgba(13,18,21,.78);transition:border-color .22s ease,background .22s ease,box-shadow .22s ease,transform .22s ease}
     .position-card:hover,.position-card.active{border-color:rgba(0,246,255,.38);background:rgba(0,246,255,.035);transform:translateY(-1px)}
+    .position-card.expanded{border-color:rgba(0,246,255,.58);background:linear-gradient(145deg,rgba(0,246,255,.065),rgba(13,18,21,.96));box-shadow:0 16px 42px rgba(0,246,255,.09),inset 0 0 0 1px rgba(0,246,255,.05)}
+    .position-card__summary{padding:18px;display:grid;grid-template-columns:minmax(180px,1.2fr) minmax(180px,1fr) minmax(100px,.6fr) auto;gap:16px;align-items:center;cursor:pointer}
+    .position-card__manage{min-width:91px;display:flex;align-items:center;justify-content:center;gap:8px}
+    .position-card__manage b{color:var(--cyan);font-size:12px;transition:transform .2s ease}
+    .position-card.expanded .position-card__manage{border-color:rgba(183,255,125,.42);background:rgba(183,255,125,.06);color:var(--green)}
+    .position-card.expanded .position-card__manage b{transform:rotate(180deg)}
+    .position-card__drawer{padding:17px 18px 18px;border-top:1px solid rgba(0,246,255,.17);background:linear-gradient(90deg,rgba(0,246,255,.045),rgba(183,255,125,.025));animation:positionDrawerIn .28s ease both}
+    .position-card__drawer-head{display:flex;align-items:center;justify-content:space-between;gap:14px}
+    .position-card__drawer-head>span:first-child{display:grid;gap:4px}
+    .position-card__drawer-head small{color:var(--cyan);font-size:7px;font-weight:1000;letter-spacing:.14em}
+    .position-card__drawer-head strong{font:900 13px/1.15 var(--display)}
+    .position-card__quick-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:13px}
+    .position-card__quick-stats>div{min-width:0;padding:10px;border:1px solid rgba(101,219,232,.11);border-radius:4px;background:rgba(7,12,15,.58);display:grid;gap:5px}
+    .position-card__quick-stats span{color:#718995;font-size:7px;letter-spacing:.08em}
+    .position-card__quick-stats strong{font-size:9px;overflow-wrap:anywhere}
+    .position-card__drawer-actions{display:grid;grid-template-columns:1.15fr 1fr 1fr;gap:7px;margin-top:10px}
+    .position-card__drawer-actions .primary{width:auto;min-height:44px;margin:0;padding-inline:13px;font-size:10px}
+    .position-card__drawer-actions .secondary{width:100%;min-height:44px}
+    .position-card__drawer-actions .span-all{grid-column:1/-1}
+    .position-card__drawer-note{margin:9px 0 0;color:#78919b;font-size:8px;line-height:1.45}
     .pair{display:flex;align-items:center;gap:11px}
     .pair-marks{display:flex}
     .pair-marks .token-mark+ .token-mark{margin-left:-9px}
@@ -505,14 +525,15 @@
     @keyframes preloadPulse{to{transform:scale(1.35);opacity:.6}}
     @keyframes positionCtaGlow{to{box-shadow:0 0 0 1px rgba(0,246,255,.25),0 17px 42px rgba(0,246,255,.3),0 0 45px rgba(183,255,125,.17)}}
     @keyframes positionCtaSweep{0%,35%{transform:translateX(-115%)}75%,100%{transform:translateX(115%)}}
+    @keyframes positionDrawerIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
     @keyframes route{from{left:0}to{left:calc(100% - 7px)}}
     @keyframes shimmer{to{transform:translateX(100%)}}
     @keyframes toastIn{from{opacity:0;transform:translateY(8px)}}
     @media(max-width:900px){
-      .nav{display:none}.status-chip{display:none}.hero{grid-template-columns:1fr;gap:24px;padding-top:56px}.grid-2,.positions-layout{grid-template-columns:1fr}.position-detail{position:static}.protocol-grid{grid-template-columns:1fr}.journey-grid{grid-template-columns:1fr;gap:20px}.journey-node__track{grid-template-columns:auto 1fr}.journey-node p{max-width:none}.position-card{grid-template-columns:1fr 1fr}.summary-grid{grid-template-columns:1fr 1fr}.mobile-nav{position:fixed;display:grid;grid-template-columns:repeat(3,1fr);left:0;right:0;bottom:0;z-index:60;padding:8px 12px calc(8px + env(safe-area-inset-bottom));border-top:1px solid var(--line2);background:rgba(7,10,12,.94);backdrop-filter:blur(16px)}.mobile-nav button{min-height:43px;border:0;border-radius:4px;background:transparent;color:#77909b;font-size:9px;font-weight:900}.mobile-nav button.active{background:rgba(0,246,255,.07);color:var(--cyan)}.footer{padding-bottom:120px}
+      .nav{display:none}.status-chip{display:none}.hero{grid-template-columns:1fr;gap:24px;padding-top:56px}.grid-2,.positions-layout{grid-template-columns:1fr}.position-detail{position:static}.protocol-grid{grid-template-columns:1fr}.journey-grid{grid-template-columns:1fr;gap:20px}.journey-node__track{grid-template-columns:auto 1fr}.journey-node p{max-width:none}.position-card__summary{grid-template-columns:1fr 1fr}.summary-grid{grid-template-columns:1fr 1fr}.mobile-nav{position:fixed;display:grid;grid-template-columns:repeat(3,1fr);left:0;right:0;bottom:0;z-index:60;padding:8px 12px calc(8px + env(safe-area-inset-bottom));border-top:1px solid var(--line2);background:rgba(7,10,12,.94);backdrop-filter:blur(16px)}.mobile-nav button{min-height:43px;border:0;border-radius:4px;background:transparent;color:#77909b;font-size:9px;font-weight:900}.mobile-nav button.active{background:rgba(0,246,255,.07);color:var(--cyan)}.footer{padding-bottom:120px}
     }
     @media(max-width:620px){
-      .shell{width:min(100% - 24px,1220px)}.topbar__in{height:62px;gap:10px}.brand__copy{display:none}.brand__mark{width:37px;height:37px}.wallet-button{max-width:150px;padding:0 10px}.hero{padding-top:42px}.hero h1{font-size:42px}.hero__copy{font-size:12px}.panel-pad{padding:17px}.panel-head h2{font-size:21px}.pill{display:none}.token-select{min-width:132px}.amount-row input,.amount-row output{font-size:32px}.route-map{grid-template-columns:50px 1fr 42px 1fr 50px}.route-core{width:42px;height:42px}.metric-grid{grid-template-columns:1fr}.metric-grid div{border-right:0;border-bottom:1px solid rgba(101,219,232,.1)}.section-head{align-items:flex-start;flex-direction:column}.summary-grid{grid-template-columns:1fr}.position-card{grid-template-columns:1fr}.position-card .secondary{width:100%}.field-row,.funding-grid,.field-action-row,.mint-token-grid,.admin-grid{grid-template-columns:1fr}.field-label{align-items:flex-start;flex-direction:column}.field-percentages{justify-content:flex-start}.field-percent,.range-presets button{min-height:40px;padding-inline:11px}.balance-actions button{min-height:30px}.range-composer__head,.price-source-panel__head,.admin-panel__head{align-items:flex-start;flex-direction:column}.range-slider-row{grid-template-columns:55px minmax(0,1fr);}.range-slider-row output{grid-column:2}.price-input-wrap{grid-template-columns:1fr}.price-input-wrap span{max-width:none;padding:0 12px 10px;text-align:left}.range-strategy{width:100%}.range-strategy button{flex:1;min-height:42px}.footer__in{align-items:flex-start;flex-direction:column}.topbar__actions .icon-button{display:none}
+      .shell{width:min(100% - 24px,1220px)}.topbar__in{height:62px;gap:10px}.brand__copy{display:none}.brand__mark{width:37px;height:37px}.wallet-button{max-width:150px;padding:0 10px}.hero{padding-top:42px}.hero h1{font-size:42px}.hero__copy{font-size:12px}.panel-pad{padding:17px}.panel-head h2{font-size:21px}.pill{display:none}.token-select{min-width:132px}.amount-row input,.amount-row output{font-size:32px}.route-map{grid-template-columns:50px 1fr 42px 1fr 50px}.route-core{width:42px;height:42px}.metric-grid{grid-template-columns:1fr}.metric-grid div{border-right:0;border-bottom:1px solid rgba(101,219,232,.1)}.section-head{align-items:flex-start;flex-direction:column}.summary-grid{grid-template-columns:1fr}.position-card__summary{grid-template-columns:1fr}.position-card .secondary{width:100%}.position-card__quick-stats,.position-card__drawer-actions{grid-template-columns:1fr}.position-card__drawer-head{align-items:flex-start;flex-direction:column}.field-row,.funding-grid,.field-action-row,.mint-token-grid,.admin-grid{grid-template-columns:1fr}.field-label{align-items:flex-start;flex-direction:column}.field-percentages{justify-content:flex-start}.field-percent,.range-presets button{min-height:40px;padding-inline:11px}.balance-actions button{min-height:30px}.range-composer__head,.price-source-panel__head,.admin-panel__head{align-items:flex-start;flex-direction:column}.range-slider-row{grid-template-columns:55px minmax(0,1fr);}.range-slider-row output{grid-column:2}.price-input-wrap{grid-template-columns:1fr}.price-input-wrap span{max-width:none;padding:0 12px 10px;text-align:left}.range-strategy{width:100%}.range-strategy button{flex:1;min-height:42px}.footer__in{align-items:flex-start;flex-direction:column}.topbar__actions .icon-button{display:none}
     }
     @media(max-width:900px){.protocol-fee-hero__grid,.protocol-transparency__grid{grid-template-columns:1fr}.protocol-fee-hero h1{max-width:720px}.fee-allocation{max-width:620px}.protocol-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
     @media(max-width:620px){.protocol-fee-hero{margin-top:35px;padding:22px}.protocol-fee-hero__top{align-items:flex-start;flex-direction:column;margin-bottom:22px}.protocol-fee-badge{white-space:normal}.protocol-fee-hero h1{margin-bottom:21px;font-size:clamp(39px,13vw,56px)}.protocol-fee-statement{font-size:14px;line-height:1.58}.fee-allocation{padding:15px}.fee-allocation__bar{height:68px}.fee-allocation__zero{font-size:25px}.protocol-transparency{margin-top:34px;padding-top:28px}.protocol-transparency__intro h2{font-size:29px}.protocol-transparency__intro p{font-size:11px;line-height:1.67}.treasury-panel,.fee-tier-panel{padding:15px}.treasury-route{grid-template-columns:1fr auto 1fr}.treasury-route span:nth-of-type(3){grid-column:1/-1}.treasury-route i:last-of-type{display:none}.fee-tier-panel__head{flex-direction:column}.fee-tier-panel__head span{max-width:none;text-align:left}.protocol-assurance{grid-template-columns:1fr;gap:11px}.protocol-assurance p{padding:11px 0 0;border-left:0;border-top:1px solid rgba(183,255,125,.19)}.contract-registry__head{align-items:flex-start;flex-direction:column}.contract-registry__head>p{text-align:left}.protocol-grid{grid-template-columns:1fr}.mobile-nav button{white-space:nowrap}}
@@ -893,7 +914,7 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
     wallets:new Map(),providerIds:new WeakMap(),selectedWallet:null,rawWallet:null,browserProvider:null,
     account:null,walletChain:null,walletHandlers:null,syncToken:0,nativeBalance:null,nativeBalanceError:null,balanceBlock:null,balanceFetchedAt:null,balanceNonce:0,positionsNonce:0,swapNativePls:true,
     modalNonce:0,modalLocked:false,modalReturnFocus:null,modalAccountHandler:null,
-    positions:[],selectedPosition:null,dexCache:new Map(),adminNonce:0,adminConfig:null,adminPool:null,
+    positions:[],selectedPosition:null,expandedPositionId:null,dexCache:new Map(),adminNonce:0,adminConfig:null,adminPool:null,
     settings:{slippageBps:50,deadlineMinutes:20,unlimitedApproval:false}
   };
   var startupState={startedAt:Date.now(),inFlight:false,slowTimer:null,releaseTimer:null,lastReport:null};
@@ -1159,7 +1180,7 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
   }
   function disconnectWallet(){
     var accountHandler=state.modalAccountHandler;state.syncToken++;state.balanceNonce++;state.positionsNonce++;state.swapAllowanceNonce++;state.swapFillNonce++;state.adminNonce++;detachWallet();try{if(state.browserProvider&&state.browserProvider.destroy)state.browserProvider.destroy()}catch(_){}
-    state.selectedWallet=null;state.rawWallet=null;state.browserProvider=null;state.account=null;state.walletChain=null;state.nativeBalance=null;state.nativeBalanceError=null;state.balanceBlock=null;state.balanceFetchedAt=null;state.swapAllowance=null;state.swapAllowanceError=null;state.positions=[];state.selectedPosition=null;state.adminConfig=null;state.adminPool=null;state.tokens.forEach(function(t){t.balance=null;t.balanceError=null});renderWallet();renderPositions();renderTokenSides();refreshSwapState();renderAdminAccess(false);if(accountHandler){accountHandler("invalidate");if(state.modalAccountHandler===accountHandler)accountHandler("refresh")}
+    state.selectedWallet=null;state.rawWallet=null;state.browserProvider=null;state.account=null;state.walletChain=null;state.nativeBalance=null;state.nativeBalanceError=null;state.balanceBlock=null;state.balanceFetchedAt=null;state.swapAllowance=null;state.swapAllowanceError=null;state.positions=[];state.selectedPosition=null;state.expandedPositionId=null;state.adminConfig=null;state.adminPool=null;state.tokens.forEach(function(t){t.balance=null;t.balanceError=null});renderWallet();renderPositions();renderTokenSides();refreshSwapState();renderAdminAccess(false);if(accountHandler){accountHandler("invalidate");if(state.modalAccountHandler===accountHandler)accountHandler("refresh")}
   }
   function bindWallet(){
     var raw=state.rawWallet,h={accounts:function(){syncWallet()},chain:function(){try{if(state.browserProvider.destroy)state.browserProvider.destroy()}catch(_){}state.browserProvider=new E.BrowserProvider(raw,"any");syncWallet()},disconnect:function(){disconnectWallet()}};
@@ -1176,7 +1197,7 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
     try{
       var results=await Promise.all([raw.request({method:"eth_accounts"}),raw.request({method:"eth_chainId"})]);
       if(token!==state.syncToken||raw!==state.rawWallet)return;
-      var nextAccount=results[0]&&results[0][0]?E.getAddress(results[0][0]):null,changed=!same(nextAccount,state.account),accountHandler=changed?state.modalAccountHandler:null;if(changed){state.balanceNonce++;state.positionsNonce++;state.swapAllowanceNonce++;state.swapFillNonce++;state.adminNonce++;state.nativeBalance=null;state.nativeBalanceError=null;state.balanceBlock=null;state.balanceFetchedAt=null;state.swapAllowance=null;state.swapAllowanceError=null;state.positions=[];state.selectedPosition=null;state.adminConfig=null;state.adminPool=null;state.tokens.forEach(function(t){t.balance=null;t.balanceError=null})}
+      var nextAccount=results[0]&&results[0][0]?E.getAddress(results[0][0]):null,changed=!same(nextAccount,state.account),accountHandler=changed?state.modalAccountHandler:null;if(changed){state.balanceNonce++;state.positionsNonce++;state.swapAllowanceNonce++;state.swapFillNonce++;state.adminNonce++;state.nativeBalance=null;state.nativeBalanceError=null;state.balanceBlock=null;state.balanceFetchedAt=null;state.swapAllowance=null;state.swapAllowanceError=null;state.positions=[];state.selectedPosition=null;state.expandedPositionId=null;state.adminConfig=null;state.adminPool=null;state.tokens.forEach(function(t){t.balance=null;t.balanceError=null})}
       state.account=nextAccount;state.walletChain=BigInt(results[1]);if(accountHandler)accountHandler("invalidate");renderWallet();if(changed){renderTokenSides();renderPositions();renderAdminAccess($("view-protocol").classList.contains("active"))}await refreshBalances();if(accountHandler&&state.modalAccountHandler===accountHandler)accountHandler("refresh");await checkSwapAllowance();refreshSwapState();if($("view-positions").classList.contains("active"))loadPositions()
     }catch(err){toast(safeError(err),"error")}
   }
@@ -1724,7 +1745,7 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
     return {tokenId:BigInt(tokenId),token0:token0,token1:token1,fee:Number(raw.fee),tickLower:lower,tickUpper:upper,tick:tick,sqrtPriceX96:sqrtPriceX96,spacing:spacing,liquidity:raw.liquidity,tokensOwed0:raw.tokensOwed0,tokensOwed1:raw.tokensOwed1,poolAddress:poolAddress,poolLiquidity:poolLiquidity,status:status}
   }
   async function loadPositions(manualTokenId){
-    var account=state.account,generation=state.syncToken,nonce=++state.positionsNonce;if(!account){renderPositions();return}
+    var account=state.account,generation=state.syncToken,nonce=++state.positionsNonce;if(!account){state.expandedPositionId=null;renderPositions();return}
     $("positionList").innerHTML="<div class='empty-state'><div><span class='token-mark'>↻</span><h3>Reading position NFTs</h3><p>Taking a consistent PulseChain block snapshot.</p></div></div>";
     try{
       var block=await readProvider.getBlockNumber(),ids=[];
@@ -1739,8 +1760,9 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
       if(nonce!==state.positionsNonce||generation!==state.syncToken||!same(account,state.account))return;state.positions=list;if(manualTokenId==null)$("positionCountNote").textContent=count>24n?"Showing first 24 of "+formatInteger(count):"Read at block "+formatInteger(block);await refreshBalances();
       if(nonce!==state.positionsNonce||generation!==state.syncToken||!same(account,state.account))return;
       if(manualTokenId!=null&&list[0])state.selectedPosition=list[0];else if(!state.selectedPosition||!list.some(function(p){return p.tokenId===state.selectedPosition.tokenId}))state.selectedPosition=list[0]||null;
+      if(state.expandedPositionId!=null&&!list.some(function(p){return p.tokenId===state.expandedPositionId}))state.expandedPositionId=null;
       renderPositions()
-    }catch(err){if(nonce!==state.positionsNonce||generation!==state.syncToken||!same(account,state.account))return;state.positions=[];state.selectedPosition=null;renderPositions();toast(safeError(err),"error")}
+    }catch(err){if(nonce!==state.positionsNonce||generation!==state.syncToken||!same(account,state.account))return;state.positions=[];state.selectedPosition=null;state.expandedPositionId=null;renderPositions();toast(safeError(err),"error")}
   }
   function positionTickPct(p){
     if(p.tick==null)return 50;var span=p.tickUpper-p.tickLower;if(span<=0)return 50;
@@ -1752,6 +1774,14 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
     var heights=[16,22,31,44,61,78,92,97,88,73,56,40,29,20,14],html="";
     for(var i=0;i<heights.length;i++)html+="<i class='"+(i>=3&&i<=11?"hot":"")+"' style='height:"+String(heights[i])+"%'></i>";
     target.innerHTML=html+(p&&p.tick!=null?"<span class='range-visual__tick' style='left:"+String(positionTickPct(p))+"%'></span>":"")
+  }
+  function positionManagerHtml(p,expanded){
+    var id=formatInteger(p.tokenId),canBurn=p.liquidity===0n&&p.tokensOwed0===0n&&p.tokensOwed1===0n;
+    return "<div class='position-card__drawer' id='position-manager-"+esc(String(p.tokenId))+"' role='region' aria-label='Manage Finvesta V3 position #"+esc(id)+"'"+(expanded?"":" hidden")+">"+
+      "<div class='position-card__drawer-head'><span><small>MANAGING THIS POSITION</small><strong>"+esc(p.token0.symbol)+" / "+esc(p.token1.symbol)+" · NFT #"+esc(id)+"</strong></span><span class='status "+(p.status==="active"?"":"out")+"'>"+esc(positionStatusLabel(p))+"</span></div>"+
+      "<div class='position-card__quick-stats'><div><span>ACTIVE RANGE</span><strong>"+formatInteger(p.tickLower)+" → "+formatInteger(p.tickUpper)+"</strong></div><div><span>LIQUIDITY</span><strong>"+esc(formatInteger(p.liquidity))+"</strong></div><div><span>RECORDED OWED</span><strong>"+esc(trimUnits(p.tokensOwed0,p.token0.decimals,6))+" "+esc(p.token0.symbol)+" · "+esc(trimUnits(p.tokensOwed1,p.token1.decimals,6))+" "+esc(p.token1.symbol)+"</strong></div></div>"+
+      "<div class='position-card__drawer-actions'><button type='button' class='primary' data-position-action='collect' data-position-id='"+esc(String(p.tokenId))+"'><span>Collect fees</span><span>→</span></button><button type='button' class='secondary' data-position-action='increase' data-position-id='"+esc(String(p.tokenId))+"'>＋ Add liquidity</button><button type='button' class='secondary' data-position-action='remove' data-position-id='"+esc(String(p.tokenId))+"'>Remove liquidity</button>"+(canBurn?"<button type='button' class='secondary span-all' data-position-action='burn' data-position-id='"+esc(String(p.tokenId))+"'>Burn empty NFT</button>":"")+"</div>"+
+      "<p class='position-card__drawer-note'>These controls apply to "+esc(p.token0.symbol)+" / "+esc(p.token1.symbol)+" · NFT #"+esc(id)+" only.</p></div>"
   }
   function renderPositions(){
     $("positionCount").textContent=state.account?formatInteger(state.positions.length):"—";
@@ -1766,13 +1796,26 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
       $("emptyNewPosition").addEventListener("click",openNewPositionModal);renderPositionDetail();return
     }
     list.innerHTML=state.positions.map(function(p){
-      var pct=positionTickPct(p),active=state.selectedPosition&&state.selectedPosition.tokenId===p.tokenId;
-      return "<article class='position-card "+(active?"active":"")+"' data-position='"+String(p.tokenId)+"'>"+
+      var pct=positionTickPct(p),active=state.selectedPosition&&state.selectedPosition.tokenId===p.tokenId,expanded=state.expandedPositionId===p.tokenId,id=String(p.tokenId);
+      return "<article class='position-card "+(active?"active ":"")+(expanded?"expanded":"")+"' data-position='"+esc(id)+"'>"+
+        "<div class='position-card__summary' data-position-summary='"+esc(id)+"'>"+
         "<div class='pair'><div class='pair-marks'>"+tokenMarkHtml(p.token0,true)+tokenMarkHtml(p.token1,true)+"</div><div><h3>"+esc(p.token0.symbol)+" / "+esc(p.token1.symbol)+"</h3><p>V3 · "+esc(feeLabel(p.fee))+" · NFT #"+esc(formatInteger(p.tokenId))+"</p></div></div>"+
         "<div class='range-mini'><span class='status "+(p.status==="active"?"":"out")+"'>"+esc(positionStatusLabel(p))+"</span><div class='range-mini__track'><span></span><i style='left:"+String(pct)+"%'></i></div><small><span>"+formatInteger(p.tickLower)+"</span><span>"+formatInteger(p.tickUpper)+"</span></small></div>"+
-        "<div class='position-stat'><span>LIQUIDITY</span><strong>"+esc(compactBig(p.liquidity))+"</strong><span>POOL "+esc(shortAddress(p.poolAddress))+"</span></div><button class='secondary'>Manage</button></article>"
+        "<div class='position-stat'><span>LIQUIDITY</span><strong>"+esc(compactBig(p.liquidity))+"</strong><span>POOL "+esc(shortAddress(p.poolAddress))+"</span></div><button type='button' class='secondary position-card__manage' data-manage-position='"+esc(id)+"' aria-expanded='"+(expanded?"true":"false")+"' aria-controls='position-manager-"+esc(id)+"'><span>"+(expanded?"Close #":"Manage #")+esc(formatInteger(p.tokenId))+"</span><b aria-hidden='true'>⌄</b></button></div>"+
+        positionManagerHtml(p,expanded)+"</article>"
     }).join("");
-    list.querySelectorAll("[data-position]").forEach(function(card){card.addEventListener("click",function(){var id=BigInt(card.dataset.position);state.selectedPosition=state.positions.find(function(p){return p.tokenId===id});renderPositions()})});
+    function selectPosition(id){var p=state.positions.find(function(item){return item.tokenId===id});if(!p)return null;state.selectedPosition=p;return p}
+    list.querySelectorAll("[data-position-summary]").forEach(function(summary){
+      function select(){var id=BigInt(summary.dataset.positionSummary),p=selectPosition(id);if(p)renderPositions()}
+      summary.addEventListener("click",function(event){if(event.target.closest("[data-manage-position]"))return;select()})
+    });
+    list.querySelectorAll("[data-manage-position]").forEach(function(button){button.addEventListener("click",function(event){
+      event.stopPropagation();var id=BigInt(button.dataset.managePosition),opening=state.expandedPositionId!==id;if(!selectPosition(id))return;state.expandedPositionId=opening?id:null;renderPositions();
+      requestAnimationFrame(function(){var next=list.querySelector("[data-manage-position='"+String(id)+"']");if(next)next.focus({preventScroll:true});if(opening){var card=list.querySelector("[data-position='"+String(id)+"']");if(card){var rect=card.getBoundingClientRect();if(rect.top<0||rect.bottom>window.innerHeight)card.scrollIntoView({behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"nearest"})}}})
+    })});
+    list.querySelectorAll("[data-position-action]").forEach(function(button){button.addEventListener("click",function(event){
+      event.stopPropagation();var id=BigInt(button.dataset.positionId),p=selectPosition(id);if(!p)return;var action=button.dataset.positionAction;if(action==="collect")previewCollect(p);else if(action==="increase")openIncreaseModal(p);else if(action==="remove")openRemoveModal(p);else if(action==="burn")previewBurn(p)
+    })});
     renderPositionDetail()
   }
   function renderPositionDetail(){
