@@ -1072,7 +1072,21 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
     return choices
   }
   async function restoreTokens(){
-    var list=[ADDR.wpls];try{list=list.concat(JSON.parse(localStorage.getItem("finvesta.v3.tokens")||"[]"))}catch(_){}
+    var list=[
+    ADDR.wpls,
+    "0x41B6D8bA2acC273Fe7b319fcEd7DD59f69592951",
+    "0x2556F7f8d82EbcdD7b821b0981C38D9dA9439CdD",
+    "0x24F0154C1dCe548AdF15da2098Fdd8B8A3B8151D",
+    "0xB709276c0e8d3A5372A13d4fEA886496F396feA1",
+    "0x15D38573d2feeb82e7ad5187aB8c1D52810B1f07",
+    "0x770CFA2FB975E7bCAEDDe234D92c3858C517Adca",
+    "0x042b48a98B37042D58Bc8defEEB7cA4eC76E6106",
+    "0x6B175474E89094C44Da98b954EedeAC495271d0F",
+    "0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599",
+    "0x57fde0a71132198BBeC939B98976993d8D89D225",
+    "0x2b591e99afE9f32eAA6214f7B7629768c40Eeb39",
+    "0x95B303987A60C71504D99Aa1b13B4DA07b0790ab",
+    "0x2fa878Ab3F87CC1C9737Fc071108F904c0B0C95d"];try{list=list.concat(JSON.parse(localStorage.getItem("finvesta.v3.tokens")||"[]"))}catch(_){}
     var seen=new Set();for(var i=0;i<list.length;i++){try{var a=E.getAddress(list[i]);if(!seen.has(a.toLowerCase())){seen.add(a.toLowerCase());await loadToken(a,false)}}catch(_){}}
   }
   async function refreshBalances(){
