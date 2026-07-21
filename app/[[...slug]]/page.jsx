@@ -47,6 +47,7 @@ const assets = {
 const nav = [
   { label: "👀 Pulsewatch", href: "https://pulsewatch.app/" },
   { label: "📈 Tracker", href: "https://ogprinters.pulsewatch.app/" },
+  { label: "Exchange", href: "/exchange/" },
   { label: "WHITE PAPER", href: "/whitepaper" },
 ];
 
