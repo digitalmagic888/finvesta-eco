@@ -154,7 +154,13 @@
     .summary-card span{color:#778f9a;font-size:8px;letter-spacing:.12em}
     .summary-card strong{font:900 25px/1 var(--display)}
     .summary-card small{color:var(--muted);font-size:9px}
-    .positions-layout{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(310px,.65fr);gap:17px;align-items:start}
+    .positions-layout{display:grid;grid-template-columns:minmax(0,1fr);gap:20px;align-items:start}
+    .position-tabs{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 17px;padding:5px;border:1px solid rgba(101,219,232,.13);border-radius:7px;background:rgba(7,12,15,.68)}
+    .position-tab{min-height:42px;padding:8px 15px;border:1px solid transparent;border-radius:5px;background:transparent;color:#839ba5;font-size:10px;font-weight:1000;letter-spacing:.045em;cursor:pointer}
+    .position-tab span{display:inline-grid;min-width:23px;margin-left:7px;padding:3px 6px;border-radius:999px;background:#17242a;color:#a8bec7;font-size:9px}
+    .position-tab:hover,.position-tab:focus-visible{color:var(--cyan);border-color:rgba(0,246,255,.24)}
+    .position-tab.active{border-color:rgba(0,246,255,.42);background:linear-gradient(135deg,rgba(0,246,255,.13),rgba(106,108,255,.08));color:var(--cyan);box-shadow:inset 0 0 0 1px rgba(0,246,255,.035)}
+    .position-tab.active span{background:rgba(0,246,255,.13);color:var(--cyan)}
     .position-list{display:grid;gap:9px}
     .empty-state{min-height:260px;padding:30px;display:grid;place-items:center;text-align:center;border:1px dashed rgba(101,219,232,.2);border-radius:6px;color:var(--muted)}
     .empty-state div{max-width:420px}
@@ -163,7 +169,7 @@
     .position-card{overflow:hidden;border:1px solid rgba(101,219,232,.12);border-radius:6px;background:rgba(13,18,21,.78);transition:border-color .22s ease,background .22s ease,box-shadow .22s ease,transform .22s ease}
     .position-card:hover,.position-card.active{border-color:rgba(0,246,255,.38);background:rgba(0,246,255,.035);transform:translateY(-1px)}
     .position-card.expanded{border-color:rgba(0,246,255,.58);background:linear-gradient(145deg,rgba(0,246,255,.065),rgba(13,18,21,.96));box-shadow:0 16px 42px rgba(0,246,255,.09),inset 0 0 0 1px rgba(0,246,255,.05)}
-    .position-card__summary{padding:18px;display:grid;grid-template-columns:minmax(180px,1.2fr) minmax(180px,1fr) minmax(100px,.6fr) auto;gap:16px;align-items:center;cursor:pointer}
+    .position-card__summary{padding:19px;display:grid;grid-template-columns:minmax(230px,1.15fr) minmax(235px,1fr) minmax(170px,.62fr) auto;gap:18px;align-items:center;cursor:pointer}
     .position-card__manage{min-width:91px;display:flex;align-items:center;justify-content:center;gap:8px}
     .position-card__manage b{color:var(--cyan);font-size:12px;transition:transform .2s ease}
     .position-card.expanded .position-card__manage{border-color:rgba(183,255,125,.42);background:rgba(183,255,125,.06);color:var(--green)}
@@ -171,37 +177,44 @@
     .position-card__drawer{padding:17px 18px 18px;border-top:1px solid rgba(0,246,255,.17);background:linear-gradient(90deg,rgba(0,246,255,.045),rgba(183,255,125,.025));animation:positionDrawerIn .28s ease both}
     .position-card__drawer-head{display:flex;align-items:center;justify-content:space-between;gap:14px}
     .position-card__drawer-head>span:first-child{display:grid;gap:4px}
-    .position-card__drawer-head small{color:var(--cyan);font-size:7px;font-weight:1000;letter-spacing:.14em}
-    .position-card__drawer-head strong{font:900 13px/1.15 var(--display)}
-    .position-card__quick-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:13px}
+    .position-card__drawer-head small{color:var(--cyan);font-size:10px;font-weight:1000;letter-spacing:.14em}
+    .position-card__drawer-head strong{font:900 15px/1.15 var(--display)}
+    .position-card__quick-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:13px}
     .position-card__quick-stats>div{min-width:0;padding:10px;border:1px solid rgba(101,219,232,.11);border-radius:4px;background:rgba(7,12,15,.58);display:grid;gap:5px}
-    .position-card__quick-stats span{color:#718995;font-size:7px;letter-spacing:.08em}
-    .position-card__quick-stats strong{font-size:9px;overflow-wrap:anywhere}
+    .position-card__quick-stats span{color:#718995;font-size:10px;letter-spacing:.08em}
+    .position-card__quick-stats strong{font-size:12px;line-height:1.35;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
     .position-card__drawer-actions{display:grid;grid-template-columns:1.15fr 1fr 1fr;gap:7px;margin-top:10px}
     .position-card__drawer-actions .primary{width:auto;min-height:44px;margin:0;padding-inline:13px;font-size:10px}
     .position-card__drawer-actions .secondary{width:100%;min-height:44px}
     .position-card__drawer-actions .span-all{grid-column:1/-1}
-    .position-card__drawer-note{margin:9px 0 0;color:#78919b;font-size:8px;line-height:1.45}
+    .position-card__drawer-note{margin:9px 0 0;color:#78919b;font-size:10px;line-height:1.5}
     .pair{display:flex;align-items:center;gap:11px}
     .pair-marks{display:flex}
     .pair-marks .token-mark+ .token-mark{margin-left:-9px}
-    .pair h3{margin:0 0 4px;font-size:13px}
-    .pair p{margin:0;color:#78909b;font-size:8px}
+    .pair h3{margin:0 0 4px;font-size:16px}
+    .pair p{margin:0;color:#78909b;font-size:11px}
     .range-mini{display:grid;gap:7px}
     .range-mini__track{height:5px;position:relative;border-radius:999px;background:#1c2a30}
     .range-mini__track span{position:absolute;inset:0 18%;background:linear-gradient(90deg,var(--blue),var(--cyan));opacity:.6}
     .range-mini__track i{position:absolute;top:-4px;width:3px;height:13px;background:var(--green);box-shadow:0 0 8px var(--green)}
-    .range-mini small{display:flex;justify-content:space-between;color:#708994;font-size:7px}
-    .status{display:inline-flex;align-items:center;gap:6px;color:var(--green);font-size:8px;font-weight:900;letter-spacing:.09em}
+    .range-mini small{display:flex;justify-content:space-between;color:#78949f;font-size:10px;font-weight:800;font-variant-numeric:tabular-nums}
+    .range-mini small.full-range{justify-content:center;color:var(--green);letter-spacing:.08em}
+    .range-mini small.current-price{justify-content:flex-start;color:#b7cbd3;line-height:1.35;overflow-wrap:anywhere}
+    .status{display:inline-flex;align-items:center;gap:6px;color:var(--green);font-size:10px;font-weight:900;letter-spacing:.09em}
     .status::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor;box-shadow:0 0 8px currentColor}
     .status.out{color:var(--orange)}
-    .position-stat{display:grid;gap:4px}
-    .position-stat span{color:#718995;font-size:7px}
-    .position-stat strong{font-size:11px}
-    .position-detail{position:sticky;top:88px;padding:21px}
-    .position-detail h2{margin:8px 0 4px;font:900 20px/1 var(--display)}
-    .position-detail__meta{color:#77909b;font-size:9px}
-    .range-visual{height:165px;margin:21px 0;position:relative;overflow:hidden;border:1px solid rgba(101,219,232,.1);border-radius:5px;background:linear-gradient(rgba(101,219,232,.04) 1px,transparent 1px);background-size:100% 25%}
+    .position-stat{min-width:0;display:grid;gap:5px}
+    .position-stat span{color:#718995;font-size:10px}
+    .position-stat strong{font-size:15px;line-height:1.2;overflow-wrap:anywhere;font-variant-numeric:tabular-nums}
+    .position-stat .value-ready{color:var(--green);font-size:18px}
+    .position-detail{position:static;top:auto;padding:25px}
+    .position-detail h2{margin:8px 0 4px;font:900 24px/1 var(--display)}
+    .position-detail__meta{color:#77909b;font-size:11px}
+    .position-detail dl.details div{padding:9px 0;font-size:12px}
+    .position-detail__value{margin:18px 0;padding:17px;border:1px solid rgba(183,255,125,.2);border-radius:6px;background:linear-gradient(135deg,rgba(183,255,125,.065),rgba(0,246,255,.035));display:flex;align-items:center;justify-content:space-between;gap:20px}
+    .position-detail__value span{display:grid;gap:5px;color:#819aa4;font-size:10px;letter-spacing:.08em}
+    .position-detail__value strong{color:var(--green);font:900 26px/1 var(--display);font-variant-numeric:tabular-nums}
+    .range-visual{height:210px;margin:21px 0;position:relative;overflow:hidden;border:1px solid rgba(101,219,232,.1);border-radius:5px;background:linear-gradient(rgba(101,219,232,.04) 1px,transparent 1px);background-size:100% 25%}
     .range-visual__bars{position:absolute;inset:20px 14px 18px;display:flex;align-items:end;gap:3px}
     .range-visual__bars i{flex:1;background:#283b43}
     .range-visual__bars i.hot{background:linear-gradient(var(--cyan),#226a75)}
@@ -302,6 +315,7 @@
     .field-percentages{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:4px}
     .field-percent{min-height:28px;padding:3px 7px;border:1px solid rgba(0,246,255,.16);border-radius:3px;background:rgba(0,246,255,.045);color:var(--teal);font-size:8px;font-weight:900;letter-spacing:.04em;cursor:pointer}
     .field-percent:hover,.field-percent:focus-visible{border-color:rgba(0,246,255,.55);color:var(--cyan)}
+    .field-percent.active{border-color:rgba(183,255,125,.5);background:rgba(183,255,125,.09);color:var(--green)}
     .field-percent:disabled{cursor:not-allowed;opacity:.35}
     .live-balance{min-height:17px;display:flex;align-items:center;justify-content:space-between;gap:9px;color:#77909b;font-size:7px;line-height:1.35}
     .live-balance strong{color:#b9d0d8;font-size:8px;overflow-wrap:anywhere}
@@ -341,7 +355,8 @@
     .locked-range__track{height:7px;position:relative;margin:12px 2px 8px;border-radius:999px;background:#203039}
     .locked-range__track span{position:absolute;inset:0;background:linear-gradient(90deg,var(--blue),var(--cyan));border-radius:999px;opacity:.55}
     .locked-range__track i{position:absolute;top:-5px;width:3px;height:17px;background:var(--orange);box-shadow:0 0 8px rgba(255,101,61,.5)}
-    .locked-range__labels{display:flex;justify-content:space-between;gap:12px;color:#78919b;font:800 7px/1.3 ui-monospace,SFMono-Regular,Menlo,monospace}
+    .locked-range__labels{display:flex;justify-content:space-between;gap:12px;color:#78919b;font:800 9px/1.3 ui-monospace,SFMono-Regular,Menlo,monospace}
+    .locked-range__labels.full-range{justify-content:center;color:var(--green);font-family:var(--sans);font-size:11px;letter-spacing:.09em}
     .field input,.field select{width:100%;height:46px;padding:0 12px;border:1px solid rgba(101,219,232,.15);border-radius:4px;background:#080f12;color:var(--text);outline:0}
     .field input[type=range]{height:28px;padding:0;border:0;background:transparent;accent-color:var(--cyan);cursor:pointer}
     .field input:focus,.field select:focus{border-color:rgba(0,246,255,.52)}
@@ -530,10 +545,10 @@
     @keyframes shimmer{to{transform:translateX(100%)}}
     @keyframes toastIn{from{opacity:0;transform:translateY(8px)}}
     @media(max-width:900px){
-      .nav{display:none}.status-chip{display:none}.hero{grid-template-columns:1fr;gap:24px;padding-top:56px}.grid-2,.positions-layout{grid-template-columns:1fr}.position-detail{position:static}.protocol-grid{grid-template-columns:1fr}.journey-grid{grid-template-columns:1fr;gap:20px}.journey-node__track{grid-template-columns:auto 1fr}.journey-node p{max-width:none}.position-card__summary{grid-template-columns:1fr 1fr}.summary-grid{grid-template-columns:1fr 1fr}.mobile-nav{position:fixed;display:grid;grid-template-columns:repeat(3,1fr);left:0;right:0;bottom:0;z-index:60;padding:8px 12px calc(8px + env(safe-area-inset-bottom));border-top:1px solid var(--line2);background:rgba(7,10,12,.94);backdrop-filter:blur(16px)}.mobile-nav button{min-height:43px;border:0;border-radius:4px;background:transparent;color:#77909b;font-size:9px;font-weight:900}.mobile-nav button.active{background:rgba(0,246,255,.07);color:var(--cyan)}.footer{padding-bottom:120px}
+      .nav{display:none}.status-chip{display:none}.hero{grid-template-columns:1fr;gap:24px;padding-top:56px}.grid-2,.positions-layout{grid-template-columns:1fr}.position-detail{position:static}.protocol-grid{grid-template-columns:1fr}.journey-grid{grid-template-columns:1fr;gap:20px}.journey-node__track{grid-template-columns:auto 1fr}.journey-node p{max-width:none}.position-card__summary{grid-template-columns:1fr 1fr}.position-card__quick-stats{grid-template-columns:1fr 1fr}.summary-grid{grid-template-columns:1fr 1fr}.mobile-nav{position:fixed;display:grid;grid-template-columns:repeat(3,1fr);left:0;right:0;bottom:0;z-index:60;padding:8px 12px calc(8px + env(safe-area-inset-bottom));border-top:1px solid var(--line2);background:rgba(7,10,12,.94);backdrop-filter:blur(16px)}.mobile-nav button{min-height:43px;border:0;border-radius:4px;background:transparent;color:#77909b;font-size:9px;font-weight:900}.mobile-nav button.active{background:rgba(0,246,255,.07);color:var(--cyan)}.footer{padding-bottom:120px}
     }
     @media(max-width:620px){
-      .shell{width:min(100% - 24px,1220px)}.topbar__in{height:62px;gap:10px}.brand__copy{display:none}.brand__mark{width:37px;height:37px}.wallet-button{max-width:150px;padding:0 10px}.hero{padding-top:42px}.hero h1{font-size:42px}.hero__copy{font-size:12px}.panel-pad{padding:17px}.panel-head h2{font-size:21px}.pill{display:none}.token-select{min-width:132px}.amount-row input,.amount-row output{font-size:32px}.route-map{grid-template-columns:50px 1fr 42px 1fr 50px}.route-core{width:42px;height:42px}.metric-grid{grid-template-columns:1fr}.metric-grid div{border-right:0;border-bottom:1px solid rgba(101,219,232,.1)}.section-head{align-items:flex-start;flex-direction:column}.summary-grid{grid-template-columns:1fr}.position-card__summary{grid-template-columns:1fr}.position-card .secondary{width:100%}.position-card__quick-stats,.position-card__drawer-actions{grid-template-columns:1fr}.position-card__drawer-head{align-items:flex-start;flex-direction:column}.field-row,.funding-grid,.field-action-row,.mint-token-grid,.admin-grid{grid-template-columns:1fr}.field-label{align-items:flex-start;flex-direction:column}.field-percentages{justify-content:flex-start}.field-percent,.range-presets button{min-height:40px;padding-inline:11px}.balance-actions button{min-height:30px}.range-composer__head,.price-source-panel__head,.admin-panel__head{align-items:flex-start;flex-direction:column}.range-slider-row{grid-template-columns:55px minmax(0,1fr);}.range-slider-row output{grid-column:2}.price-input-wrap{grid-template-columns:1fr}.price-input-wrap span{max-width:none;padding:0 12px 10px;text-align:left}.range-strategy{width:100%}.range-strategy button{flex:1;min-height:42px}.footer__in{align-items:flex-start;flex-direction:column}.topbar__actions .icon-button{display:none}
+      .shell{width:min(100% - 24px,1220px)}.topbar__in{height:62px;gap:10px}.brand__copy{display:none}.brand__mark{width:37px;height:37px}.wallet-button{max-width:150px;padding:0 10px}.hero{padding-top:42px}.hero h1{font-size:42px}.hero__copy{font-size:12px}.panel-pad{padding:17px}.panel-head h2{font-size:21px}.pill{display:none}.token-select{min-width:132px}.amount-row input,.amount-row output{font-size:32px}.route-map{grid-template-columns:50px 1fr 42px 1fr 50px}.route-core{width:42px;height:42px}.metric-grid{grid-template-columns:1fr}.metric-grid div{border-right:0;border-bottom:1px solid rgba(101,219,232,.1)}.section-head{align-items:flex-start;flex-direction:column}.summary-grid{grid-template-columns:1fr}.position-tabs{display:grid;grid-template-columns:1fr;margin-bottom:13px}.position-tab{width:100%;display:flex;align-items:center;justify-content:space-between;text-align:left}.position-card__summary{grid-template-columns:1fr}.position-card .secondary{width:100%}.position-card__quick-stats,.position-card__drawer-actions{grid-template-columns:1fr}.position-card__drawer-head{align-items:flex-start;flex-direction:column}.position-detail__value{align-items:flex-start;flex-direction:column}.field-row,.funding-grid,.field-action-row,.mint-token-grid,.admin-grid{grid-template-columns:1fr}.field-label{align-items:flex-start;flex-direction:column}.field-percentages{justify-content:flex-start}.field-percent,.range-presets button{min-height:40px;padding-inline:11px}.balance-actions button{min-height:30px}.range-composer__head,.price-source-panel__head,.admin-panel__head{align-items:flex-start;flex-direction:column}.range-slider-row{grid-template-columns:55px minmax(0,1fr);}.range-slider-row output{grid-column:2}.price-input-wrap{grid-template-columns:1fr}.price-input-wrap span{max-width:none;padding:0 12px 10px;text-align:left}.range-strategy{width:100%}.range-strategy button{flex:1;min-height:42px}.footer__in{align-items:flex-start;flex-direction:column}.topbar__actions .icon-button{display:none}
     }
     @media(max-width:900px){.protocol-fee-hero__grid,.protocol-transparency__grid{grid-template-columns:1fr}.protocol-fee-hero h1{max-width:720px}.fee-allocation{max-width:620px}.protocol-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
     @media(max-width:620px){.protocol-fee-hero{margin-top:35px;padding:22px}.protocol-fee-hero__top{align-items:flex-start;flex-direction:column;margin-bottom:22px}.protocol-fee-badge{white-space:normal}.protocol-fee-hero h1{margin-bottom:21px;font-size:clamp(39px,13vw,56px)}.protocol-fee-statement{font-size:14px;line-height:1.58}.fee-allocation{padding:15px}.fee-allocation__bar{height:68px}.fee-allocation__zero{font-size:25px}.protocol-transparency{margin-top:34px;padding-top:28px}.protocol-transparency__intro h2{font-size:29px}.protocol-transparency__intro p{font-size:11px;line-height:1.67}.treasury-panel,.fee-tier-panel{padding:15px}.treasury-route{grid-template-columns:1fr auto 1fr}.treasury-route span:nth-of-type(3){grid-column:1/-1}.treasury-route i:last-of-type{display:none}.fee-tier-panel__head{flex-direction:column}.fee-tier-panel__head span{max-width:none;text-align:left}.protocol-assurance{grid-template-columns:1fr;gap:11px}.protocol-assurance p{padding:11px 0 0;border-left:0;border-top:1px solid rgba(183,255,125,.19)}.contract-registry__head{align-items:flex-start;flex-direction:column}.contract-registry__head>p{text-align:left}.protocol-grid{grid-template-columns:1fr}.mobile-nav button{white-space:nowrap}}
@@ -675,33 +690,38 @@
       <div class="shell">
         <div class="hero positions-hero">
           <div><p class="eyebrow"><i></i>V3 liquidity positions</p><h1>Liquidity,<br><em>under control.</em></h1></div>
-          <div class="positions-hero__aside"><p class="hero__copy"><strong>Your wallet is the source of truth.</strong> Position NFTs, ticks, liquidity, and collectible amounts are read directly from the on-chain position manager.</p><button class="position-create-cta" id="newPositionButton"><span class="position-create-cta__plus">＋</span><span><strong>New position</strong><small>Create or initialize liquidity</small></span><span aria-hidden="true">→</span></button></div>
+          <div class="positions-hero__aside"><p class="hero__copy"><strong>On-chain positions, clearly separated.</strong> Browse every live position NFT, then connect a wallet to filter and manage active or inactive liquidity.</p><button class="position-create-cta" id="newPositionButton"><span class="position-create-cta__plus">＋</span><span><strong>New position</strong><small>Create or initialize liquidity</small></span><span aria-hidden="true">→</span></button></div>
         </div>
         <div class="summary-grid">
-          <article class="summary-card"><span>POSITION NFTS</span><strong id="positionCount">—</strong><small id="positionCountNote">Connect a wallet to scan</small></article>
-          <article class="summary-card"><span>ACTIVE RANGES</span><strong id="activeCount">—</strong><small>Current tick inside selected bounds</small></article>
-          <article class="summary-card"><span>POSITION MANAGER</span><strong style="font-size:14px">0xEdab…9e08</strong><small>PulseChain · verified bytecode</small></article>
+          <article class="summary-card"><span id="positionCountLabel">MY POSITION NFTS</span><strong id="positionCount">—</strong><small id="positionCountNote">Connect a wallet to scan</small></article>
+          <article class="summary-card"><span>MY ACTIVE POSITIONS</span><strong id="activeCount">—</strong><small>Funded NFTs, including out-of-range positions</small></article>
+          <article class="summary-card"><span id="positionValueLabel">COMBINED TVL</span><strong id="positionValueTotal">—</strong><small id="positionValueNote">Estimated current LP principal</small></article>
         </div>
         <div class="section-head">
-          <div><p class="kicker">Concentrated liquidity</p><h2>Your positions</h2></div>
+          <div><p class="kicker">Concentrated liquidity</p><h2 id="positionListTitle">Your positions</h2></div>
           <div class="tools position-actions"><button class="secondary" id="manualPositionButton">Load token ID</button></div>
+        </div>
+        <div class="position-tabs" role="tablist" aria-label="Position filters">
+          <button type="button" class="position-tab" role="tab" data-position-tab="all" aria-selected="false">All Positions <span id="allPositionTabCount">—</span></button>
+          <button type="button" class="position-tab active" role="tab" data-position-tab="active" aria-selected="true">Active Positions <span id="activePositionTabCount">—</span></button>
+          <button type="button" class="position-tab" role="tab" data-position-tab="inactive" aria-selected="false">Inactive Positions <span id="inactivePositionTabCount">—</span></button>
         </div>
         <div class="positions-layout">
           <div class="position-list" id="positionList">
-            <div class="empty-state"><div><span class="token-mark">◇</span><h3>Connect to discover positions</h3><p>Finvesta reads enumerable V3 position NFTs owned by the connected address. A manual token-ID fallback is available for transferred or non-indexed positions.</p><button class="secondary" data-connect>Connect wallet</button></div></div>
+            <div class="empty-state"><div><span class="token-mark">◇</span><h3>Connect to discover positions</h3><p>Finvesta reads enumerable V3 position NFTs associated with the connected wallet. A manual token-ID fallback is available for transferred or non-indexed positions.</p><button class="secondary" data-connect>Connect wallet</button></div></div>
           </div>
           <aside class="panel position-detail" id="positionDetail">
             <p class="kicker">Position intelligence</p><h2>No position selected</h2><p class="position-detail__meta">Choose a position to inspect its range and management actions.</p>
             <div class="range-visual"><div class="range-visual__bars" id="rangeBars"></div></div>
-            <div class="notice info">Position values are intentionally shown in token units. This build does not invent fiat prices or depend on an undisclosed pricing API.</div>
+            <div class="notice info">TVL is the estimated current LP principal. Current price comes from the pool snapshot, and 24-hour volume uses exact pool-address DEX Screener data. Estimates never affect transaction math.</div>
           </aside>
         </div>
         <section class="journey">
           <p class="eyebrow"><i></i>Position lifecycle map</p>
           <h2 class="section-title">Capital stays<br><em>legible.</em></h2>
           <div class="journey-grid">
-            <article class="journey-node active"><div class="journey-node__track"><b>01</b><i></i></div><h3>DISCOVER</h3><p>Read NFT ownership, tokens, tier, ticks, and liquidity on chain.</p></article>
-            <article class="journey-node"><div class="journey-node__track"><b>02</b><i></i></div><h3>DIAGNOSE</h3><p>Compare current pool tick with the position’s active range.</p></article>
+            <article class="journey-node active"><div class="journey-node__track"><b>01</b><i></i></div><h3>DISCOVER</h3><p>Read NFT tokens, tier, range, and pool state on chain.</p></article>
+            <article class="journey-node"><div class="journey-node__track"><b>02</b><i></i></div><h3>DIAGNOSE</h3><p>Compare the current pool price with the position’s active range.</p></article>
             <article class="journey-node"><div class="journey-node__track"><b>03</b><i></i></div><h3>PREVIEW</h3><p>Statically simulate collection, increase, or removal parameters.</p></article>
             <article class="journey-node"><div class="journey-node__track"><b>04</b><i></i></div><h3>REVIEW</h3><p>Expose exact amounts, minimums, deadline, and target contract.</p></article>
             <article class="journey-node"><div class="journey-node__track"><b>05</b><i></i></div><h3>MANAGE</h3><p>Submit only after an explicit wallet confirmation.</p></article>
@@ -833,6 +853,7 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
     "0x2556F7f8d82EbcdD7b821b0981C38D9dA9439CdD",
     "0x24F0154C1dCe548AdF15da2098Fdd8B8A3B8151D",
     "0xB709276c0e8d3A5372A13d4fEA886496F396feA1",
+    "0xd6c31bA0754C4383A41c0e9DF042C62b5e918f6d",
     "0x15D38573d2feeb82e7ad5187aB8c1D52810B1f07",
     "0x770CFA2FB975E7bCAEDDe234D92c3858C517Adca",
     "0x042b48a98B37042D58Bc8defEEB7cA4eC76E6106",
@@ -841,6 +862,7 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
     "0x57fde0a71132198BBeC939B98976993d8D89D225",
     "0x2b591e99afE9f32eAA6214f7B7629768c40Eeb39",
     "0x95B303987A60C71504D99Aa1b13B4DA07b0790ab",
+    "0xc10A4Ed9b4042222d69ff0B374eddd47ed90fC1F",
     "0x2fa878Ab3F87CC1C9737Fc071108F904c0B0C95d"
   ]);
   var MAX_SAVED_TOKEN_RESTORES=40,STARTUP_WORKERS=4;
@@ -880,6 +902,7 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
       "function factory() view returns(address)","function WETH9() view returns(address)",
       "function deployer() view returns(address)","function baseURI() view returns(string)",
       "function balanceOf(address) view returns(uint256)","function tokenOfOwnerByIndex(address,uint256) view returns(uint256)",
+      "function totalSupply() view returns(uint256)","function tokenByIndex(uint256) view returns(uint256)",
       "function ownerOf(uint256) view returns(address)",
       "function positions(uint256 tokenId) view returns(uint96 nonce,address operator,address token0,address token1,uint24 fee,int24 tickLower,int24 tickUpper,uint128 liquidity,uint256 feeGrowthInside0LastX128,uint256 feeGrowthInside1LastX128,uint128 tokensOwed0,uint128 tokensOwed1)",
       "function createAndInitializePoolIfNecessary(address token0,address token1,uint24 fee,uint160 sqrtPriceX96) payable returns(address pool)",
@@ -898,7 +921,7 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
     deployer:["function owner() view returns(address)","function factoryAddress() view returns(address)"],
     descriptor:[]
   });
-  var MAX_UINT128=(1n<<128n)-1n, Q96=1n<<96n, Q192=1n<<192n, MIN_TICK=-887272, MAX_TICK=887272, NATIVE_MAX_GAS_UNITS=1500000n;
+  var MAX_UINT128=(1n<<128n)-1n, Q96=1n<<96n, Q192=1n<<192n, MIN_TICK=-887272, MAX_TICK=887272, NATIVE_MAX_GAS_UNITS=1500000n, PUBLIC_POSITION_PAGE_SIZE=100;
   var rpcRequest=new E.FetchRequest(CHAIN.rpc);rpcRequest.timeout=18000;
   var readProvider = new E.JsonRpcProvider(rpcRequest,{name:"pulsechain",chainId:369},{staticNetwork:true,batchMaxCount:1});
   var contracts = {
@@ -912,9 +935,9 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
     rpcOk:false,latestBlock:0,latestTimestamp:0,feeTiers:[],tokens:new Map(),tokenLoads:new Map(),from:null,to:null,pool:null,
     spotOut:null,simulatedOut:null,minOut:null,quoteNonce:0,quoteSource:"none",swapAllowance:null,swapAllowanceError:null,swapAllowanceNonce:0,swapFillNonce:0,
     wallets:new Map(),providerIds:new WeakMap(),selectedWallet:null,rawWallet:null,browserProvider:null,
-    account:null,walletChain:null,walletHandlers:null,syncToken:0,nativeBalance:null,nativeBalanceError:null,balanceBlock:null,balanceFetchedAt:null,balanceNonce:0,positionsNonce:0,swapNativePls:true,
+    account:null,walletChain:null,walletHandlers:null,syncToken:0,nativeBalance:null,nativeBalanceError:null,balanceBlock:null,balanceFetchedAt:null,balanceNonce:0,positionsNonce:0,allPositionsNonce:0,positionValueNonce:0,swapNativePls:true,
     modalNonce:0,modalLocked:false,modalReturnFocus:null,modalAccountHandler:null,
-    positions:[],selectedPosition:null,expandedPositionId:null,dexCache:new Map(),adminNonce:0,adminConfig:null,adminPool:null,
+    positions:[],allPositions:[],allPositionsTotal:null,allPositionsBlock:null,allPositionsNextIndex:0,positionTab:"active",positionLoading:null,selectedPosition:null,expandedPositionId:null,dexCache:new Map(),positionMarketCache:new Map(),adminNonce:0,adminConfig:null,adminPool:null,
     settings:{slippageBps:50,deadlineMinutes:20,unlimitedApproval:false}
   };
   var startupState={startedAt:Date.now(),inFlight:false,slowTimer:null,releaseTimer:null,lastReport:null};
@@ -1129,7 +1152,7 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
     document.querySelectorAll(".view").forEach(function(v){v.classList.toggle("active",v.id==="view-"+name)});
     document.querySelectorAll("[data-nav]").forEach(function(b){b.classList.toggle("active",b.dataset.nav===name)});
     if(!replace)history.replaceState(null,"","#"+name);
-    if(name==="positions"&&state.account)loadPositions();
+    if(name==="positions")loadPositions();
     if(name==="protocol"){if(!document.body.classList.contains("app-loading"))loadProtocol();renderAdminAccess(true)}
     window.scrollTo({top:0,behavior:"smooth"})
   }
@@ -1180,7 +1203,7 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
   }
   function disconnectWallet(){
     var accountHandler=state.modalAccountHandler;state.syncToken++;state.balanceNonce++;state.positionsNonce++;state.swapAllowanceNonce++;state.swapFillNonce++;state.adminNonce++;detachWallet();try{if(state.browserProvider&&state.browserProvider.destroy)state.browserProvider.destroy()}catch(_){}
-    state.selectedWallet=null;state.rawWallet=null;state.browserProvider=null;state.account=null;state.walletChain=null;state.nativeBalance=null;state.nativeBalanceError=null;state.balanceBlock=null;state.balanceFetchedAt=null;state.swapAllowance=null;state.swapAllowanceError=null;state.positions=[];state.selectedPosition=null;state.expandedPositionId=null;state.adminConfig=null;state.adminPool=null;state.tokens.forEach(function(t){t.balance=null;t.balanceError=null});renderWallet();renderPositions();renderTokenSides();refreshSwapState();renderAdminAccess(false);if(accountHandler){accountHandler("invalidate");if(state.modalAccountHandler===accountHandler)accountHandler("refresh")}
+    state.selectedWallet=null;state.rawWallet=null;state.browserProvider=null;state.account=null;state.walletChain=null;state.nativeBalance=null;state.nativeBalanceError=null;state.balanceBlock=null;state.balanceFetchedAt=null;state.swapAllowance=null;state.swapAllowanceError=null;state.positions=[];state.positionLoading=null;state.selectedPosition=null;state.expandedPositionId=null;state.adminConfig=null;state.adminPool=null;state.tokens.forEach(function(t){t.balance=null;t.balanceError=null});renderWallet();renderPositions();renderTokenSides();refreshSwapState();renderAdminAccess(false);if(accountHandler){accountHandler("invalidate");if(state.modalAccountHandler===accountHandler)accountHandler("refresh")}
   }
   function bindWallet(){
     var raw=state.rawWallet,h={accounts:function(){syncWallet()},chain:function(){try{if(state.browserProvider.destroy)state.browserProvider.destroy()}catch(_){}state.browserProvider=new E.BrowserProvider(raw,"any");syncWallet()},disconnect:function(){disconnectWallet()}};
@@ -1568,7 +1591,7 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
       candidates=candidates.filter(Boolean).sort(function(a,b){return a.liquidity===b.liquidity?0:(a.liquidity>b.liquidity?-1:1)});
       state.pool=candidates[0]||null;renderPoolState();
       if(!state.pool){$("quoteFreshness").textContent="No direct V3 pool exists";$("swapNotice").innerHTML="No initialized direct pool exists for this pair at an enabled fee tier. Open <button class='link-button' id='noticeCreatePool'>New position</button> to deliberately initialize the first price and liquidity.";if($("noticeCreatePool"))$("noticeCreatePool").addEventListener("click",function(){navigate("positions");openNewPositionModal()})}
-      else if(state.pool.liquidity===0n){$("quoteFreshness").textContent="Pool has zero active liquidity";$("swapNotice").textContent="This pool is initialized but has no active in-range liquidity. Router execution remains disabled until a position supplies the current tick."}
+      else if(state.pool.liquidity===0n){$("quoteFreshness").textContent="Pool has zero active liquidity";$("swapNotice").textContent="This pool is initialized but has no active in-range liquidity. Router execution remains disabled until a position supplies liquidity at the current price."}
       else{$("quoteFreshness").textContent="Non-binding slot0 reference";$("swapNotice").textContent="The displayed output is a non-binding pool spot reference. Approval enables a wallet-context router simulation; only that simulation can produce the protected minimum.";computeSpotReference()}
       checkSwapAllowance();refreshSwapState()
     }catch(err){if(nonce!==state.quoteNonce)return;$("quoteFreshness").textContent="Pool query failed";toast(safeError(err),"error");refreshSwapState()}
@@ -1733,107 +1756,102 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
     })
   }
   function updateShareUrlAndQuote(){state.simulatedOut=null;state.minOut=null;computeSpotReference();checkSwapAllowance();refreshSwapState();updateShareUrl()}
-  async function buildPosition(tokenId,blockTag){
-    var raw=await contracts.manager.positions(tokenId,{blockTag:blockTag}),token0=await loadToken(raw.token0,false),token1=await loadToken(raw.token1,false);
-    var poolAddress=await contracts.factory.getPool(raw.token0,raw.token1,raw.fee,{blockTag:blockTag});
-    var tick=null,spacing=null,sqrtPriceX96=null,poolLiquidity=0n;
-    if(poolAddress!==E.ZeroAddress){
-      var pool=new E.Contract(poolAddress,ABI.pool,readProvider),pv=await Promise.all([pool.slot0({blockTag:blockTag}),pool.tickSpacing({blockTag:blockTag}),pool.liquidity({blockTag:blockTag})]);
-      tick=Number(pv[0].tick);sqrtPriceX96=pv[0].sqrtPriceX96;spacing=Number(pv[1]);poolLiquidity=pv[2]
-    }
-    var lower=Number(raw.tickLower),upper=Number(raw.tickUpper),status=tick==null?"unknown":tick<lower?"below":tick>=upper?"above":"active";
-    return {tokenId:BigInt(tokenId),token0:token0,token1:token1,fee:Number(raw.fee),tickLower:lower,tickUpper:upper,tick:tick,sqrtPriceX96:sqrtPriceX96,spacing:spacing,liquidity:raw.liquidity,tokensOwed0:raw.tokensOwed0,tokensOwed1:raw.tokensOwed1,poolAddress:poolAddress,poolLiquidity:poolLiquidity,status:status}
+  async function mapConcurrent(items,limit,worker){
+    var output=new Array(items.length),cursor=0;
+    async function run(){while(true){var index=cursor++;if(index>=items.length)return;try{output[index]=await worker(items[index],index)}catch(err){console.warn("Position read failed",items[index],err);output[index]=null}}}
+    var runners=[];for(var i=0;i<Math.min(limit,items.length);i++)runners.push(run());await Promise.all(runners);return output.filter(Boolean)
+  }
+  async function poolPositionContext(poolAddress,blockTag,poolCache){
+    if(poolAddress===E.ZeroAddress)return {tick:null,spacing:null,sqrtPriceX96:null,poolLiquidity:0n};
+    var key=poolAddress.toLowerCase(),pending=poolCache&&poolCache.get(key);if(pending)return pending;
+    pending=(async function(){var pool=new E.Contract(poolAddress,ABI.pool,readProvider),pv=await Promise.all([pool.slot0({blockTag:blockTag}),pool.tickSpacing({blockTag:blockTag}),pool.liquidity({blockTag:blockTag})]),initialized=pv[0].sqrtPriceX96!==0n;return {tick:initialized?Number(pv[0].tick):null,spacing:Number(pv[1]),sqrtPriceX96:initialized?pv[0].sqrtPriceX96:null,poolLiquidity:pv[2]}})();
+    if(poolCache)poolCache.set(key,pending);return pending
+  }
+  async function buildPosition(tokenId,blockTag,knownOwner,poolCache){
+    var reads=await Promise.all([contracts.manager.positions(tokenId,{blockTag:blockTag}),knownOwner?Promise.resolve(knownOwner):contracts.manager.ownerOf(tokenId,{blockTag:blockTag})]),raw=reads[0],owner=E.getAddress(reads[1]);
+    var tokens=await Promise.all([loadToken(raw.token0,false),loadToken(raw.token1,false)]),token0=tokens[0],token1=tokens[1],poolAddress=await contracts.factory.getPool(raw.token0,raw.token1,raw.fee,{blockTag:blockTag}),context;try{context=await poolPositionContext(poolAddress,blockTag,poolCache||new Map())}catch(err){console.warn("Pool context unavailable for position",tokenId,err);context={tick:null,spacing:({100:1,500:10,2500:50,10000:200})[Number(raw.fee)]||null,sqrtPriceX96:null,poolLiquidity:0n}}
+    var lower=Number(raw.tickLower),upper=Number(raw.tickUpper),status=context.tick==null?"unknown":context.tick<lower?"below":context.tick>=upper?"above":"active",principal0=null,principal1=null;
+    if(context.sqrtPriceX96!=null){var principal=amountsForRangeLiquidity(context.sqrtPriceX96,sqrtRatioAtTick(lower),sqrtRatioAtTick(upper),raw.liquidity);principal0=principal.amount0;principal1=principal.amount1}
+    return {tokenId:BigInt(tokenId),owner:owner,token0:token0,token1:token1,fee:Number(raw.fee),tickLower:lower,tickUpper:upper,tick:context.tick,sqrtPriceX96:context.sqrtPriceX96,spacing:context.spacing,liquidity:raw.liquidity,tokensOwed0:raw.tokensOwed0,tokensOwed1:raw.tokensOwed1,poolAddress:poolAddress,poolLiquidity:context.poolLiquidity,status:status,principal0:principal0,principal1:principal1,valueUsd:raw.liquidity===0n?0:null,valueStatus:raw.liquidity===0n?"ready":"pending",valueConfidence:"standard",market:null,poolMarket:null,poolMarketStatus:"pending"}
+  }
+  async function loadOwnedPositions(){
+    var account=state.account,generation=state.syncToken,nonce=++state.positionsNonce;if(!account){state.positions=[];renderPositions();return}
+    if(state.positionTab!=="all"){state.positionLoading="owned";renderPositions()}
+    try{
+      var block=await readProvider.getBlockNumber();if(nonce!==state.positionsNonce||generation!==state.syncToken||!same(account,state.account))return;
+      var count=await contracts.manager.balanceOf(account,{blockTag:block}),limit=Number(count);if(!Number.isSafeInteger(limit))throw new Error("This wallet position count is too large for browser enumeration");var indexes=Array.from({length:limit},function(_,i){return i});
+      var ids=await mapConcurrent(indexes,6,function(index){return contracts.manager.tokenOfOwnerByIndex(account,index,{blockTag:block})});if(nonce!==state.positionsNonce||generation!==state.syncToken||!same(account,state.account))return;
+      var poolCache=new Map(),list=await mapConcurrent(ids,4,function(id){return buildPosition(id,block,account,poolCache)});list.sort(function(a,b){return a.tokenId===b.tokenId?0:a.tokenId>b.tokenId?-1:1});if(nonce!==state.positionsNonce||generation!==state.syncToken||!same(account,state.account))return;
+      state.positions=list;if(state.positionLoading==="owned")state.positionLoading=null;await refreshBalances();if(nonce!==state.positionsNonce||generation!==state.syncToken||!same(account,state.account))return;renderPositions();loadPositionValuations(list,function(){return nonce===state.positionsNonce&&generation===state.syncToken&&same(account,state.account)})
+    }catch(err){if(nonce!==state.positionsNonce||generation!==state.syncToken||!same(account,state.account))return;state.positions=[];if(state.positionLoading==="owned")state.positionLoading=null;renderPositions();toast(safeError(err),"error")}
+  }
+  async function loadAllPositions(append){
+    var continuing=Boolean(append&&state.allPositionsBlock!=null&&state.allPositionsTotal!=null&&BigInt(state.allPositionsNextIndex)<state.allPositionsTotal),nonce=++state.allPositionsNonce;state.positionLoading=continuing?"all-more":"all";if(!continuing){state.allPositions=[];state.allPositionsTotal=null;state.allPositionsBlock=null;state.allPositionsNextIndex=0}renderPositions();
+    try{
+      var block=continuing?state.allPositionsBlock:await readProvider.getBlockNumber(),total=continuing?state.allPositionsTotal:await contracts.manager.totalSupply({blockTag:block});if(nonce!==state.allPositionsNonce)return;
+      var start=continuing?state.allPositionsNextIndex:0,remaining=total-BigInt(start),count=remaining>BigInt(PUBLIC_POSITION_PAGE_SIZE)?PUBLIC_POSITION_PAGE_SIZE:Number(remaining),indexes=Array.from({length:count},function(_,i){return start+i}),ids=await mapConcurrent(indexes,6,function(index){return contracts.manager.tokenByIndex(index,{blockTag:block})});if(nonce!==state.allPositionsNonce)return;if(count>0&&!ids.length)throw new Error("The position manager did not expose its public token index");
+      var poolCache=new Map(),page=await mapConcurrent(ids,4,function(id){return buildPosition(id,block,null,poolCache)}),merged=continuing?state.allPositions.concat(page):page,unique=new Map();merged.forEach(function(p){unique.set(String(p.tokenId),p)});var list=Array.from(unique.values());list.sort(function(a,b){return a.tokenId===b.tokenId?0:a.tokenId>b.tokenId?-1:1});if(nonce!==state.allPositionsNonce)return;
+      state.allPositions=list;state.allPositionsTotal=total;state.allPositionsBlock=block;state.allPositionsNextIndex=start+count;if(state.positionLoading==="all"||state.positionLoading==="all-more")state.positionLoading=null;renderPositions();loadPositionValuations(page,function(){return state.allPositionsBlock===block&&page.every(function(p){return state.allPositions.indexOf(p)!==-1})})
+    }catch(err){if(nonce!==state.allPositionsNonce)return;if(!continuing){state.allPositions=[];state.allPositionsTotal=null;state.allPositionsBlock=null;state.allPositionsNextIndex=0}state.positionLoading=null;renderPositions();toast("All Positions could not be enumerated from the manager: "+safeError(err),"error")}
+  }
+  async function loadManualPosition(tokenId){
+    try{
+      var block=await readProvider.getBlockNumber(),p=await buildPosition(tokenId,block,null,new Map()),owned=state.account&&same(p.owner,state.account);
+      function merge(list){return [p].concat(list.filter(function(item){return item.tokenId!==p.tokenId})).sort(function(a,b){return a.tokenId===b.tokenId?0:a.tokenId>b.tokenId?-1:1})}
+      state.allPositions=merge(state.allPositions);if(owned)state.positions=merge(state.positions);state.positionTab=owned?(p.liquidity>0n?"active":"inactive"):"all";state.selectedPosition=p;state.expandedPositionId=p.tokenId;renderPositions();loadPositionValuations([p],function(){return state.selectedPosition&&state.selectedPosition.tokenId===p.tokenId})
+    }catch(err){toast(safeError(err),"error")}
   }
   async function loadPositions(manualTokenId){
-    var account=state.account,generation=state.syncToken,nonce=++state.positionsNonce;if(!account){state.expandedPositionId=null;renderPositions();return}
-    $("positionList").innerHTML="<div class='empty-state'><div><span class='token-mark'>↻</span><h3>Reading position NFTs</h3><p>Taking a consistent PulseChain block snapshot.</p></div></div>";
-    try{
-      var block=await readProvider.getBlockNumber(),ids=[];
-      if(nonce!==state.positionsNonce||generation!==state.syncToken||!same(account,state.account))return;
-      if(manualTokenId!=null){
-        var owner=await contracts.manager.ownerOf(manualTokenId,{blockTag:block});if(!same(owner,account))throw new Error("Connected account does not own position #"+formatInteger(manualTokenId));ids=[BigInt(manualTokenId)]
-      }else{
-        var count=await contracts.manager.balanceOf(account,{blockTag:block}),limit=count>24n?24:Number(count);
-        for(var i=0;i<limit;i++){if(nonce!==state.positionsNonce||generation!==state.syncToken||!same(account,state.account))return;ids.push(await contracts.manager.tokenOfOwnerByIndex(account,i,{blockTag:block}))}
-      }
-      var list=[];for(var j=0;j<ids.length;j++){try{list.push(await buildPosition(ids[j],block))}catch(err){console.warn("Position read failed",ids[j],err)}}
-      if(nonce!==state.positionsNonce||generation!==state.syncToken||!same(account,state.account))return;state.positions=list;if(manualTokenId==null)$("positionCountNote").textContent=count>24n?"Showing first 24 of "+formatInteger(count):"Read at block "+formatInteger(block);await refreshBalances();
-      if(nonce!==state.positionsNonce||generation!==state.syncToken||!same(account,state.account))return;
-      if(manualTokenId!=null&&list[0])state.selectedPosition=list[0];else if(!state.selectedPosition||!list.some(function(p){return p.tokenId===state.selectedPosition.tokenId}))state.selectedPosition=list[0]||null;
-      if(state.expandedPositionId!=null&&!list.some(function(p){return p.tokenId===state.expandedPositionId}))state.expandedPositionId=null;
-      renderPositions()
-    }catch(err){if(nonce!==state.positionsNonce||generation!==state.syncToken||!same(account,state.account))return;state.positions=[];state.selectedPosition=null;state.expandedPositionId=null;renderPositions();toast(safeError(err),"error")}
+    if(manualTokenId!=null)return loadManualPosition(manualTokenId);
+    var jobs=[];if(state.account)jobs.push(loadOwnedPositions());else{state.positions=[];state.positionsNonce++;if(state.positionTab!=="all")state.positionLoading=null}
+    if(state.positionTab==="all")jobs.push(loadAllPositions());else if(!state.account)renderPositions();await Promise.allSettled(jobs)
   }
-  function positionTickPct(p){
-    if(p.tick==null)return 50;var span=p.tickUpper-p.tickLower;if(span<=0)return 50;
-    return Math.max(2,Math.min(98,Math.round((p.tick-p.tickLower)*100/span)))
-  }
+  function positionTickPct(p){if(p.tick==null)return 50;var span=p.tickUpper-p.tickLower;if(span<=0)return 50;return Math.max(2,Math.min(98,Math.round((p.tick-p.tickLower)*100/span)))}
   function positionStatusLabel(p){return p.status==="active"?"IN RANGE":p.status==="below"?"BELOW RANGE":p.status==="above"?"ABOVE RANGE":"POOL UNAVAILABLE"}
+  function isFullRangePosition(p){var spacing=Number(p&&p.spacing);return Number.isInteger(spacing)&&spacing>0&&p.tickLower===Math.ceil(MIN_TICK/spacing)*spacing&&p.tickUpper===Math.floor(MAX_TICK/spacing)*spacing}
+  function positionRangeLabel(p){return isFullRangePosition(p)?"Full Range":formatInteger(p.tickLower)+" → "+formatInteger(p.tickUpper)}
+  function positionLifecycleLabel(p){return p.liquidity>0n?"ACTIVE":"INACTIVE"}
+  function canManagePosition(p){return Boolean(state.account&&p&&same(p.owner,state.account))}
   function walletBalanceLabel(token){return token.balance==null?(token.balanceError?"Unavailable":"Loading…"):trimUnits(token.balance,token.decimals,8)+" "+token.symbol}
-  function renderRangeBars(target,p){
-    var heights=[16,22,31,44,61,78,92,97,88,73,56,40,29,20,14],html="";
-    for(var i=0;i<heights.length;i++)html+="<i class='"+(i>=3&&i<=11?"hot":"")+"' style='height:"+String(heights[i])+"%'></i>";
-    target.innerHTML=html+(p&&p.tick!=null?"<span class='range-visual__tick' style='left:"+String(positionTickPct(p))+"%'></span>":"")
-  }
+  function visiblePositions(){var list=state.positionTab==="all"?state.allPositions:state.positions.filter(function(p){return state.positionTab==="active"?p.liquidity>0n:p.liquidity===0n});return list.slice().sort(function(a,b){return a.tokenId===b.tokenId?0:a.tokenId>b.tokenId?-1:1})}
+  function positionValueDisplay(p){if(p.valueStatus==="ready"&&p.valueUsd!=null)return (p.valueConfidence==="low"?"~":"")+formatUsd(p.valueUsd);if(p.valueStatus==="error")return "Unavailable";return "Pricing…"}
+  function positionPriceFromSqrt(sqrt,token0,token1){try{sqrt=BigInt(sqrt);if(sqrt<=0n)return null;return fractionToDecimal(sqrt*sqrt*(10n**BigInt(token0.decimals)),Q192*(10n**BigInt(token1.decimals)),36)}catch(_){return null}}
+  function concisePositionPrice(value){if(value==null)return "Unavailable";var n=Number(value);if(!Number.isFinite(n)||n<=0)return formatDecimal(value);if(n>=1000000000||n<0.000001)return n.toExponential(5).replace(/\.0+e/,"e");return n.toLocaleString("en-US",{maximumSignificantDigits:8})}
+  function positionCurrentPriceDisplay(p,sqrt){var value=positionPriceFromSqrt(sqrt==null?p.sqrtPriceX96:sqrt,p.token0,p.token1);return value==null?"Unavailable":"1 "+p.token0.symbol+" = "+concisePositionPrice(value)+" "+p.token1.symbol}
+  function positionVolumeDisplay(p){if(p.poolMarketStatus==="pending")return "Loading…";return p.poolMarket&&p.poolMarket.volumeH24!=null?formatUsd(p.poolMarket.volumeH24):"Unavailable"}
+  function renderRangeBars(target,p){var heights=[16,22,31,44,61,78,92,97,88,73,56,40,29,20,14],html="";for(var i=0;i<heights.length;i++)html+="<i class='"+(i>=3&&i<=11?"hot":"")+"' style='height:"+String(heights[i])+"%'></i>";target.innerHTML=html+(p&&p.tick!=null?"<span class='range-visual__tick' style='left:"+String(positionTickPct(p))+"%'></span>":"")}
   function positionManagerHtml(p,expanded){
-    var id=formatInteger(p.tokenId),canBurn=p.liquidity===0n&&p.tokensOwed0===0n&&p.tokensOwed1===0n;
-    return "<div class='position-card__drawer' id='position-manager-"+esc(String(p.tokenId))+"' role='region' aria-label='Manage Finvesta V3 position #"+esc(id)+"'"+(expanded?"":" hidden")+">"+
-      "<div class='position-card__drawer-head'><span><small>MANAGING THIS POSITION</small><strong>"+esc(p.token0.symbol)+" / "+esc(p.token1.symbol)+" · NFT #"+esc(id)+"</strong></span><span class='status "+(p.status==="active"?"":"out")+"'>"+esc(positionStatusLabel(p))+"</span></div>"+
-      "<div class='position-card__quick-stats'><div><span>ACTIVE RANGE</span><strong>"+formatInteger(p.tickLower)+" → "+formatInteger(p.tickUpper)+"</strong></div><div><span>LIQUIDITY</span><strong>"+esc(formatInteger(p.liquidity))+"</strong></div><div><span>RECORDED OWED</span><strong>"+esc(trimUnits(p.tokensOwed0,p.token0.decimals,6))+" "+esc(p.token0.symbol)+" · "+esc(trimUnits(p.tokensOwed1,p.token1.decimals,6))+" "+esc(p.token1.symbol)+"</strong></div></div>"+
-      "<div class='position-card__drawer-actions'><button type='button' class='primary' data-position-action='collect' data-position-id='"+esc(String(p.tokenId))+"'><span>Collect fees</span><span>→</span></button><button type='button' class='secondary' data-position-action='increase' data-position-id='"+esc(String(p.tokenId))+"'>＋ Add liquidity</button><button type='button' class='secondary' data-position-action='remove' data-position-id='"+esc(String(p.tokenId))+"'>Remove liquidity</button>"+(canBurn?"<button type='button' class='secondary span-all' data-position-action='burn' data-position-id='"+esc(String(p.tokenId))+"'>Burn empty NFT</button>":"")+"</div>"+
-      "<p class='position-card__drawer-note'>These controls apply to "+esc(p.token0.symbol)+" / "+esc(p.token1.symbol)+" · NFT #"+esc(id)+" only.</p></div>"
+    var id=formatInteger(p.tokenId),owned=canManagePosition(p),canBurn=owned&&p.liquidity===0n&&p.tokensOwed0===0n&&p.tokensOwed1===0n,actions=owned?"<div class='position-card__drawer-actions'><button type='button' class='primary' data-position-action='collect' data-position-id='"+esc(String(p.tokenId))+"'><span>Collect fees</span><span>→</span></button><button type='button' class='secondary' data-position-action='increase' data-position-id='"+esc(String(p.tokenId))+"'>＋ Add liquidity</button>"+(p.liquidity>0n?"<button type='button' class='secondary' data-position-action='remove' data-position-id='"+esc(String(p.tokenId))+"'>Remove liquidity</button>":"")+(canBurn?"<button type='button' class='secondary span-all' data-position-action='burn' data-position-id='"+esc(String(p.tokenId))+"'>Burn empty NFT</button>":"")+"</div>":"";
+    return "<div class='position-card__drawer' id='position-manager-"+esc(String(p.tokenId))+"' role='region' aria-label='Position #"+esc(id)+" details'"+(expanded?"":" hidden")+"><div class='position-card__drawer-head'><span><small>"+(owned?"YOUR POSITION · MANAGEMENT":"PUBLIC POSITION · READ ONLY")+"</small><strong>"+esc(p.token0.symbol)+" / "+esc(p.token1.symbol)+" · NFT #"+esc(id)+"</strong></span><span class='status "+(p.status==="active"?"":"out")+"'>"+esc(positionStatusLabel(p))+"</span></div><div class='position-card__quick-stats'><div><span>PRICE RANGE</span><strong>"+esc(positionRangeLabel(p))+"</strong></div><div><span>CURRENT PRICE</span><strong>"+esc(positionCurrentPriceDisplay(p))+"</strong></div><div><span>TVL</span><strong>"+esc(positionValueDisplay(p))+"</strong></div><div><span>24H VOLUME</span><strong>"+esc(positionVolumeDisplay(p))+"</strong></div></div>"+actions+"<p class='position-card__drawer-note'>TVL is the estimated current LP principal; recorded owed fees are excluded. Volume is accepted only from exact pool-address market data."+(p.valueConfidence==="low"?" The TVL uses a low-liquidity reference and is explicitly untrusted.":"")+(owned?"":" Management is unavailable for this connected wallet.")+"</p></div>"
+  }
+  function renderPositionSummary(){
+    var ownedActive=state.positions.filter(function(p){return p.liquidity>0n}),ownedInactive=state.positions.filter(function(p){return p.liquidity===0n}),allCount=state.allPositionsTotal==null?(state.allPositions.length?state.allPositions.length:null):state.allPositionsTotal,isAll=state.positionTab==="all",truncated=isAll&&state.allPositionsTotal!=null&&BigInt(state.allPositionsNextIndex)<state.allPositionsTotal,valueSet=isAll?state.allPositions:ownedActive,funded=valueSet.filter(function(p){return p.liquidity>0n}),known=funded.filter(function(p){return p.valueStatus==="ready"&&p.valueUsd!=null}),lowConfidence=known.filter(function(p){return p.valueConfidence==="low"}).length,total=known.reduce(function(sum,p){return sum+p.valueUsd},0),pending=funded.some(function(p){return p.valueStatus==="pending"});
+    $("positionCountLabel").textContent=isAll?"ALL POSITION NFTS":"MY POSITION NFTS";$("positionCount").textContent=isAll?(allCount==null?"—":formatInteger(allCount)):(state.account?formatInteger(state.positions.length):"—");
+    $("positionCountNote").textContent=isAll?(state.allPositionsBlock==null?"Public manager index":(truncated?"Showing "+formatInteger(state.allPositions.length)+" of "+formatInteger(state.allPositionsTotal)+" · ":"")+"Read at block "+formatInteger(state.allPositionsBlock)):(state.account?"Connected wallet positions":"Connect a wallet to scan");
+    $("activeCount").textContent=state.account?formatInteger(ownedActive.length):"—";$("allPositionTabCount").textContent=allCount==null?"—":formatInteger(allCount);$("activePositionTabCount").textContent=state.account?formatInteger(ownedActive.length):"—";$("inactivePositionTabCount").textContent=state.account?formatInteger(ownedInactive.length):"—";
+    $("positionValueLabel").textContent=isAll?(truncated?"LOADED PUBLIC TVL":"COMBINED PUBLIC TVL"):"MY COMBINED TVL";$("positionValueTotal").textContent=!funded.length?formatUsd(0):known.length?(lowConfidence?"~":"")+formatUsd(total)+(known.length<funded.length||truncated?"+":""):pending?"Pricing…":"Unavailable";$("positionValueNote").textContent=!funded.length?"No funded liquidity in this view":known.length+" of "+funded.length+" loaded positions priced · estimated current LP principal"+(lowConfidence?" · "+String(lowConfidence)+" low-liquidity estimate"+(lowConfidence===1?"":"s"):"")+(truncated?" · subtotal":"");
+    $("positionListTitle").textContent=isAll?"All positions":state.positionTab==="active"?"Your active positions":"Your inactive positions";document.querySelectorAll("[data-position-tab]").forEach(function(button){var active=button.dataset.positionTab===state.positionTab;button.classList.toggle("active",active);button.setAttribute("aria-selected",String(active))})
   }
   function renderPositions(){
-    $("positionCount").textContent=state.account?formatInteger(state.positions.length):"—";
-    $("activeCount").textContent=state.account?formatInteger(state.positions.filter(function(p){return p.status==="active"}).length):"—";
-    var list=$("positionList");
-    if(!state.account){
-      list.innerHTML="<div class='empty-state'><div><span class='token-mark'>◇</span><h3>Connect to discover positions</h3><p>Finvesta reads enumerable V3 position NFTs owned by the connected address.</p><button class='secondary' data-connect>Connect wallet</button></div></div>";
-      list.querySelector("[data-connect]").addEventListener("click",openWalletModal);renderPositionDetail();return
-    }
-    if(!state.positions.length){
-      list.innerHTML="<div class='empty-state'><div><span class='token-mark'>＋</span><h3>No V3 positions found</h3><p>This deployment currently has no pools. Initialize the first pool and mint its position through the guarded creation flow.</p><button class='position-create-cta' id='emptyNewPosition'><span class='position-create-cta__plus'>＋</span><span><strong>Create first position</strong><small>Initialize liquidity</small></span><span aria-hidden='true'>→</span></button></div></div>";
-      $("emptyNewPosition").addEventListener("click",openNewPositionModal);renderPositionDetail();return
-    }
-    list.innerHTML=state.positions.map(function(p){
-      var pct=positionTickPct(p),active=state.selectedPosition&&state.selectedPosition.tokenId===p.tokenId,expanded=state.expandedPositionId===p.tokenId,id=String(p.tokenId);
-      return "<article class='position-card "+(active?"active ":"")+(expanded?"expanded":"")+"' data-position='"+esc(id)+"'>"+
-        "<div class='position-card__summary' data-position-summary='"+esc(id)+"'>"+
-        "<div class='pair'><div class='pair-marks'>"+tokenMarkHtml(p.token0,true)+tokenMarkHtml(p.token1,true)+"</div><div><h3>"+esc(p.token0.symbol)+" / "+esc(p.token1.symbol)+"</h3><p>V3 · "+esc(feeLabel(p.fee))+" · NFT #"+esc(formatInteger(p.tokenId))+"</p></div></div>"+
-        "<div class='range-mini'><span class='status "+(p.status==="active"?"":"out")+"'>"+esc(positionStatusLabel(p))+"</span><div class='range-mini__track'><span></span><i style='left:"+String(pct)+"%'></i></div><small><span>"+formatInteger(p.tickLower)+"</span><span>"+formatInteger(p.tickUpper)+"</span></small></div>"+
-        "<div class='position-stat'><span>LIQUIDITY</span><strong>"+esc(compactBig(p.liquidity))+"</strong><span>POOL "+esc(shortAddress(p.poolAddress))+"</span></div><button type='button' class='secondary position-card__manage' data-manage-position='"+esc(id)+"' aria-expanded='"+(expanded?"true":"false")+"' aria-controls='position-manager-"+esc(id)+"'><span>"+(expanded?"Close #":"Manage #")+esc(formatInteger(p.tokenId))+"</span><b aria-hidden='true'>⌄</b></button></div>"+
-        positionManagerHtml(p,expanded)+"</article>"
-    }).join("");
-    function selectPosition(id){var p=state.positions.find(function(item){return item.tokenId===id});if(!p)return null;state.selectedPosition=p;return p}
-    list.querySelectorAll("[data-position-summary]").forEach(function(summary){
-      function select(){var id=BigInt(summary.dataset.positionSummary),p=selectPosition(id);if(p)renderPositions()}
-      summary.addEventListener("click",function(event){if(event.target.closest("[data-manage-position]"))return;select()})
-    });
-    list.querySelectorAll("[data-manage-position]").forEach(function(button){button.addEventListener("click",function(event){
-      event.stopPropagation();var id=BigInt(button.dataset.managePosition),opening=state.expandedPositionId!==id;if(!selectPosition(id))return;state.expandedPositionId=opening?id:null;renderPositions();
-      requestAnimationFrame(function(){var next=list.querySelector("[data-manage-position='"+String(id)+"']");if(next)next.focus({preventScroll:true});if(opening){var card=list.querySelector("[data-position='"+String(id)+"']");if(card){var rect=card.getBoundingClientRect();if(rect.top<0||rect.bottom>window.innerHeight)card.scrollIntoView({behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"nearest"})}}})
-    })});
-    list.querySelectorAll("[data-position-action]").forEach(function(button){button.addEventListener("click",function(event){
-      event.stopPropagation();var id=BigInt(button.dataset.positionId),p=selectPosition(id);if(!p)return;var action=button.dataset.positionAction;if(action==="collect")previewCollect(p);else if(action==="increase")openIncreaseModal(p);else if(action==="remove")openRemoveModal(p);else if(action==="burn")previewBurn(p)
-    })});
-    renderPositionDetail()
+    renderPositionSummary();var list=$("positionList"),positions=visiblePositions();if(!positions.some(function(p){return state.selectedPosition&&p.tokenId===state.selectedPosition.tokenId}))state.selectedPosition=positions[0]||null;if(state.expandedPositionId!=null&&!positions.some(function(p){return p.tokenId===state.expandedPositionId}))state.expandedPositionId=null;
+    if((state.positionLoading==="all"&&state.positionTab==="all")||(state.positionLoading==="owned"&&state.positionTab!=="all")){list.innerHTML="<div class='empty-state'><div><span class='token-mark'>↻</span><h3>Reading position NFTs</h3><p>Taking one consistent PulseChain block snapshot and resolving pool ranges.</p></div></div>";renderPositionDetail();return}
+    if(state.positionTab!=="all"&&!state.account){list.innerHTML="<div class='empty-state'><div><span class='token-mark'>◇</span><h3>Connect to view your positions</h3><p>Active and inactive tabs are filtered to the connected wallet.</p><button class='secondary' data-connect>Connect wallet</button></div></div>";list.querySelector("[data-connect]").addEventListener("click",openWalletModal);renderPositionDetail();return}
+    if(!positions.length){var all=state.positionTab==="all",inactive=state.positionTab==="inactive";list.innerHTML="<div class='empty-state'><div><span class='token-mark'>＋</span><h3>"+(all?"No public positions found":inactive?"No inactive positions":"No active positions")+"</h3><p>"+(all?"No position NFTs are currently enumerable from this manager.":inactive?"This wallet has no zero-liquidity position NFTs.":"This wallet has no funded V3 positions yet.")+"</p>"+(all?"":"<button class='position-create-cta' id='emptyNewPosition'><span class='position-create-cta__plus'>＋</span><span><strong>New position</strong><small>Create or initialize liquidity</small></span><span aria-hidden='true'>→</span></button>")+"</div></div>";if($("emptyNewPosition"))$("emptyNewPosition").addEventListener("click",openNewPositionModal);renderPositionDetail();return}
+    list.innerHTML=positions.map(function(p){var pct=positionTickPct(p),selected=state.selectedPosition&&state.selectedPosition.tokenId===p.tokenId,expanded=state.expandedPositionId===p.tokenId,id=String(p.tokenId),owned=canManagePosition(p),range=isFullRangePosition(p)?"<small class='full-range'><span>FULL RANGE</span></small>":"<small><span>"+formatInteger(p.tickLower)+"</span><span>"+formatInteger(p.tickUpper)+"</span></small>";return "<article class='position-card "+(selected?"active ":"")+(expanded?"expanded":"")+"' data-position='"+esc(id)+"'><div class='position-card__summary' data-position-summary='"+esc(id)+"'><div class='pair'><div class='pair-marks'>"+tokenMarkHtml(p.token0,true)+tokenMarkHtml(p.token1,true)+"</div><div><h3>"+esc(p.token0.symbol)+" / "+esc(p.token1.symbol)+"</h3><p>"+esc(feeLabel(p.fee))+" fee · NFT #"+esc(formatInteger(p.tokenId))+" · "+esc(positionLifecycleLabel(p))+"</p></div></div><div class='range-mini'><span class='status "+(p.status==="active"?"":"out")+"'>"+esc(positionStatusLabel(p))+"</span><div class='range-mini__track'><span></span><i style='left:"+String(pct)+"%'></i></div>"+range+"<small class='current-price'><span>"+esc(positionCurrentPriceDisplay(p))+"</span></small></div><div class='position-stat'><span>TVL"+(p.valueConfidence==="low"?" · LOW-LIQUIDITY ESTIMATE":"")+"</span><strong class='"+(p.valueStatus==="ready"?"value-ready":"")+"'>"+esc(positionValueDisplay(p))+"</strong><span>24H VOLUME "+esc(positionVolumeDisplay(p))+"</span></div><button type='button' class='secondary position-card__manage' data-manage-position='"+esc(id)+"' aria-expanded='"+(expanded?"true":"false")+"' aria-controls='position-manager-"+esc(id)+"'><span>"+(expanded?"Close #":owned?"Manage #":"View #")+esc(formatInteger(p.tokenId))+"</span><b aria-hidden='true'>⌄</b></button></div>"+positionManagerHtml(p,expanded)+"</article>"}).join("");
+    var more=state.positionTab==="all"&&state.allPositionsTotal!=null&&BigInt(state.allPositionsNextIndex)<state.allPositionsTotal;if(more)list.insertAdjacentHTML("beforeend","<div class='empty-state'><div><span class='token-mark'>＋</span><h3>More public positions available</h3><p>Loaded "+esc(formatInteger(state.allPositions.length))+" of "+esc(formatInteger(state.allPositionsTotal))+" from block "+esc(formatInteger(state.allPositionsBlock))+".</p><button type='button' class='secondary' id='loadMorePositions' "+(state.positionLoading==="all-more"?"disabled":"")+">"+(state.positionLoading==="all-more"?"Loading next page…":"Load next "+String(PUBLIC_POSITION_PAGE_SIZE)+" positions")+"</button></div></div>");if($("loadMorePositions"))$("loadMorePositions").addEventListener("click",function(){loadAllPositions(true)});
+    function selectPosition(id){var p=positions.find(function(item){return item.tokenId===id});if(!p)return null;state.selectedPosition=p;return p}
+    list.querySelectorAll("[data-position-summary]").forEach(function(summary){summary.addEventListener("click",function(event){if(event.target.closest("[data-manage-position]"))return;var p=selectPosition(BigInt(summary.dataset.positionSummary));if(p)renderPositions()})});
+    list.querySelectorAll("[data-manage-position]").forEach(function(button){button.addEventListener("click",function(event){event.stopPropagation();var id=BigInt(button.dataset.managePosition),opening=state.expandedPositionId!==id;if(!selectPosition(id))return;state.expandedPositionId=opening?id:null;renderPositions();requestAnimationFrame(function(){var next=list.querySelector("[data-manage-position='"+String(id)+"']");if(next)next.focus({preventScroll:true});if(opening){var card=list.querySelector("[data-position='"+String(id)+"']");if(card)card.scrollIntoView({behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"nearest"})}})})});
+    list.querySelectorAll("[data-position-action]").forEach(function(button){button.addEventListener("click",function(event){event.stopPropagation();var p=selectPosition(BigInt(button.dataset.positionId));if(!p||!canManagePosition(p))return;var action=button.dataset.positionAction;if(action==="collect")previewCollect(p);else if(action==="increase")openIncreaseModal(p);else if(action==="remove")openRemoveModal(p);else if(action==="burn")previewBurn(p)})});renderPositionDetail()
   }
   function renderPositionDetail(){
-    var d=$("positionDetail"),p=state.selectedPosition;
-    if(!p){
-      d.innerHTML="<p class='kicker'>Position intelligence</p><h2>No position selected</h2><p class='position-detail__meta'>Choose a position to inspect its range and management actions.</p><div class='range-visual'><div class='range-visual__bars' id='rangeBars'></div></div><div class='notice info'>Position values are shown in token units. No synthetic fiat values are used.</div>";
-      renderRangeBars($("rangeBars"));return
-    }
-    var canBurn=p.liquidity===0n&&p.tokensOwed0===0n&&p.tokensOwed1===0n;
-    d.innerHTML="<p class='kicker'>Finvesta V3 position · #"+esc(formatInteger(p.tokenId))+"</p><div class='pair'>"+tokenMarkHtml(p.token0,true)+tokenMarkHtml(p.token1,true)+"<div><h2>"+esc(p.token0.symbol)+" / "+esc(p.token1.symbol)+"</h2><p class='position-detail__meta'>"+esc(feeLabel(p.fee))+" pool fee · concentrated liquidity</p></div></div>"+
-      "<div class='range-visual'><div class='range-visual__bars' id='rangeBars'></div></div>"+
-      "<dl class='details' style='display:block'><div><dt>Status</dt><dd><span class='status "+(p.status==="active"?"":"out")+"'>"+esc(positionStatusLabel(p))+"</span></dd></div><div><dt>Current tick</dt><dd>"+esc(p.tick==null?"Unavailable":formatInteger(p.tick))+"</dd></div><div><dt>Active range</dt><dd>"+formatInteger(p.tickLower)+" → "+formatInteger(p.tickUpper)+"</dd></div><div><dt>Liquidity</dt><dd>"+esc(formatInteger(p.liquidity))+"</dd></div><div><dt>Wallet "+esc(p.token0.symbol)+"</dt><dd>"+esc(walletBalanceLabel(p.token0))+"</dd></div><div><dt>Wallet "+esc(p.token1.symbol)+"</dt><dd>"+esc(walletBalanceLabel(p.token1))+"</dd></div>"+(isWpls(p.token0)||isWpls(p.token1)?"<div><dt>Wallet native PLS</dt><dd>"+esc(state.nativeBalance==null?(state.nativeBalanceError?"Unavailable":"Loading…"):trimUnits(state.nativeBalance,18,8)+" PLS")+"</dd></div>":"")+"<div><dt>Balance snapshot</dt><dd>"+esc(state.balanceBlock==null?"Loading…":"PulseChain #"+formatInteger(state.balanceBlock))+"</dd></div><div><dt>Recorded owed</dt><dd>"+esc(trimUnits(p.tokensOwed0,p.token0.decimals,6))+" "+esc(p.token0.symbol)+" · "+esc(trimUnits(p.tokensOwed1,p.token1.decimals,6))+" "+esc(p.token1.symbol)+"</dd></div><div><dt>Pool</dt><dd class='mono'>"+esc(shortAddress(p.poolAddress))+"</dd></div></dl>"+
-      "<div class='action-grid'><button class='primary' id='collectButton'><span>Collect fees</span><span>→</span></button><button class='secondary' id='increaseButton'>＋ Add liquidity</button><button class='secondary' id='removeButton'>Remove liquidity</button>"+(canBurn?"<button class='secondary' id='burnButton' style='grid-column:1/-1'>Burn empty NFT</button>":"")+"</div>"+
-      "<div class='notice info'>Current collectible fees are previewed with collect.staticCall from your account. Recorded owed values above may lag until the position is touched.</div>";
-    renderRangeBars($("rangeBars"),p);$("collectButton").addEventListener("click",function(){previewCollect(p)});$("increaseButton").addEventListener("click",function(){openIncreaseModal(p)});$("removeButton").addEventListener("click",function(){openRemoveModal(p)});if($("burnButton"))$("burnButton").addEventListener("click",function(){previewBurn(p)})
+    var d=$("positionDetail"),p=state.selectedPosition;if(!p){d.innerHTML="<p class='kicker'>Position intelligence</p><h2>No position selected</h2><p class='position-detail__meta'>Choose a position card to inspect its range, inventory, TVL, price, and volume.</p><div class='range-visual'><div class='range-visual__bars' id='rangeBars'></div></div><div class='notice info'>TVL estimates combine on-chain V3 range math with exact-address DEX Screener USD references.</div>";renderRangeBars($("rangeBars"));return}
+    var owned=canManagePosition(p),canBurn=owned&&p.liquidity===0n&&p.tokensOwed0===0n&&p.tokensOwed1===0n,principal0=p.principal0==null?"Unavailable":trimUnits(p.principal0,p.token0.decimals,8)+" "+p.token0.symbol,principal1=p.principal1==null?"Unavailable":trimUnits(p.principal1,p.token1.decimals,8)+" "+p.token1.symbol,walletRows=owned?"<div><dt>Wallet "+esc(p.token0.symbol)+"</dt><dd>"+esc(walletBalanceLabel(p.token0))+"</dd></div><div><dt>Wallet "+esc(p.token1.symbol)+"</dt><dd>"+esc(walletBalanceLabel(p.token1))+"</dd></div>"+(isWpls(p.token0)||isWpls(p.token1)?"<div><dt>Wallet native PLS</dt><dd>"+esc(state.nativeBalance==null?(state.nativeBalanceError?"Unavailable":"Loading…"):trimUnits(state.nativeBalance,18,8)+" PLS")+"</dd></div>":""):"",source=p.market&&p.market.url?" · <a href='"+esc(p.market.url)+"' target='_blank' rel='noopener noreferrer'>DEX Screener source ↗</a>":"",volumeSource=p.poolMarket&&p.poolMarket.url?" · <a href='"+esc(p.poolMarket.url)+"' target='_blank' rel='noopener noreferrer'>Pool source ↗</a>":"",confidence=p.valueConfidence==="low"?" · LOW-LIQUIDITY REFERENCE — UNTRUSTED":"";
+    d.innerHTML="<p class='kicker'>Finvesta V3 position · #"+esc(formatInteger(p.tokenId))+"</p><div class='pair'>"+tokenMarkHtml(p.token0,true)+tokenMarkHtml(p.token1,true)+"<div><h2>"+esc(p.token0.symbol)+" / "+esc(p.token1.symbol)+"</h2><p class='position-detail__meta'>"+esc(feeLabel(p.fee))+" pool fee · "+esc(positionLifecycleLabel(p))+"</p></div></div><div class='range-visual'><div class='range-visual__bars' id='rangeBars'></div></div><div class='position-detail__value'><span>TVL<small>Estimated current LP principal · recorded owed fees excluded"+confidence+source+"</small></span><strong>"+esc(positionValueDisplay(p))+"</strong></div><dl class='details' style='display:block'><div><dt>Lifecycle</dt><dd>"+esc(positionLifecycleLabel(p))+"</dd></div><div><dt>Range status</dt><dd><span class='status "+(p.status==="active"?"":"out")+"'>"+esc(positionStatusLabel(p))+"</span></dd></div><div><dt>Current price</dt><dd>"+esc(positionCurrentPriceDisplay(p))+"</dd></div><div><dt>Price range</dt><dd>"+esc(positionRangeLabel(p))+"</dd></div><div><dt>Position "+esc(p.token0.symbol)+"</dt><dd>"+esc(principal0)+"</dd></div><div><dt>Position "+esc(p.token1.symbol)+"</dt><dd>"+esc(principal1)+"</dd></div><div><dt>24h volume</dt><dd>"+esc(positionVolumeDisplay(p))+volumeSource+"</dd></div>"+walletRows+"<div><dt>Recorded owed</dt><dd>"+esc(trimUnits(p.tokensOwed0,p.token0.decimals,6))+" "+esc(p.token0.symbol)+" · "+esc(trimUnits(p.tokensOwed1,p.token1.decimals,6))+" "+esc(p.token1.symbol)+"</dd></div><div><dt>Pool</dt><dd class='mono'>"+esc(shortAddress(p.poolAddress))+"</dd></div></dl>"+(owned?"<div class='action-grid'><button class='primary' id='collectButton'><span>Collect fees</span><span>→</span></button><button class='secondary' id='increaseButton'>＋ Add liquidity</button>"+(p.liquidity>0n?"<button class='secondary' id='removeButton'>Remove liquidity</button>":"")+(canBurn?"<button class='secondary' id='burnButton' style='grid-column:1/-1'>Burn empty NFT</button>":"")+"</div><div class='notice info'>Final collect, increase, and removal amounts are always simulated from the connected wallet before signing.</div>":"<div class='notice info'>Public position details are read-only. Management is unavailable for this connected wallet.</div>");
+    renderRangeBars($("rangeBars"),p);if(owned){$("collectButton").addEventListener("click",function(){previewCollect(p)});$("increaseButton").addEventListener("click",function(){openIncreaseModal(p)});if($("removeButton"))$("removeButton").addEventListener("click",function(){openRemoveModal(p)});if($("burnButton"))$("burnButton").addEventListener("click",function(){previewBurn(p)})}
   }
   async function assertPositionOwner(p,expectedAccount){
-    expectedAccount=expectedAccount||state.account;if(!expectedAccount||!same(state.account,expectedAccount))throw new Error("Connected account changed for position #"+formatInteger(p.tokenId));var owner=await contracts.manager.ownerOf(p.tokenId);if(!same(owner,expectedAccount))throw new Error("Connected account no longer owns position #"+formatInteger(p.tokenId));return owner
+    expectedAccount=expectedAccount||state.account;if(!expectedAccount||!same(state.account,expectedAccount))throw new Error("Connected account changed for position #"+formatInteger(p.tokenId));var owner=await contracts.manager.ownerOf(p.tokenId);if(!same(owner,expectedAccount))throw new Error("This NFT is no longer available to the connected wallet");return owner
   }
   async function previewCollect(p){
     try{
@@ -1894,52 +1912,65 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
     })
   }
   function openIncreaseModal(p,seed){
-    seed=seed||{};var hasWpls=isWpls(p.token0)||isWpls(p.token1);
+    seed=seed||{};var hasWpls=isWpls(p.token0)||isWpls(p.token1),fullRange=isFullRangePosition(p),rangeLabels=fullRange?"<div class='locked-range__labels full-range'><span>FULL RANGE</span><span id='increaseCurrentPrice'>"+esc(positionCurrentPriceDisplay(p))+"</span></div>":"<div class='locked-range__labels'><span>"+formatInteger(p.tickLower)+"</span><span id='increaseCurrentPrice'>"+esc(positionCurrentPriceDisplay(p))+"</span><span>"+formatInteger(p.tickUpper)+"</span></div>";
     openModal(modalHeader("Increase liquidity · Step 1 of 3","Fund position #"+formatInteger(p.tokenId))+
-      "<div class='modal-body'>"+flowStrip(1)+"<div class='locked-range'><div class='range-composer__head'><span><strong>Fixed NFT range</strong><small> · current ratio drives paired fills</small></span><span class='status "+(p.status==="active"?"":"out")+"' id='increaseRangeStatus'>"+esc(positionStatusLabel(p))+"</span></div><div class='locked-range__track'><span></span>"+(p.tick!=null?"<i id='increaseTickMarker' style='left:"+String(positionTickPct(p))+"%'></i>":"")+"</div><div class='locked-range__labels'><span>"+formatInteger(p.tickLower)+"</span><span id='increaseCurrentTick'>current "+esc(p.tick==null?"unavailable":formatInteger(p.tick))+"</span><span>"+formatInteger(p.tickUpper)+"</span></div><div class='range-context' id='increaseRatioStatus'>This NFT's range is fixed. A different range requires a new position.</div></div>"+
+      "<div class='modal-body'>"+flowStrip(1)+"<div class='locked-range'><div class='range-composer__head'><span><strong>Fixed NFT range</strong><small> · current ratio drives paired fills</small></span><span class='status "+(p.status==="active"?"":"out")+"' id='increaseRangeStatus'>"+esc(positionStatusLabel(p))+"</span></div><div class='locked-range__track'><span></span>"+(p.tick!=null?"<i id='increaseTickMarker' style='left:"+String(positionTickPct(p))+"%'></i>":"")+"</div>"+rangeLabels+"<div class='range-context' id='increaseRatioStatus'>"+(fullRange?"Full Range position. Enter either token amount and the paired side will update automatically.":"This NFT's range is fixed. A different range requires a new position.")+"</div></div>"+
       "<div class='field-row'><div class='field'><div class='field-label'><label id='increaseLabel0' for='increase0'>"+esc(p.token0.symbol)+" desired</label><span class='field-percentages'>"+percentageChips("increase",0)+"</span></div><input id='increase0' inputmode='decimal' value='"+esc(seed.amount0||"")+"'><div class='live-balance'><strong id='increaseBalance0'>Live balance loading…</strong></div></div><div class='field'><div class='field-label'><label id='increaseLabel1' for='increase1'>"+esc(p.token1.symbol)+" desired</label><span class='field-percentages'>"+percentageChips("increase",1)+"</span></div><input id='increase1' inputmode='decimal' value='"+esc(seed.amount1||"")+"'><div class='live-balance'><strong id='increaseBalance1'>Live balance loading…</strong></div></div></div><div class='live-balance' style='margin-top:7px'><span id='increaseBalanceBlock'>Querying one PulseChain block snapshot…</span><button type='button' id='increaseRefreshBalances' title='Refresh both token balances, native PLS, and the pool price from one PulseChain block'>↻ Refresh live data</button></div>"+
-      (hasWpls?"<div class='native-funding'><label class='choice-button'><input id='increaseUseNativePls' type='checkbox' "+(seed.useNativePls!==false?"checked":"")+"><span><strong>Use native PLS for the WPLS side · default</strong><small>Finvesta sends the WPLS cap as PLS, wraps only actual consumption 1:1, and refunds unused PLS atomically. Uncheck to fund with WPLS PRC-20 instead.</small></span></label></div>":"")+ 
+      (hasWpls?"<div class='native-funding'><label class='choice-button'><input id='increaseUseNativePls' type='checkbox' "+(seed.useNativePls!==false?"checked":"")+"><span><strong>Use native PLS for the WPLS side · default</strong><small>Finvesta sends the WPLS cap as PLS, wraps only actual consumption 1:1, and refunds unused PLS atomically. Uncheck to fund with WPLS PRC-20 instead.</small></span></label></div>":"")+
       "<div id='increaseFunding' class='funding-grid' hidden></div>"+
       "<div class='notice info'>Desired amounts are maxima. Finvesta checks funding and approvals, simulates current range consumption, and then advances to the final review automatically after any approval.</div><button class='primary' id='prepareIncrease'><span>Continue · validate & simulate</span><span>→</span></button></div>",true);
-    var increaseModalId=state.modalNonce,increaseSnapshot=null,increaseContext=null,increaseBalanceNonce=0,increaseFillNonce=0,increasePrepareNonce=0,increasePrepareInFlight=false,increaseAutoFilled=false;
+    var increaseModalId=state.modalNonce,increaseSnapshot=null,increaseContext=null,increaseBalanceNonce=0,increaseFillNonce=0,increasePrepareNonce=0,increasePrepareInFlight=false,increaseAutoFilled=false,increaseAmountAnchor=seed.amount0&&!seed.amount1?0:seed.amount1&&!seed.amount0?1:null,increasePairError=null;
     function nativeSelected(){return Boolean(hasWpls&&$("increaseUseNativePls").checked)}
-    function clearIncreaseAutoAmounts(message){if(!increaseAutoFilled)return;$("increase0").value="";$("increase1").value="";increaseAutoFilled=false;if(message){$("increaseRatioStatus").className="range-context warn";$("increaseRatioStatus").textContent=message}}
+    function clearIncreaseAutoAmounts(message){if(!increaseAutoFilled)return;if(increaseAmountAnchor!=null)$("increase"+String(increaseAmountAnchor===0?1:0)).value="";else{$("increase0").value="";$("increase1").value=""}increaseAutoFilled=false;increasePairError=null;if(message){$("increaseRatioStatus").className="range-context warn";$("increaseRatioStatus").textContent=message}}
     function syncIncreaseLabels(){
       [p.token0,p.token1].forEach(function(token,index){var nativeSide=isWpls(token)&&nativeSelected();$("increaseLabel"+String(index)).textContent=nativeSide?"Native PLS desired · wraps to WPLS":token.symbol+" desired"})
+    }
+    function syncIncreaseManualAmounts(side){
+      var other=side===0?1:0,input=$("increase"+String(side)),pairedInput=$("increase"+String(other));increaseAmountAnchor=side;increasePairError=null;document.querySelectorAll("[data-increase-percent]").forEach(function(button){button.classList.remove("active")});
+      try{
+        if(!String(input.value||"").trim()||String(input.value||"").trim()==="."){pairedInput.value="";increaseAmountAnchor=null;increaseAutoFilled=false;$("increaseRatioStatus").className="range-context";$("increaseRatioStatus").textContent="Enter either token amount and the paired side will update automatically.";return}
+        if(!increaseContext){pairedInput.value="";increaseAutoFilled=false;$("increaseRatioStatus").className="range-context";$("increaseRatioStatus").textContent="Loading the live pool ratio…";return}
+        var token=side===0?p.token0:p.token1,amount=parseAmountStrict(input.value,token.decimals,token.symbol+" amount");if(amount===0n){pairedInput.value="";increaseAutoFilled=false;return}
+        var sqrtA=sqrtRatioAtTick(p.tickLower),sqrtB=sqrtRatioAtTick(p.tickUpper),mode=increaseContext.sqrtPriceX96<=sqrtA?"token0":increaseContext.sqrtPriceX96>=sqrtB?"token1":"both";
+        if(mode==="token0"&&side!==0)throw new Error("At the current price this position accepts "+p.token0.symbol+" only");if(mode==="token1"&&side!==1)throw new Error("At the current price this position accepts "+p.token1.symbol+" only");
+        var desired=deriveRangeDesiredFromAnchor(side,amount,increaseContext.sqrtPriceX96,p.tickLower,p.tickUpper),paired=other===0?desired.amount0:desired.amount1,available0=increaseContext.available0,available1=increaseContext.available1,short0=typeof available0!=="bigint"||desired.amount0>available0,short1=typeof available1!=="bigint"||desired.amount1>available1,short=short0||short1;
+        pairedInput.value=formatDecimal(E.formatUnits(paired,other===0?p.token0.decimals:p.token1.decimals));increaseAutoFilled=true;$("increaseFunding").hidden=true;$("increaseRatioStatus").className="range-context"+(short?" warn":"");$("increaseRatioStatus").textContent=(desired.mode==="both"?(other===0?p.token0.symbol:p.token1.symbol)+" calculated from "+token.symbol+" at the live range ratio.":"One-sided range: "+token.symbol+" is the only required asset.")+(short?" The desired amounts exceed a live wallet balance; use a percentage button to scale safely.":"")
+      }catch(err){pairedInput.value="";increaseAutoFilled=false;increasePairError=safeError(err);$("increaseRatioStatus").className="range-context warn";$("increaseRatioStatus").textContent=increasePairError}
     }
     async function loadIncreaseBalances(){
       if(state.modalNonce!==increaseModalId)return;var nonce=++increaseBalanceNonce;increaseSnapshot=null;increaseContext=null;document.querySelectorAll("[data-increase-percent]").forEach(function(button){button.disabled=true});$("increaseBalanceBlock").textContent="Refreshing one PulseChain block snapshot…";
       try{
         var account=state.account;if(!account)throw new Error("Connect a wallet to load position funding balances");var useNative=nativeSelected(),snapshot=await readFundingSnapshot([p.token0,p.token1],{nativeWpls:useNative,account:account}),reserve=0n;
         if(useNative){if(snapshot.nativeBalance==null)throw new Error("Could not verify native PLS balance");reserve=nativeGasReserve(NATIVE_MAX_GAS_UNITS,await conservativeFeeData())}
-        var pool=new E.Contract(p.poolAddress,ABI.pool,readProvider),slot=await pool.slot0({blockTag:snapshot.block});if(nonce!==increaseBalanceNonce||state.modalNonce!==increaseModalId)return;
+        var pool=new E.Contract(p.poolAddress,ABI.pool,readProvider),slot=await pool.slot0({blockTag:snapshot.block});if(nonce!==increaseBalanceNonce||state.modalNonce!==increaseModalId)return;if(slot.sqrtPriceX96===0n)throw new Error("This position pool is not initialized");
         var available=[p.token0,p.token1].map(function(token,index){
           var raw=snapshot.balances.get(token.address.toLowerCase()),nativeSide=useNative&&isWpls(token),usable=nativeSide?(snapshot.nativeBalance>reserve?snapshot.nativeBalance-reserve:0n):raw;
           $("increaseBalance"+String(index)).textContent=nativeSide?"Usable native PLS "+trimUnits(usable,18,8)+" · WPLS "+(raw==null?"unavailable":trimUnits(raw,token.decimals,8)):raw==null?"Balance unavailable":trimUnits(raw,token.decimals,8)+" "+token.symbol;
           return usable
         });
-        increaseSnapshot=snapshot;increaseContext={sqrtPriceX96:slot.sqrtPriceX96,tick:Number(slot.tick),available0:available[0],available1:available[1],reserve:reserve};
-        var sqrtLower=sqrtRatioAtTick(p.tickLower),sqrtUpper=sqrtRatioAtTick(p.tickUpper),active0=increaseContext.sqrtPriceX96<sqrtUpper,active1=increaseContext.sqrtPriceX96>sqrtLower;document.querySelectorAll("[data-increase-percent]").forEach(function(button){var side=Number(button.dataset.side),active=side===0?active0:active1,token=side===0?p.token0:p.token1,spendLabel=useNative&&isWpls(token)?"native PLS":token.symbol;button.disabled=!active;button.title=active?"Use this share of the live "+spendLabel+" balance and derive its paired cap":"Current price makes this a one-sided "+(active0?p.token0.symbol:p.token1.symbol)+" range"});
+        increaseSnapshot=snapshot;increaseContext={sqrtPriceX96:slot.sqrtPriceX96,tick:Number(slot.tick),available0:available[0],available1:available[1],reserve:reserve};increasePairError=null;
+        var sqrtLower=sqrtRatioAtTick(p.tickLower),sqrtUpper=sqrtRatioAtTick(p.tickUpper),active0=increaseContext.sqrtPriceX96<sqrtUpper,active1=increaseContext.sqrtPriceX96>sqrtLower;document.querySelectorAll("[data-increase-percent]").forEach(function(button){var side=Number(button.dataset.side),rangeActive=side===0?active0:active1,selected=side===0?available[0]:available[1],counterpart=side===0?available[1]:available[0],hasFunds=typeof selected==="bigint"&&selected>0n&&(!(active0&&active1)||(typeof counterpart==="bigint"&&counterpart>0n)),active=rangeActive&&hasFunds,token=side===0?p.token0:p.token1,spendLabel=useNative&&isWpls(token)?"native PLS":token.symbol;button.disabled=!active;button.title=active?"Use this share of the live "+spendLabel+" balance and derive its paired cap":!rangeActive?"Current price makes this a one-sided "+(active0?p.token0.symbol:p.token1.symbol)+" range":"A usable balance is required on every active side"});
         $("increaseBalanceBlock").textContent="Live at PulseChain block #"+formatInteger(snapshot.block)+(useNative?" · gas reserve "+trimUnits(reserve,18,6)+" PLS":"");
-        $("increaseCurrentTick").textContent="current "+formatInteger(increaseContext.tick);$("increaseRangeStatus").textContent=increaseContext.tick<p.tickLower?"BELOW RANGE":increaseContext.tick>=p.tickUpper?"ABOVE RANGE":"IN RANGE";$("increaseRangeStatus").className="status "+(increaseContext.tick>=p.tickLower&&increaseContext.tick<p.tickUpper?"":"out");
+        $("increaseCurrentPrice").textContent=positionCurrentPriceDisplay(p,increaseContext.sqrtPriceX96);$("increaseRangeStatus").textContent=increaseContext.tick<p.tickLower?"BELOW RANGE":increaseContext.tick>=p.tickUpper?"ABOVE RANGE":"IN RANGE";$("increaseRangeStatus").className="status "+(increaseContext.tick>=p.tickLower&&increaseContext.tick<p.tickUpper?"":"out");
         var pct=Math.max(2,Math.min(98,Math.round((increaseContext.tick-p.tickLower)*100/(p.tickUpper-p.tickLower))));if($("increaseTickMarker"))$("increaseTickMarker").style.left=String(pct)+"%";
-        $("increaseRatioStatus").className="range-context"+(increaseContext.tick<p.tickLower||increaseContext.tick>=p.tickUpper?" warn":"");$("increaseRatioStatus").textContent=(increaseContext.tick<p.tickLower?"Current price is below the range: ratio fills use "+p.token0.symbol+" only.":increaseContext.tick>=p.tickUpper?"Current price is above the range: ratio fills use "+p.token1.symbol+" only.":"Current price is inside the range: ratio fills derive both token caps and scale to the limiting live balance.")+" "+rangePriceLabel(p.tickLower,p.tickUpper,p.token0,p.token1)+". This NFT's ticks are fixed."
-      }catch(err){if(nonce!==increaseBalanceNonce||state.modalNonce!==increaseModalId)return;$("increaseBalance0").textContent="Balance unavailable";$("increaseBalance1").textContent="Balance unavailable";$("increaseBalanceBlock").textContent=safeError(err)}
+        $("increaseRatioStatus").className="range-context"+(increaseContext.tick<p.tickLower||increaseContext.tick>=p.tickUpper?" warn":"");$("increaseRatioStatus").textContent=(increaseContext.tick<p.tickLower?"Current price is below the range: ratio fills use "+p.token0.symbol+" only.":increaseContext.tick>=p.tickUpper?"Current price is above the range: ratio fills use "+p.token1.symbol+" only.":"Current price is inside the range: ratio fills derive both token caps and scale to the limiting live balance.")+(fullRange?" Full Range.":" "+rangePriceLabel(p.tickLower,p.tickUpper,p.token0,p.token1)+".")+" This NFT's range is fixed.";if(increaseAmountAnchor!=null)syncIncreaseManualAmounts(increaseAmountAnchor)
+      }catch(err){if(nonce!==increaseBalanceNonce||state.modalNonce!==increaseModalId)return;$("increaseBalance0").textContent="Balance unavailable";$("increaseBalance1").textContent="Balance unavailable";$("increaseBalanceBlock").textContent=safeError(err);increasePairError=safeError(err)}
     }
     async function fillIncreasePercent(side,percent){
-      var request=++increaseFillNonce;try{if(!increaseContext)await loadIncreaseBalances();if(request!==increaseFillNonce||state.modalNonce!==increaseModalId)return;if(!increaseContext)throw new Error("Live range context is unavailable");var allocation=allocateRangePercent(side,percent,increaseContext.available0,increaseContext.available1,increaseContext.sqrtPriceX96,p.tickLower,p.tickUpper);if(request!==increaseFillNonce||state.modalNonce!==increaseModalId)return;$("increase0").value=E.formatUnits(allocation.amount0,p.token0.decimals);$("increase1").value=E.formatUnits(allocation.amount1,p.token1.decimals);increaseAutoFilled=true;$("increaseFunding").hidden=true;$("increaseRatioStatus").textContent=(allocation.mode==="both"?"Paired at the live in-range ratio.":allocation.mode==="token0"?"One-sided "+p.token0.symbol+" fill because current price is below the range.":"One-sided "+p.token1.symbol+" fill because current price is above the range.")+(allocation.limited?" Scaled down by the counterpart wallet balance.":" Anchored to "+String(percent)+"% of the selected live balance.");toast("Range-aware "+String(percent)+"% funding caps applied","success")}catch(err){if(request===increaseFillNonce&&state.modalNonce===increaseModalId)toast(safeError(err),"error")}
+      var request=++increaseFillNonce;try{if(!increaseContext)await loadIncreaseBalances();if(request!==increaseFillNonce||state.modalNonce!==increaseModalId)return;if(!increaseContext)throw new Error("Live range context is unavailable");var allocation=allocateRangePercent(side,percent,increaseContext.available0,increaseContext.available1,increaseContext.sqrtPriceX96,p.tickLower,p.tickUpper);if(request!==increaseFillNonce||state.modalNonce!==increaseModalId)return;$("increase0").value=E.formatUnits(allocation.amount0,p.token0.decimals);$("increase1").value=E.formatUnits(allocation.amount1,p.token1.decimals);increaseAmountAnchor=null;increasePairError=null;increaseAutoFilled=true;$("increaseFunding").hidden=true;$("increaseRatioStatus").className="range-context"+(allocation.mode==="both"?"":" warn");$("increaseRatioStatus").textContent=(allocation.mode==="both"?"Paired at the live in-range ratio.":allocation.mode==="token0"?"One-sided "+p.token0.symbol+" fill because current price is below the range.":"One-sided "+p.token1.symbol+" fill because current price is above the range.")+(allocation.limited?" Scaled down by the counterpart wallet balance.":" Anchored to "+String(percent)+"% of the selected live balance.");document.querySelectorAll("[data-increase-percent]").forEach(function(button){button.classList.toggle("active",Number(button.dataset.side)===side&&Number(button.dataset.increasePercent)===percent)});toast("Range-aware "+String(percent)+"% funding caps applied","success")}catch(err){if(request===increaseFillNonce&&state.modalNonce===increaseModalId)toast(safeError(err),"error")}
     }
     document.querySelectorAll("[data-increase-percent]").forEach(function(button){button.addEventListener("click",function(){fillIncreasePercent(Number(button.dataset.side),Number(button.dataset.increasePercent))})});
-    ["increase0","increase1"].forEach(function(id){$(id).addEventListener("input",function(){increaseFillNonce++;increaseAutoFilled=false})});
-    $("increaseRefreshBalances").addEventListener("click",function(){increaseFillNonce++;clearIncreaseAutoAmounts("Live data refreshed. Choose a percentage again to derive caps from the new snapshot.");loadIncreaseBalances()});
-    if(hasWpls)$("increaseUseNativePls").addEventListener("change",function(){increaseFillNonce++;clearIncreaseAutoAmounts("Funding asset changed. Choose a percentage again after the live snapshot refreshes.");syncIncreaseLabels();$("increaseFunding").hidden=true;loadIncreaseBalances()});syncIncreaseLabels();loadIncreaseBalances();
+    [0,1].forEach(function(side){var input=$("increase"+String(side));input.addEventListener("input",function(){increaseFillNonce++;increaseAutoFilled=false;syncIncreaseManualAmounts(side)});input.addEventListener("blur",function(){try{var token=side===0?p.token0:p.token1,value=parseAmountStrict(this.value,token.decimals,token.symbol+" amount");if(value>0n)this.value=formatDecimal(E.formatUnits(value,token.decimals))}catch(_){}})});
+    $("increaseRefreshBalances").addEventListener("click",function(){increaseFillNonce++;clearIncreaseAutoAmounts(increaseAmountAnchor!=null?"Refreshing the live ratio and recalculating the paired side…":"Live data refreshed. Choose a percentage again to derive caps from the new snapshot.");loadIncreaseBalances()});
+    if(hasWpls)$("increaseUseNativePls").addEventListener("change",function(){increaseFillNonce++;clearIncreaseAutoAmounts(increaseAmountAnchor!=null?"Funding asset changed. Recalculating the paired side from the refreshed balance…":"Funding asset changed. Choose a percentage again after the live snapshot refreshes.");syncIncreaseLabels();$("increaseFunding").hidden=true;loadIncreaseBalances()});syncIncreaseLabels();loadIncreaseBalances();
     $("prepareIncrease").addEventListener("click",async function(){
-      if(increasePrepareInFlight)return;increasePrepareInFlight=true;var btn=this,prepareRequest=++increasePrepareNonce,resumeLabel=btn.dataset.resumeLabel;delete btn.dataset.resumeLabel;var form={amount0:$("increase0").value,amount1:$("increase1").value,useNativePls:nativeSelected()},a0=form.amount0,a1=form.amount1,account=state.account;
+      if(increasePrepareInFlight)return;increasePrepareInFlight=true;var btn=this,prepareRequest=++increasePrepareNonce,resumeLabel=btn.dataset.resumeLabel;delete btn.dataset.resumeLabel;var form=null,a0="",a1="",account=null;
       function ownsIncreasePrepare(){return state.modalNonce===increaseModalId&&prepareRequest===increasePrepareNonce&&document.body.contains(btn)}
       function assertIncreasePrepare(){if(!ownsIncreasePrepare())return false;if(!same(state.account,account)||form.amount0!==$("increase0").value||form.amount1!==$("increase1").value||form.useNativePls!==nativeSelected())throw new Error("Position funding inputs changed during validation. Review the refreshed form and continue again.");return true}
       setBusy(btn,true,resumeLabel||"Revalidating funding…");
       try{
-        if(!account)throw new Error("Connect the position owner wallet before increasing liquidity");var amount0=parseAmount(a0,p.token0.decimals),amount1=parseAmount(a1,p.token1.decimals);if(amount0===0n&&amount1===0n)throw new Error("Enter at least one token amount");
+        if(increaseAmountAnchor!=null)syncIncreaseManualAmounts(increaseAmountAnchor);if(!increaseContext)throw new Error("Wait for the live pool ratio and wallet balances to finish loading");if(increasePairError)throw new Error(increasePairError);form={amount0:$("increase0").value,amount1:$("increase1").value,useNativePls:nativeSelected()};a0=form.amount0;a1=form.amount1;account=state.account;
+        if(!account)throw new Error("Connect a wallet that can manage this position before increasing liquidity");var amount0=parseAmountStrict(a0,p.token0.decimals,p.token0.symbol+" amount"),amount1=parseAmountStrict(a1,p.token1.decimals,p.token1.symbol+" amount");if(amount0===0n&&amount1===0n)throw new Error("Enter at least one token amount");
         var wplsToken=isWpls(p.token0)?p.token0:isWpls(p.token1)?p.token1:null,wplsAmount=wplsToken?(wplsToken===p.token0?amount0:amount1):0n,useNative=Boolean(form.useNativePls&&wplsToken&&wplsAmount>0n),nativeValue=useNative?wplsAmount:0n;
         if(useNative){var managerWpls=await contracts.manager.WETH9();if(!assertIncreasePrepare())return;if(!same(managerWpls,ADDR.wpls))throw new Error("Position manager WPLS configuration does not match this interface");if(wplsToken.decimals!==18)throw new Error("Native PLS funding requires 18-decimal WPLS")}
         await assertPositionOwner(p,account);if(!assertIncreasePrepare())return;var provisionalReserve=0n;if(useNative){provisionalReserve=nativeGasReserve(NATIVE_MAX_GAS_UNITS,await conservativeFeeData());if(!assertIncreasePrepare())return}var fundingPlan={supportsNative:Boolean(wplsToken),useNative:useNative,nativeValue:nativeValue,gasReserve:provisionalReserve},funding=await readFundingSnapshot([p.token0,p.token1],{nativeWpls:useNative,account:account}),fundingItems=[{token:p.token0,required:amount0,side:"0"},{token:p.token1,required:amount1,side:"1"}];if(!assertIncreasePrepare())return;renderFundingSnapshot("increaseFunding",funding,fundingItems,fundingPlan);assertFunding(funding,fundingItems,fundingPlan);
@@ -1948,12 +1979,12 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
         function approvalOptions(){return {flowName:"Increase liquidity",validate:async function(){if(!same(state.account,account))throw new Error("Connected account changed");await assertPositionOwner(p,account)},continue:function(){continueModalFlow(function(){openIncreaseModal(p,form)},"prepareIncrease","Approval confirmed · revalidating…")}}}
         if(allowances[0]<amount0){if(!assertIncreasePrepare())return;increasePrepareInFlight=false;closeModal();return approveManagerToken(p.token0,amount0,approvalOptions())}
         if(allowances[1]<amount1){if(!assertIncreasePrepare())return;increasePrepareInFlight=false;closeModal();return approveManagerToken(p.token1,amount1,approvalOptions())}
-        await assertPositionOwner(p,account);if(!assertIncreasePrepare())return;var signer=await getSigner();if(!assertIncreasePrepare())return;var signerAddress=await signer.getAddress();if(!assertIncreasePrepare())return;if(!same(signerAddress,account))throw new Error("Connected signer does not match the position owner");var pm=new E.Contract(ADDR.positionManager,ABI.manager,signer),deadline=await currentDeadline();if(!assertIncreasePrepare())return;
+        await assertPositionOwner(p,account);if(!assertIncreasePrepare())return;var signer=await getSigner();if(!assertIncreasePrepare())return;var signerAddress=await signer.getAddress();if(!assertIncreasePrepare())return;if(!same(signerAddress,account))throw new Error("Connected signer cannot manage this position");var pm=new E.Contract(ADDR.positionManager,ABI.manager,signer),deadline=await currentDeadline();if(!assertIncreasePrepare())return;
         function increasePlan(params){var calls=useNative?[pm.interface.encodeFunctionData("increaseLiquidity",[params]),pm.interface.encodeFunctionData("refundETH",[])]:null;return {calls:calls,overrides:useNative?{value:nativeValue}:{}}}
         async function simulateIncrease(contract,params){var plan=increasePlan(params);if(!plan.calls)return contract.increaseLiquidity.staticCall(params);var results=await contract.multicall.staticCall(plan.calls,plan.overrides),decoded=contract.interface.decodeFunctionResult("increaseLiquidity",results[0]);return {liquidity:decoded.liquidity==null?decoded[0]:decoded.liquidity,amount0:decoded.amount0==null?decoded[1]:decoded.amount0,amount1:decoded.amount1==null?decoded[2]:decoded.amount1}}
         async function estimateIncrease(contract,params){var plan=increasePlan(params);return plan.calls?contract.multicall.estimateGas(plan.calls,plan.overrides):contract.increaseLiquidity.estimateGas(params)}
         async function sendIncrease(contract,params){var plan=increasePlan(params);return plan.calls?contract.multicall(plan.calls,plan.overrides):contract.increaseLiquidity(params)}
-        var preview={tokenId:p.tokenId,amount0Desired:amount0,amount1Desired:amount1,amount0Min:0n,amount1Min:0n,deadline:deadline},out=await simulateIncrease(pm,preview);if(!assertIncreasePrepare())return;
+        var preview={tokenId:p.tokenId,amount0Desired:amount0,amount1Desired:amount1,amount0Min:0n,amount1Min:0n,deadline:deadline},out=await simulateIncrease(pm,preview);if(!assertIncreasePrepare())return;if(out.liquidity===0n)throw new Error("Those desired amounts produce zero position liquidity at the current range and price");
         var min0=out.amount0===0n?0n:(out.amount0*BigInt(10000-state.settings.slippageBps)/10000n||1n),min1=out.amount1===0n?0n:(out.amount1*BigInt(10000-state.settings.slippageBps)/10000n||1n),params=Object.assign({},preview,{amount0Min:min0,amount1Min:min1});
         var protectedOut=await simulateIncrease(pm,params);if(!assertIncreasePrepare())return;var estimatedGas=await estimateIncrease(pm,params);if(!assertIncreasePrepare())return;if(protectedOut.amount0!==out.amount0||protectedOut.amount1!==out.amount1||protectedOut.liquidity!==out.liquidity)throw new Error("Deposit consumption changed during simulation");
         if(useNative){fundingPlan.gasReserve=nativeGasReserve(estimatedGas,await conservativeFeeData());if(!assertIncreasePrepare())return;renderFundingSnapshot("increaseFunding",funding,fundingItems,fundingPlan);assertFunding(funding,fundingItems,fundingPlan)}
@@ -1976,7 +2007,7 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
         })
       }catch(err){if(!ownsIncreasePrepare())return;increasePrepareInFlight=false;toast(safeError(err),"error");setBusy(btn,false)}
     });
-    state.modalAccountHandler=function(){if(state.modalNonce!==increaseModalId)return;increasePrepareNonce++;increaseFillNonce++;closeModal(true);toast("Connected account changed. The position funding flow was closed because NFT ownership and balances are wallet-specific.","error")}
+    state.modalAccountHandler=function(){if(state.modalNonce!==increaseModalId)return;increasePrepareNonce++;increaseFillNonce++;closeModal(true);toast("Connected account changed. The position funding flow was closed because position access and balances are wallet-specific.","error")}
   }
   function integerSqrt(value){
     if(value<0n)throw new Error("Square root requires a non-negative value");if(value<2n)return value;
@@ -2000,7 +2031,7 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
     return delta*10000n/(a[1]*r[0])
   }
   function formatUsd(value){
-    var n=Number(value||0);if(!Number.isFinite(n)||n<0)return "$—";
+    if(value==null||value==="")return "$—";var n=Number(value);if(!Number.isFinite(n)||n<0)return "$—";
     return "$"+n.toLocaleString("en-US",{minimumFractionDigits:2,maximumFractionDigits:n>=1?2:4})
   }
   async function fetchDexJson(path,useCache){
@@ -2019,13 +2050,13 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
     var direct=same(base,tokenA.address)&&same(quote,tokenB.address),inverse=same(base,tokenB.address)&&same(quote,tokenA.address);if(!direct&&!inverse)return null;
     var native;try{native=decimalFraction(String(pair.priceNative));if(native[0]<=0n)return null}catch(_){return null}
     var price=direct?fractionToDecimal(native[0],native[1],42):fractionToDecimal(native[1],native[0],42),p=decimalFraction(price);
-    var liquidityUsd=Number(pair.liquidity&&pair.liquidity.usd||0),volumeH24=Number(pair.volume&&pair.volume.h24||0),tradesH24=Number(pair.txns&&pair.txns.h24&&((pair.txns.h24.buys||0)+(pair.txns.h24.sells||0))||0),tradesH6=Number(pair.txns&&pair.txns.h6&&((pair.txns.h6.buys||0)+(pair.txns.h6.sells||0))||0);
-    if(!Number.isFinite(liquidityUsd)||liquidityUsd<0)liquidityUsd=0;if(!Number.isFinite(volumeH24)||volumeH24<0)volumeH24=0;if(!Number.isFinite(tradesH24)||tradesH24<0)tradesH24=0;if(!Number.isFinite(tradesH6)||tradesH6<0)tradesH6=0;
+    var liquidityUsd=Number(pair.liquidity&&pair.liquidity.usd||0),rawVolumeH24=pair.volume&&pair.volume.h24!=null?pair.volume.h24:null,volumeH24=rawVolumeH24==null?null:Number(rawVolumeH24),tradesH24=Number(pair.txns&&pair.txns.h24&&((pair.txns.h24.buys||0)+(pair.txns.h24.sells||0))||0),tradesH6=Number(pair.txns&&pair.txns.h6&&((pair.txns.h6.buys||0)+(pair.txns.h6.sells||0))||0),baseUsd=Number(pair.priceUsd),nativeNumber=Number(pair.priceNative),quoteUsd=Number.isFinite(baseUsd)&&baseUsd>0&&Number.isFinite(nativeNumber)&&nativeNumber>0?baseUsd/nativeNumber:null,tokenAUsd=direct?baseUsd:quoteUsd,tokenBUsd=direct?quoteUsd:baseUsd;
+    if(!Number.isFinite(liquidityUsd)||liquidityUsd<0)liquidityUsd=0;if(volumeH24!=null&&(!Number.isFinite(volumeH24)||volumeH24<0))volumeH24=null;if(!Number.isFinite(tradesH24)||tradesH24<0)tradesH24=0;if(!Number.isFinite(tradesH6)||tradesH6<0)tradesH6=0;
     return {
       price:price,inversePrice:fractionToDecimal(p[1],p[0],24),pairAddress:pairAddress,
       dexId:clampText(pair.dexId,"Unknown DEX",32),label:Array.isArray(pair.labels)&&pair.labels.length?clampText(pair.labels.join(" · "),"",40):"",
       liquidityUsd:liquidityUsd,volumeH24:volumeH24,tradesH24:Math.floor(tradesH24),tradesH6:Math.floor(tradesH6),
-      fetchedAt:Date.now(),thin:liquidityUsd<DEX.thinLiquidityUsd,
+      fetchedAt:Date.now(),thin:liquidityUsd<DEX.thinLiquidityUsd,tokenAUsd:Number.isFinite(tokenAUsd)&&tokenAUsd>0?tokenAUsd:null,tokenBUsd:Number.isFinite(tokenBUsd)&&tokenBUsd>0?tokenBUsd:null,
       sourceBase:base,sourceQuote:quote,url:"https://dexscreener.com/"+DEX.chain+"/"+pairAddress
     }
   }
@@ -2038,6 +2069,27 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
   async function refreshDexMarketReference(reference,tokenA,tokenB){
     var data=await fetchDexJson("/latest/dex/pairs/"+DEX.chain+"/"+encodeURIComponent(reference.pairAddress),false),pairs=Array.isArray(data&&data.pairs)?data.pairs:[];
     var pair=pairs.find(function(item){return item&&same(item.pairAddress,reference.pairAddress)}),fresh=dexPairPrice(pair,tokenA,tokenB);if(!fresh)throw new Error("Selected DEX Screener pair is no longer a valid direct market");return fresh
+  }
+  async function dexMarketForPosition(p){
+    var key=p.poolAddress.toLowerCase(),cached=state.positionMarketCache.get(key);if(cached&&Date.now()-cached.at<DEX.cacheMs){if(cached.value)return cached.value;if(cached.promise)return cached.promise}
+    var promise=(async function(){
+      var market=null;try{var data=await fetchDexJson("/latest/dex/pairs/"+DEX.chain+"/"+encodeURIComponent(p.poolAddress),true),pairs=Array.isArray(data&&data.pairs)?data.pairs:[],pair=pairs.find(function(item){return item&&same(item.pairAddress,p.poolAddress)});market=dexPairPrice(pair,p.token0,p.token1)}catch(_){}
+      if(!market||market.tokenAUsd==null||market.tokenBUsd==null){var fallback=await findDexMarketReference(p.token0,p.token1);if(fallback.tokenAUsd==null||fallback.tokenBUsd==null)throw new Error("DEX Screener has no usable USD reference for this exact token pair");market=fallback}
+      state.positionMarketCache.set(key,{at:Date.now(),value:market});return market
+    })();state.positionMarketCache.set(key,{at:Date.now(),promise:promise});try{return await promise}catch(err){state.positionMarketCache.delete(key);throw err}
+  }
+  async function fetchTokenUsdPrices(positions){
+    var wanted=new Set(),poolTargets=new Map();positions.forEach(function(p){wanted.add(p.token0.address.toLowerCase());wanted.add(p.token1.address.toLowerCase());if(p.poolAddress!==E.ZeroAddress)poolTargets.set(p.poolAddress.toLowerCase(),p)});var addresses=Array.from(wanted),chunks=[];for(var i=0;i<addresses.length;i+=30)chunks.push(addresses.slice(i,i+30));var poolAddresses=Array.from(poolTargets.keys()),poolChunks=[];for(var j=0;j<poolAddresses.length;j+=30)poolChunks.push(poolAddresses.slice(j,j+30));
+    var batches=await Promise.all([Promise.allSettled(chunks.map(function(chunk){return fetchDexJson("/tokens/v1/"+DEX.chain+"/"+chunk.join(","),true)})),Promise.allSettled(poolChunks.map(function(chunk){return fetchDexJson("/latest/dex/pairs/"+DEX.chain+"/"+chunk.join(","),true)}))]),results=batches[0],poolResults=batches[1],prices=new Map(),poolMarkets=new Map();
+    function offer(address,usd,pair){var key=String(address||"").toLowerCase(),liquidity=Number(pair&&pair.liquidity&&pair.liquidity.usd||0);if(!wanted.has(key)||!Number.isFinite(usd)||usd<=0)return;if(!Number.isFinite(liquidity)||liquidity<0)liquidity=0;var current=prices.get(key);if(current&&current.liquidityUsd>=liquidity)return;var pairAddress;try{pairAddress=E.getAddress(pair.pairAddress)}catch(_){return}prices.set(key,{usd:usd,liquidityUsd:liquidity,url:"https://dexscreener.com/"+DEX.chain+"/"+pairAddress,pairAddress:pairAddress,thin:liquidity<DEX.thinLiquidityUsd,fetchedAt:Date.now()})}
+    function offerPool(pair){var pairAddress;try{pairAddress=E.getAddress(pair.pairAddress)}catch(_){return}var target=poolTargets.get(pairAddress.toLowerCase());if(!target)return;var market=dexPairPrice(pair,target.token0,target.token1);if(market)poolMarkets.set(pairAddress.toLowerCase(),market)}
+    results.forEach(function(result){if(result.status!=="fulfilled"||!Array.isArray(result.value))return;result.value.forEach(function(pair){if(!pair||String(pair.chainId).toLowerCase()!==DEX.chain||!pair.baseToken||!pair.quoteToken)return;var baseUsd=Number(pair.priceUsd),native=Number(pair.priceNative),quoteUsd=Number.isFinite(baseUsd)&&baseUsd>0&&Number.isFinite(native)&&native>0?baseUsd/native:null;offer(pair.baseToken.address,baseUsd,pair);offer(pair.quoteToken.address,quoteUsd,pair);offerPool(pair)})});poolResults.forEach(function(result){if(result.status!=="fulfilled")return;var pairs=Array.isArray(result.value&&result.value.pairs)?result.value.pairs:Array.isArray(result.value)?result.value:[];pairs.forEach(offerPool)});return {prices:prices,poolMarkets:poolMarkets}
+  }
+  async function loadPositionValuations(positions,guard){
+    var funded=positions.filter(function(p){p.poolMarket=null;p.poolMarketStatus="pending";if(p.liquidity===0n){p.valueUsd=0;p.valueStatus="ready";p.valueConfidence="standard";return false}p.valueStatus="pending";return true});renderPositions();if(!positions.length)return;
+    try{
+        var data=await fetchTokenUsdPrices(positions),prices=data.prices;if(guard&&!guard())return;positions.forEach(function(p){p.poolMarket=data.poolMarkets.get(p.poolAddress.toLowerCase())||null;p.poolMarketStatus=p.poolMarket?"ready":"error"});funded.forEach(function(p){try{if(p.principal0==null||p.principal1==null)throw new Error("Position principal is unavailable");var amount0=Number(E.formatUnits(p.principal0,p.token0.decimals)),amount1=Number(E.formatUnits(p.principal1,p.token1.decimals)),price0=prices.get(p.token0.address.toLowerCase()),price1=prices.get(p.token1.address.toLowerCase());if(amount0>0&&(!price0||price0.usd==null))throw new Error("No USD price for "+p.token0.symbol);if(amount1>0&&(!price1||price1.usd==null))throw new Error("No USD price for "+p.token1.symbol);var value=amount0*(price0?price0.usd:0)+amount1*(price1?price1.usd:0);if(!Number.isFinite(value)||value<0)throw new Error("Position USD value overflow");p.valueUsd=value;p.valueStatus="ready";p.valueConfidence=(amount0>0&&price0&&price0.thin)||(amount1>0&&price1&&price1.thin)?"low":"standard";p.market=price0||price1||null}catch(err){p.valueUsd=null;p.valueStatus="error";p.valueConfidence="unavailable";p.market=null;console.warn("Position valuation unavailable",p.poolAddress,err)}})
+    }catch(err){positions.forEach(function(p){p.poolMarket=null;p.poolMarketStatus="error"});funded.forEach(function(p){p.valueUsd=null;p.valueStatus="error";p.market=null});console.warn("DEX Screener valuation batch failed",err)}if(!guard||guard())renderPositions()
   }
   function initialSqrtPrice(price,tokenA,tokenB,token0,token1){
     var f=decimalFraction(price),num=f[0],den=f[1];
@@ -2081,6 +2133,21 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
     if(sqrtP<=sqrtA)return {amount0:amount0ForLiquidity(liquidity,sqrtA,sqrtB),amount1:0n,mode:"token0"};
     if(sqrtP>=sqrtB)return {amount0:0n,amount1:amount1ForLiquidity(liquidity,sqrtA,sqrtB),mode:"token1"};
     return {amount0:amount0ForLiquidity(liquidity,sqrtP,sqrtB),amount1:amount1ForLiquidity(liquidity,sqrtA,sqrtP),mode:"both"}
+  }
+  function divRoundingUp(n,d){if(d<=0n)throw new Error("Division denominator must be positive");return n===0n?0n:(n-1n)/d+1n}
+  function amount0CapForLiquidity(liquidity,sqrtA,sqrtB){if(sqrtA>sqrtB){var s=sqrtA;sqrtA=sqrtB;sqrtB=s}if(liquidity===0n)return 0n;return divRoundingUp(divRoundingUp((liquidity<<96n)*(sqrtB-sqrtA),sqrtB),sqrtA)}
+  function amount1CapForLiquidity(liquidity,sqrtA,sqrtB){if(sqrtA>sqrtB){var s=sqrtA;sqrtA=sqrtB;sqrtB=s}return liquidity===0n?0n:divRoundingUp(liquidity*(sqrtB-sqrtA),Q96)}
+  function desiredAmountsForRangeLiquidity(sqrtP,sqrtA,sqrtB,liquidity){if(sqrtA>=sqrtB)throw new Error("Range must have a valid minimum width");if(sqrtP<=sqrtA)return {amount0:amount0CapForLiquidity(liquidity,sqrtA,sqrtB),amount1:0n,mode:"token0"};if(sqrtP>=sqrtB)return {amount0:0n,amount1:amount1CapForLiquidity(liquidity,sqrtA,sqrtB),mode:"token1"};return {amount0:amount0CapForLiquidity(liquidity,sqrtP,sqrtB),amount1:amount1CapForLiquidity(liquidity,sqrtA,sqrtP),mode:"both"}}
+  function deriveRangeDesiredFromAnchor(side,amount,sqrtP,lowerTick,upperTick){
+    if(side!==0&&side!==1)throw new Error("Funding side must be token0 or token1");if(amount<=0n)throw new Error("Enter an amount greater than zero");
+    var sqrtA=sqrtRatioAtTick(lowerTick),sqrtB=sqrtRatioAtTick(upperTick),mode=sqrtP<=sqrtA?"token0":sqrtP>=sqrtB?"token1":"both",liquidity;
+    if(mode==="token0"&&side!==0)throw new Error("This range currently accepts token0 only");if(mode==="token1"&&side!==1)throw new Error("This range currently accepts token1 only");
+    if(side===0)liquidity=liquidityForAmount0(amount,mode==="token0"?sqrtA:sqrtP,sqrtB);else liquidity=liquidityForAmount1(amount,sqrtA,mode==="token1"?sqrtB:sqrtP);if(liquidity<=0n)throw new Error("That amount is too small for this range");
+    var required=desiredAmountsForRangeLiquidity(sqrtP,sqrtA,sqrtB,liquidity);return {amount0:side===0?amount:required.amount0,amount1:side===1?amount:required.amount1,liquidity:liquidity,mode:mode}
+  }
+  function parseAmountStrict(value,decimals,label){
+    var raw=String(value==null?"":value).trim(),name=label||"Amount";if(!raw)return 0n;if(raw.indexOf(",")>=0){if(!/^\d{1,3}(?:,\d{3})*(?:\.\d*)?$/.test(raw))throw new Error(name+" has invalid comma grouping");raw=raw.replace(/,/g,"")}
+    if(!/^(?:\d+(?:\.\d*)?|\.\d+)$/.test(raw))throw new Error(name+" must be a plain non-negative decimal");var fraction=raw.split(".")[1]||"";if(fraction.length>decimals)throw new Error(name+" supports at most "+String(decimals)+" decimal places");if(raw[0]===".")raw="0"+raw;return E.parseUnits(raw,decimals)
   }
   function allocateRangePercent(side,percent,available0,available1,sqrtP,lowerTick,upperTick){
     var sqrtA=sqrtRatioAtTick(lowerTick),sqrtB=sqrtRatioAtTick(upperTick),part=BigInt(percent),anchor,other,mode=sqrtP<=sqrtA?"token0":sqrtP>=sqrtB?"token1":"both";
@@ -2337,7 +2404,7 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
     }
   }
   function openManualPositionModal(){
-    openModal(modalHeader("Ownership-checked fallback","Load token ID")+"<div class='modal-body'><div class='field'><label>Position NFT token ID</label><input id='manualTokenId' inputmode='numeric' placeholder='0'></div><button class='primary' id='loadManual'><span>Verify ownership & load</span><span>→</span></button></div>");
+    openModal(modalHeader("Exact on-chain lookup","Load token ID")+"<div class='modal-body'><div class='field'><label>Position NFT token ID</label><input id='manualTokenId' inputmode='numeric' placeholder='0'></div><button class='primary' id='loadManual'><span>Load position</span><span>→</span></button></div>");
     $("loadManual").addEventListener("click",async function(){var id=$("manualTokenId").value;if(!/^\d+$/.test(id))return toast("Enter a numeric token ID","error");closeModal();await loadPositions(BigInt(id))})
   }
   async function previewBurn(p){
@@ -2345,7 +2412,7 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
     var account=state.account;try{await assertPositionOwner(p,account)}catch(err){return toast(safeError(err),"error")}
     reviewTransaction({
       kicker:"Irreversible NFT cleanup",title:"Burn empty position",
-      rows:[["Position","#"+formatInteger(p.tokenId)],["Liquidity","0"],["Recorded owed","0 / 0"],["Owner",account,"mono"],["Position manager",ADDR.positionManager,"mono"]],
+      rows:[["Position","#"+formatInteger(p.tokenId)],["Liquidity","0"],["Recorded owed","0 / 0"],["Position manager",ADDR.positionManager,"mono"]],
       confirmLabel:"Burn in wallet",successMessage:"Empty position NFT burned",
       execute:async function(progress){if(!same(state.account,account))throw new Error("Connected account changed after review");await assertPositionOwner(p,account);var s=await getSigner();if(!same(await s.getAddress(),account))throw new Error("Connected signer changed after review");var m=new E.Contract(ADDR.positionManager,ABI.manager,s);await m.burn.staticCall(p.tokenId);await m.burn.estimateGas(p.tokenId);progress("wallet");var tx=await m.burn(p.tokenId);progress("pending",tx.hash);return awaitReceipt(tx)},
       onSuccess:async function(){state.selectedPosition=null;await loadPositions()}
@@ -2366,6 +2433,7 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
   }
   function bindUi(){
     document.querySelectorAll("[data-nav]").forEach(function(b){b.addEventListener("click",function(){navigate(b.dataset.nav)})});
+    document.querySelectorAll("[data-position-tab]").forEach(function(button){button.addEventListener("click",function(){if(state.positionTab===button.dataset.positionTab)return;state.positionTab=button.dataset.positionTab;state.selectedPosition=null;state.expandedPositionId=null;renderPositions();loadPositions()})});
     $("walletButton").addEventListener("click",openWalletModal);$("settingsButton").addEventListener("click",openSettings);$("inlineSettings").addEventListener("click",openSettings);
     $("fromTokenButton").addEventListener("click",function(){openTokenModal("from")});$("toTokenButton").addEventListener("click",function(){openTokenModal("to")});
     $("flipButton").addEventListener("click",function(){var priorOut=state.simulatedOut||state.spotOut,t=state.from;state.from=state.to;state.to=t;state.swapFillNonce++;if(priorOut&&state.from)$("amountIn").value=E.formatUnits(priorOut,state.from.decimals);state.simulatedOut=null;state.minOut=null;renderTokenSides();discoverBestPool()});
@@ -2378,7 +2446,7 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
     $("swapCta").addEventListener("click",handleSwapCta);
     $("detailsToggle").addEventListener("click",function(){var d=$("swapDetails");d.hidden=!d.hidden;this.querySelector("span:last-child").textContent=d.hidden?"⌄":"⌃"});
     $("shareButton").addEventListener("click",function(){updateShareUrl();copyText(location.href)});
-    $("manualPositionButton").addEventListener("click",function(){if(!state.account)return openWalletModal();openManualPositionModal()});
+    $("manualPositionButton").addEventListener("click",openManualPositionModal);
     $("newPositionButton").addEventListener("click",function(){if(!state.account)return openWalletModal();openNewPositionModal()});
     $("adminUseActivePool").addEventListener("click",useActiveAdminPool);
     $("adminLoadPool").addEventListener("click",async function(){var button=this;setBusy(button,true,"Verifying…");try{await loadAdminPool()}catch(err){toast(safeError(err),"error")}finally{setBusy(button,false)}});
