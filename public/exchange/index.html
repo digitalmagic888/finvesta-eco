@@ -921,7 +921,7 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
     deployer:["function owner() view returns(address)","function factoryAddress() view returns(address)"],
     descriptor:[]
   });
-  var MAX_UINT128=(1n<<128n)-1n, Q96=1n<<96n, Q192=1n<<192n, MIN_TICK=-887272, MAX_TICK=887272, NATIVE_MAX_GAS_UNITS=1500000n, PUBLIC_POSITION_PAGE_SIZE=100;
+  var MAX_UINT128=(1n<<128n)-1n, Q96=1n<<96n, Q192=1n<<192n, MIN_TICK=-887272, MAX_TICK=887272, NATIVE_MAX_GAS_UNITS=1500000n, PUBLIC_POSITION_PAGE_SIZE=100, OWNED_POSITION_ENUMERATION_LIMIT=24;
   var rpcRequest=new E.FetchRequest(CHAIN.rpc);rpcRequest.timeout=18000;
   var readProvider = new E.JsonRpcProvider(rpcRequest,{name:"pulsechain",chainId:369},{staticNetwork:true,batchMaxCount:1});
   var contracts = {
@@ -1779,10 +1779,10 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
     if(state.positionTab!=="all"){state.positionLoading="owned";renderPositions()}
     try{
       var block=await readProvider.getBlockNumber();if(nonce!==state.positionsNonce||generation!==state.syncToken||!same(account,state.account))return;
-      var count=await contracts.manager.balanceOf(account,{blockTag:block}),limit=Number(count);if(!Number.isSafeInteger(limit))throw new Error("This wallet position count is too large for browser enumeration");var indexes=Array.from({length:limit},function(_,i){return i});
+      var count=await contracts.manager.balanceOf(account,{blockTag:block}),limit=count>BigInt(OWNED_POSITION_ENUMERATION_LIMIT)?OWNED_POSITION_ENUMERATION_LIMIT:Number(count),truncated=count>BigInt(OWNED_POSITION_ENUMERATION_LIMIT);var indexes=Array.from({length:limit},function(_,i){return i});
       var ids=await mapConcurrent(indexes,6,function(index){return contracts.manager.tokenOfOwnerByIndex(account,index,{blockTag:block})});if(nonce!==state.positionsNonce||generation!==state.syncToken||!same(account,state.account))return;
       var poolCache=new Map(),list=await mapConcurrent(ids,4,function(id){return buildPosition(id,block,account,poolCache)});list.sort(function(a,b){return a.tokenId===b.tokenId?0:a.tokenId>b.tokenId?-1:1});if(nonce!==state.positionsNonce||generation!==state.syncToken||!same(account,state.account))return;
-      state.positions=list;if(state.positionLoading==="owned")state.positionLoading=null;await refreshBalances();if(nonce!==state.positionsNonce||generation!==state.syncToken||!same(account,state.account))return;renderPositions();loadPositionValuations(list,function(){return nonce===state.positionsNonce&&generation===state.syncToken&&same(account,state.account)})
+      state.positions=list;if(state.positionLoading==="owned")state.positionLoading=null;await refreshBalances();if(nonce!==state.positionsNonce||generation!==state.syncToken||!same(account,state.account))return;renderPositions();if(truncated)toast("Showing the first "+String(OWNED_POSITION_ENUMERATION_LIMIT)+" wallet positions to keep this browser responsive. Use manual lookup for additional NFT IDs.","error");loadPositionValuations(list,function(){return nonce===state.positionsNonce&&generation===state.syncToken&&same(account,state.account)})
     }catch(err){if(nonce!==state.positionsNonce||generation!==state.syncToken||!same(account,state.account))return;state.positions=[];if(state.positionLoading==="owned")state.positionLoading=null;renderPositions();toast(safeError(err),"error")}
   }
   async function loadAllPositions(append){
