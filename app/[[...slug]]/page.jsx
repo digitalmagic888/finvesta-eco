@@ -49,6 +49,7 @@ const nav = [
   { label: "📈 Tracker", href: "https://ogprinters.pulsewatch.app/" },
   { label: "Exchange", href: "/exchange/" },
   { label: "WHITE PAPER", href: "/whitepaper" },
+  { label: "Flash Lending Docs", href: "/flash-lending-docs/", cta: true },
 ];
 
 const disclaimer =
@@ -142,7 +143,7 @@ function Header() {
       </Link>
       <nav className="nav-links" aria-label="Site">
         {nav.map((item) => (
-          <a key={item.label} href={item.href}>
+          <a key={item.label} href={item.href} className={item.cta ? "nav-cta" : undefined}>
             {item.label}
           </a>
         ))}

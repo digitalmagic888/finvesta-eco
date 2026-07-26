@@ -17,7 +17,7 @@ export default function MobileMenu({ nav }) {
           <nav aria-label="Site">
             {nav.map((item) => (
               item.href.startsWith("/") ? (
-                <Link key={item.label} href={item.href} onClick={() => setOpen(false)}>
+                <Link key={item.label} className={item.cta ? "mobile-nav-cta" : undefined} href={item.href} onClick={() => setOpen(false)}>
                   {item.label}
                 </Link>
               ) : (
