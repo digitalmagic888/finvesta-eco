@@ -1,5 +1,6 @@
 import "./globals.css";
 import AgreementDisclaimer from "./components/AgreementDisclaimer";
+import ExitIntentPopup from "./components/ExitIntentPopup";
 
 export const metadata = {
   metadataBase: new URL("https://www.finvesta.eco"),
@@ -17,6 +18,7 @@ export default function RootLayout({ children }) {
       <body>
         {children}
         <AgreementDisclaimer />
+        <ExitIntentPopup />
       </body>
     </html>
   );
