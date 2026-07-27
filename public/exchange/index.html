@@ -48,6 +48,8 @@
     .nav button:hover,.nav button.active{background:rgba(0,246,255,.06);border-color:rgba(0,246,255,.16);color:var(--cyan)}
     .topbar__actions{margin-left:auto;display:flex;align-items:center;gap:8px}
     .status-chip,.wallet-button{height:40px;display:inline-flex;align-items:center;gap:8px;padding:0 12px;border-radius:999px;border:1px solid var(--line2);background:rgba(13,18,21,.85);color:var(--muted);font-size:10px;font-weight:800}
+    button.status-chip{cursor:pointer}
+    button.status-chip:hover{border-color:rgba(0,246,255,.4);color:var(--cyan)}
     .status-chip i,.live-dot{width:7px;height:7px;border-radius:50%;background:#54656d}
     .status-chip.online i,.live-dot.online{background:var(--green);box-shadow:0 0 11px rgba(183,255,125,.72)}
     .wallet-button{border-radius:4px;border-color:rgba(255,101,61,.38);background:linear-gradient(135deg,rgba(255,101,61,.18),rgba(255,155,61,.09));color:#ffc4a8;cursor:pointer;max-width:190px}
@@ -410,6 +412,7 @@
     .field input,.field select{width:100%;height:46px;padding:0 12px;border:1px solid rgba(101,219,232,.15);border-radius:4px;background:#080f12;color:var(--text);outline:0}
     .field input[type=range]{height:28px;padding:0;border:0;background:transparent;accent-color:var(--cyan);cursor:pointer}
     .field input:focus,.field select:focus{border-color:rgba(0,246,255,.52)}
+    .field [aria-invalid="true"]{border-color:rgba(255,107,120,.65);box-shadow:0 0 0 3px rgba(255,107,120,.055)}
     .field-row{display:grid;grid-template-columns:1fr 1fr;gap:9px}
     .field-action-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:stretch}
     .field-action-row .secondary{height:46px;white-space:nowrap}
@@ -608,6 +611,17 @@
     .preloader-note{margin:17px 0 0;color:#58717c;font-size:8px;line-height:1.55;text-align:center}
     .preloader-retry{min-height:43px;margin:18px auto 0;padding:0 18px;border:1px solid rgba(255,107,120,.42);border-radius:4px;background:rgba(255,107,120,.08);color:#ffc0c7;font-size:10px;font-weight:1000;cursor:pointer}
     .preloader-retry:hover{border-color:var(--red);background:rgba(255,107,120,.13)}
+    .preloader-rpc-recovery{margin-top:18px;padding:14px;border:1px solid rgba(255,107,120,.24);border-radius:6px;background:rgba(6,12,15,.78);text-align:left}
+    .preloader-rpc-recovery__head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .preloader-rpc-recovery__head strong{color:#e9f9ff;font-size:10px;letter-spacing:.04em}
+    .preloader-rpc-recovery__head span{min-width:0;overflow:hidden;color:#ff9ba5;font-size:8px;font-weight:900;text-overflow:ellipsis;white-space:nowrap}
+    .preloader-rpc-recovery .field{margin-top:10px}
+    .preloader-rpc-message{min-height:18px;margin:9px 0 0;color:#78919b;font-size:8px;line-height:1.5}
+    .preloader-rpc-message.is-error{color:#ff9ba5}
+    .preloader-rpc-message.is-success{color:var(--green)}
+    .preloader-rpc-recovery [aria-invalid="true"]{border-color:rgba(255,107,120,.65);box-shadow:0 0 0 3px rgba(255,107,120,.055)}
+    .preloader-rpc-recovery .preloader-retry{display:block;width:100%;margin-top:12px}
+    .preloader-rpc-recovery .preloader-retry:disabled{cursor:wait;opacity:.55}
     .app-preloader.has-error .preloader-card{border-color:rgba(255,107,120,.3)}
     .app-preloader.has-error .preloader-orbit::before{border-color:rgba(255,107,120,.5);border-left-color:transparent}
     .app-preloader.is-ready .preloader-card{transform:translateY(-5px);border-color:rgba(183,255,125,.26)}
@@ -624,15 +638,16 @@
     @keyframes route{from{left:0}to{left:calc(100% - 7px)}}
     @keyframes shimmer{to{transform:translateX(100%)}}
     @keyframes toastIn{from{opacity:0;transform:translateY(8px)}}
+    @media(max-height:720px){.app-preloader.has-error{place-items:start center;padding-block:12px}.app-preloader.has-error .preloader-visual{display:none}.app-preloader.has-error .preloader-card{margin:auto 0}}
     @media(max-width:900px){
       .nav{display:none}.status-chip{display:none}.hero{grid-template-columns:1fr;gap:24px;padding-top:56px}.grid-2,.positions-layout{grid-template-columns:1fr}.position-detail{position:static}.protocol-grid{grid-template-columns:1fr}.journey-grid{grid-template-columns:1fr;gap:20px}.journey-node__track{grid-template-columns:auto 1fr}.journey-node p{max-width:none}.position-card__summary{grid-template-columns:1fr 1fr}.position-card__quick-stats{grid-template-columns:1fr 1fr}.summary-grid{grid-template-columns:1fr 1fr}.mobile-nav{position:fixed;display:grid;grid-template-columns:repeat(3,1fr);left:0;right:0;bottom:0;z-index:60;padding:8px 12px calc(8px + env(safe-area-inset-bottom));border-top:1px solid var(--line2);background:rgba(7,10,12,.94);backdrop-filter:blur(16px)}.mobile-nav button{min-height:43px;border:0;border-radius:4px;background:transparent;color:#77909b;font-size:9px;font-weight:900}.mobile-nav button.active{background:rgba(0,246,255,.07);color:var(--cyan)}.footer{padding-bottom:120px}
     }
     @media(max-width:620px){
-      .shell{width:min(100% - 24px,1220px)}.topbar__in{height:62px;gap:10px}.brand__copy{display:none}.brand__mark{width:37px;height:37px}.wallet-button{max-width:150px;padding:0 10px}.hero{padding-top:42px}.hero h1{font-size:42px}.hero__copy{font-size:12px}.panel-pad{padding:17px}.panel-head h2{font-size:21px}.pill{display:none}.token-select{min-width:132px}.amount-row input,.amount-row output{font-size:32px}.route-map{grid-template-columns:50px 1fr 42px 1fr 50px}.route-core{width:42px;height:42px}.metric-grid{grid-template-columns:1fr}.metric-grid div{border-right:0;border-bottom:1px solid rgba(101,219,232,.1)}.section-head{align-items:flex-start;flex-direction:column}.summary-grid{grid-template-columns:1fr}.position-tabs{display:grid;grid-template-columns:1fr;margin-bottom:13px}.position-tab{width:100%;display:flex;align-items:center;justify-content:space-between;text-align:left}.position-actions{display:grid;grid-template-columns:1fr;gap:8px}.position-sort{width:100%;grid-template-columns:auto repeat(2,minmax(0,1fr))}.position-sort__option{padding-inline:8px}.position-card__summary{grid-template-columns:1fr}.position-card .secondary{width:100%}.position-card__quick-stats,.position-card__drawer-actions{grid-template-columns:1fr}.position-card__drawer-head{align-items:flex-start;flex-direction:column}.position-detail__value{align-items:flex-start;flex-direction:column}.field-row,.funding-grid,.field-action-row,.mint-token-grid,.admin-grid{grid-template-columns:1fr}.field-label{align-items:flex-start;flex-direction:column}.field-percentages{justify-content:flex-start}.field-percent,.range-presets button{min-height:40px;padding-inline:11px}.balance-actions button{min-height:30px}.range-composer__head,.price-source-panel__head,.admin-panel__head{align-items:flex-start;flex-direction:column}.range-slider-row{grid-template-columns:55px minmax(0,1fr);}.range-slider-row output{grid-column:2}.price-input-wrap{grid-template-columns:1fr}.price-input-wrap span{max-width:none;padding:0 12px 10px;text-align:left}.range-strategy{width:100%}.range-strategy button{flex:1;min-height:42px}.footer__in{align-items:flex-start;flex-direction:column}.topbar__actions .icon-button{display:none}
+      .shell{width:min(100% - 24px,1220px)}.topbar__in{height:62px;gap:10px}.brand__copy{display:none}.brand__mark{width:37px;height:37px}.wallet-button{max-width:150px;padding:0 10px}.hero{padding-top:42px}.hero h1{font-size:42px}.hero__copy{font-size:12px}.panel-pad{padding:17px}.panel-head h2{font-size:21px}.pill{display:none}.token-select{min-width:132px}.amount-row input,.amount-row output{font-size:32px}.route-map{grid-template-columns:50px 1fr 42px 1fr 50px}.route-core{width:42px;height:42px}.metric-grid{grid-template-columns:1fr}.metric-grid div{border-right:0;border-bottom:1px solid rgba(101,219,232,.1)}.section-head{align-items:flex-start;flex-direction:column}.summary-grid{grid-template-columns:1fr}.position-tabs{display:grid;grid-template-columns:1fr;margin-bottom:13px}.position-tab{width:100%;display:flex;align-items:center;justify-content:space-between;text-align:left}.position-actions{display:grid;grid-template-columns:1fr;gap:8px}.position-sort{width:100%;grid-template-columns:auto repeat(2,minmax(0,1fr))}.position-sort__option{padding-inline:8px}.position-card__summary{grid-template-columns:1fr}.position-card .secondary{width:100%}.position-card__quick-stats,.position-card__drawer-actions{grid-template-columns:1fr}.position-card__drawer-head{align-items:flex-start;flex-direction:column}.position-detail__value{align-items:flex-start;flex-direction:column}.field-row,.funding-grid,.field-action-row,.mint-token-grid,.admin-grid{grid-template-columns:1fr}.field-label{align-items:flex-start;flex-direction:column}.field-percentages{justify-content:flex-start}.field-percent,.range-presets button{min-height:40px;padding-inline:11px}.balance-actions button{min-height:30px}.range-composer__head,.price-source-panel__head,.admin-panel__head{align-items:flex-start;flex-direction:column}.range-slider-row{grid-template-columns:55px minmax(0,1fr);}.range-slider-row output{grid-column:2}.price-input-wrap{grid-template-columns:1fr}.price-input-wrap span{max-width:none;padding:0 12px 10px;text-align:left}.range-strategy{width:100%}.range-strategy button{flex:1;min-height:42px}.footer__in{align-items:flex-start;flex-direction:column}.topbar__actions .icon-button{display:none}.topbar__actions #settingsButton{display:grid}
     }
     @media(max-width:900px){.protocol-fee-hero__grid,.protocol-transparency__grid{grid-template-columns:1fr}.protocol-fee-hero h1{max-width:720px}.fee-allocation{max-width:620px}.protocol-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
     @media(max-width:620px){.protocol-fee-hero{margin-top:35px;padding:22px}.protocol-fee-hero__top{align-items:flex-start;flex-direction:column;margin-bottom:22px}.protocol-fee-badge{white-space:normal}.protocol-fee-hero h1{margin-bottom:21px;font-size:clamp(39px,13vw,56px)}.protocol-fee-statement{font-size:14px;line-height:1.58}.fee-allocation{padding:15px}.fee-allocation__bar{height:68px}.fee-allocation__zero{font-size:25px}.protocol-transparency{margin-top:34px;padding-top:28px}.protocol-transparency__intro h2{font-size:29px}.protocol-transparency__intro p{font-size:11px;line-height:1.67}.treasury-panel,.fee-tier-panel{padding:15px}.treasury-route{grid-template-columns:1fr auto 1fr}.treasury-route span:nth-of-type(3){grid-column:1/-1}.treasury-route i:last-of-type{display:none}.fee-tier-panel__head{flex-direction:column}.fee-tier-panel__head span{max-width:none;text-align:left}.protocol-assurance{grid-template-columns:1fr;gap:11px}.protocol-assurance p{padding:11px 0 0;border-left:0;border-top:1px solid rgba(183,255,125,.19)}.contract-registry__head{align-items:flex-start;flex-direction:column}.contract-registry__head>p{text-align:left}.protocol-grid{grid-template-columns:1fr}.mobile-nav button{white-space:nowrap}}
-    @media(max-width:620px){.app-preloader{place-items:center;padding:14px}.preloader-card{padding:24px 18px}.preloader-visual{height:96px;margin-bottom:17px}.preloader-orbit{width:92px;height:92px}.preloader-orbit img{width:49px;height:49px}.preloader-card h1{font-size:clamp(29px,10.5vw,38px)}.preloader-status{margin-top:13px;font-size:10px}.preloader-steps{grid-template-columns:1fr;gap:6px;margin-top:17px}.preloader-step{display:grid;grid-template-columns:1fr auto;align-items:center;padding:8px 10px}.preloader-step strong{margin:0;max-width:160px;text-align:right}.preloader-note{margin-top:13px}.positions-hero__aside{width:100%;gap:14px}.positions-hero__aside .position-create-cta{min-height:68px}.position-actions,.position-actions .secondary{width:100%}.range-presets{grid-template-columns:repeat(2,1fr)}.range-presets #mintFullStrategy{grid-column:1/-1}.price-range-card{min-height:96px;padding-inline:8px}.mint-deposit-card{grid-template-columns:1fr}.mint-deposit-card>input{text-align:left}.mint-deposit-card>.field-percentages{grid-column:auto}}
+    @media(max-width:620px){.app-preloader{place-items:center;padding:14px}.preloader-card{padding:24px 18px}.preloader-visual{height:96px;margin-bottom:17px}.preloader-orbit{width:92px;height:92px}.preloader-orbit img{width:49px;height:49px}.preloader-card h1{font-size:clamp(29px,10.5vw,38px)}.preloader-status{margin-top:13px;font-size:10px}.preloader-steps{grid-template-columns:1fr;gap:6px;margin-top:17px}.preloader-step{display:grid;grid-template-columns:1fr auto;align-items:center;padding:8px 10px}.preloader-step strong{margin:0;max-width:160px;text-align:right}.preloader-note{margin-top:13px}.preloader-rpc-recovery__head{align-items:flex-start;flex-direction:column;gap:5px}.preloader-rpc-recovery__head span{max-width:100%;white-space:normal}.positions-hero__aside{width:100%;gap:14px}.positions-hero__aside .position-create-cta{min-height:68px}.position-actions,.position-actions .secondary{width:100%}.range-presets{grid-template-columns:repeat(2,1fr)}.range-presets #mintFullStrategy{grid-column:1/-1}.price-range-card{min-height:96px;padding-inline:8px}.mint-deposit-card{grid-template-columns:1fr}.mint-deposit-card>input{text-align:left}.mint-deposit-card>.field-percentages{grid-column:auto}}
     @media(min-width:901px) and (max-width:1120px){.position-card__summary.has-fees{grid-template-columns:1fr 1fr}.position-card__summary.has-fees .position-card__manage{grid-column:1/-1}}
     @media(max-width:900px){.position-card__summary.has-fees{grid-template-columns:1fr 1fr}.position-card__summary.has-fees .position-card__manage{grid-column:1/-1}}
     @media(max-width:620px){.position-card__summary.has-fees{grid-template-columns:1fr}.claimable-fees{padding:14px}.claimable-fees__head{align-items:flex-start;flex-direction:column}.claimable-fees__grid{grid-template-columns:1fr}.claimable-fee__copy strong{font-size:clamp(15px,4.8vw,21px)}.claim-compound-cta{min-height:72px;padding:12px}.compound-step-banner{grid-template-columns:1fr}.compound-step-banner__state{justify-self:start}.compound-step-banner__assets{grid-template-columns:1fr}.compound-balance__hero-head{flex-direction:column}.compound-balance__route{grid-template-columns:1fr}.compound-balance__arrow{min-height:24px;transform:rotate(90deg)}.compound-balance__facts{grid-template-columns:1fr}.compound-balance__actions{grid-template-columns:1fr}.compound-balance__actions .secondary{min-width:0}}
@@ -647,13 +662,19 @@
       <h1 id="preloaderTitle">Making DeFi<br><em>Fun Again.</em></h1>
       <p class="preloader-status" id="preloaderStatus" role="status" aria-live="polite" aria-atomic="true">Opening a verified PulseChain read session…</p>
       <div class="preloader-progress" id="preloaderProgress" role="progressbar" aria-label="Asset registry synchronization" aria-valuemin="0" aria-valuemax="100" aria-valuenow="4"><div class="preloader-progress__fill" id="preloaderProgressFill"></div></div>
-      <div class="preloader-progress-meta"><span id="preloaderProgressLabel">Preparing registry</span><strong id="preloaderProgressCount">0 / 14</strong></div>
+      <div class="preloader-progress-meta"><span id="preloaderProgressLabel">Preparing registry</span><strong id="preloaderProgressCount">0 / 16</strong></div>
       <div class="preloader-steps" aria-label="Startup readiness">
         <div class="preloader-step is-active" id="preloaderRpcStep"><span>PulseChain RPC</span><strong id="preloaderRpcValue">Verifying</strong></div>
         <div class="preloader-step" id="preloaderNativeStep"><span>Native PLS</span><strong id="preloaderNativeValue">Waiting</strong></div>
         <div class="preloader-step" id="preloaderAssetsStep"><span>Asset registry</span><strong id="preloaderAssetsValue">0 settled</strong></div>
       </div>
-      <button class="preloader-retry" id="preloaderRetry" type="button" hidden>Retry PulseChain sync</button>
+      <div class="preloader-rpc-recovery" id="preloaderRpcRecovery" hidden aria-labelledby="preloaderRpcRecoveryTitle">
+        <div class="preloader-rpc-recovery__head"><strong id="preloaderRpcRecoveryTitle">Choose a preferred read RPC</strong><span id="preloaderRpcCurrent">Automatic fallback paused</span></div>
+        <div class="field"><label for="preloaderRpcMode">PulseChain endpoint</label><select id="preloaderRpcMode" aria-describedby="preloaderRpcMessage"></select></div>
+        <div class="field" id="preloaderCustomRpcField" hidden><label for="preloaderCustomRpc">Custom RPC URL</label><input id="preloaderCustomRpc" type="url" inputmode="url" maxlength="2048" placeholder="https://your-rpc.example" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="go" aria-describedby="preloaderRpcMessage"></div>
+        <p class="preloader-rpc-message" id="preloaderRpcMessage" role="status" aria-live="polite">The endpoint is verified as PulseChain 369 before synchronization restarts. Healthy fallbacks remain enabled.</p>
+        <button class="preloader-retry" id="preloaderRetry" type="button">Save preference &amp; retry sync</button>
+      </div>
       <p class="preloader-note">Token metadata is resolved directly from PulseChain. No wallet connection or approval is requested during startup.</p>
       <noscript><p class="preloader-status" style="color:var(--red)">JavaScript is required to resolve the asset registry.</p></noscript>
     </div>
@@ -670,8 +691,8 @@
         <button data-nav="protocol">Protocol Fees</button>
       </nav>
       <div class="topbar__actions">
-        <span class="status-chip" id="rpcChip"><i></i><span>RPC checking</span></span>
-        <button class="icon-button" id="settingsButton" aria-label="Swap settings" title="Swap settings">⚙</button>
+        <button class="status-chip" id="rpcChip" type="button" aria-label="Read RPC settings" title="Read RPC settings"><i></i><span>RPC checking</span></button>
+        <button class="icon-button" id="settingsButton" aria-label="Swap and RPC settings" title="Swap and RPC settings">⚙</button>
         <button class="wallet-button" id="walletButton"><span>◇</span><span id="walletLabel">Connect wallet</span></button>
       </div>
     </div>
@@ -688,7 +709,7 @@
           <article class="panel panel-pad">
             <div class="panel-head">
               <div><p class="kicker">PulseChain · Chain 369</p><h2>Swap assets</h2></div>
-              <div class="tools"><span class="pill caution" id="quotePill">POOL SPOT</span><button class="icon-button" id="inlineSettings" title="Swap settings">⚙</button></div>
+              <div class="tools"><span class="pill caution" id="quotePill">POOL SPOT</span><button class="icon-button" id="inlineSettings" aria-label="Swap and RPC settings" title="Swap and RPC settings">⚙</button></div>
             </div>
             <div class="token-well">
               <div class="well-top"><span>YOU PAY</span><span id="fromBalanceLabel">Balance —</span></div>
@@ -917,6 +938,52 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
     id:369n, hex:"0x171", name:"PulseChain", rpc:"https://rpc-pulsechain.g4mm4.io",
     explorer:"https://scan.pulsechain.com", nativeCurrency:{name:"Pulse",symbol:"PLS",decimals:18}
   });
+  var RPC_PRESETS = Object.freeze([
+    Object.freeze({label:"PublicNode",url:"https://pulsechain-rpc.publicnode.com"}),
+    Object.freeze({label:"PulseChain official",url:"https://rpc.pulsechain.com"}),
+    Object.freeze({label:"G4mm4",url:"https://rpc-pulsechain.g4mm4.io"}),
+    Object.freeze({label:"PulseChain Stats",url:"https://rpc.pulsechainstats.com"})
+  ]);
+  var RPC_PREFERENCE_STORAGE_KEY="finvesta.v3.rpcPreference.v1",RPC_LAST_GOOD_STORAGE_KEY="finvesta.v3.rpcLastHealthy.v1",RPC_TIMEOUT_MS=9000,RPC_REGISTRY_TIMEOUT_MS=30000,SAVED_TOKEN_SYNC_BUDGET_MS=8000,RPC_FALLBACK_DELAY_MS=450,RPC_MAX_BLOCK_AGE_SECONDS=180;
+  function normalizeRpcUrl(value){
+    var raw=String(value==null?"":value).trim();if(!raw||raw.length>2048)throw new Error("Enter a valid RPC URL no longer than 2,048 characters");
+    var url;try{url=new URL(raw)}catch(_){throw new Error("Enter a complete HTTPS RPC URL")}
+    if(url.protocol!=="https:")throw new Error("Custom RPC URLs must use HTTPS");
+    if(url.username||url.password)throw new Error("RPC URLs with embedded usernames or passwords are not accepted");
+    if(url.hash)throw new Error("Remove the # fragment from the RPC URL");
+    if(!url.hostname)throw new Error("The RPC URL needs a valid hostname");
+    return url.pathname==="/"&&!url.search?url.origin:url.href
+  }
+  function rpcPreset(url){
+    var normalized;try{normalized=normalizeRpcUrl(url)}catch(_){return null}
+    return RPC_PRESETS.find(function(item){return normalizeRpcUrl(item.url)===normalized})||null
+  }
+  function rpcPublicLabel(url){
+    try{var parsed=new URL(normalizeRpcUrl(url)),preset=rpcPreset(url);return (preset?preset.label+" · ":"")+parsed.hostname}catch(_){return "Custom endpoint"}
+  }
+  function loadRpcPreference(){
+    try{
+      var saved=JSON.parse(localStorage.getItem(RPC_PREFERENCE_STORAGE_KEY)||"null");
+      if(saved&&saved.mode==="preferred")return {mode:"preferred",url:normalizeRpcUrl(saved.url)};
+      if(saved&&saved.mode==="auto")return {mode:"auto",url:null}
+    }catch(_){}
+    return {mode:"auto",url:null}
+  }
+  function loadLastGoodRpc(){
+    try{return normalizeRpcUrl(localStorage.getItem(RPC_LAST_GOOD_STORAGE_KEY)||"")}catch(_){return null}
+  }
+  var rpcPreference=loadRpcPreference(),lastGoodRpcUrl=loadLastGoodRpc();
+  function rpcCandidateUrls(excluded){
+    excluded=excluded||new Set();var urls=[],seen=new Set();
+    function add(value){try{var url=normalizeRpcUrl(value),key=url.toLowerCase();if(!seen.has(key)&&!excluded.has(key)){seen.add(key);urls.push(url)}}catch(_){}}
+    if(rpcPreference.mode==="preferred")add(rpcPreference.url);
+    else if(lastGoodRpcUrl&&rpcPreset(lastGoodRpcUrl))add(lastGoodRpcUrl);
+    add(CHAIN.rpc);RPC_PRESETS.forEach(function(item){add(item.url)});return urls
+  }
+  function createReadProvider(url){
+    var request=new E.FetchRequest(normalizeRpcUrl(url));request.timeout=RPC_TIMEOUT_MS;
+    return new E.JsonRpcProvider(request,{name:"pulsechain",chainId:369},{staticNetwork:true,batchMaxCount:1})
+  }
   var DEX = Object.freeze({
     api:"https://api.dexscreener.com",chain:"pulsechain",cacheMs:30000,
     thinLiquidityUsd:10000,maxDeviationBps:200,timeoutMs:12000
@@ -952,7 +1019,7 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
   var TOKEN_LOGO_OVERRIDES=Object.freeze({
     "0x15d38573d2feeb82e7ad5187ab8c1d52810b1f07":"0x15D38573d2feeb82e7ad5187aB8c1D52810B1f07.png"
   });
-  var MAX_SAVED_TOKEN_RESTORES=40,STARTUP_WORKERS=4;
+  var MAX_SAVED_TOKEN_RESTORES=40,STARTUP_WORKERS=2;
   var PENDING_COMPOUND_STORAGE_KEY="finvesta.v3.pendingCompounds.v2",PENDING_COMPOUND_ENTRY_PREFIX="finvesta.v3.pendingCompound.v3:"+String(CHAIN.id)+":",LEGACY_PENDING_COMPOUND_STORAGE_KEY="finvesta.v3.pendingCompounds.v1";
   var TOKEN_LOGO_STORAGE_KEY="finvesta.v3.tokenLogos.v1",TOKEN_LOGO_TTL_MS=86400000,TOKEN_LOGO_MISS_TTL_MS=1800000,TOKEN_LOGO_CACHE_LIMIT=100;
   var ADMIN_EOA="0x369418f70ccE4D4FeE21934CB7a13CD009C59888";
@@ -1019,25 +1086,28 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
     E.id("Swap(address,address,int256,int256,uint160,uint128,int24)"),
     E.id("Swap(address,address,int256,int256,uint160,uint128,int24,uint128,uint128)")
   ]);
-  var rpcRequest=new E.FetchRequest(CHAIN.rpc);rpcRequest.timeout=18000;
-  var readProvider = new E.JsonRpcProvider(rpcRequest,{name:"pulsechain",chainId:369},{staticNetwork:true,batchMaxCount:1});
-  var contracts = {
-    factory:new E.Contract(ADDR.factory,ABI.factory,readProvider),
-    router:new E.Contract(ADDR.router,ABI.router,readProvider),
-    manager:new E.Contract(ADDR.positionManager,ABI.manager,readProvider),
-    coordinator:new E.Contract(ADDR.deploymentCoordinator,ABI.coordinator,readProvider),
-    deployer:new E.Contract(ADDR.poolDeployer,ABI.deployer,readProvider)
-  };
+  function createReadContracts(provider){
+    return {
+      factory:new E.Contract(ADDR.factory,ABI.factory,provider),
+      router:new E.Contract(ADDR.router,ABI.router,provider),
+      manager:new E.Contract(ADDR.positionManager,ABI.manager,provider),
+      coordinator:new E.Contract(ADDR.deploymentCoordinator,ABI.coordinator,provider),
+      deployer:new E.Contract(ADDR.poolDeployer,ABI.deployer,provider)
+    }
+  }
+  var activeRpcUrl=rpcCandidateUrls()[0]||CHAIN.rpc;
+  var readProvider=createReadProvider(activeRpcUrl);
+  var contracts=createReadContracts(readProvider);
   var state = {
-    rpcOk:false,latestBlock:0,latestTimestamp:0,feeTiers:[],tokens:new Map(),tokenLoads:new Map(),from:null,to:null,pool:null,
+    rpcOk:false,rpcGeneration:0,latestBlock:0,latestTimestamp:0,feeTiers:[],tokens:new Map(),tokenLoads:new Map(),from:null,to:null,pool:null,
     spotOut:null,simulatedOut:null,minOut:null,quoteNonce:0,quoteSource:"none",swapAllowance:null,swapAllowanceError:null,swapAllowanceNonce:0,swapFillNonce:0,
     wallets:new Map(),providerIds:new WeakMap(),selectedWallet:null,rawWallet:null,browserProvider:null,
-    account:null,walletChain:null,walletHandlers:null,syncToken:0,nativeBalance:null,nativeBalanceError:null,balanceBlock:null,balanceFetchedAt:null,balanceNonce:0,positionsNonce:0,allPositionsNonce:0,positionValueNonce:0,swapNativePls:true,
+    account:null,walletChain:null,walletHandlers:null,syncToken:0,nativeBalance:null,nativeBalanceError:null,balanceBlock:null,balanceFetchedAt:null,balanceNonce:0,positionsNonce:0,allPositionsNonce:0,manualPositionNonce:0,positionValueNonce:0,swapNativePls:true,
     modalNonce:0,modalLocked:false,modalReturnFocus:null,modalAccountHandler:null,
     positions:[],allPositions:[],allPositionsTotal:null,allPositionsBlock:null,allPositionsNextIndex:0,positionTab:"active",positionSort:"tvl",positionLoading:null,selectedPosition:null,expandedPositionId:null,dexCache:new Map(),positionMarketCache:new Map(),poolVolumeCache:new Map(),volumeWindowCache:null,positionFeeCache:new Map(),positionFeeLoads:new Map(),positionFeeNonce:0,pendingCompounds:new Map(),compoundQuarantines:new Map(),tokenLogoCache:new Map(),tokenLogoQueue:new Map(),tokenLogoTimer:null,tokenLogoBusy:false,tokenLogoOverrideFailures:new Set(),adminNonce:0,adminConfig:null,adminPool:null,
     settings:{slippageBps:50,deadlineMinutes:20,unlimitedApproval:false}
   };
-  var startupState={startedAt:Date.now(),inFlight:false,slowTimer:null,releaseTimer:null,lastReport:null};
+  var startupState={startedAt:Date.now(),inFlight:false,slowTimer:null,releaseTimer:null,lastReport:null,failures:[]};
 
   function $(id){return document.getElementById(id)}
   function esc(value){return String(value==null?"":value).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
@@ -1098,6 +1168,7 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
       ["data","error","cause","originalError"].forEach(function(k){try{if(v[k])q.push(v[k])}catch(_){}})
     }
     var msg=msgs.join(" · ").replace(/execution reverted(?:: )?/i,"Transaction would revert: ");
+    try{[activeRpcUrl,rpcPreference&&rpcPreference.url].filter(Boolean).forEach(function(url){msg=msg.split(url).join(rpcPublicLabel(url))})}catch(_){}
     return clampText(msg||"Unknown wallet or RPC error","Unknown error",260)
   }
   function nestedCode(error){
@@ -1116,6 +1187,99 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
   }
   function waitMs(ms){return new Promise(function(resolve){setTimeout(resolve,ms)})}
   function afterNextPaint(){return new Promise(function(resolve){requestAnimationFrame(function(){requestAnimationFrame(resolve)})})}
+  function rpcOptionsHtml(config){
+    var selected=config&&config.mode==="preferred"?(rpcPreset(config.url)?normalizeRpcUrl(config.url):"custom"):"auto";
+    var html="<option value='auto'"+(selected==="auto"?" selected":"")+">Automatic fallback · all 4 endpoints</option>";
+    RPC_PRESETS.forEach(function(item){var url=normalizeRpcUrl(item.url);html+="<option value='"+esc(url)+"'"+(selected===url?" selected":"")+">"+esc(item.label+" · "+new URL(url).hostname)+"</option>"});
+    return html+"<option value='custom'"+(selected==="custom"?" selected":"")+">Custom HTTPS endpoint…</option>"
+  }
+  function renderRpcControl(selectId,customFieldId,customInputId,config){
+    var select=$(selectId),field=$(customFieldId),input=$(customInputId);if(!select||!field||!input)return;
+    select.innerHTML=rpcOptionsHtml(config);input.value=config&&config.mode==="preferred"&&!rpcPreset(config.url)?config.url:"";field.hidden=select.value!=="custom";input.removeAttribute("aria-invalid")
+  }
+  function toggleRpcCustomField(selectId,customFieldId,customInputId){
+    var select=$(selectId),field=$(customFieldId),input=$(customInputId);if(!select||!field||!input)return;
+    field.hidden=select.value!=="custom";input.removeAttribute("aria-invalid");if(!field.hidden)setTimeout(function(){input.focus()},0)
+  }
+  function readRpcControl(selectId,customInputId){
+    var select=$(selectId),input=$(customInputId);if(!select)throw new Error("RPC selection is unavailable");
+    if(select.value==="auto")return {mode:"auto",url:null};
+    var url=normalizeRpcUrl(select.value==="custom"?(input?input.value:""):select.value);
+    return {mode:"preferred",url:url}
+  }
+  function sameRpcPreference(a,b){return !!a&&!!b&&a.mode===b.mode&&(a.mode==="auto"||normalizeRpcUrl(a.url)===normalizeRpcUrl(b.url))}
+  function persistHealthyRpc(){
+    lastGoodRpcUrl=activeRpcUrl;
+    try{localStorage.setItem(RPC_PREFERENCE_STORAGE_KEY,JSON.stringify(rpcPreference));localStorage.setItem(RPC_LAST_GOOD_STORAGE_KEY,activeRpcUrl)}catch(_){}
+  }
+  function renderPreloaderRpcRecovery(message){
+    renderRpcControl("preloaderRpcMode","preloaderCustomRpcField","preloaderCustomRpc",rpcPreference);
+    $("preloaderRpcCurrent").textContent="Last attempt · "+rpcPublicLabel(activeRpcUrl);
+    var status=$("preloaderRpcMessage");status.className="preloader-rpc-message"+(message?" is-error":"");status.textContent=message||"The endpoint is verified as PulseChain 369 before synchronization restarts. Healthy fallbacks remain enabled."
+  }
+  async function probeRpcUrl(url){
+    url=normalizeRpcUrl(url);var provider=createReadProvider(url);
+    try{
+      var basic=await Promise.all([provider.send("eth_chainId",[]),provider.getBlock("latest")]),chainHex=basic[0],block=basic[1];
+      if(BigInt(chainHex)!==CHAIN.id)throw new Error("Endpoint returned chain "+String(chainHex)+" instead of PulseChain 369");
+      if(!block||!Number.isSafeInteger(Number(block.number))||!Number.isFinite(Number(block.timestamp)))throw new Error("Endpoint did not return a valid latest block");
+      var age=Math.floor(Date.now()/1000)-Number(block.timestamp);if(age>RPC_MAX_BLOCK_AGE_SECONDS)throw new Error("Latest block is "+formatInteger(age)+" seconds stale");if(age < -60)throw new Error("Latest block timestamp is materially ahead of this device");
+      var code=await Promise.all([provider.getCode(ADDR.factory,block.number),provider.getCode(ADDR.positionManager,block.number)]);
+      if(code[0]==="0x"||code[1]==="0x")throw new Error("Required Finvesta contracts are unavailable at the latest block");
+      return {url:url,provider:provider,block:block}
+    }catch(err){try{provider.destroy()}catch(_){}throw err}
+  }
+  async function findHealthyRpc(excluded){
+    var candidates=rpcCandidateUrls(excluded);if(!candidates.length)throw new Error("No untried RPC endpoints remain");
+    var failures=[],preferred=rpcPreference.mode==="preferred"?normalizeRpcUrl(rpcPreference.url):null;
+    if(preferred&&candidates[0]===preferred){
+      setStartupStatus("Verifying preferred endpoint "+rpcPublicLabel(preferred)+" before automatic fallback…");
+      try{return await probeRpcUrl(preferred)}
+      catch(preferredError){failures.push({url:preferred,error:safeError(preferredError)});candidates=candidates.slice(1);if(!candidates.length){var preferredFailure=new Error("No configured PulseChain RPC passed the health check");preferredFailure.rpcFailures=failures;throw preferredFailure}}
+    }
+    setStartupStatus("Checking "+rpcPublicLabel(candidates[0])+" with automatic fallbacks standing by…");
+    return new Promise(function(resolve,reject){
+      var settled=false,remaining=candidates.length;
+      candidates.forEach(function(url,index){
+        var start=index===0?Promise.resolve():waitMs(RPC_FALLBACK_DELAY_MS);
+        start.then(function(){if(settled)return null;return probeRpcUrl(url)}).then(function(result){
+          if(!result)return;if(settled){try{result.provider.destroy()}catch(_){}return}
+          settled=true;resolve(result)
+        }).catch(function(err){
+          if(settled)return;failures.push({url:url,error:safeError(err)});remaining--;
+          if(remaining===0){var failure=new Error("No configured PulseChain RPC passed the health check");failure.rpcFailures=failures;reject(failure)}
+        })
+      })
+    })
+  }
+  async function restoreIntentWithDeadline(onProgress){
+    var generation=state.rpcGeneration,provider=readProvider,timer=null,coreReady=false;
+    function markCoreReady(){coreReady=true;clearTimeout(timer)}
+    var work=restoreIntent(onProgress,markCoreReady);
+    var deadline=new Promise(function(_resolve,reject){timer=setTimeout(function(){
+      if(coreReady)return;
+      if(generation===state.rpcGeneration){state.rpcGeneration++;state.syncToken++;try{provider.destroy()}catch(_){}}
+      reject(new Error("RPC exceeded the "+formatInteger(RPC_REGISTRY_TIMEOUT_MS/1000)+"-second core-registry sync limit"))
+    },RPC_REGISTRY_TIMEOUT_MS)});
+    try{return await Promise.race([work,deadline])}finally{clearTimeout(timer)}
+  }
+  function activateReadRpc(result){
+    var prior=readProvider;readProvider=result.provider;activeRpcUrl=result.url;contracts=createReadContracts(readProvider);state.rpcGeneration++;state.syncToken++;state.rpcOk=false;
+    state.quoteNonce++;state.balanceNonce++;state.positionsNonce++;state.allPositionsNonce++;state.manualPositionNonce++;state.positionValueNonce++;state.swapAllowanceNonce++;state.swapFillNonce++;state.adminNonce++;state.positionFeeNonce++;
+    state.poolVolumeCache.clear();state.volumeWindowCache=null;state.positionFeeCache.clear();state.positionFeeLoads.clear();state.positionMarketCache.clear();
+    if($("rpcChip")){$("rpcChip").classList.remove("online");$("rpcChip").querySelector("span").textContent="RPC switching";$("rpcChip").title="Read RPC · "+rpcPublicLabel(activeRpcUrl);$("rpcChip").setAttribute("aria-label","Read RPC switching to "+rpcPublicLabel(activeRpcUrl)+". Open RPC settings.")}
+    if(prior&&prior!==readProvider){try{prior.destroy()}catch(_){}}
+  }
+  function resetRegistryForRpcAttempt(){
+    state.tokens=new Map();state.tokenLoads=new Map();state.from=null;state.to=null;state.pool=null;state.feeTiers=[];state.spotOut=null;state.simulatedOut=null;state.minOut=null;state.quoteSource="none";
+    state.nativeBalance=null;state.nativeBalanceError=null;state.balanceBlock=null;state.balanceFetchedAt=null;state.swapAllowance=null;state.swapAllowanceError=null;
+    state.positions=[];state.allPositions=[];state.allPositionsTotal=null;state.allPositionsBlock=null;state.allPositionsNextIndex=0;state.positionLoading=null;state.selectedPosition=null;state.expandedPositionId=null;state.adminConfig=null;state.adminPool=null;
+    state.poolVolumeCache.clear();state.volumeWindowCache=null;state.positionFeeCache.clear();state.positionFeeLoads.clear();state.positionMarketCache.clear();state.tokenLogoQueue.clear()
+  }
+  function startupRpcFailureMessage(error,failures){
+    failures=failures||[];var names=[],seen=new Set();failures.forEach(function(item){var label=rpcPublicLabel(item.url);if(!seen.has(label)){seen.add(label);names.push(label)}});
+    return "No endpoint completed the PulseChain registry sync"+(names.length?" after trying "+names.join(", "):"")+". "+safeError(error)
+  }
   function setStartupStep(id,status,value){
     var step=$(id);if(!step)return;step.classList.remove("is-active","is-ready","has-error");if(status)step.classList.add(status);var strong=step.querySelector("strong");if(strong&&value!=null)strong.textContent=value
   }
@@ -1140,22 +1304,23 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
   }
   function resetPreloader(){
     clearTimeout(startupState.slowTimer);var loader=$("appPreloader");if(!loader)return;loader.hidden=false;loader.classList.remove("has-error","is-ready","is-leaving");loader.setAttribute("aria-busy","true");
-    $("preloaderTitle").innerHTML="Making DeFi<br><em>Fun Again.</em>";$("preloaderStatus").setAttribute("role","status");$("preloaderRetry").hidden=true;
+    $("preloaderTitle").innerHTML="Making DeFi<br><em>Fun Again.</em>";$("preloaderStatus").setAttribute("role","status");$("preloaderRpcRecovery").hidden=true;$("preloaderRetry").hidden=false;
     document.body.classList.add("app-loading");document.body.setAttribute("aria-busy","true");setAppInteractive(false);setStartupPercent(4,"Preparing registry","0 / "+formatInteger(DEFAULT_TOKEN_ADDRESSES.length));
     setStartupStep("preloaderRpcStep","is-active","Verifying");setStartupStep("preloaderNativeStep",null,"Waiting");setStartupStep("preloaderAssetsStep",null,"0 settled");setStartupStatus("Opening a verified PulseChain read session…");
-    startupState.slowTimer=setTimeout(function(){if(startupState.inFlight)setStartupStatus("PulseChain is responding slowly · keeping asset selection locked until the registry is complete…")},8000)
+    startupState.slowTimer=setTimeout(function(){if(startupState.inFlight)setStartupStatus("PulseChain is responding slowly · automatic RPC fallback is still working…")},8000)
   }
   async function releasePreloader(report){
     clearTimeout(startupState.slowTimer);var loader=$("appPreloader"),skipped=report&&report.failedSaved?report.failedSaved.length:0,coreCount=DEFAULT_TOKEN_ADDRESSES.length;
-    setStartupStep("preloaderRpcStep","is-ready","Chain 369 live");setStartupStep("preloaderNativeStep","is-ready","PLS route ready");setStartupStep("preloaderAssetsStep","is-ready",skipped?formatInteger(report.loaded)+" ready":formatInteger(coreCount)+" core ready");
+    setStartupStep("preloaderRpcStep","is-ready",(rpcPreset(activeRpcUrl)?rpcPreset(activeRpcUrl).label:"Custom RPC")+" live");setStartupStep("preloaderNativeStep","is-ready","PLS route ready");setStartupStep("preloaderAssetsStep","is-ready",skipped?formatInteger(report.loaded)+" ready":formatInteger(coreCount)+" core ready");
     setStartupPercent(100,"Registry synchronized",formatInteger(report.settled)+" / "+formatInteger(report.total));setStartupStatus(skipped?formatInteger(coreCount)+" core assets ready · "+formatInteger(skipped)+" unavailable saved token"+(skipped===1?"":"s")+" skipped":"Native PLS and all "+formatInteger(coreCount)+" core assets are ready.");loader.classList.add("is-ready");
     await waitMs(Math.max(0,240-(Date.now()-startupState.startedAt)));await afterNextPaint();setAppInteractive(true);document.body.classList.remove("app-loading");document.body.removeAttribute("aria-busy");loader.classList.add("is-leaving");
     await waitMs(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches?30:400);loader.hidden=true;loader.setAttribute("aria-busy","false")
   }
   function failPreloader(error){
     clearTimeout(startupState.slowTimer);var loader=$("appPreloader"),message=safeError(error);if(!loader)return;loader.classList.add("has-error");loader.setAttribute("aria-busy","false");
-    $("preloaderTitle").innerHTML="Sync needs<br><em>another pass.</em>";$("preloaderStatus").setAttribute("role","alert");setStartupStatus("Asset sync paused · "+message);setStartupStep("preloaderAssetsStep","has-error","Retry required");
-    if(!state.tokens.has(ADDR.wpls.toLowerCase()))setStartupStep("preloaderNativeStep","has-error","WPLS unavailable");var retry=$("preloaderRetry");retry.hidden=false;setTimeout(function(){retry.focus()},0)
+    document.body.setAttribute("aria-busy","false");$("rpcChip").setAttribute("aria-label","Read RPC unavailable. Choose an endpoint and retry synchronization.");$("preloaderTitle").innerHTML="Sync needs<br><em>another pass.</em>";$("preloaderStatus").setAttribute("role","alert");setStartupStatus("Asset sync paused · "+message);setStartupStep("preloaderAssetsStep","has-error","Retry required");
+    if(!state.tokens.has(ADDR.wpls.toLowerCase()))setStartupStep("preloaderNativeStep","has-error","WPLS unavailable");
+    renderPreloaderRpcRecovery(message);$("preloaderRpcRecovery").hidden=false;var retry=$("preloaderRetry");retry.hidden=false;setTimeout(function(){$("preloaderRpcMode").focus()},0)
   }
   function openModal(html,wide){
     if($("modalLayer").hidden)state.modalReturnFocus=document.activeElement;state.modalNonce++;state.modalLocked=false;state.modalAccountHandler=null;var modalId=state.modalNonce;
@@ -1291,7 +1456,7 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
   function openWalletModal(){
     if(state.account){
       openModal(modalHeader("Connected wallet","Account")+
-        "<div class='modal-body'><div class='review-box'><dl><div><dt>Account</dt><dd class='mono'>"+esc(state.account)+"</dd></div><div><dt>Wallet network</dt><dd>"+(state.walletChain===CHAIN.id?"PulseChain · 369":"Wrong network")+"</dd></div><div><dt>Read RPC</dt><dd>rpc.pulsechainstats.com</dd></div></dl></div>"+
+        "<div class='modal-body'><div class='review-box'><dl><div><dt>Account</dt><dd class='mono'>"+esc(state.account)+"</dd></div><div><dt>Wallet network</dt><dd>"+(state.walletChain===CHAIN.id?"PulseChain · 369":"Wrong network")+"</dd></div><div><dt>Read RPC</dt><dd>"+esc(rpcPublicLabel(activeRpcUrl))+"</dd></div></dl></div>"+
         (state.walletChain!==CHAIN.id?"<button class='primary' id='switchChain'><span>Switch to PulseChain</span><span>→</span></button>":"")+
         "<button class='secondary' id='disconnectButton' style='width:100%;margin-top:9px'>Disconnect locally</button></div>");
       if($("switchChain"))$("switchChain").addEventListener("click",async function(){try{await ensurePulseChain();await syncWallet();closeModal()}catch(err){toast(safeError(err),"error")}});
@@ -1347,7 +1512,7 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
     try{await state.rawWallet.request({method:"wallet_switchEthereumChain",params:[{chainId:CHAIN.hex}]})}
     catch(err){
       if(!isUnknownChain(err))throw err;
-      await state.rawWallet.request({method:"wallet_addEthereumChain",params:[{chainId:CHAIN.hex,chainName:CHAIN.name,nativeCurrency:CHAIN.nativeCurrency,rpcUrls:[CHAIN.rpc],blockExplorerUrls:[CHAIN.explorer]}]})
+      await state.rawWallet.request({method:"wallet_addEthereumChain",params:[{chainId:CHAIN.hex,chainName:CHAIN.name,nativeCurrency:CHAIN.nativeCurrency,rpcUrls:RPC_PRESETS.map(function(item){return item.url}),blockExplorerUrls:[CHAIN.explorer]}]})
     }
     if(BigInt(await state.rawWallet.request({method:"eth_chainId"}))!==CHAIN.id)await state.rawWallet.request({method:"wallet_switchEthereumChain",params:[{chainId:CHAIN.hex}]});
     await syncWallet();if(state.walletChain!==CHAIN.id)throw new Error("Wallet did not switch to PulseChain")
@@ -1357,27 +1522,31 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
     if(!state.browserProvider)throw new Error("Wallet provider is unavailable");
     var health=await Promise.all([readProvider.getBlock("latest"),state.browserProvider.getBlockNumber()]),readBlock=health[0],walletBlock=Number(health[1]);
     var age=Math.floor(Date.now()/1000)-Number(readBlock.timestamp),gap=Math.abs(Number(readBlock.number)-walletBlock);
-    if(age>180)throw new Error("PulseChain read RPC is stale by "+formatInteger(age)+" seconds");
+    if(age>RPC_MAX_BLOCK_AGE_SECONDS)throw new Error("PulseChain read RPC is stale by "+formatInteger(age)+" seconds");
     if(gap>24)throw new Error("Read RPC and wallet provider differ by "+formatInteger(gap)+" blocks");
     if(age>75)toast("PulseChain RPC block is "+formatInteger(age)+" seconds old; transaction simulation will revalidate.","error");
     return state.browserProvider.getSigner(state.account)
   }
 
-  async function loadToken(address,save){
-    var a=E.getAddress(address),key=a.toLowerCase(),token=state.tokens.get(key);
+  async function loadToken(address,save,isCurrent){
+    var generation=state.rpcGeneration,provider=readProvider,a=E.getAddress(address),key=a.toLowerCase(),token=state.tokens.get(key);
+    function assertLoadContext(){if(generation!==state.rpcGeneration||provider!==readProvider)throw new Error("RPC changed while token metadata was loading");if(isCurrent&&!isCurrent())throw new Error("Token metadata request exceeded its startup budget")}
+    assertLoadContext();
     if(token){queueTokenLogo(token);if(save!==false)saveTokenAddresses();return token}
     var pending=state.tokenLoads.get(key);
     if(!pending){
       pending=(async function(){
-        var code=await readProvider.getCode(a);if(code==="0x")throw new Error("That address has no deployed token bytecode");
-        var c=new E.Contract(a,ABI.erc20,readProvider),vals=await Promise.allSettled([c.name(),c.symbol(),c.decimals()]);
-        var decimals=vals[2].status==="fulfilled"?Number(vals[2].value):18;if(!Number.isInteger(decimals)||decimals<0||decimals>255)throw new Error("Token returned invalid decimals");
+        var code=await provider.getCode(a);assertLoadContext();if(code==="0x")throw new Error("That address has no deployed token bytecode");
+        var c=new E.Contract(a,ABI.erc20,provider),vals=await Promise.allSettled([c.name(),c.symbol(),c.decimals()]);assertLoadContext();
+        if(vals[2].status!=="fulfilled")throw new Error("Token decimals could not be verified: "+safeError(vals[2].reason));
+        var decimals=Number(vals[2].value);if(!Number.isInteger(decimals)||decimals<0||decimals>255)throw new Error("Token returned invalid decimals");
+        assertLoadContext();
         var loaded={address:a,name:vals[0].status==="fulfilled"?clampText(vals[0].value,"PRC-20 token",48):"PRC-20 token",symbol:vals[1].status==="fulfilled"?clampText(vals[1].value,"TOKEN",16):"TOKEN",decimals:decimals,balance:null,balanceError:null,logoUrl:null,logoStatus:"idle"};
         state.tokens.set(key,loaded);queueTokenLogo(loaded);return loaded
       })();
       state.tokenLoads.set(key,pending)
     }
-    try{token=await pending;if(save!==false)saveTokenAddresses();return token}
+    try{token=await pending;assertLoadContext();if(save!==false)saveTokenAddresses();return token}
     finally{if(state.tokenLoads.get(key)===pending)state.tokenLoads.delete(key)}
   }
   function saveTokenAddresses(){try{localStorage.setItem("finvesta.v3.tokens",JSON.stringify(Array.from(state.tokens.values()).map(function(t){return t.address}))) }catch(_){}}
@@ -1395,34 +1564,65 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
     state.tokens.forEach(function(token){if(!isWpls(token))add(token,false)});
     return choices
   }
+  async function readActiveRpcHealth(){
+    var generation=state.rpcGeneration,provider=readProvider,results=await Promise.all([provider.send("eth_chainId",[]),provider.getBlock("latest")]),chainHex=results[0],block=results[1];
+    if(generation!==state.rpcGeneration||provider!==readProvider)throw new Error("Read RPC changed during its health check");
+    if(BigInt(chainHex)!==CHAIN.id)throw new Error("The configured RPC returned chain "+String(chainHex)+" instead of PulseChain 369");
+    if(!block||!Number.isSafeInteger(Number(block.number))||!Number.isFinite(Number(block.timestamp)))throw new Error("The configured RPC did not return a valid latest block");
+    var age=Math.floor(Date.now()/1000)-Number(block.timestamp);if(age>RPC_MAX_BLOCK_AGE_SECONDS)throw new Error("The configured RPC latest block is "+formatInteger(age)+" seconds stale");if(age < -60)throw new Error("The configured RPC latest block timestamp is materially ahead of this device");
+    return {generation:generation,provider:provider,block:block}
+  }
   async function verifyStartupChain(){
     state.rpcOk=false;$("rpcChip").classList.remove("online");$("rpcChip").querySelector("span").textContent="RPC checking";setStartupStatus("Verifying Chain 369 and the latest PulseChain block…");setStartupPercent(7,"Verifying network","0 / "+formatInteger(DEFAULT_TOKEN_ADDRESSES.length));
-    var results=await Promise.all([readProvider.send("eth_chainId",[]),readProvider.getBlock("latest")]),chainHex=results[0],block=results[1];
-    if(BigInt(chainHex)!==CHAIN.id)throw new Error("The configured RPC returned chain "+String(chainHex)+" instead of PulseChain 369");
-    state.rpcOk=true;state.latestBlock=Number(block.number);state.latestTimestamp=Number(block.timestamp);$("rpcChip").classList.add("online");$("rpcChip").querySelector("span").textContent="RPC · "+formatInteger(block.number);$("routeBlock").textContent="#"+formatInteger(block.number);$("footerBlock").textContent="BLOCK "+formatInteger(block.number);
-    setStartupStep("preloaderRpcStep","is-ready","Chain 369 live");setStartupPercent(10,"Network ready","0 / "+formatInteger(DEFAULT_TOKEN_ADDRESSES.length))
+    var health=await readActiveRpcHealth(),block=health.block;if(health.generation!==state.rpcGeneration||health.provider!==readProvider)throw new Error("Read RPC changed before its health check completed");
+    state.rpcOk=true;state.latestBlock=Number(block.number);state.latestTimestamp=Number(block.timestamp);$("rpcChip").classList.add("online");$("rpcChip").querySelector("span").textContent="RPC · "+formatInteger(block.number);$("rpcChip").title="Read RPC · "+rpcPublicLabel(activeRpcUrl);$("rpcChip").setAttribute("aria-label","Read RPC online through "+rpcPublicLabel(activeRpcUrl)+" at block "+formatInteger(block.number)+". Open RPC settings.");$("routeBlock").textContent="#"+formatInteger(block.number);$("footerBlock").textContent="BLOCK "+formatInteger(block.number);
+    setStartupStep("preloaderRpcStep","is-ready",rpcPreset(activeRpcUrl)?rpcPreset(activeRpcUrl).label+" live":"Custom RPC live");setStartupPercent(10,"Network ready","0 / "+formatInteger(DEFAULT_TOKEN_ADDRESSES.length))
   }
-  async function restoreTokens(onProgress){
+  async function restoreTokens(onProgress,onCoreReady){
+    var attemptGeneration=state.rpcGeneration,attemptProvider=readProvider;
+    function assertAttempt(){if(attemptGeneration!==state.rpcGeneration||attemptProvider!==readProvider)throw new Error("Read RPC changed during asset registry synchronization")}
     var saved=[];try{saved=JSON.parse(localStorage.getItem("finvesta.v3.tokens")||"[]");if(!Array.isArray(saved))saved=[]}catch(_){saved=[]}
     saved=saved.slice(-MAX_SAVED_TOKEN_RESTORES);var coreSet=new Set(DEFAULT_TOKEN_ADDRESSES.map(function(address){return address.toLowerCase()})),requested=DEFAULT_TOKEN_ADDRESSES.concat(saved),seen=new Set(),entries=[];
     requested.forEach(function(raw){try{var address=E.getAddress(raw),key=address.toLowerCase();if(!seen.has(key)){seen.add(key);entries.push({address:address,key:key,core:coreSet.has(key)})}}catch(_){}});
-    var report={total:entries.length,settled:0,loaded:0,failedCore:[],failedSaved:[],wplsReady:false},cursor=0;
-    function emit(extra){if(onProgress)onProgress(Object.assign({},report,extra||{}))}
-    async function settle(entry){
-      var token=null,error=null,maxAttempts=entry.core?2:1;
+    var report={total:entries.length,settled:0,loaded:0,failedCore:[],failedSaved:[],wplsReady:false},reported=new Set();
+    function emit(extra){assertAttempt();if(onProgress)onProgress(Object.assign({},report,extra||{}))}
+    async function settle(entry,isCurrent){
+      function assertScope(){assertAttempt();if(isCurrent&&!isCurrent())throw new Error("Saved-token restoration exceeded its startup budget")}
+      assertScope();var token=null,error=null,maxAttempts=entry.core?2:1;
       for(var attempt=1;attempt<=maxAttempts;attempt++){
-        try{token=await loadToken(entry.address,false);error=null;break}catch(err){error=err;if(attempt<maxAttempts)await waitMs(320)}
+        assertScope();
+        try{token=await loadToken(entry.address,false,isCurrent);assertScope();error=null;break}
+        catch(err){assertScope();error=err;if(attempt<maxAttempts){await waitMs(320);assertScope()}}
       }
-      if(token)report.loaded++;else(entry.core?report.failedCore:report.failedSaved).push({address:entry.address,error:safeError(error)});
-      report.settled++;report.wplsReady=state.tokens.has(ADDR.wpls.toLowerCase());emit({token:token,error:error,address:entry.address});return token
+      assertScope();if(token)report.loaded++;else(entry.core?report.failedCore:report.failedSaved).push({address:entry.address,error:safeError(error)});
+      reported.add(entry.key);report.settled++;report.wplsReady=state.tokens.has(ADDR.wpls.toLowerCase());emit({token:token,error:error,address:entry.address});return token
     }
-    emit();var wplsEntry=entries.find(function(entry){return same(entry.address,ADDR.wpls)}),wpls=wplsEntry?await settle(wplsEntry):null;
+    async function runWorkers(items){
+      var cursor=0;
+      async function worker(){while(true){assertAttempt();if(cursor>=items.length)return;var index=cursor++;await settle(items[index])}}
+      var workers=[];for(var i=0;i<Math.min(STARTUP_WORKERS,items.length);i++)workers.push(worker());await Promise.all(workers);assertAttempt()
+    }
+    emit();var wplsEntry=entries.find(function(entry){return same(entry.address,ADDR.wpls)}),wpls=wplsEntry?await settle(wplsEntry):null;assertAttempt();
     if(!wpls)throw new Error("Native PLS could not be prepared because WPLS metadata is unavailable. Check the PulseChain RPC and retry.");
-    var rest=entries.filter(function(entry){return !same(entry.address,ADDR.wpls)});
-    async function worker(){while(cursor<rest.length){var index=cursor++;await settle(rest[index])}}
-    var workers=[];for(var i=0;i<Math.min(STARTUP_WORKERS,rest.length);i++)workers.push(worker());await Promise.all(workers);
-    var unordered=state.tokens,ordered=new Map();entries.forEach(function(entry){var token=unordered.get(entry.key);if(token)ordered.set(entry.key,token)});unordered.forEach(function(token,key){if(!ordered.has(key))ordered.set(key,token)});state.tokens=ordered;report.wplsReady=state.tokens.has(ADDR.wpls.toLowerCase());emit({complete:true});
+    var coreEntries=entries.filter(function(entry){return entry.core&&!same(entry.address,ADDR.wpls)});await runWorkers(coreEntries);assertAttempt();
     if(report.failedCore.length)throw new Error(formatInteger(report.failedCore.length)+" required asset"+(report.failedCore.length===1?"":"s")+" could not be restored: "+report.failedCore.map(function(item){return shortAddress(item.address)}).join(", ")+". Retry to open the complete registry.");
+    if(onCoreReady)onCoreReady();assertAttempt();
+    var savedEntries=entries.filter(function(entry){return !entry.core}),savedCursor=0,savedOpen=true,savedDeadline=Date.now()+SAVED_TOKEN_SYNC_BUDGET_MS;
+    function savedCurrent(){return savedOpen&&Date.now()<savedDeadline}
+    async function savedWorker(){
+      while(true){
+        assertAttempt();if(savedCursor>=savedEntries.length||!savedCurrent())return;var index=savedCursor++;
+        try{await settle(savedEntries[index],savedCurrent)}catch(err){if(!savedCurrent())return;throw err}
+      }
+    }
+    var savedWorkers=[];for(var i=0;i<Math.min(STARTUP_WORKERS,savedEntries.length);i++)savedWorkers.push(savedWorker());
+    if(savedWorkers.length){
+      var savedWork=Promise.all(savedWorkers),savedOutcome=await Promise.race([savedWork.then(function(){return "complete"}),waitMs(SAVED_TOKEN_SYNC_BUDGET_MS).then(function(){return "budget"})]);savedOpen=false;
+      if(savedOutcome==="budget")savedWork.catch(function(){})
+    }else savedOpen=false;
+    assertAttempt();var skippedError=new Error("Skipped after the saved-token startup budget");
+    savedEntries.forEach(function(entry){if(reported.has(entry.key))return;assertAttempt();state.tokenLoads.delete(entry.key);report.failedSaved.push({address:entry.address,error:safeError(skippedError)});reported.add(entry.key);report.settled++;emit({token:null,error:skippedError,address:entry.address})});
+    assertAttempt();var unordered=state.tokens,ordered=new Map();entries.forEach(function(entry){var token=unordered.get(entry.key);if(token)ordered.set(entry.key,token)});unordered.forEach(function(token,key){if(!ordered.has(key))ordered.set(key,token)});state.tokens=ordered;report.wplsReady=state.tokens.has(ADDR.wpls.toLowerCase());emit({complete:true});
     return report
   }
   async function refreshBalances(){
@@ -1440,13 +1640,13 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
   }
   async function readFundingSnapshot(tokens,options){
     if(!state.account)throw new Error("Connect a wallet before checking position funding");
-    options=options||{};var account=options.account||state.account,generation=state.syncToken;if(!same(account,state.account))throw new Error("Connected account changed before the balance snapshot");
+    options=options||{};var account=options.account||state.account,generation=state.syncToken,rpcGeneration=state.rpcGeneration,provider=readProvider;if(!same(account,state.account))throw new Error("Connected account changed before the balance snapshot");
     var unique=[],seen=new Set();tokens.forEach(function(t){var k=t.address.toLowerCase();if(!seen.has(k)){seen.add(k);unique.push(t)}});
-    var block=options.blockTag==null?await readProvider.getBlockNumber():Number(options.blockTag);if(!Number.isSafeInteger(block)||block<0)throw new Error("A valid PulseChain block is required for the balance snapshot");if(generation!==state.syncToken||!same(account,state.account))throw new Error("Connected account changed while balances were loading");
-    var calls=unique.map(function(t){return new E.Contract(t.address,ABI.erc20,readProvider).balanceOf(account,{blockTag:block})});
-    calls.push(readProvider.getBalance(account,block));
+    var block=options.blockTag==null?await provider.getBlockNumber():Number(options.blockTag);if(!Number.isSafeInteger(block)||block<0)throw new Error("A valid PulseChain block is required for the balance snapshot");if(generation!==state.syncToken||rpcGeneration!==state.rpcGeneration||provider!==readProvider)throw new Error("Wallet or read RPC changed while balances were loading");if(!same(account,state.account))throw new Error("Connected account changed while balances were loading");
+    var calls=unique.map(function(t){return new E.Contract(t.address,ABI.erc20,provider).balanceOf(account,{blockTag:block})});
+    calls.push(provider.getBalance(account,block));
     var settled=await Promise.allSettled(calls),balances=new Map(),errors=[];
-    if(generation!==state.syncToken||!same(account,state.account))throw new Error("Connected account changed while balances were loading");
+    if(generation!==state.syncToken||rpcGeneration!==state.rpcGeneration||provider!==readProvider)throw new Error("Wallet or read RPC changed while balances were loading");if(!same(account,state.account))throw new Error("Connected account changed while balances were loading");
     unique.forEach(function(t,index){
       var result=settled[index];
       if(result.status==="fulfilled")balances.set(t.address.toLowerCase(),result.value)
@@ -1522,11 +1722,11 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
   }
 
   async function loadProtocol(){
-    var grid=$("protocolGrid");if(grid.children.length===0)grid.innerHTML="<div class='contract-card skeleton' style='height:190px'></div><div class='contract-card skeleton' style='height:190px'></div>";
+    var generation=state.rpcGeneration,grid=$("protocolGrid");if(grid.children.length===0)grid.innerHTML="<div class='contract-card skeleton' style='height:190px'></div><div class='contract-card skeleton' style='height:190px'></div>";
     try{
       var chainHex=await readProvider.send("eth_chainId",[]);if(BigInt(chainHex)!==CHAIN.id)throw new Error("RPC returned unexpected chain ID "+chainHex);
-      var block=await readProvider.getBlock("latest");state.rpcOk=true;state.latestBlock=Number(block.number);state.latestTimestamp=Number(block.timestamp);
-      $("rpcChip").classList.add("online");$("rpcChip").querySelector("span").textContent="RPC · "+formatInteger(block.number);
+      var block=await readProvider.getBlock("latest");if(generation!==state.rpcGeneration)return;state.rpcOk=true;state.latestBlock=Number(block.number);state.latestTimestamp=Number(block.timestamp);
+      $("rpcChip").classList.add("online");$("rpcChip").querySelector("span").textContent="RPC · "+formatInteger(block.number);$("rpcChip").title="Read RPC · "+rpcPublicLabel(activeRpcUrl);$("rpcChip").setAttribute("aria-label","Read RPC online through "+rpcPublicLabel(activeRpcUrl)+" at block "+formatInteger(block.number)+". Open RPC settings.");
       $("routeBlock").textContent="#"+formatInteger(block.number);$("footerBlock").textContent="BLOCK "+formatInteger(block.number);
       var candidates=[100,500,2500,3000,10000],tiers=[];
       for(var i=0;i<candidates.length;i++){
@@ -1534,6 +1734,7 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
           if(Number(sp)>0&&Boolean(extra.enabled))tiers.push({fee:candidates[i],spacing:Number(sp),enabled:true})
         }catch(_){var fallback=await contracts.factory.feeAmountTickSpacing(candidates[i]);if(Number(fallback)>0)tiers.push({fee:candidates[i],spacing:Number(fallback),enabled:true})}
       }
+      if(generation!==state.rpcGeneration)return;
       state.feeTiers=tiers;
       var values=await Promise.all([
         Promise.allSettled([contracts.coordinator.deployed(),contracts.coordinator.owner(),contracts.coordinator.factory(),contracts.coordinator.poolDeployer(),contracts.coordinator.positionDescriptor()]),
@@ -1543,16 +1744,18 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
         Promise.allSettled([contracts.router.factory(),contracts.router.WETH9(),contracts.router.deployer()]),
         Promise.all(Object.values(ADDR).slice(0,6).map(function(a){return readProvider.getCode(a)}))
       ]);
+      if(generation!==state.rpcGeneration)return;
       function val(result,fallback){return result&&result.status==="fulfilled"?String(result.value):fallback||"Unavailable"}
-      var codes=values[3],cards=[
+      var codeByKey={};Object.keys(ADDR).slice(0,6).forEach(function(key,index){codeByKey[key]=values[5][index]});var cards=[
         {key:"factory",name:"V3 factory",role:"Pool registry and protocol configuration",details:[["Owner",val(values[2][0])],["Pool deployer",val(values[2][1])]]},
         {key:"positionManager",name:"Position manager",role:"Enumerable V3 NFT mint and management",details:[["Collection",val(values[3][0])],["Symbol",val(values[3][1])],["Factory",val(values[3][2])],["WPLS",val(values[3][3])]]},
         {key:"router",name:"Swap router",role:"Original V3 exactInputSingle execution",details:[["Factory",val(values[4][0])],["WPLS",val(values[4][1])],["Selector","0x414bf389 · 8-field tuple"]]}
       ];
-      grid.innerHTML=cards.map(function(c,index){var code=codes[index]||"0x",bytes=Math.max(0,(code.length-2)/2);return "<article class='contract-card'><div class='contract-card__head'><div><p class='kicker'>"+esc(c.role)+"</p><h3>"+esc(c.name)+"</h3></div><span class='health "+(code==="0x"?"bad":"")+"'>"+(code==="0x"?"NO CODE":"LIVE")+"</span></div><div class='address mono'><span>"+esc(ADDR[c.key])+"</span><button class='link-button' data-copy='"+esc(ADDR[c.key])+"'>COPY</button></div><dl>"+c.details.map(function(d){return "<div><dt>"+esc(d[0])+"</dt><dd class='mono'>"+esc(d[1])+"</dd></div>"}).join("")+"</dl></article>"}).join("");
+      grid.innerHTML=cards.map(function(c){var code=codeByKey[c.key]||"0x",bytes=Math.max(0,(code.length-2)/2);return "<article class='contract-card'><div class='contract-card__head'><div><p class='kicker'>"+esc(c.role)+"</p><h3>"+esc(c.name)+"</h3></div><span class='health "+(code==="0x"?"bad":"")+"'>"+(code==="0x"?"NO CODE":"LIVE")+"</span></div><div class='address mono'><span>"+esc(ADDR[c.key])+"</span><button class='link-button' data-copy='"+esc(ADDR[c.key])+"'>COPY</button></div><dl>"+c.details.map(function(d){return "<div><dt>"+esc(d[0])+"</dt><dd class='mono'>"+esc(d[1])+"</dd></div>"}).join("")+"</dl></article>"}).join("");
       grid.querySelectorAll("[data-copy]").forEach(function(b){b.addEventListener("click",function(){copyText(b.dataset.copy)})})
     }catch(err){
-      state.rpcOk=false;$("rpcChip").classList.remove("online");$("rpcChip").querySelector("span").textContent="RPC unavailable";grid.innerHTML="<div class='notice'>"+esc(safeError(err))+"</div>";toast("PulseChain RPC check failed","error")
+      if(generation!==state.rpcGeneration)return;
+      state.rpcOk=false;$("rpcChip").classList.remove("online");$("rpcChip").querySelector("span").textContent="RPC unavailable";$("rpcChip").title="Change read RPC";$("rpcChip").setAttribute("aria-label","Read RPC unavailable. Open RPC settings.");grid.innerHTML="<div class='notice'><span>"+esc(safeError(err))+"</span><button class='link-button' id='protocolRpcRetry' type='button'>Retry with fallback</button></div>";$("protocolRpcRetry").addEventListener("click",runStartup);toast("PulseChain RPC check failed","error")
     }
   }
 
@@ -1807,20 +2010,21 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
     var plan=swapCallPlan(router,params,nativeIn,nativeOut,account),txOverrides=Object.assign({},plan.overrides,overrides||{});return plan.calls?router.multicall(plan.calls,txOverrides):router.exactInputSingle(params,txOverrides)
   }
   async function previewSwap(){
-    var amount=swapAmount(),from=state.from,to=state.to,pool=state.pool,account=state.account,nativeMode=state.swapNativePls,nativeIn=swapNativeInput(),nativeOut=swapNativeOutput();
+    var rpcGeneration=state.rpcGeneration,provider=readProvider,readContracts=contracts,amount=swapAmount(),from=state.from,to=state.to,pool=state.pool,account=state.account,nativeMode=state.swapNativePls,nativeIn=swapNativeInput(),nativeOut=swapNativeOutput();
+    function assertReadContext(){if(rpcGeneration!==state.rpcGeneration||provider!==readProvider)throw new Error("Read RPC changed during swap preparation. Preview the route again.")}
     if(!amount||!from||!to||!pool||!account)throw new Error("Complete the swap form before simulation");
-    var signer=await getSigner();if(!same(await signer.getAddress(),account))throw new Error("Connected signer does not match the swap recipient");var router=new E.Contract(ADDR.router,ABI.router,signer);
-    var livePool=await contracts.factory.getPool(from.address,to.address,pool.fee);
+    var signer=await getSigner();assertReadContext();if(!same(await signer.getAddress(),account))throw new Error("Connected signer does not match the swap recipient");var router=new E.Contract(ADDR.router,ABI.router,signer);
+    var livePool=await readContracts.factory.getPool(from.address,to.address,pool.fee);assertReadContext();
     if(!same(livePool,pool.address))throw new Error("Factory pool mapping changed; refresh the pair");
-    var extra=await contracts.factory.feeAmountTickSpacingExtraInfo(pool.fee);if(!extra.enabled)throw new Error("Selected factory fee tier is no longer enabled");
-    if((nativeIn||nativeOut)&&!same(await contracts.router.WETH9(),ADDR.wpls))throw new Error("Swap router WPLS configuration does not match this interface");
-    var provisionalReserve=0n;if(nativeIn){provisionalReserve=nativeGasReserve(NATIVE_MAX_GAS_UNITS,await conservativeFeeData());var initialNative=await readProvider.getBalance(account);if(initialNative<amount+provisionalReserve)throw new Error("Native PLS must cover the full swap amount plus a provisional gas reserve of "+trimUnits(provisionalReserve,18,8)+" PLS")}
-    var deadline=await currentDeadline(),base={tokenIn:from.address,tokenOut:to.address,fee:pool.fee,recipient:nativeOut?E.ZeroAddress:account,deadline:deadline,amountIn:amount,amountOutMinimum:0n,sqrtPriceLimitX96:0n};
+    var extra=await readContracts.factory.feeAmountTickSpacingExtraInfo(pool.fee);assertReadContext();if(!extra.enabled)throw new Error("Selected factory fee tier is no longer enabled");
+    if((nativeIn||nativeOut)&&!same(await readContracts.router.WETH9(),ADDR.wpls))throw new Error("Swap router WPLS configuration does not match this interface");assertReadContext();
+    var provisionalReserve=0n;if(nativeIn){provisionalReserve=nativeGasReserve(NATIVE_MAX_GAS_UNITS,await conservativeFeeData());assertReadContext();var initialNative=await provider.getBalance(account);assertReadContext();if(initialNative<amount+provisionalReserve)throw new Error("Native PLS must cover the full swap amount plus a provisional gas reserve of "+trimUnits(provisionalReserve,18,8)+" PLS")}
+    var deadline=await currentDeadline();assertReadContext();var base={tokenIn:from.address,tokenOut:to.address,fee:pool.fee,recipient:nativeOut?E.ZeroAddress:account,deadline:deadline,amountIn:amount,amountOutMinimum:0n,sqrtPriceLimitX96:0n};
     $("quoteFreshness").textContent="Simulating router…";
-    var out=await simulateSwapPlan(router,base,nativeIn,nativeOut,account);if(out<=0n)throw new Error("Router simulation returned no output");
+    var out=await simulateSwapPlan(router,base,nativeIn,nativeOut,account);assertReadContext();if(out<=0n)throw new Error("Router simulation returned no output");
     var min=out*BigInt(10000-state.settings.slippageBps)/10000n;if(min===0n)min=1n;var protectedParams=Object.assign({},base,{amountOutMinimum:min});
-    await simulateSwapPlan(router,protectedParams,nativeIn,nativeOut,account);var estimatedGas=await estimateSwapPlan(router,protectedParams,nativeIn,nativeOut,account),gasReserve=nativeIn?nativeGasReserve(estimatedGas,await conservativeFeeData()):0n;
-    if(nativeIn&&await readProvider.getBalance(account)<amount+gasReserve)throw new Error("Native PLS must cover "+trimUnits(amount,18,8)+" PLS plus the estimated "+trimUnits(gasReserve,18,8)+" PLS gas reserve");
+    await simulateSwapPlan(router,protectedParams,nativeIn,nativeOut,account);var estimatedGas=await estimateSwapPlan(router,protectedParams,nativeIn,nativeOut,account),gasReserve=nativeIn?nativeGasReserve(estimatedGas,await conservativeFeeData()):0n;assertReadContext();
+    if(nativeIn&&await provider.getBalance(account)<amount+gasReserve)throw new Error("Native PLS must cover "+trimUnits(amount,18,8)+" PLS plus the estimated "+trimUnits(gasReserve,18,8)+" PLS gas reserve");assertReadContext();
     state.simulatedOut=out;state.minOut=min;state.quoteSource="router";$("amountOut").textContent=trimUnits(out,to.decimals,8);$("quoteFreshness").textContent="Wallet-backed router simulation";
     $("detailQuoteSource").textContent=(nativeIn||nativeOut?"Native-settlement multicall":"exactInputSingle")+" · static simulation";refreshSwapState();
     var impact="Unavailable";if(state.spotOut&&state.spotOut>out){var bps=(state.spotOut-out)*10000n/state.spotOut;impact=(Number(bps)/100).toFixed(2)+"% vs spot reference"}
@@ -1833,6 +2037,7 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
       rows:rows,
       confirmLabel:"Swap in wallet",successMessage:"Swap confirmed on PulseChain",
       execute:async function(progress){
+        if(rpcGeneration!==state.rpcGeneration)throw new Error("Read RPC changed after review. Preview the swap again.");
         if(!same(state.account,account)||state.from!==from||state.to!==to||state.pool!==pool||swapAmount()!==amount||state.swapNativePls!==nativeMode)throw new Error("Swap intent changed. Reopen the current quote before signing.");
         var freshSigner=await getSigner(),freshRouter=new E.Contract(ADDR.router,ABI.router,freshSigner),block=await readProvider.getBlock("latest");
         if(!same(await freshSigner.getAddress(),account))throw new Error("Connected signer changed after review");
@@ -1859,19 +2064,29 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
   }
   function openSettings(){
     var s=state.settings;
-    openModal(modalHeader("Execution protection","Swap settings")+
+    openModal(modalHeader("Execution protection","Swap & RPC settings")+
       "<div class='modal-body'><div class='field'><label>Slippage tolerance (%)</label><input id='settingSlippage' inputmode='decimal' value='"+esc((s.slippageBps/100).toFixed(2))+"'></div>"+
       "<div class='field'><label>Transaction deadline (minutes)</label><input id='settingDeadline' inputmode='numeric' value='"+esc(s.deadlineMinutes)+"'></div>"+
       "<label class='choice-button' style='margin-top:12px'><input id='settingUnlimited' type='checkbox' "+(s.unlimitedApproval?"checked":"")+"><span><strong>Unlimited approvals</strong><small>Advanced · exact input approval is the safer default</small></span></label>"+
+      "<div class='field'><label for='settingRpcMode'>Preferred PulseChain read RPC</label><select id='settingRpcMode' aria-describedby='settingRpcMessage'></select></div>"+
+      "<div class='field' id='settingCustomRpcField' hidden><label for='settingCustomRpc'>Custom RPC URL</label><input id='settingCustomRpc' type='url' inputmode='url' maxlength='2048' placeholder='https://your-rpc.example' autocomplete='off' autocapitalize='off' autocorrect='off' spellcheck='false' aria-describedby='settingRpcMessage'></div>"+
+      "<p class='preloader-rpc-message' id='settingRpcMessage' role='status' aria-live='polite'></p>"+
+      "<div class='notice info'>Active read endpoint: <strong>"+esc(rpcPublicLabel(activeRpcUrl))+"</strong>. A preferred endpoint is tried first; the other trusted presets remain automatic fallbacks.</div>"+
       "<div class='notice'>Slippage is applied only to a successful router simulation. A pool spot reference never becomes the transaction minimum.</div>"+
-      "<button class='primary' id='saveSettings'><span>Apply safeguards</span><span>✓</span></button></div>");
+      "<button class='primary' id='saveSettings'><span>Apply settings</span><span>✓</span></button></div>");
+    renderRpcControl("settingRpcMode","settingCustomRpcField","settingCustomRpc",rpcPreference);
+    $("settingRpcMode").addEventListener("change",function(){this.removeAttribute("aria-invalid");toggleRpcCustomField("settingRpcMode","settingCustomRpcField","settingCustomRpc");$("settingRpcMessage").textContent="";$("settingRpcMessage").className="preloader-rpc-message"});
+    $("settingCustomRpc").addEventListener("input",function(){this.removeAttribute("aria-invalid");$("settingRpcMessage").textContent="";$("settingRpcMessage").className="preloader-rpc-message"});
     $("saveSettings").addEventListener("click",function(){
-      var slip=Number($("settingSlippage").value),deadline=Number($("settingDeadline").value);
+      var slip=Number($("settingSlippage").value),deadline=Number($("settingDeadline").value),nextRpc;
       if(!Number.isFinite(slip)||slip<0.01||slip>5)return toast("Slippage must be between 0.01% and 5%","error");
       if(!Number.isInteger(deadline)||deadline<1||deadline>60)return toast("Deadline must be a whole number from 1 to 60 minutes","error");
+      try{nextRpc=readRpcControl("settingRpcMode","settingCustomRpc")}catch(err){var field=$("settingRpcMode").value==="custom"?$("settingCustomRpc"):$("settingRpcMode"),message=safeError(err);field.setAttribute("aria-invalid","true");$("settingRpcMessage").className="preloader-rpc-message is-error";$("settingRpcMessage").textContent=message;field.focus();return toast(message,"error")}
+      var rpcChanged=!sameRpcPreference(nextRpc,rpcPreference),preferredInactive=nextRpc.mode==="preferred"&&normalizeRpcUrl(nextRpc.url)!==normalizeRpcUrl(activeRpcUrl),rpcRetryNeeded=rpcChanged||preferredInactive||!state.rpcOk;
       state.settings.slippageBps=Math.round(slip*100);state.settings.deadlineMinutes=deadline;state.settings.unlimitedApproval=$("settingUnlimited").checked;
       try{localStorage.setItem("finvesta.v3.settings",JSON.stringify(state.settings))}catch(_){}
-      state.simulatedOut=null;state.minOut=null;closeModal();refreshSwapState();toast("Execution safeguards updated","success")
+      if(rpcRetryNeeded)rpcPreference=nextRpc;state.simulatedOut=null;state.minOut=null;closeModal();refreshSwapState();
+      if(rpcRetryNeeded){toast((rpcChanged?"RPC preference updated":"Retrying preferred RPC")+" · resynchronizing with automatic fallback","success");runStartup()}else toast("Execution safeguards updated","success")
     })
   }
   function updateShareUrlAndQuote(){state.simulatedOut=null;state.minOut=null;computeSpotReference();checkSwapAllowance();refreshSwapState();updateShareUrl()}
@@ -1914,11 +2129,13 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
     }catch(err){if(nonce!==state.allPositionsNonce)return;if(!continuing){state.allPositions=[];state.allPositionsTotal=null;state.allPositionsBlock=null;state.allPositionsNextIndex=0}state.positionLoading=null;renderPositions();toast("All Positions could not be enumerated from the manager: "+safeError(err),"error")}
   }
   async function loadManualPosition(tokenId){
+    var generation=state.rpcGeneration,nonce=++state.manualPositionNonce;
+    function current(){return generation===state.rpcGeneration&&nonce===state.manualPositionNonce}
     try{
-      var block=await readProvider.getBlockNumber(),p=await buildPosition(tokenId,block,null,new Map()),owned=state.account&&same(p.owner,state.account);
+      var block=await readProvider.getBlockNumber();if(!current())return;var p=await buildPosition(tokenId,block,null,new Map());if(!current())return;var owned=state.account&&same(p.owner,state.account);
       function merge(list){return [p].concat(list.filter(function(item){return item.tokenId!==p.tokenId})).sort(function(a,b){return a.tokenId===b.tokenId?0:a.tokenId>b.tokenId?-1:1})}
-      state.allPositions=merge(state.allPositions);if(owned)state.positions=merge(state.positions);state.positionTab=owned?(p.liquidity>0n?"active":"inactive"):"all";state.selectedPosition=p;state.expandedPositionId=p.tokenId;renderPositions();var manualGuard=function(){return state.selectedPosition&&state.selectedPosition.tokenId===p.tokenId};loadPositionValuations([p],manualGuard);loadPositionFeePreviews([p],block,manualGuard)
-    }catch(err){toast(safeError(err),"error")}
+      state.allPositions=merge(state.allPositions);if(owned)state.positions=merge(state.positions);state.positionTab=owned?(p.liquidity>0n?"active":"inactive"):"all";state.selectedPosition=p;state.expandedPositionId=p.tokenId;renderPositions();var manualGuard=function(){return current()&&state.selectedPosition&&state.selectedPosition.tokenId===p.tokenId};loadPositionValuations([p],manualGuard);loadPositionFeePreviews([p],block,manualGuard)
+    }catch(err){if(current())toast(safeError(err),"error")}
   }
   async function loadPositions(manualTokenId){
     if(manualTokenId!=null)return loadManualPosition(manualTokenId);
@@ -2698,27 +2915,29 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
   }
   async function poolVolumeBlockWindow(){
     var cached=state.volumeWindowCache;if(cached&&Date.now()-cached.at<60000){if(cached.value)return cached.value;if(cached.promise)return cached.promise}
+    var generation=state.rpcGeneration,provider=readProvider,entry;
     var promise=(async function(){
-      var tip=await readProvider.getBlock("latest"),latest=Number(tip.number),target=Number(tip.timestamp)-VOLUME_LOOKBACK_SECONDS,high=latest,low=Math.max(0,latest-12000),step=12000,lowBlock=await readProvider.getBlock(low);
-      while(low>0&&Number(lowBlock.timestamp)>target){high=low;step*=2;low=Math.max(0,low-step);lowBlock=await readProvider.getBlock(low)}
-      while(low+1<high){var middle=Math.floor((low+high)/2),block=await readProvider.getBlock(middle);if(Number(block.timestamp)<target)low=middle;else high=middle}
+      var tip=await provider.getBlock("latest"),latest=Number(tip.number),target=Number(tip.timestamp)-VOLUME_LOOKBACK_SECONDS,high=latest,low=Math.max(0,latest-12000),step=12000,lowBlock=await provider.getBlock(low);
+      while(low>0&&Number(lowBlock.timestamp)>target){high=low;step*=2;low=Math.max(0,low-step);lowBlock=await provider.getBlock(low)}
+      while(low+1<high){var middle=Math.floor((low+high)/2),block=await provider.getBlock(middle);if(Number(block.timestamp)<target)low=middle;else high=middle}
       return {fromBlock:high,toBlock:latest,targetTimestamp:target,tipTimestamp:Number(tip.timestamp)}
-    })();state.volumeWindowCache={at:Date.now(),promise:promise};try{var value=await promise;state.volumeWindowCache={at:Date.now(),value:value};return value}catch(err){state.volumeWindowCache=null;throw err}
+    })();entry={at:Date.now(),promise:promise};state.volumeWindowCache=entry;try{var value=await promise;if(generation!==state.rpcGeneration||provider!==readProvider||state.volumeWindowCache!==entry)throw new Error("Read RPC changed during the volume window scan");state.volumeWindowCache={at:Date.now(),value:value};return value}catch(err){if(state.volumeWindowCache===entry)state.volumeWindowCache=null;throw err}
   }
   function selectPoolVolumeAnchors(p,prices){
     var quote=p.poolMarket&&p.poolMarket.sourceQuote,candidates=[{side:0,token:p.token0,reference:prices.get(p.token0.address.toLowerCase())},{side:1,token:p.token1,reference:prices.get(p.token1.address.toLowerCase())}].filter(function(item){return usableUsdReference(item.reference)&&!item.reference.thin&&Number(item.reference.liquidityUsd||0)>=DEX.thinLiquidityUsd});candidates.forEach(function(item){item.preferred=Boolean(quote&&same(item.token.address,quote))});candidates.sort(function(a,b){return Number(b.preferred)-Number(a.preferred)||Number(b.reference.liquidityUsd||0)-Number(a.reference.liquidityUsd||0)});return candidates.slice(0,2)
   }
   async function estimateExactPoolVolume(p,anchors){
     var key=p.poolAddress.toLowerCase(),cached=state.poolVolumeCache.get(key);if(cached&&Date.now()-cached.at<VOLUME_FALLBACK_CACHE_MS){if(Object.prototype.hasOwnProperty.call(cached,"value"))return cached.value;if(cached.promise)return cached.promise}
+    var generation=state.rpcGeneration,provider=readProvider,entry;
     var promise=(async function(){
       if(!Array.isArray(anchors)||!anchors.length)throw new Error("No independent USD anchor is available for this pool");
-      var window=await poolVolumeBlockWindow(),logs=[];for(var from=window.fromBlock;from<=window.toBlock;from+=VOLUME_LOG_CHUNK_BLOCKS){var to=Math.min(window.toBlock,from+VOLUME_LOG_CHUNK_BLOCKS-1),chunk=await readProvider.getLogs({address:p.poolAddress,fromBlock:from,toBlock:to,topics:[POOL_SWAP_TOPICS]});logs.push.apply(logs,chunk);if(logs.length>VOLUME_FALLBACK_MAX_SWAPS)throw new Error("Exact-pool activity exceeds the bounded volume estimator")}
+      var window=await poolVolumeBlockWindow(),logs=[];for(var from=window.fromBlock;from<=window.toBlock;from+=VOLUME_LOG_CHUNK_BLOCKS){var to=Math.min(window.toBlock,from+VOLUME_LOG_CHUNK_BLOCKS-1),chunk=await provider.getLogs({address:p.poolAddress,fromBlock:from,toBlock:to,topics:[POOL_SWAP_TOPICS]});logs.push.apply(logs,chunk);if(logs.length>VOLUME_FALLBACK_MAX_SWAPS)throw new Error("Exact-pool activity exceeds the bounded volume estimator")}
       var amounts=[0n,0n],count=0;logs.forEach(function(log){try{var parsed=POOL_EVENT_INTERFACE.parseLog(log);if(!parsed||parsed.name!=="Swap")return;var raw0=BigInt(parsed.args.amount0),raw1=BigInt(parsed.args.amount1);amounts[0]+=raw0<0n?-raw0:raw0;amounts[1]+=raw1<0n?-raw1:raw1;count++}catch(_){}});
       var reported=Number(p.poolMarket&&p.poolMarket.tradesH24||0),tolerance=Math.max(3,Math.ceil(reported*.25));if(!count||!reported||Math.abs(count-reported)>tolerance)throw new Error("Exact-pool Swap count does not match the market activity window");
       var estimates=anchors.map(function(anchor){var units=Number(E.formatUnits(amounts[anchor.side],anchor.token.decimals)),usd=units*Number(anchor.reference.usd);if(!Number.isFinite(usd)||usd<=0)throw new Error("Exact-pool volume estimate is unavailable");return {anchor:anchor,usd:usd}}),primary=estimates[0],secondary=estimates[1]||null,discrepancyBps=null,confidence="single-anchor";
       if(secondary){discrepancyBps=Math.round(Math.abs(primary.usd-secondary.usd)*10000/Math.max(primary.usd,secondary.usd));if(discrepancyBps>VOLUME_FALLBACK_MAX_DISCREPANCY_BPS)throw new Error("Independent volume anchors disagree");confidence=discrepancyBps>VOLUME_FALLBACK_WARN_DISCREPANCY_BPS?"low":"validated"}
       return {volumeH24:primary.usd,volumeSource:"onchain-anchor-estimate",volumeEstimated:true,volumeFallbackStatus:"ready",volumeConfidence:confidence,observedTradesH24:count,volumeAnchorSymbol:primary.anchor.token.symbol,volumeAnchorUrl:primary.anchor.reference.url,volumeAnchorRole:primary.anchor.preferred?"quote":"fallback",volumeCrossCheckSymbol:secondary?secondary.anchor.token.symbol:null,volumeCrossCheckUsd:secondary?secondary.usd:null,volumeCrossCheckDiscrepancyBps:discrepancyBps,volumeWindowFromBlock:window.fromBlock,volumeWindowToBlock:window.toBlock}
-    })();state.poolVolumeCache.set(key,{at:Date.now(),promise:promise});try{var value=await promise;state.poolVolumeCache.set(key,{at:Date.now(),value:value});return value}catch(_){state.poolVolumeCache.set(key,{at:Date.now(),value:null});return null}
+    })();entry={at:Date.now(),promise:promise};state.poolVolumeCache.set(key,entry);try{var value=await promise;if(generation!==state.rpcGeneration||provider!==readProvider||state.poolVolumeCache.get(key)!==entry)return null;state.poolVolumeCache.set(key,{at:Date.now(),value:value});return value}catch(_){if(generation===state.rpcGeneration&&provider===readProvider&&state.poolVolumeCache.get(key)===entry)state.poolVolumeCache.set(key,{at:Date.now(),value:null});return null}
   }
   function scheduleUnpricedPoolVolumes(positions,prices,guard){
     var groups=new Map();positions.forEach(function(p){var market=p.poolMarket,trades=Number(market&&market.tradesH24||0);if(!market||market.volumeSource!=="activity-unpriced"||trades<=0||trades>VOLUME_FALLBACK_MAX_SWAPS)return;var anchors=selectPoolVolumeAnchors(p,prices);if(!anchors.length)return;var key=p.poolAddress.toLowerCase(),group=groups.get(key);if(group)group.positions.push(p);else groups.set(key,{position:p,positions:[p],anchors:anchors})});var work=Array.from(groups.values()).slice(0,VOLUME_FALLBACK_MAX_POOLS);if(!work.length)return;
@@ -3082,10 +3301,21 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
   function bindUi(){
     document.addEventListener("error",function(event){var image=event.target;if(!image||!image.matches||!image.matches("img[data-token-logo]"))return;var mark=image.closest(".token-mark"),key=mark&&mark.dataset.tokenAddress,token=key&&state.tokens.get(key);if(image.hasAttribute("data-token-logo-override")){image.remove();if(key)state.tokenLogoOverrideFailures.add(key);if(token)refreshTokenLogoMarks(token);return}var failedUrl=safeTokenLogoUrl(image.currentSrc||image.src);image.remove();if(token&&safeTokenLogoUrl(token.logoUrl)===failedUrl){token.logoUrl=null;token.logoStatus="unavailable";refreshTokenLogoMarks(token);recordTokenLogoCache(token);persistTokenLogoCache()}},true);
     window.addEventListener("storage",function(event){if(event.key!==PENDING_COMPOUND_STORAGE_KEY&&(!event.key||event.key.indexOf(PENDING_COMPOUND_ENTRY_PREFIX)!==0))return;var refresh=function(){restorePendingCompoundSessions();if($("view-positions").classList.contains("active"))renderPositions()};if(event.key===PENDING_COMPOUND_STORAGE_KEY)migrateLegacyCompoundSessions().then(refresh,refresh);else refresh()});
+    $("preloaderRpcMode").addEventListener("change",function(){toggleRpcCustomField("preloaderRpcMode","preloaderCustomRpcField","preloaderCustomRpc");var message=$("preloaderRpcMessage");message.className="preloader-rpc-message";message.textContent="The selected endpoint is tried first. Healthy preset fallbacks remain enabled."});
+    $("preloaderCustomRpc").addEventListener("input",function(){this.removeAttribute("aria-invalid");$("preloaderRpcMessage").className="preloader-rpc-message"});
+    $("preloaderCustomRpc").addEventListener("keydown",function(event){if(event.key==="Enter"){event.preventDefault();$("preloaderRetry").click()}});
+    $("preloaderRetry").addEventListener("click",async function(){
+      if(startupState.inFlight)return;var button=this,message=$("preloaderRpcMessage");
+      try{
+        var next=readRpcControl("preloaderRpcMode","preloaderCustomRpc");rpcPreference=next;message.className="preloader-rpc-message is-success";message.textContent="Preference accepted. Verifying PulseChain 369 and all required contracts…";setBusy(button,true,"Checking endpoints…");var recovered=await runStartup();if(recovered)setTimeout(function(){(window.matchMedia&&window.matchMedia("(max-width: 900px)").matches?$("settingsButton"):$("rpcChip")).focus()},0)
+      }catch(err){
+        if($("preloaderRpcMode").value==="custom")$("preloaderCustomRpc").setAttribute("aria-invalid","true");message.className="preloader-rpc-message is-error";message.textContent=safeError(err)
+      }finally{if(document.body.contains(button))setBusy(button,false)}
+    });
     document.querySelectorAll("[data-nav]").forEach(function(b){b.addEventListener("click",function(){navigate(b.dataset.nav)})});
     document.querySelectorAll("[data-position-tab]").forEach(function(button){button.addEventListener("click",function(){if(state.positionTab===button.dataset.positionTab)return;state.positionTab=button.dataset.positionTab;state.selectedPosition=null;state.expandedPositionId=null;renderPositions();loadPositions()})});
     document.querySelectorAll("[data-position-sort]").forEach(function(button){button.addEventListener("click",function(){var next=button.dataset.positionSort;if((next!=="tvl"&&next!=="volume")||state.positionSort===next)return;state.positionSort=next;renderPositions();$("positionSortStatus").textContent="Loaded positions sorted by largest "+(next==="volume"?"24-hour volume.":"TVL.")})});
-    $("walletButton").addEventListener("click",openWalletModal);$("settingsButton").addEventListener("click",openSettings);$("inlineSettings").addEventListener("click",openSettings);
+    $("walletButton").addEventListener("click",openWalletModal);$("rpcChip").addEventListener("click",openSettings);$("settingsButton").addEventListener("click",openSettings);$("inlineSettings").addEventListener("click",openSettings);
     $("fromTokenButton").addEventListener("click",function(){openTokenModal("from")});$("toTokenButton").addEventListener("click",function(){openTokenModal("to")});
     $("flipButton").addEventListener("click",function(){var priorOut=state.simulatedOut||state.spotOut,t=state.from;state.from=state.to;state.to=t;state.swapFillNonce++;if(priorOut&&state.from)$("amountIn").value=E.formatUnits(priorOut,state.from.decimals);state.simulatedOut=null;state.minOut=null;renderTokenSides();discoverBestPool()});
     var timer;$("amountIn").addEventListener("input",function(){state.swapFillNonce++;this.value=cleanDecimalInput(this.value,state.from?state.from.decimals:18);clearTimeout(timer);timer=setTimeout(updateShareUrlAndQuote,220);refreshSwapState()});
@@ -3118,37 +3348,58 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
     });
     window.addEventListener("hashchange",function(){navigate(location.hash.slice(1)||"swap",true)})
   }
-  async function restoreIntent(onProgress){
+  async function restoreIntent(onProgress,onCoreReady){
+    var rpcGeneration=state.rpcGeneration;
+    function currentRpc(){if(rpcGeneration!==state.rpcGeneration)throw new Error("Read RPC changed during registry synchronization")}
     try{
       var saved=JSON.parse(localStorage.getItem("finvesta.v3.settings")||"null");
       if(saved&&Number.isInteger(saved.slippageBps)&&saved.slippageBps>=1&&saved.slippageBps<=500&&Number.isInteger(saved.deadlineMinutes)&&saved.deadlineMinutes>=1&&saved.deadlineMinutes<=60)state.settings={slippageBps:saved.slippageBps,deadlineMinutes:saved.deadlineMinutes,unlimitedApproval:Boolean(saved.unlimitedApproval)}
     }catch(_){}
-    await verifyStartupChain();var report=await restoreTokens(onProgress);
+    await verifyStartupChain();currentRpc();var report=await restoreTokens(onProgress,onCoreReady);currentRpc();
     var q=new URLSearchParams(location.search),from=q.get("from"),to=q.get("to"),amount=q.get("amount"),settle=q.get("settle");
     state.swapNativePls=settle!=="wpls";
-    try{state.from=from?await loadToken(from,true):state.tokens.get(ADDR.wpls.toLowerCase())||null}catch(err){state.from=state.tokens.get(ADDR.wpls.toLowerCase())||null;toast("Input token URL was ignored; native PLS was restored instead. "+safeError(err),"error")}
-    try{state.to=to?await loadToken(to,true):null}catch(err){toast("Output token URL was ignored: "+safeError(err),"error")}
+    try{state.from=from?await loadToken(from,true):state.tokens.get(ADDR.wpls.toLowerCase())||null}catch(err){currentRpc();state.from=state.tokens.get(ADDR.wpls.toLowerCase())||null;toast("Input token URL was ignored; native PLS was restored instead. "+safeError(err),"error")}currentRpc();
+    try{state.to=to?await loadToken(to,true):null}catch(err){currentRpc();toast("Output token URL was ignored: "+safeError(err),"error")}currentRpc();
     if(amount)$("amountIn").value=cleanDecimalInput(amount,state.from?state.from.decimals:18);
     var choices=knownAssetChoices(),missing=DEFAULT_TOKEN_ADDRESSES.filter(function(address){return !state.tokens.has(address.toLowerCase())});
     if(missing.length)throw new Error("The required asset registry is incomplete. Missing "+missing.map(shortAddress).join(", "));
     if(!choices.some(function(choice){return choice.key==="native-pls"&&choice.symbol==="PLS"}))throw new Error("The native PLS settlement choice did not initialize");
     if(!state.from)state.from=state.tokens.get(ADDR.wpls.toLowerCase())||null;renderTokenSides();refreshSwapState();
     if(!from&&settle!=="wpls"&&(!isWpls(state.from)||!state.swapNativePls||$("fromTokenSymbol").textContent!=="PLS"))throw new Error("Native PLS did not reach the rendered default state");
-    return report
+    currentRpc();return report
   }
   async function runStartup(){
-    if(startupState.inFlight)return;startupState.inFlight=true;startupState.startedAt=Date.now();resetPreloader();
+    if(startupState.inFlight)return false;if(state.modalLocked){toast("Finish the active wallet flow before changing the read RPC","error");return false}startupState.inFlight=true;startupState.startedAt=Date.now();resetPreloader();
     try{
-      var report=await restoreIntent(updateStartupProgress);await releasePreloader(report);
+      var excluded=new Set(),report=null,lastError=null;startupState.failures=[];
+      while(rpcCandidateUrls(excluded).length){
+        var candidate;
+        try{candidate=await findHealthyRpc(excluded)}
+        catch(probeError){if(probeError.rpcFailures)startupState.failures=startupState.failures.concat(probeError.rpcFailures);lastError=probeError;break}
+        activateReadRpc(candidate);resetRegistryForRpcAttempt();setStartupStep("preloaderRpcStep","is-active","Syncing via "+(rpcPreset(activeRpcUrl)?rpcPreset(activeRpcUrl).label:"custom RPC"));setStartupStatus("Synchronizing the complete registry through "+rpcPublicLabel(activeRpcUrl)+"…");
+        try{
+          var candidateReport=await restoreIntentWithDeadline(updateStartupProgress);
+          if(state.account){await refreshBalances();await checkSwapAllowance();refreshSwapState()}
+          var finalHealth=await readActiveRpcHealth();if(finalHealth.generation!==state.rpcGeneration||finalHealth.provider!==readProvider)throw new Error("Read RPC changed before startup release");
+          state.rpcOk=true;state.latestBlock=Number(finalHealth.block.number);state.latestTimestamp=Number(finalHealth.block.timestamp);report=candidateReport;break
+        }
+        catch(syncError){
+          lastError=syncError;startupState.failures.push({url:activeRpcUrl,error:safeError(syncError)});excluded.add(normalizeRpcUrl(activeRpcUrl).toLowerCase());state.rpcOk=false;
+          setStartupStep("preloaderRpcStep","has-error","Switching endpoint");setStartupStatus(rpcPublicLabel(activeRpcUrl)+" could not complete the registry · trying another RPC…")
+        }
+      }
+      if(!report)throw lastError||new Error("No configured PulseChain RPC completed synchronization");
+      persistHealthyRpc();await releasePreloader(report);
       if(state.from&&state.to)discoverBestPool();else if($("view-protocol").classList.contains("active"))loadProtocol();
-      setTimeout(function(){window.dispatchEvent(new Event("eip6963:requestProvider"))},350)
-    }catch(err){console.error(err);if(!state.rpcOk)setStartupStep("preloaderRpcStep","has-error","RPC unavailable");failPreloader(err)}
+      if($("view-positions").classList.contains("active"))loadPositions();
+      setTimeout(function(){window.dispatchEvent(new Event("eip6963:requestProvider"))},350);return true
+    }catch(err){console.error(err);if(!state.rpcOk)setStartupStep("preloaderRpcStep","has-error","RPC unavailable");failPreloader(new Error(startupRpcFailureMessage(err,startupState.failures)));return false}
     finally{startupState.inFlight=false}
   }
   async function init(){
     restoreTokenLogoCache();await migrateLegacyCompoundSessions();restorePendingCompoundSessions();
     bindUi();renderWallet();renderPositions();renderRangeBars($("rangeBars"));renderAdminAccess(false);
-    navigate(location.hash.slice(1)||"swap",true);$("preloaderRetry").addEventListener("click",runStartup);await runStartup()
+    navigate(location.hash.slice(1)||"swap",true);await runStartup()
   }
   init().catch(function(err){console.error(err);failPreloader(err)});
   })();
