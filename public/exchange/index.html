@@ -361,6 +361,23 @@
     .contract-card dd{margin:0;max-width:65%;color:#8fa4ad;text-align:right;overflow-wrap:anywhere}
     .health{font-size:7px;color:#8ebd72;font-weight:900}
     .health.bad{color:var(--red)}
+    .docs-hero{position:relative;isolation:isolate;overflow:hidden;margin:68px 0 24px;padding:clamp(31px,5vw,58px);border:1px solid rgba(0,246,255,.29);border-radius:10px;background:radial-gradient(circle at 88% 12%,rgba(0,246,255,.14),transparent 33%),radial-gradient(circle at 8% 92%,rgba(183,255,125,.08),transparent 32%),linear-gradient(138deg,rgba(17,25,29,.99),rgba(8,13,16,.99));box-shadow:0 35px 100px rgba(0,0,0,.42),0 0 55px rgba(0,246,255,.045)}
+    .docs-hero::before{content:"DOCS";position:absolute;right:-.03em;bottom:-.22em;z-index:-1;color:rgba(255,255,255,.025);font:900 clamp(120px,21vw,255px)/.8 var(--display);letter-spacing:-.09em}
+    .docs-hero__grid{display:grid;grid-template-columns:minmax(0,1.22fr) minmax(280px,.78fr);gap:clamp(28px,6vw,70px);align-items:end}
+    .docs-hero h1{margin:0 0 23px;font:900 clamp(48px,7vw,84px)/.89 var(--display);letter-spacing:-.055em;text-transform:uppercase}
+    .docs-hero h1 em{font-style:normal;color:transparent;-webkit-text-stroke:1px rgba(0,246,255,.84)}
+    .docs-lede{max-width:790px;margin:0;color:#d5e6ec;font-size:clamp(14px,1.45vw,18px);line-height:1.67}.docs-lede strong{color:#fff}
+    .docs-badges{display:flex;flex-wrap:wrap;gap:7px;margin-top:22px}.docs-badge{min-height:29px;padding:0 10px;display:inline-flex;align-items:center;border:1px solid rgba(183,255,125,.24);border-radius:999px;background:rgba(183,255,125,.055);color:var(--green);font-size:8px;font-weight:1000;letter-spacing:.09em}.docs-badge.cyan{border-color:rgba(0,246,255,.24);background:rgba(0,246,255,.055);color:var(--cyan)}
+    .docs-hero__aside{padding:19px;border:1px solid rgba(101,219,232,.16);border-radius:7px;background:rgba(5,11,14,.62)}.docs-hero__aside>span{display:block;margin-bottom:8px;color:var(--cyan);font-size:8px;font-weight:1000;letter-spacing:.13em}.docs-hero__aside strong{display:block;margin-bottom:10px;font:900 18px/1.12 var(--display);text-transform:uppercase}.docs-hero__aside p{margin:0;color:#8ea6b0;font-size:10px;line-height:1.62}.docs-hero__aside p+p{margin-top:9px}
+    .docs-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:0 0 46px}.docs-summary article{padding:16px;border:1px solid rgba(101,219,232,.12);border-radius:6px;background:linear-gradient(145deg,rgba(15,23,27,.94),rgba(8,13,16,.96));display:grid;gap:5px}.docs-summary span{color:#718995;font-size:8px;font-weight:900;letter-spacing:.12em}.docs-summary strong{font-size:13px;line-height:1.4}.docs-summary small{color:#78909a;font-size:9px;line-height:1.5}
+    .docs-section{margin:0 0 52px;scroll-margin-top:90px;content-visibility:auto;contain-intrinsic-size:1px 520px}.docs-section__head{max-width:850px;margin-bottom:17px}.docs-section__head .kicker{margin-bottom:7px}.docs-section__head h2{margin:0 0 10px;font:900 clamp(27px,3.4vw,40px)/.98 var(--display);letter-spacing:-.03em;text-transform:uppercase}.docs-section__head p{margin:0;color:#8ba2ac;font-size:11px;line-height:1.65}
+    .docs-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.docs-grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}.docs-card{padding:18px;border:1px solid rgba(101,219,232,.13);border-radius:7px;background:linear-gradient(145deg,rgba(14,22,26,.93),rgba(8,13,16,.96))}.docs-card h3{margin:0 0 9px;color:#e7f5fa;font:900 14px/1.15 var(--display);letter-spacing:.02em;text-transform:uppercase}.docs-card p{margin:0;color:#879fa9;font-size:10px;line-height:1.62}.docs-card p+p{margin-top:8px}.docs-card strong{color:#dcebf1}.docs-card code,.docs-table code{color:#a7eff5;font:700 9px/1.45 ui-monospace,SFMono-Regular,Consolas,monospace;overflow-wrap:anywhere}
+    .docs-list{margin:0;padding:0;list-style:none;display:grid;gap:8px}.docs-list li{position:relative;padding-left:17px;color:#8da5af;font-size:10px;line-height:1.58}.docs-list li::before{content:"";position:absolute;left:0;top:.62em;width:6px;height:6px;border-radius:50%;background:var(--cyan);box-shadow:0 0 8px rgba(0,246,255,.38)}.docs-list strong{color:#e0edf2}
+    .docs-callout{margin:16px 0 0;padding:15px 17px;border:1px solid rgba(183,255,125,.22);border-left:3px solid var(--green);border-radius:5px;background:rgba(183,255,125,.045);color:#a9c1b7;font-size:10px;line-height:1.65}.docs-callout strong{color:var(--green)}.docs-callout.caution{border-color:rgba(255,155,61,.24);border-left-color:var(--orange2);background:rgba(255,101,61,.045);color:#c1a99d}.docs-callout.caution strong{color:#ffc29f}
+    .docs-flow{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}.docs-flow article{min-width:0;padding:14px;border:1px solid rgba(101,219,232,.13);border-radius:6px;background:#091115}.docs-flow b{width:25px;height:25px;margin-bottom:13px;display:grid;place-items:center;border:1px solid rgba(0,246,255,.35);border-radius:50%;color:var(--cyan);font-size:8px}.docs-flow h3{margin:0 0 6px;font:900 11px/1 var(--display)}.docs-flow p{margin:0;color:#78919b;font-size:9px;line-height:1.55}
+    .docs-table-wrap{overflow-x:auto;border:1px solid rgba(101,219,232,.14);border-radius:7px;background:rgba(7,12,15,.76)}.docs-table{width:100%;min-width:780px;border-collapse:collapse;table-layout:fixed}.docs-table th,.docs-table td{padding:12px 13px;border-bottom:1px solid rgba(101,219,232,.1);vertical-align:top;text-align:left}.docs-table tr:last-child th,.docs-table tr:last-child td{border-bottom:0}.docs-table thead th{background:rgba(0,246,255,.055);color:var(--cyan);font-size:8px;font-weight:1000;letter-spacing:.1em;text-transform:uppercase}.docs-table tbody th{color:#e5f3f8;font-size:10px;line-height:1.45}.docs-table td{color:#859da7;font-size:9px;line-height:1.55}.docs-table a,.docs-links a,.footer a{color:var(--teal);text-decoration:none}.docs-table a:hover,.docs-links a:hover,.footer a:hover{text-decoration:underline}.docs-address{display:block;margin-top:4px;color:#9fb6bf;font:700 8px/1.5 ui-monospace,SFMono-Regular,Consolas,monospace;overflow-wrap:anywhere}
+    .docs-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.docs-links a{min-height:38px;padding:0 12px;display:inline-flex;align-items:center;border:1px solid rgba(0,246,255,.2);border-radius:4px;background:rgba(0,246,255,.04);font-size:9px;font-weight:900}
+    .docs-footnote{margin:12px 0 0;color:#6f8791;font-size:9px;line-height:1.58}.docs-version{font-variant-numeric:tabular-nums}
     .footer{border-top:1px solid var(--line2);padding:28px 0 95px;color:#687f89;font-size:8px;letter-spacing:.06em}
     .footer__in{display:flex;justify-content:space-between;gap:20px;align-items:center}
     .mobile-nav{display:none}
@@ -635,6 +652,7 @@
     .preloader-rpc-recovery .preloader-actions .preloader-retry{display:block;width:100%;margin:0}
     .preloader-rpc-recovery .preloader-retry:disabled{cursor:wait;opacity:.55}
     .preloader-continue{width:100%;min-height:43px;padding-inline:12px;line-height:1.3}
+    .preloader-docs{grid-column:1/-1}
     .app-preloader.has-error .preloader-card{border-color:rgba(255,107,120,.3)}
     .app-preloader.has-error .preloader-orbit::before{border-color:rgba(255,107,120,.5);border-left-color:transparent}
     .app-preloader.has-error{place-items:start center}
@@ -655,7 +673,7 @@
     @keyframes toastIn{from{opacity:0;transform:translateY(8px)}}
     @media(max-height:720px){.app-preloader.has-error{place-items:start center;padding-block:12px}.app-preloader.has-error .preloader-visual{display:none}.app-preloader.has-error .preloader-card{margin:auto 0}}
     @media(max-width:900px){
-      .nav{display:none}.status-chip{display:none}.hero{grid-template-columns:1fr;gap:24px;padding-top:56px}.grid-2,.positions-layout{grid-template-columns:1fr}.position-detail{position:static}.protocol-grid{grid-template-columns:1fr}.journey-grid{grid-template-columns:1fr;gap:20px}.journey-node__track{grid-template-columns:auto 1fr}.journey-node p{max-width:none}.position-card__summary{grid-template-columns:1fr 1fr}.position-card__quick-stats{grid-template-columns:1fr 1fr}.summary-grid{grid-template-columns:1fr 1fr}.mobile-nav{position:fixed;display:grid;grid-template-columns:repeat(3,1fr);left:0;right:0;bottom:0;z-index:60;padding:8px 12px calc(8px + env(safe-area-inset-bottom));border-top:1px solid var(--line2);background:rgba(7,10,12,.94);backdrop-filter:blur(16px)}.mobile-nav button{min-height:43px;border:0;border-radius:4px;background:transparent;color:#77909b;font-size:9px;font-weight:900}.mobile-nav button.active{background:rgba(0,246,255,.07);color:var(--cyan)}.footer{padding-bottom:120px}
+      .nav{display:none}.status-chip{display:none}.hero{grid-template-columns:1fr;gap:24px;padding-top:56px}.grid-2,.positions-layout{grid-template-columns:1fr}.position-detail{position:static}.protocol-grid{grid-template-columns:1fr}.journey-grid{grid-template-columns:1fr;gap:20px}.journey-node__track{grid-template-columns:auto 1fr}.journey-node p{max-width:none}.position-card__summary{grid-template-columns:1fr 1fr}.position-card__quick-stats{grid-template-columns:1fr 1fr}.summary-grid{grid-template-columns:1fr 1fr}.mobile-nav{position:fixed;display:grid;grid-template-columns:repeat(4,1fr);left:0;right:0;bottom:0;z-index:60;padding:8px 12px calc(8px + env(safe-area-inset-bottom));border-top:1px solid var(--line2);background:rgba(7,10,12,.94);backdrop-filter:blur(16px)}.mobile-nav button{min-height:43px;border:0;border-radius:4px;background:transparent;color:#77909b;font-size:9px;font-weight:900}.mobile-nav button.active{background:rgba(0,246,255,.07);color:var(--cyan)}.footer{padding-bottom:120px}
     }
     @media(max-width:620px){
       .shell{width:min(100% - 24px,1220px)}.topbar__in{height:62px;gap:10px}.brand__copy{display:none}.brand__mark{width:37px;height:37px}.wallet-button{max-width:150px;padding:0 10px}.hero{padding-top:42px}.hero h1{font-size:42px}.hero__copy{font-size:12px}.panel-pad{padding:17px}.panel-head h2{font-size:21px}.pill{display:none}.token-select{min-width:132px}.amount-row input,.amount-row output{font-size:32px}.route-map{grid-template-columns:50px 1fr 42px 1fr 50px}.route-core{width:42px;height:42px}.metric-grid{grid-template-columns:1fr}.metric-grid div{border-right:0;border-bottom:1px solid rgba(101,219,232,.1)}.section-head{align-items:flex-start;flex-direction:column}.summary-grid{grid-template-columns:1fr}.position-tabs{display:grid;grid-template-columns:1fr;margin-bottom:13px}.position-tab{width:100%;display:flex;align-items:center;justify-content:space-between;text-align:left}.position-actions{display:grid;grid-template-columns:1fr;gap:8px}.position-sort{width:100%;grid-template-columns:auto repeat(2,minmax(0,1fr))}.position-sort__option{padding-inline:8px}.position-card__summary{grid-template-columns:1fr}.position-card .secondary{width:100%}.position-card__quick-stats,.position-card__drawer-actions{grid-template-columns:1fr}.position-card__drawer-head{align-items:flex-start;flex-direction:column}.position-detail__value{align-items:flex-start;flex-direction:column}.field-row,.funding-grid,.field-action-row,.mint-token-grid,.admin-grid{grid-template-columns:1fr}.field-label{align-items:flex-start;flex-direction:column}.field-percentages{justify-content:flex-start}.field-percent,.range-presets button{min-height:40px;padding-inline:11px}.balance-actions button{min-height:30px}.range-composer__head,.price-source-panel__head,.admin-panel__head{align-items:flex-start;flex-direction:column}.range-slider-row{grid-template-columns:55px minmax(0,1fr);}.range-slider-row output{grid-column:2}.price-input-wrap{grid-template-columns:1fr}.price-input-wrap span{max-width:none;padding:0 12px 10px;text-align:left}.range-strategy{width:100%}.range-strategy button{flex:1;min-height:42px}.footer__in{align-items:flex-start;flex-direction:column}.topbar__actions .icon-button{display:none}.topbar__actions #settingsButton{display:grid}
@@ -668,6 +686,8 @@
     @media(max-width:620px){.position-card__summary.has-fees{grid-template-columns:1fr}.claimable-fees{padding:14px}.claimable-fees__head{align-items:flex-start;flex-direction:column}.claimable-fees__grid{grid-template-columns:1fr}.claimable-fee__copy strong{font-size:clamp(15px,4.8vw,21px)}.claim-compound-cta{min-height:72px;padding:12px}.compound-step-banner{grid-template-columns:1fr}.compound-step-banner__state{justify-self:start}.compound-step-banner__assets{grid-template-columns:1fr}.compound-balance__hero-head{flex-direction:column}.compound-balance__route{grid-template-columns:1fr}.compound-balance__arrow{min-height:24px;transform:rotate(90deg)}.compound-balance__facts{grid-template-columns:1fr}.compound-balance__actions{grid-template-columns:1fr}.compound-balance__actions .secondary{min-width:0}}
     @media(max-width:900px){.pool-card__summary{grid-template-columns:1fr 1fr}.pool-drawer-grid,.pool-owned-row{grid-template-columns:1fr 1fr}}
     @media(max-width:620px){.position-sort{grid-template-columns:1fr 1fr}.position-sort__label{grid-column:1/-1}.pool-card__summary,.pool-drawer-grid,.pool-owned-row{grid-template-columns:1fr}.pool-card .secondary{width:100%}}
+    @media(max-width:900px){.docs-hero__grid{grid-template-columns:1fr}.docs-hero__aside{max-width:680px}.docs-summary{grid-template-columns:repeat(2,minmax(0,1fr))}.docs-grid.three{grid-template-columns:repeat(2,minmax(0,1fr))}.docs-flow{grid-template-columns:repeat(2,minmax(0,1fr))}}
+    @media(max-width:620px){.docs-hero{margin-top:35px;padding:22px}.docs-hero h1{font-size:clamp(39px,13vw,56px)}.docs-lede{font-size:13px}.docs-summary,.docs-grid,.docs-grid.three,.docs-flow{grid-template-columns:1fr}.docs-section{margin-bottom:42px}.docs-card{padding:15px}.docs-table{min-width:700px}}
     @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
   </style>
 </head>
@@ -693,6 +713,7 @@
         <div class="preloader-actions">
           <button class="preloader-retry" id="preloaderRetry" type="button">Save preference &amp; retry sync</button>
           <button class="secondary preloader-continue" id="preloaderContinue" type="button" hidden>Continue to pool analytics</button>
+          <button class="secondary preloader-continue preloader-docs" id="preloaderDocs" type="button" hidden>Open technical &amp; security docs</button>
         </div>
       </div>
       <p class="preloader-note">Token metadata is resolved directly from PulseChain. No wallet connection or approval is requested during startup.</p>
@@ -709,6 +730,7 @@
         <button data-nav="swap" class="active">Swap</button>
         <button data-nav="positions">Positions</button>
         <button data-nav="protocol">Protocol Fees</button>
+        <button data-nav="docs">Docs</button>
       </nav>
       <div class="topbar__actions">
         <button class="status-chip" id="rpcChip" type="button" aria-label="Read RPC settings" title="Read RPC settings"><i></i><span>RPC checking</span></button>
@@ -875,7 +897,7 @@
               <p class="kicker">Full allocation disclosure</p>
               <h2 id="protocolTransparencyTitle">Protocol Fee Transparency</h2>
               <p>Certain liquidity pools may allocate <strong>up to 40% of the selected swap fee</strong> to the protocol treasury, with the remaining <strong>60% distributed to liquidity providers</strong>.</p>
-              <p>This <strong>does not increase the fee paid by traders</strong>. Every pool continues to charge only its configured fee tier (0.01%, 0.05%, 0.25%, or 1.00%). The protocol fee is simply a distribution of that existing fee after each swap.</p>
+              <p>This <strong>does not increase the fee paid by traders</strong>. Every pool continues to charge only its configured fee tier. This build checks the factory's enabled 0.01%, 0.05%, 0.25%, 0.30%, and 1.00% candidates and uses only tiers confirmed live on chain. The protocol fee is simply a distribution of that existing fee after each swap.</p>
             </div>
             <div class="protocol-transparency__grid">
               <article class="treasury-panel">
@@ -895,6 +917,7 @@
                       <tr><th scope="row">0.01%</th><td>0.004%</td><td>0.006%</td></tr>
                       <tr><th scope="row">0.05%</th><td>0.020%</td><td>0.030%</td></tr>
                       <tr><th scope="row">0.25%</th><td>0.100%</td><td>0.150%</td></tr>
+                      <tr><th scope="row">0.30%</th><td>0.120%</td><td>0.180%</td></tr>
                       <tr><th scope="row">1.00%</th><td>0.400%</td><td>0.600%</td></tr>
                     </tbody>
                   </table>
@@ -931,15 +954,197 @@
           <div class="live-balance" style="margin-top:12px"><span id="adminSnapshot">Owner-only controls are hidden from every other connected address.</span><button type="button" id="adminRefresh">↻ Refresh admin state</button></div>
         </section>
         <section class="contract-registry" aria-labelledby="registryTitle">
-          <div class="contract-registry__head"><div><p class="kicker">Deployed infrastructure</p><h2 id="registryTitle">Contract registry</h2></div><p>Reference addresses and live deployment status for the contracts supporting the protocol are audited forks of v3 Liberty Swap.</p></div>
+          <div class="contract-registry__head"><div><p class="kicker">Deployed infrastructure</p><h2 id="registryTitle">Contract registry</h2></div><p>Reference addresses and live deployment status for the configured contracts. Factory source and compiler metadata are publicly available through Sourcify.</p></div>
           <div class="protocol-grid" id="protocolGrid"></div>
+        </section>
+      </div>
+    </section>
+    <section class="view" id="view-docs" aria-labelledby="docsTitle">
+      <div class="shell">
+        <section class="docs-hero">
+          <div class="docs-hero__grid">
+            <div>
+              <p class="eyebrow"><i></i>Technical &amp; security documentation</p>
+              <h1 id="docsTitle">Trust through<br><em>verification.</em></h1>
+              <p class="docs-lede"><strong>Finvesta Eco Exchange is a self-custodial, browser-executed V3 interface for PulseChain.</strong> This page documents the production constants, wallet and transaction boundaries, external read services, administrative controls, and safeguards implemented by this single-file DApp.</p>
+              <div class="docs-badges"><span class="docs-badge">SELF-CUSTODIAL</span><span class="docs-badge cyan">CHAIN 369</span><span class="docs-badge cyan">NO TRANSACTION RELAY</span><span class="docs-badge">EXPLICIT WALLET APPROVAL</span></div>
+            </div>
+            <aside class="docs-hero__aside">
+              <span>PRODUCTION DAPP · CHAIN 369</span>
+              <strong>Documentation scope</strong>
+              <p>This page describes the client architecture, production constants, wallet boundaries, transaction controls, and external read services contained in this file.</p>
+              <p>The DApp never asks for a seed phrase, private key, password, or message signature.</p>
+            </aside>
+          </div>
+        </section>
+
+        <section class="docs-summary" aria-label="Architecture summary">
+          <article><span>INTERFACE</span><strong>Static single-file client</strong><small>Inline UI, embedded ethers 6.17.0, and local calldata construction.</small></article>
+          <article><span>NETWORK</span><strong>PulseChain · Chain ID 369</strong><small>Wallet network and read-RPC freshness are verified before signing flows.</small></article>
+          <article><span>CUSTODY</span><strong>No operator custody</strong><small>The interface does not hold user keys or operate a custodial account system.</small></article>
+          <article><span>SIGNING</span><strong>Injected EIP-1193 wallet</strong><small>Wallet access begins only after a user chooses a discovered provider.</small></article>
+          <article><span>SETTLEMENT</span><strong>Direct to published contracts</strong><small>No server-side signer or transaction-relay endpoint participates.</small></article>
+          <article><span>PUBLIC DATA</span><strong>RPC + read-only APIs</strong><small>Pool analytics and market references are external display inputs, not signing authorities.</small></article>
+        </section>
+
+        <section class="docs-section" aria-labelledby="docsScopeTitle">
+          <div class="docs-section__head"><p class="kicker">01 · Scope &amp; architecture</p><h2 id="docsScopeTitle">What this DApp is—and is not</h2><p>The security boundary separates public reads, local transaction construction, wallet authorization, and on-chain settlement.</p></div>
+          <div class="docs-grid">
+            <article class="docs-card"><h3>Browser client</h3><p>The exchange UI, ABI fragments, chain configuration, contract addresses, validation logic, and ethers 6.17.0 runtime are delivered in this HTML file. No remote JavaScript or stylesheet is loaded by the DApp.</p></article>
+            <article class="docs-card"><h3>Read plane</h3><p>Selected PulseChain JSON-RPC endpoints provide chain state. DEX Screener supplies public market references and approved image URLs. The production default <code>analytics-api.finvesta.eco/v1</code> supplies read-only pool analytics.</p></article>
+            <article class="docs-card"><h3>Authorization plane</h3><p>An injected EIP-1193 provider supplies the connected account and signer. EIP-6963 discovery may announce wallets, but <code>eth_requestAccounts</code> is called only after the user selects a wallet.</p></article>
+            <article class="docs-card"><h3>Settlement plane</h3><p>Approvals and state-changing calls go from the selected wallet to the reviewed token, router, position manager, or factory contract. The hosting origin does not sign, relay, batch, or custody transactions for users.</p></article>
+          </div>
+          <div class="docs-callout"><strong>Precise backend statement:</strong> no backend participates in authentication, wallet access, custody, calldata construction, signing, or transaction relay. A read-only analytics service does exist and supplies public pool metrics; its responses do not construct transaction calldata.</div>
+        </section>
+
+        <section class="docs-section" aria-labelledby="docsContractsTitle">
+          <div class="docs-section__head"><p class="kicker">02 · Production registry</p><h2 id="docsContractsTitle">Configured contracts and authority</h2><p>All addresses below are hardcoded and normalized before use. Flow-specific checks verify relevant relationships immediately before a wallet prompt.</p></div>
+          <div class="docs-table-wrap">
+            <table class="docs-table">
+              <caption class="visually-hidden">Finvesta production contract registry</caption>
+              <colgroup><col style="width:20%"><col style="width:42%"><col style="width:38%"></colgroup>
+              <thead><tr><th scope="col">Component</th><th scope="col">Address</th><th scope="col">Role and evidence</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Deployment coordinator</th><td><code>0x75990a83Fec22e278825445202A34852BB7a6CE4</code></td><td>Deployment topology and ownership reads. <a href="https://scan.pulsechain.com/address/0x75990a83Fec22e278825445202A34852BB7a6CE4" target="_blank" rel="noopener noreferrer">Explorer ↗</a></td></tr>
+                <tr><th scope="row">Pool deployer</th><td><code>0x3a6d7f6cEd61fa5678EC624dE3a8bcde532ce630</code></td><td>Factory-authorized V3 pool deployment. <a href="https://scan.pulsechain.com/address/0x3a6d7f6cEd61fa5678EC624dE3a8bcde532ce630" target="_blank" rel="noopener noreferrer">Explorer ↗</a></td></tr>
+                <tr><th scope="row">V3 factory</th><td><code>0x7f5c7C5144b4B4c6e954A5b2D75C318C5467EFDc</code></td><td>Pool registry, enabled fee tiers, owner, and protocol configuration. <a href="https://repo.sourcify.dev/369/0x7f5c7C5144b4B4c6e954A5b2D75C318C5467EFDc" target="_blank" rel="noopener noreferrer">Verified source ↗</a></td></tr>
+                <tr><th scope="row">Position descriptor</th><td><code>0x93d0E663FD9da813e7D0F75095c964EbD60711a3</code></td><td>LP NFT metadata support. <a href="https://scan.pulsechain.com/address/0x93d0E663FD9da813e7D0F75095c964EbD60711a3" target="_blank" rel="noopener noreferrer">Explorer ↗</a></td></tr>
+                <tr><th scope="row">Position manager</th><td><code>0xEdab52594aF0763502A9D5b4975854BBbd5e9e08</code></td><td>Pool initialization, LP NFT mint/increase/decrease/collect/burn, WPLS wrapping, and residual native refund. <a href="https://scan.pulsechain.com/address/0xEdab52594aF0763502A9D5b4975854BBbd5e9e08" target="_blank" rel="noopener noreferrer">Explorer ↗</a></td></tr>
+                <tr><th scope="row">Swap router</th><td><code>0x02111F79b8fd68f76cc616214fe7662f93273FEF</code></td><td>Direct <code>exactInputSingle</code> swaps and native PLS/WPLS settlement multicalls. <a href="https://scan.pulsechain.com/address/0x02111F79b8fd68f76cc616214fe7662f93273FEF" target="_blank" rel="noopener noreferrer">Explorer ↗</a></td></tr>
+                <tr><th scope="row">WPLS</th><td><code>0xA1077a294dDE1B09bB078844df40758a5D0f9a27</code></td><td>Canonical wrapped asset used for native PLS pool routes. <a href="https://scan.pulsechain.com/address/0xA1077a294dDE1B09bB078844df40758a5D0f9a27" target="_blank" rel="noopener noreferrer">Explorer ↗</a></td></tr>
+                <tr><th scope="row">Admin EOA</th><td><code>0x369418f70ccE4D4FeE21934CB7a13CD009C59888</code></td><td>Frontend gate for factory-owner controls; the factory contract remains the authoritative access-control boundary.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="docs-footnote">Factory source and compiler metadata are publicly verified through Sourcify, allowing reviewers to compare the published source with the deployed bytecode. Other registry entries link to their live PulseChain deployment records.</p>
+        </section>
+
+        <section class="docs-section" aria-labelledby="docsActionsTitle">
+          <div class="docs-section__head"><p class="kicker">03 · User-authorized actions</p><h2 id="docsActionsTitle">What the interface can request</h2><p>The application implements direct single-pool V3 execution, LP NFT management, and owner-restricted configuration. It contains no arbitrary destination or generic transaction composer.</p></div>
+          <div class="docs-table-wrap">
+            <table class="docs-table">
+              <caption class="visually-hidden">Wallet action and authorization matrix</caption>
+              <colgroup><col style="width:20%"><col style="width:26%"><col style="width:54%"></colgroup>
+              <thead><tr><th scope="col">Action</th><th scope="col">Target / spender</th><th scope="col">Recipient, authority, and protection</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">Connect / switch network</th><td>Selected injected wallet</td><td>Account access follows an explicit wallet choice. Network switching or addition targets PulseChain <code>0x171</code>.</td></tr>
+                <tr><th scope="row">Swap approval</th><td>Selected token → fixed router</td><td>Exact input amount by default. Unlimited allowance is an explicit advanced setting. The spender and allowance are shown before the wallet prompt.</td></tr>
+                <tr><th scope="row">Direct swap</th><td>Fixed router</td><td>Recipient is the connected account. For native output, the router temporarily receives WPLS only so the same multicall can unwrap and deliver PLS to that account.</td></tr>
+                <tr><th scope="row">Create pool / mint LP</th><td>Fixed position manager</td><td>The connected account is the LP NFT recipient. A new starting price is shown and reviewed before initialization.</td></tr>
+                <tr><th scope="row">Increase liquidity</th><td>Selected tokens → fixed position manager</td><td>NFT ownership, balances, allowances, range ratio, minimum amounts, and deadline are rechecked.</td></tr>
+                <tr><th scope="row">Collect fees</th><td>Fixed position manager</td><td>Collection recipient is the connected NFT owner. The claimable amounts are refreshed before submission.</td></tr>
+                <tr><th scope="row">Decrease / withdraw</th><td>Fixed position manager multicall</td><td>Protected decrease and collection settle to the connected owner. Ownership is checked before review and again before prompt.</td></tr>
+                <tr><th scope="row">Claim &amp; compound</th><td>Fixed manager + optional fixed router</td><td>Fees first enter the user's wallet; an optional reviewed balancing swap may follow before a reviewed liquidity increase. Recovery state prevents silent duplicate progression.</td></tr>
+                <tr><th scope="row">Burn empty LP NFT</th><td>Fixed position manager</td><td>Allowed only for the connected owner after zero liquidity and no-collectible-fee conditions are verified.</td></tr>
+                <tr><th scope="row">Dropped-nonce recovery</th><td>Connected account → itself</td><td>A compound-recovery flow may offer an explicitly reviewed zero-value self-transfer at one exact nonce to cancel a dropped journaled transaction.</td></tr>
+                <tr><th scope="row">Factory administration</th><td>Fixed factory</td><td>Only the configured EOA after live factory-owner verification. Calls are limited to pool protocol fee and distribution configuration exposed by the fixed ABI.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="docs-section" aria-labelledby="docsLifecycleTitle">
+          <div class="docs-section__head"><p class="kicker">04 · Transaction lifecycle</p><h2 id="docsLifecycleTitle">From intent to receipt</h2><p>Every state-changing path is designed around a visible review and an explicit wallet decision.</p></div>
+          <div class="docs-flow" aria-label="Transaction lifecycle">
+            <article><b>01</b><h3>INTENT</h3><p>The user selects tokens, amounts, range, position, or owner parameters.</p></article>
+            <article><b>02</b><h3>VERIFY</h3><p>Account, chain, contract relationship, ownership, balance, allowance, and current state are checked as applicable.</p></article>
+            <article><b>03</b><h3>SIMULATE</h3><p>A static call and gas estimate test the concrete contract method without changing state.</p></article>
+            <article><b>04</b><h3>REVIEW</h3><p>Target, spender, recipient, amounts, minimums, deadline, native value, and purpose are exposed before confirmation.</p></article>
+            <article><b>05</b><h3>SETTLE</h3><p>The wallet submits only after approval; the interface waits for a PulseChain receipt and refreshes read state.</p></article>
+          </div>
+          <div class="docs-callout caution"><strong>Coverage boundary:</strong> exact submitted-calldata/target/value and replacement-transaction verification is strongest in position-management and compound-recovery paths. Ordinary swaps, swap approvals, new-position mints, and admin writes rely on fresh pre-prompt validation, the wallet's own transaction review, and receipt handling rather than the same uniform post-confirm identity checker.</div>
+        </section>
+
+        <section class="docs-section" aria-labelledby="docsSafeguardsTitle">
+          <div class="docs-section__head"><p class="kicker">05 · Defensive controls</p><h2 id="docsSafeguardsTitle">Client-side safeguards</h2><p>These checks are defense in depth. Contract authorization and the user's wallet remain the final enforcement layers.</p></div>
+          <div class="docs-grid three">
+            <article class="docs-card"><h3>Configuration</h3><ul class="docs-list"><li>Chain ID, core contracts, WPLS, admin EOA, ABI fragments, and candidate fee tiers are fixed in source.</li><li>Startup requires fresh Chain 369 state and nonempty factory/position-manager bytecode.</li><li>Router/factory/WPLS/pool relationships are re-read where relevant to a transaction flow.</li></ul></article>
+            <article class="docs-card"><h3>Wallet &amp; network</h3><ul class="docs-list"><li>Connection follows explicit EIP-6963 or legacy-provider selection.</li><li>Malformed or duplicate wallet announcements are ignored and display metadata is restricted.</li><li>Before signing, read RPC and wallet provider must be within 24 blocks; stale chain state is rejected.</li></ul></article>
+            <article class="docs-card"><h3>Intent invalidation</h3><ul class="docs-list"><li>Account, chain, route, amount, range, RPC, or modal changes invalidate affected snapshots.</li><li>Signer address must match the reviewed account and intended recipient.</li><li>Broadcast status remains visible when an account changes after submission.</li></ul></article>
+            <article class="docs-card"><h3>Amounts &amp; time</h3><ul class="docs-list"><li>Protected output and LP minimums derive from static simulation and the selected slippage setting.</li><li>Deadlines derive from the latest on-chain block timestamp.</li><li>Balances and allowances are refreshed immediately before sensitive prompts.</li></ul></article>
+            <article class="docs-card"><h3>Native PLS</h3><ul class="docs-list"><li>Native value is capped to the reviewed input or WPLS desired amount.</li><li>A conservative gas reserve includes a 20% buffer.</li><li>Wrapping, unwrapping, and residual refunds occur atomically through fixed router/manager methods.</li></ul></article>
+            <article class="docs-card"><h3>LP positions</h3><ul class="docs-list"><li>Manager, pool registration, NFT ownership, token order, fee tier, and range context are checked.</li><li>Pending compound stages are journaled with public nonces and hashes for recovery.</li><li>Browser locks serialize protected compound wallet actions across tabs when supported.</li></ul></article>
+          </div>
+        </section>
+
+        <section class="docs-section" aria-labelledby="docsDataTitle">
+          <div class="docs-section__head"><p class="kicker">06 · Data, storage &amp; privacy</p><h2 id="docsDataTitle">No secret collection</h2><p>The DApp has no user-account database, cookie authentication, seed-phrase form, private-key form, password field, message-signature flow, server-side signer, or transaction relay.</p></div>
+          <div class="docs-grid">
+            <article class="docs-card"><h3>Stored locally in the browser</h3><ul class="docs-list"><li>RPC preference and last healthy preset.</li><li>Imported token contract addresses.</li><li>Slippage, deadline, and unlimited-approval preference.</li><li>Validated token-logo cache.</li><li>Public compound-recovery state: account, NFT/pool/token addresses, amounts, stages, nonces, deadlines, and transaction hashes.</li></ul></article>
+            <article class="docs-card"><h3>Not stored by this client</h3><ul class="docs-list"><li>Seed phrases, private keys, keystore files, passwords, or wallet credentials.</li><li>Custodial balances or application login sessions.</li><li>Server-issued auth tokens or cookies.</li><li>Automatic approvals, signatures, or transaction authorizations.</li></ul></article>
+          </div>
+          <div class="docs-table-wrap" style="margin-top:10px">
+            <table class="docs-table">
+              <caption class="visually-hidden">External request inventory</caption>
+              <colgroup><col style="width:25%"><col style="width:34%"><col style="width:41%"></colgroup>
+              <thead><tr><th scope="col">External interface</th><th scope="col">Purpose</th><th scope="col">Privacy boundary</th></tr></thead>
+              <tbody>
+                <tr><th scope="row">PulseChain JSON-RPC</th><td>Blocks, bytecode, contract reads, balances, allowances, logs, simulations, and receipts.</td><td>After connection, RPC operators can observe queried public account and contract addresses. Custom endpoints must use HTTPS and cannot embed credentials.</td></tr>
+                <tr><th scope="row">Injected wallet</th><td>Account, chain, signer, gas context, prompts, and transaction broadcast.</td><td>The wallet—not this site—holds keys and displays the final authorization prompt.</td></tr>
+                <tr><th scope="row">Finvesta analytics API</th><td>Public pool TVL, volume, fee, and estimated APR display.</td><td>Requests omit browser credentials. Analytics output does not set transaction amounts, recipients, spenders, or calldata.</td></tr>
+                <tr><th scope="row">DEX Screener API/CDN</th><td>Market references, exact-pool TVL, USD valuation, and allowlisted token logos.</td><td>Requests omit browser credentials. Token and pool addresses are public. Market data is treated as advisory and refreshed before a new-pool price prompt.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="docs-section" aria-labelledby="docsUntrustedTitle">
+          <div class="docs-section__head"><p class="kicker">07 · Untrusted inputs</p><h2 id="docsUntrustedTitle">Validation and rendering boundaries</h2><p>Token contracts, wallet providers, RPC responses, URLs, browser storage, and external APIs can all return hostile or malformed data.</p></div>
+          <div class="docs-grid three">
+            <article class="docs-card"><h3>Token metadata</h3><p>Imported addresses are checksum-normalized, bytecode and decimals are required, control characters are stripped, and name/symbol lengths are capped. Dynamic text is escaped or assigned with <code>textContent</code>.</p></article>
+            <article class="docs-card"><h3>Images &amp; links</h3><p>Discovered logo URLs must use HTTPS on DEX Screener domains. Links to explorers and markets are constructed from normalized addresses and use <code>noopener noreferrer</code>.</p></article>
+            <article class="docs-card"><h3>Shared URLs</h3><p>Only token addresses, amount, and native/WPLS settlement intent are restored. Addresses and decimal input are validated, and a shared link never connects a wallet or submits a transaction.</p></article>
+            <article class="docs-card"><h3>RPC responses</h3><p>Chain ID, latest-block shape and freshness, timestamp skew, and required bytecode are checked. The app automatically tries preset fallbacks and permits a validated custom HTTPS endpoint.</p></article>
+            <article class="docs-card"><h3>Market references</h3><p>Thin markets are labeled. A DEX Screener price chosen for new-pool initialization is refreshed during review and immediately before signing; movement above 2% aborts the flow.</p></article>
+            <article class="docs-card"><h3>Analytics</h3><p>APR, TVL, volume, and USD estimates are informational. They do not alter router calldata, position-manager calldata, approvals, recipients, protected minimums, or deadlines.</p></article>
+          </div>
+        </section>
+
+        <section class="docs-section" aria-labelledby="docsAdminTitle">
+          <div class="docs-section__head"><p class="kicker">08 · Administrative controls</p><h2 id="docsAdminTitle">Owner actions are verified on chain</h2><p>The interface verifies live contract ownership and state before presenting an owner action; the factory contract remains the final authorization layer.</p></div>
+          <div class="docs-grid">
+            <article class="docs-card"><h3>Pool protocol fee</h3><p>The owner may set token0 and token1 protocol shares for a factory-registered pool, subject to deployed contract rules. The client checks pool bytecode, factory, token ordering, fee tier, registration, current packed setting, and owner before simulation and submission.</p></article>
+            <article class="docs-card"><h3>Treasury &amp; buyback distribution</h3><p>The owner may configure distribution recipients and basis-point shares exposed by the factory ABI. The client validates addresses and totals, re-reads the current configuration, simulates, estimates gas, and requires a wallet confirmation.</p></article>
+          </div>
+          <div class="docs-callout"><strong>On-chain authority:</strong> the factory owner is the role authorized to manage the settings described above and to transfer ownership where the contracts permit it. Before presenting an administrative transaction, the interface reads the live owner, pool protocol fee, and distribution state directly from PulseChain.</div>
+        </section>
+
+        <section class="docs-section" aria-labelledby="docsSupplyTitle">
+          <div class="docs-section__head"><p class="kicker">09 · Embedded runtime</p><h2 id="docsSupplyTitle">Locally bundled and version checked</h2><p>The wallet runtime and application logic are delivered together in this static file for transparent inspection and predictable execution.</p></div>
+          <div class="docs-grid">
+            <article class="docs-card"><h3>Local runtime</h3><ul class="docs-list"><li>ethers 6.17.0 is embedded rather than loaded from a third-party script host.</li><li>The application refuses to initialize unless the exposed ethers version string is exactly <code>6.17.0</code>.</li><li>The production client loads no remote JavaScript or stylesheet dependency.</li></ul></article>
+            <article class="docs-card"><h3>Runtime verification</h3><ul class="docs-list"><li>The embedded ethers bundle carries a documented SHA-256 release fingerprint.</li><li>Application configuration and ABI fragments are included directly in the same file.</li><li>Production response headers and deployment controls are managed by the hosting configuration.</li></ul></article>
+          </div>
+          <div class="docs-callout"><strong>Bundled-library scope:</strong> the full upstream ethers distribution contains generic wallet, mnemonic, keystore, and key-management utilities. The Finvesta application code does not invoke those utilities or expose any form that accepts wallet secrets; it uses provider, contract, ABI, address, unit-conversion, hashing, and math functionality.</div>
+        </section>
+
+        <section class="docs-section" aria-labelledby="docsLimitsTitle">
+          <div class="docs-section__head"><p class="kicker">10 · Architecture scope</p><h2 id="docsLimitsTitle">Established V3 mechanics</h2><p>Finvesta Exchange combines a familiar concentrated-liquidity design with client-side verification tailored to this PulseChain deployment.</p></div>
+          <div class="docs-grid three">
+            <article class="docs-card"><h3>Uniswap V3 lineage</h3><p>Finvesta Exchange is a Uniswap V3 fork based on the V3 implementation used by <a href="https://libertyswap.finance/" target="_blank" rel="noopener noreferrer">LibertySwap.finance</a>, adapted for the published Finvesta contracts on PulseChain. The production factory source and compiler metadata are publicly verified through Sourcify.</p></article>
+            <article class="docs-card"><h3>Token compatibility</h3><p>The interface is designed for standard PRC-20 behavior. Fee-on-transfer, rebase, restrictive, or otherwise nonstandard tokens may be incompatible with some V3 swap and liquidity flows.</p></article>
+            <article class="docs-card"><h3>Wallet &amp; RPC checks</h3><p>Wallets authorize transactions and RPC endpoints provide public chain state. The interface checks Chain 369, block freshness, required contract relationships, and the wallet/read-provider block gap before sensitive actions.</p></article>
+            <article class="docs-card"><h3>Market references</h3><p>DEX Screener and Finvesta analytics provide informational pricing, TVL, volume, and APR references. Transaction recipients, spenders, protected minimums, and deadlines are derived independently from wallet and on-chain context.</p></article>
+            <article class="docs-card"><h3>Direct V3 execution</h3><p>Swaps use direct, single-pool V3 routes selected from fee tiers confirmed enabled by the factory. The interface does not present these routes as aggregator routing.</p></article>
+          </div>
+        </section>
+
+        <section class="docs-section" aria-labelledby="docsEvidenceTitle">
+          <div class="docs-section__head"><p class="kicker">11 · Public verification</p><h2 id="docsEvidenceTitle">Published project resources</h2><p>These links connect the official project surface with the verified production factory source and deployment metadata.</p></div>
+          <div class="docs-links">
+            <a href="https://finvesta.eco/" target="_blank" rel="noopener noreferrer">Official domain ↗</a>
+            <a href="https://finvesta.eco/exchange/" target="_blank" rel="noopener noreferrer">Production DApp ↗</a>
+            <a href="https://repo.sourcify.dev/369/0x7f5c7C5144b4B4c6e954A5b2D75C318C5467EFDc" target="_blank" rel="noopener noreferrer">Factory verified source ↗</a>
+          </div>
+          <div class="docs-callout"><strong>Verification scope:</strong> the factory's published source, compiler metadata, and configured address can be compared directly with the production DApp constants documented on this page.</div>
         </section>
       </div>
     </section>
   </main>
 
-  <footer class="footer"><div class="shell footer__in"><span>FINVESTA V3 · PULSECHAIN</span><span>Self-custodial interface · Verify every wallet prompt</span><span id="footerBlock">RPC —</span></div></footer>
-  <nav class="mobile-nav" aria-label="Mobile navigation"><button data-nav="swap" class="active">SWAP</button><button data-nav="positions">POSITIONS</button><button data-nav="protocol">PROTOCOL FEES</button></nav>
+  <footer class="footer"><div class="shell footer__in"><span>FINVESTA V3 · PULSECHAIN</span><span>Self-custodial interface · <a href="#docs">Technical &amp; security docs</a></span><span id="footerBlock">RPC —</span></div></footer>
+  <nav class="mobile-nav" aria-label="Mobile navigation"><button data-nav="swap" class="active">SWAP</button><button data-nav="positions">POSITIONS</button><button data-nav="protocol">FEES</button><button data-nav="docs">DOCS</button></nav>
   <div class="modal-layer" id="modalLayer" hidden><div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"></div></div>
   <div class="toast-stack" id="toastStack" aria-live="polite"></div>
 
@@ -1329,7 +1534,7 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
   }
   function resetPreloader(){
     clearTimeout(startupState.slowTimer);var loader=$("appPreloader");if(!loader)return;loader.hidden=false;loader.classList.remove("has-error","is-ready","is-leaving");loader.setAttribute("aria-busy","true");
-    $("preloaderTitle").innerHTML="Making DeFi<br><em>Fun Again.</em>";$("preloaderStatus").setAttribute("role","status");$("preloaderRpcRecovery").hidden=true;$("preloaderRetry").hidden=false;$("preloaderContinue").hidden=true;
+    $("preloaderTitle").innerHTML="Making DeFi<br><em>Fun Again.</em>";$("preloaderStatus").setAttribute("role","status");$("preloaderRpcRecovery").hidden=true;$("preloaderRetry").hidden=false;$("preloaderContinue").hidden=true;$("preloaderDocs").hidden=true;
     document.body.classList.add("app-loading");document.body.setAttribute("aria-busy","true");setAppInteractive(false);setStartupPercent(4,"Preparing registry","0 / "+formatInteger(DEFAULT_TOKEN_ADDRESSES.length));
     setStartupStep("preloaderRpcStep","is-active","Verifying");setStartupStep("preloaderNativeStep",null,"Waiting");setStartupStep("preloaderAssetsStep",null,"0 settled");setStartupStatus("Opening a verified PulseChain read session…");
     startupState.slowTimer=setTimeout(function(){if(startupState.inFlight)setStartupStatus("PulseChain is responding slowly · automatic RPC fallback is still working…")},8000)
@@ -1345,7 +1550,7 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
     clearTimeout(startupState.slowTimer);var loader=$("appPreloader"),message=safeError(error);if(!loader)return;loader.classList.add("has-error");loader.setAttribute("aria-busy","false");
     loader.hidden=false;document.body.classList.add("app-loading");document.body.setAttribute("aria-busy","false");var chip=$("rpcChip");chip.classList.remove("online");chip.querySelector("span").textContent="RPC unavailable";chip.title="Change read RPC";chip.setAttribute("aria-label","Read RPC unavailable. Choose an endpoint and retry synchronization.");$("preloaderTitle").innerHTML="Sync needs<br><em>another pass.</em>";$("preloaderStatus").setAttribute("role","alert");setStartupStatus("Asset sync paused · "+message);setStartupStep("preloaderAssetsStep","has-error","Retry required");
     if(!state.tokens.has(ADDR.wpls.toLowerCase()))setStartupStep("preloaderNativeStep","has-error","WPLS unavailable");
-    renderPreloaderRpcRecovery(message);$("preloaderRpcRecovery").hidden=false;var retry=$("preloaderRetry");retry.hidden=false;$("preloaderContinue").hidden=false;setAppInteractive(false);setTimeout(function(){$("preloaderRpcMode").focus()},0)
+    renderPreloaderRpcRecovery(message);$("preloaderRpcRecovery").hidden=false;var retry=$("preloaderRetry");retry.hidden=false;$("preloaderContinue").hidden=false;$("preloaderDocs").hidden=false;setAppInteractive(false);setTimeout(function(){$("preloaderRpcMode").focus()},0)
   }
   async function continueToPoolAnalytics(){
     var loader=$("appPreloader");if(!loader||loader.hidden)return;
@@ -1353,6 +1558,12 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
     await waitMs(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches?30:400);loader.hidden=true;loader.classList.remove("has-error","is-ready","is-leaving");
     navigate("positions");toast("Pool analytics remains available. Wallet and transaction features will stay paused until a PulseChain RPC synchronizes.","error");
     setTimeout(function(){var pools=document.querySelector("[data-position-tab='pools']");if(pools)pools.focus()},0)
+  }
+  async function continueToDocumentation(){
+    var loader=$("appPreloader");if(!loader||loader.hidden)return;
+    clearTimeout(startupState.slowTimer);loader.setAttribute("aria-busy","false");loader.classList.add("is-leaving");setAppInteractive(true);document.body.classList.remove("app-loading");document.body.removeAttribute("aria-busy");
+    await waitMs(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches?30:400);loader.hidden=true;loader.classList.remove("has-error","is-ready","is-leaving");
+    navigate("docs");toast("Documentation opened. Transaction features remain paused until a PulseChain RPC synchronizes.","error")
   }
   function openModal(html,wide){
     if($("modalLayer").hidden)state.modalReturnFocus=document.activeElement;state.modalNonce++;state.modalLocked=false;state.modalAccountHandler=null;var modalId=state.modalNonce;
@@ -1457,7 +1668,7 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
   }
 
   function navigate(name,replace){
-    if(["swap","positions","protocol"].indexOf(name)<0)name="swap";
+    if(["swap","positions","protocol","docs"].indexOf(name)<0)name="swap";
     document.querySelectorAll(".view").forEach(function(v){v.classList.toggle("active",v.id==="view-"+name)});
     document.querySelectorAll("[data-nav]").forEach(function(b){b.classList.toggle("active",b.dataset.nav===name)});
     if(!replace)history.replaceState(null,"","#"+name);
@@ -3375,6 +3586,7 @@ const __$G=typeof globalThis!=="undefined"?globalThis:typeof window!=="undefined
       }finally{if(document.body.contains(button))setBusy(button,false)}
     });
     $("preloaderContinue").addEventListener("click",continueToPoolAnalytics);
+    $("preloaderDocs").addEventListener("click",continueToDocumentation);
     document.querySelectorAll("[data-nav]").forEach(function(b){b.addEventListener("click",function(){navigate(b.dataset.nav)})});
     document.querySelectorAll("[data-position-tab]").forEach(function(button){button.addEventListener("click",function(){if(state.positionTab===button.dataset.positionTab)return;state.positionTab=button.dataset.positionTab;if(state.positionTab!=="pools"&&state.positionSort==="apr")state.positionSort="tvl";state.selectedPosition=null;state.expandedPositionId=null;renderPositions();loadPositions()})});
     document.querySelectorAll("[data-position-sort]").forEach(function(button){button.addEventListener("click",function(){var next=button.dataset.positionSort;if((next!=="tvl"&&next!=="volume"&&next!=="apr")||state.positionSort===next||next==="apr"&&state.positionTab!=="pools")return;state.positionSort=next;renderPositions();if(state.positionTab==="pools")loadPoolAnalytics(true);$("positionSortStatus").textContent="Pool analytics sorted by largest "+(next==="volume"?"24-hour volume.":next==="apr"?"estimated 7-day net LP APR.":"TVL.")})});
