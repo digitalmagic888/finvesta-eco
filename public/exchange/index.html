@@ -582,7 +582,9 @@
     .choice-button{min-height:59px;padding:9px 11px;display:flex;align-items:center;gap:11px;border:1px solid rgba(101,219,232,.12);border-radius:5px;background:#0b1215;text-align:left;cursor:pointer}
     .choice-button:hover{border-color:rgba(0,246,255,.4);background:rgba(0,246,255,.035)}
     .wallet-icon{width:37px;height:37px;display:grid;place-items:center;overflow:hidden;border-radius:9px;background:var(--panel3);font-weight:900}
-    .wallet-icon img{width:100%;height:100%;object-fit:cover}
+    .wallet-icon img{width:100%;height:100%;object-fit:contain}
+    .wallet-discovery-status{margin:0 0 9px;color:#8fa7b0;font-size:8px;line-height:1.5}
+    .wallet-discovery-status strong{color:var(--cyan)}
     .choice-button span{display:grid;gap:3px}
     .choice-button small{color:var(--muted);font-size:8px}
     .review-box{padding:14px;border:1px solid rgba(101,219,232,.12);border-radius:5px;background:#080f12}
@@ -7522,6 +7524,7 @@ lit-html/directives/ref.js:
     id:369n, hex:"0x171", name:"PulseChain", rpc:"https://rpc-pulsechain.g4mm4.io",
     explorer:"https://scan.pulsechain.com", nativeCurrency:{name:"Pulse",symbol:"PLS",decimals:18}
   });
+  // Local deployment asset copied byte-for-byte from
   var RPC_PRESETS = Object.freeze([
     Object.freeze({label:"PublicNode",url:"https://pulsechain-rpc.publicnode.com"}),
     Object.freeze({label:"PulseChain official",url:"https://rpc.pulsechain.com"}),
@@ -7692,7 +7695,7 @@ lit-html/directives/ref.js:
   var state = {
     rpcOk:false,rpcGeneration:0,latestBlock:0,latestTimestamp:0,feeTiers:[],tokens:new Map(),tokenLoads:new Map(),from:null,to:null,pool:null,
     spotOut:null,simulatedOut:null,minOut:null,quoteNonce:0,quoteSource:"none",swapAllowance:null,swapAllowanceError:null,swapAllowanceNonce:0,swapFillNonce:0,
-    wallets:new Map(),providerIds:new WeakMap(),selectedWallet:null,rawWallet:null,browserProvider:null,walletConnector:null,walletKind:null,walletConnectUri:null,walletConnectCodeOpen:false,walletConnectCompact:null,
+    wallets:new Map(),providerIds:new WeakMap(),compatWalletCounter:0,walletChooserModal:0,walletAttempt:0,walletConnecting:false,selectedWallet:null,rawWallet:null,browserProvider:null,walletConnector:null,walletKind:null,walletConnectUri:null,walletConnectCodeOpen:false,walletConnectCompact:null,
     account:null,walletChain:null,walletHandlers:null,syncToken:0,nativeBalance:null,nativeBalanceError:null,balanceBlock:null,balanceFetchedAt:null,balanceNonce:0,positionsNonce:0,manualPositionNonce:0,positionValueNonce:0,swapNativePls:true,
     modalNonce:0,modalLocked:false,modalReturnFocus:null,modalAccountHandler:null,
     positions:[],positionTab:"pools",positionSort:"tvl",positionLoading:null,positionError:null,positionSnapshotBlock:null,positionPendingBlock:null,positionTargetCount:null,watchAddress:null,watchVerifiedBlock:null,selectedPosition:null,expandedPositionId:null,poolRows:[],poolStatus:"idle",poolError:null,poolWarning:null,poolSource:null,poolSnapshotAt:null,poolMeta:null,poolNonce:0,poolAbort:null,poolPromise:null,poolLoadingSort:null,poolLoadedAt:0,poolLoadedSort:null,expandedPoolAddress:null,dexCache:new Map(),positionMarketCache:new Map(),poolVolumeCache:new Map(),volumeWindowCache:null,positionFeeCache:new Map(),positionFeeLoads:new Map(),positionFeeNonce:0,pendingCompounds:new Map(),compoundQuarantines:new Map(),tokenLogoCache:new Map(),tokenLogoQueue:new Map(),tokenLogoTimer:null,tokenLogoBusy:false,tokenLogoOverrideFailures:new Set(),adminNonce:0,adminConfig:null,adminPool:null,
@@ -7946,7 +7949,7 @@ lit-html/directives/ref.js:
   }
   function closeModal(force){
     if(state.modalLocked&&!force){toast("This wallet flow is already in progress. Wait for its result before closing.","error");return false}
-    state.modalNonce++;state.modalLocked=false;state.modalAccountHandler=null;$("modalLayer").hidden=true;$("modal").innerHTML="";document.querySelectorAll("header,main,footer,.mobile-nav").forEach(function(el){el.inert=false});var prior=state.modalReturnFocus;state.modalReturnFocus=null;if(prior&&prior.isConnected&&typeof prior.focus==="function")prior.focus();return true
+    var closingModal=state.modalNonce;if(state.walletChooserModal===closingModal)state.walletChooserModal=0;state.modalNonce++;state.modalLocked=false;state.modalAccountHandler=null;$("modalLayer").hidden=true;$("modal").innerHTML="";document.querySelectorAll("header,main,footer,.mobile-nav").forEach(function(el){el.inert=false});var prior=state.modalReturnFocus;state.modalReturnFocus=null;if(prior&&prior.isConnected&&typeof prior.focus==="function")prior.focus();return true
   }
   function modalHeader(kicker,title){
     return "<div class='modal-head'><div><p class='kicker'>"+esc(kicker)+"</p><h2 id='modalTitle'>"+esc(title)+"</h2></div><button class='icon-button' data-close aria-label='Close'>×</button></div>"
@@ -8051,9 +8054,42 @@ lit-html/directives/ref.js:
     window.scrollTo({top:0,behavior:"smooth"})
   }
 
+  function isInjectedProvider(value){try{return !!value&&(typeof value==="object"||typeof value==="function")&&typeof value.request==="function"}catch(_){return false}}
+  function readProviderFlag(provider,name){try{return provider&&provider[name]===true}catch(_){return false}}
+  function providerBrandHint(provider){
+    var hints=[
+      [["isRabby"],"Rabby Wallet","io.rabby",null],
+      [["isBraveWallet"],"Brave Wallet","com.brave.wallet",null],
+      [["isCoinbaseWallet","isCoinbaseBrowser"],"Coinbase Wallet","com.coinbase.wallet",null],
+      [["isTrust","isTrustWallet"],"Trust Wallet","com.trustwallet",null],
+      [["isOkxWallet","isOKExWallet"],"OKX Wallet","com.okex.wallet",null],
+      [["isPhantom"],"Phantom","app.phantom",null],
+      [["isFrame"],"Frame","sh.frame",null],
+      [["isTally"],"Taho","com.taho",null],
+      [["isMetaMask"],"MetaMask-compatible Wallet","io.metamask.compatible",null]
+    ];
+    for(var i=0;i<hints.length;i++)if(hints[i][0].some(function(flag){return readProviderFlag(provider,flag)}))return {name:hints[i][1],rdns:hints[i][2],icon:hints[i][3]};
+    return null
+  }
+  function injectedProviderSnapshot(){
+    var root=null,providers=[];
+    try{var injected=window.ethereum;if(isInjectedProvider(injected))root=injected}catch(_){}
+    try{var values=root&&Array.isArray(root.providers)?root.providers:[];values.forEach(function(provider){if(isInjectedProvider(provider)&&providers.indexOf(provider)<0)providers.push(provider)})}catch(_){}
+    return {providers:providers}
+  }
+  function compatibilityWalletChoice(provider,index){
+    var hint=providerBrandHint(provider),name=hint&&hint.name,rdns=hint&&hint.rdns,icon=hint&&hint.icon;
+    if(!name){name="Injected Browser Wallet "+String(index+1);rdns="window.ethereum.providers["+String(index)+"]";icon=null}
+    return Object.freeze({kind:"injected-legacy",legacy:true,info:Object.freeze({uuid:"legacy:providers:"+String(index),name:name,rdns:rdns,icon:icon}),provider:provider})
+  }
+  function addWalletChoice(out,seen,choice){
+    if(!choice||!choice.provider||!isInjectedProvider(choice.provider)||seen.has(choice.provider))return false;
+    seen.add(choice.provider);out.push(choice);return true
+  }
   function walletChoices(){
-    var out=Array.from(state.wallets.values());
-    if(!out.length&&window.ethereum&&typeof window.ethereum.request==="function")out.push({info:{uuid:"legacy",name:"Browser Wallet",rdns:"window.ethereum",icon:null},provider:window.ethereum,legacy:true});
+    var out=[],seen=new Set(),announced=Array.from(state.wallets.values()),snapshot=injectedProviderSnapshot();
+    announced.forEach(function(choice){addWalletChoice(out,seen,choice)});
+    snapshot.providers.forEach(function(provider,index){addWalletChoice(out,seen,compatibilityWalletChoice(provider,index))});
     var wc=walletConnectChoice();if(wc)out.push(wc);
     return out
   }
@@ -8096,11 +8132,11 @@ lit-html/directives/ref.js:
   async function cancelWalletConnectPairing(){
     var uri=state.walletConnectUri,button=$("cancelWcPairing"),api=globalThis.FinvestaWalletConnect;
     hideWalletConnectPairing();if(button)button.disabled=true;
-    if(!isWalletConnectUri(uri)||!api||typeof api.cancelPairing!=="function"){if(button)button.disabled=false;openWalletModal();return}
+    if(!isWalletConnectUri(uri)||!api||typeof api.cancelPairing!=="function"){if(button)button.disabled=false;if(!state.walletConnecting&&$("modalLayer").hidden)openWalletModal();return}
     try{
       var canceled=await api.cancelPairing(activeRpcUrl,uri);
-      if(!canceled){try{await api.closeModal(activeRpcUrl)}catch(_){}openWalletModal()}
-    }catch(err){console.warn("WalletConnect pairing cancellation failed",err);try{await api.closeModal(activeRpcUrl)}catch(_){}toast("Pairing controls were reset. Choose WalletConnect again to retry.","success");openWalletModal()}
+      if(!canceled){try{await api.closeModal(activeRpcUrl)}catch(_){}if(!state.walletConnecting&&$("modalLayer").hidden)openWalletModal()}
+    }catch(err){console.warn("WalletConnect pairing cancellation failed",err);try{await api.closeModal(activeRpcUrl)}catch(_){}toast("Pairing controls were reset. Choose WalletConnect again to retry.","success");if(!state.walletConnecting&&$("modalLayer").hidden)openWalletModal()}
     finally{if(button)button.disabled=false}
   }
   function syncWalletConnectPairingLayout(){
@@ -8130,31 +8166,67 @@ lit-html/directives/ref.js:
     };return provider
   }
   async function resolveWalletChoice(choice){
-    if(!isWalletConnectChoice(choice))return {raw:choice&&choice.provider,connector:null};
+    if(!isWalletConnectChoice(choice))return {raw:choice&&choice.provider,connector:null,choice:choice};
     var api=globalThis.FinvestaWalletConnect;if(!api)throw new Error("WalletConnect runtime is unavailable");closeModal(true);toast("Opening WalletConnect QR and wallet options…","success");
     var result;try{result=await api.connect(activeRpcUrl,showWalletConnectPairing)}finally{hideWalletConnectPairing()}
     var session=result&&result.session,raw=result&&result.provider,connector=result&&result.connector;
     if(!raw||typeof raw.request!=="function"||!connector)throw new Error("WalletConnect did not return a usable wallet provider");
     if(!walletConnectSessionApproved(session)){try{await api.disconnect(connector)}catch(_){}throw new Error("The wallet did not approve PulseChain 369 transaction access")}
     if(typeof raw.setDefaultChain==="function")raw.setDefaultChain("eip155:369",activeRpcUrl);
-    return {raw:walletConnectProvider(raw),connector:connector}
+    return {raw:walletConnectProvider(raw),connector:connector,choice:choice}
   }
   function safeWalletIcon(value){return typeof value==="string"&&/^data:image\/(?:png|webp|gif|svg\+xml)(?:;[^,]*)?,/i.test(value)?value:null}
+  function requestInjectedWalletProviders(){
+    try{window.dispatchEvent(new Event("eip6963:requestProvider"))}catch(err){console.warn("Injected wallet discovery request failed",err)}
+  }
+  function walletChooserIsOpen(modalId){
+    var expected=modalId==null?state.walletChooserModal:modalId;
+    return !!expected&&state.walletChooserModal===expected&&state.modalNonce===expected&&!$("modalLayer").hidden&&!!$("walletList")
+  }
+  function renderWalletChoices(modalId){
+    if(!walletChooserIsOpen(modalId)||state.walletConnecting)return;
+    var list=$("walletList"),status=$("walletDiscoveryStatus"),active=document.activeElement,activeKey=active&&active.dataset?active.dataset.walletKey:null,choices=walletChoices(),injectedCount=choices.filter(function(choice){return !isWalletConnectChoice(choice)}).length;
+    list.replaceChildren();
+    if(status)status.textContent=injectedCount?String(injectedCount)+" injected wallet "+(injectedCount===1?"option":"options")+" available · live discovery remains active":"No injected provider has announced yet · listening for browser wallets";
+    if(!choices.length){
+      var empty=document.createElement("div");empty.className="empty-state";empty.style.minHeight="150px";var body=document.createElement("div"),heading=document.createElement("h3"),copy=document.createElement("p");heading.textContent="No wallet provider found";copy.textContent="Enable an injected wallet for this site, open the DApp in a wallet browser, or install an EIP-1193 extension.";body.append(heading,copy);empty.appendChild(body);list.appendChild(empty);return
+    }
+    choices.forEach(function(choice){
+      var b=document.createElement("button");b.className="choice-button";b.type="button";b.dataset.walletKey=String(choice.info&&choice.info.uuid||"");
+      var icon=document.createElement("span");icon.className="wallet-icon";
+      if(choice.info.icon){var img=document.createElement("img");img.src=choice.info.icon;img.alt="";img.setAttribute("aria-hidden","true");img.addEventListener("error",function(){img.remove();icon.textContent="◇"},{once:true});icon.appendChild(img)}else icon.textContent=isWalletConnectChoice(choice)?"⌁":"◇";
+      var choiceCopy=document.createElement("span"),strong=document.createElement("strong"),small=document.createElement("small");strong.textContent=choice.info.name;small.textContent=choice.info.rdns;choiceCopy.append(strong,small);b.append(icon,choiceCopy);
+      b.addEventListener("click",function(){if(state.walletConnecting)return toast("A wallet connection request is already active.","error");connectWallet(choice,b,modalId)});list.appendChild(b)
+    });
+    if(activeKey){var next=Array.from(list.querySelectorAll(".choice-button")).find(function(button){return button.dataset.walletKey===activeKey});if(next)next.focus()}
+  }
+  function startWalletDiscoveryBurst(modalId){
+    function refresh(){if(!walletChooserIsOpen(modalId)||state.walletConnecting)return;requestInjectedWalletProviders();renderWalletChoices(modalId)}
+    refresh();[80,350,900,1800,3500].forEach(function(delay){setTimeout(refresh,delay)})
+  }
   function onProviderAnnouncement(event){
     try{
       var d=event.detail,p=d&&d.provider,info=d&&d.info;
-      if(!p||typeof p.request!=="function"||!info||typeof info.uuid!=="string"||!/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(info.uuid))return;
-      if(state.wallets.has(info.uuid)){if(state.wallets.get(info.uuid).provider!==p)console.warn("Rejected duplicate wallet UUID");return}
-      var prior=state.providerIds.get(p);if(prior&&prior!==info.uuid)return;
-      var clean=Object.freeze({uuid:info.uuid,name:clampText(info.name,"Browser Wallet",80),rdns:clampText(info.rdns,"unknown",160),icon:safeWalletIcon(info.icon)});
-      state.providerIds.set(p,info.uuid);state.wallets.set(info.uuid,Object.freeze({info:clean,provider:p}))
+      if(!isInjectedProvider(p)||!info)return;
+      var supplied=typeof info.uuid==="string"?info.uuid:"",validUuid=/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(supplied),normalizedUuid=validUuid?supplied.toLowerCase():"",prior=state.providerIds.get(p);
+      if(prior){if(walletChooserIsOpen())setTimeout(function(){renderWalletChoices(state.walletChooserModal)},0);return}
+      if(validUuid&&state.wallets.has(normalizedUuid)){if(state.wallets.get(normalizedUuid).provider!==p)console.warn("Rejected duplicate wallet UUID");return}
+      var uuid=validUuid?normalizedUuid:"compat:"+String(++state.compatWalletCounter),clean=Object.freeze({uuid:uuid,name:clampText(info.name,"Browser Wallet",80),rdns:clampText(info.rdns,"Compatibility announcement",160),icon:safeWalletIcon(info.icon)});
+      if(!validUuid)console.warn("Accepted injected wallet with non-standard EIP-6963 UUID through the compatibility registry");
+      state.providerIds.set(p,uuid);state.wallets.set(uuid,Object.freeze({info:clean,provider:p,compatibility:!validUuid}));
+      if(walletChooserIsOpen())setTimeout(function(){renderWalletChoices(state.walletChooserModal)},0)
     }catch(err){console.warn("Ignored malformed EIP-6963 announcement",err)}
   }
   window.addEventListener("eip6963:announceProvider",onProviderAnnouncement);
-  window.dispatchEvent(new Event("eip6963:requestProvider"));
+  window.addEventListener("ethereum#initialized",function(){requestInjectedWalletProviders();if(walletChooserIsOpen())renderWalletChoices(state.walletChooserModal)});
+  window.addEventListener("focus",function(){requestInjectedWalletProviders();if(walletChooserIsOpen())renderWalletChoices(state.walletChooserModal)});
+  window.addEventListener("pageshow",function(){requestInjectedWalletProviders();if(walletChooserIsOpen())renderWalletChoices(state.walletChooserModal)});
+  document.addEventListener("visibilitychange",function(){if(document.visibilityState!=="visible")return;requestInjectedWalletProviders();if(walletChooserIsOpen())renderWalletChoices(state.walletChooserModal)});
+  requestInjectedWalletProviders();
 
   function openWalletModal(){
     if(state.account){
+      state.walletChooserModal=0;
       var remote=state.walletKind==="walletconnect";
       openModal(modalHeader("Connected wallet","Account")+
         "<div class='modal-body'><div class='review-box'><dl><div><dt>Account</dt><dd class='mono'>"+esc(state.account)+"</dd></div><div><dt>Connection</dt><dd>"+esc(state.selectedWallet&&state.selectedWallet.info?state.selectedWallet.info.name:"Wallet")+"</dd></div><div><dt>Wallet network</dt><dd>"+(state.walletChain===CHAIN.id?"PulseChain · 369":"Wrong network")+"</dd></div><div><dt>Read RPC</dt><dd>"+esc(rpcPublicLabel(activeRpcUrl))+"</dd></div></dl></div>"+
@@ -8163,40 +8235,57 @@ lit-html/directives/ref.js:
       if($("switchChain"))$("switchChain").addEventListener("click",async function(){try{await ensurePulseChain();await syncWallet();closeModal()}catch(err){toast(safeError(err),"error")}});
       $("disconnectButton").addEventListener("click",async function(){var button=$("disconnectButton");setBusy(button,true,"Disconnecting…");await disconnectWallet(remote);closeModal(true)});return
     }
-    openModal(modalHeader("Wallet providers","Connect wallet")+"<div class='modal-body'><div class='wallet-list' id='walletList'></div><p class='notice info'>Choose an injected browser wallet or WalletConnect for QR, mobile/deep-link, and web-wallet pairing. WalletConnect starts only after you select it, and no account request occurs before a wallet choice.</p></div>");
-    var list=$("walletList"),choices=walletChoices();
-    if(!choices.length){list.innerHTML="<div class='empty-state' style='min-height:150px'><div><h3>No wallet provider found</h3><p>Open the DApp in a PulseChain-compatible wallet browser or install an EIP-1193 extension.</p></div></div>";return}
-    choices.forEach(function(choice){
-      var b=document.createElement("button");b.className="choice-button";b.type="button";
-      var icon=document.createElement("span");icon.className="wallet-icon";
-      if(choice.info.icon){var img=document.createElement("img");img.src=choice.info.icon;img.alt="";icon.appendChild(img)}else icon.textContent=isWalletConnectChoice(choice)?"⌁":"◇";
-      var copy=document.createElement("span"),strong=document.createElement("strong"),small=document.createElement("small");
-      strong.textContent=choice.info.name;small.textContent=choice.info.rdns;copy.append(strong,small);b.append(icon,copy);
-      b.addEventListener("click",function(){setBusy(b,true,isWalletConnectChoice(choice)?"Opening QR / pairing…":"Waiting for wallet…");connectWallet(choice)});list.appendChild(b)
-    })
+    openModal(modalHeader("Wallet providers","Connect wallet")+"<div class='modal-body'><p class='wallet-discovery-status' id='walletDiscoveryStatus' role='status' aria-live='polite'>Scanning injected providers…</p><div class='wallet-list' id='walletList'></div><p class='notice info'>Choose an injected browser wallet or WalletConnect for QR, mobile/deep-link, and web-wallet pairing. WalletConnect starts only after you select it, and no account request occurs before a wallet choice.</p></div>");
+    state.walletChooserModal=state.modalNonce;startWalletDiscoveryBurst(state.walletChooserModal)
   }
   function removeWalletListener(raw,event,listener){if(!raw||!listener)return;if(raw.removeListener)raw.removeListener(event,listener);else if(raw.off)raw.off(event,listener)}
   function detachWallet(){
     var r=state.rawWallet,h=state.walletHandlers;if(r&&h){removeWalletListener(r,"accountsChanged",h.accounts);removeWalletListener(r,"chainChanged",h.chain);removeWalletListener(r,"disconnect",h.disconnect)}
     state.walletHandlers=null
   }
-  function clearWalletState(){
+  function clearWalletState(preserveAttempt){
+    if(!preserveAttempt){state.walletAttempt++;state.walletConnecting=false;state.modalLocked=false}
     var accountHandler=state.modalAccountHandler,watching=positionViewIsWatch();hideWalletConnectPairing();state.syncToken++;state.balanceNonce++;if(!watching)state.positionsNonce++;state.swapAllowanceNonce++;state.swapFillNonce++;state.adminNonce++;detachWallet();try{if(state.browserProvider&&state.browserProvider.destroy)state.browserProvider.destroy()}catch(_){}
     state.selectedWallet=null;state.rawWallet=null;state.browserProvider=null;state.walletConnector=null;state.walletKind=null;state.account=null;state.walletChain=null;state.nativeBalance=null;state.nativeBalanceError=null;state.balanceBlock=null;state.balanceFetchedAt=null;state.swapAllowance=null;state.swapAllowanceError=null;if(!watching){state.positions=[];state.positionLoading=null;state.positionError=null;state.positionSnapshotBlock=null;state.positionPendingBlock=null;state.positionTargetCount=null;state.selectedPosition=null;state.expandedPositionId=null;state.positionFeeCache.clear();state.positionFeeLoads.clear()}state.adminConfig=null;state.adminPool=null;state.tokens.forEach(function(t){t.balance=null;t.balanceError=null});renderWallet();renderPositions();renderTokenSides();refreshSwapState();renderAdminAccess(false);if(accountHandler){accountHandler("invalidate");if(state.modalAccountHandler===accountHandler)accountHandler("refresh")}
   }
-  async function disconnectWallet(terminateSession){
-    var connector=state.walletConnector,api=globalThis.FinvestaWalletConnect;clearWalletState();
+  async function disconnectWallet(terminateSession,preserveAttempt){
+    var connector=state.walletConnector,api=globalThis.FinvestaWalletConnect;clearWalletState(preserveAttempt);
     if(terminateSession!==false&&connector&&api&&typeof api.disconnect==="function")try{await api.disconnect(connector)}catch(err){console.warn("WalletConnect session disconnect failed",err);toast("Local wallet state was cleared, but the remote WalletConnect session could not be confirmed closed.","error")}
   }
   function bindWallet(){
-    var raw=state.rawWallet,h={accounts:function(){if(raw===state.rawWallet)syncWallet()},chain:function(){if(raw!==state.rawWallet)return;try{if(state.browserProvider.destroy)state.browserProvider.destroy()}catch(_){}state.browserProvider=new E.BrowserProvider(raw,"any");syncWallet()},disconnect:function(){if(raw!==state.rawWallet)return;var wasWalletConnect=state.walletKind==="walletconnect";clearWalletState();if(wasWalletConnect)toast("WalletConnect session disconnected","error")}};
+    var raw=state.rawWallet,h={accounts:function(accounts){if(raw!==state.rawWallet)return;if(Array.isArray(accounts)&&!accounts.length){clearWalletState();toast("Wallet account access was removed. Connect again when ready.","error");return}syncWallet()},chain:function(){if(raw!==state.rawWallet)return;try{if(state.browserProvider.destroy)state.browserProvider.destroy()}catch(_){}state.browserProvider=new E.BrowserProvider(raw,"any");syncWallet()},disconnect:function(){if(raw!==state.rawWallet)return;var wasWalletConnect=state.walletKind==="walletconnect";clearWalletState();if(wasWalletConnect)toast("WalletConnect session disconnected","error")}};
     state.walletHandlers=h;if(raw.on){raw.on("accountsChanged",h.accounts);raw.on("chainChanged",h.chain);raw.on("disconnect",h.disconnect)}
   }
-  async function connectWallet(choice){
-    try{await disconnectWallet(true);var resolved=await resolveWalletChoice(choice),raw=resolved.raw;if(!raw||typeof raw.request!=="function")throw new Error("Wallet provider is unavailable");state.selectedWallet=choice;state.rawWallet=raw;state.walletConnector=resolved.connector;state.walletKind=isWalletConnectChoice(choice)?"walletconnect":"injected";state.browserProvider=new E.BrowserProvider(raw,"any");bindWallet();
-      var accounts=await raw.request({method:"eth_requestAccounts"});if(!Array.isArray(accounts)||!accounts.length)throw new Error("Wallet did not provide an account");await syncWallet();if(!state.account||raw!==state.rawWallet)throw new Error("Wallet account synchronization did not complete");closeModal(true);
+  function walletErrorDetails(error){
+    var seen=new Set(),queue=[error],parts=[];while(queue.length){var value=queue.shift();if(!value||typeof value!=="object"||seen.has(value))continue;seen.add(value);["message","shortMessage","stack","code"].forEach(function(key){try{if(value[key]!=null)parts.push(String(value[key]))}catch(_){}});["data","error","cause","originalError"].forEach(function(key){try{if(value[key])queue.push(value[key])}catch(_){}})}return parts.join(" · ")
+  }
+  function walletRequestRejected(error){var detail=walletErrorDetails(error);return nestedCode(error)===4001||/\bACTION_REJECTED\b|user rejected|request rejected|user denied|rejected the request/i.test(detail)}
+  function lockWalletChooser(modalId,button,choice){
+    if(!walletChooserIsOpen(modalId))return;state.modalLocked=true;$("modal").querySelectorAll(".choice-button,[data-close]").forEach(function(control){control.disabled=true});setBusy(button,true,isWalletConnectChoice(choice)?"Opening QR / pairing…":"Waiting for wallet approval…")
+  }
+  async function disconnectDetachedConnector(connector){
+    var api=globalThis.FinvestaWalletConnect;if(connector&&connector!==state.walletConnector&&api&&typeof api.disconnect==="function")try{await api.disconnect(connector)}catch(_){}
+  }
+  async function connectWallet(choice,button,modalId){
+    if(state.walletConnecting)return toast("A wallet connection request is already active.","error");
+    var attempt=++state.walletAttempt,resolved=null,raw=null,committed=false;state.walletConnecting=true;lockWalletChooser(modalId,button,choice);
+    try{
+      await disconnectWallet(true,true);if(attempt!==state.walletAttempt)return;
+      resolved=await resolveWalletChoice(choice);if(attempt!==state.walletAttempt){await disconnectDetachedConnector(resolved&&resolved.connector);return}
+      raw=resolved.raw;if(!isInjectedProvider(raw))throw new Error("Wallet provider is unavailable");var accounts=await raw.request({method:"eth_requestAccounts"});if(attempt!==state.walletAttempt){await disconnectDetachedConnector(resolved&&resolved.connector);return}if(!Array.isArray(accounts)||!accounts.length)throw new Error("Wallet did not provide an account");
+      state.selectedWallet=resolved.choice||choice;state.rawWallet=raw;state.walletConnector=resolved.connector;state.walletKind=isWalletConnectChoice(choice)?"walletconnect":"injected";state.browserProvider=new E.BrowserProvider(raw,"any");bindWallet();committed=true;await syncWallet();if(attempt!==state.walletAttempt||!state.account||raw!==state.rawWallet)throw new Error("Wallet account synchronization did not complete");if(walletChooserIsOpen(modalId))closeModal(true);
       if(state.walletChain!==CHAIN.id)toast("Wallet connected. Switch to PulseChain before any transaction.","error");else toast(state.walletKind==="walletconnect"?"WalletConnect session established on PulseChain":"Wallet connected to PulseChain","success")
-    }catch(err){var canceled=!!err&&err.code==="FINVESTA_WC_CANCELLED";await disconnectWallet(true);if(canceled){toast("WalletConnect pairing canceled. Choose a wallet when you are ready.","success");openWalletModal();return}toast(safeError(err),"error");openWalletModal()}
+    }catch(err){
+      if(attempt!==state.walletAttempt){await disconnectDetachedConnector(resolved&&resolved.connector);return}
+      var canceled=!!err&&err.code==="FINVESTA_WC_CANCELLED",rejected=walletRequestRejected(err);if(!committed)await disconnectDetachedConnector(resolved&&resolved.connector);await disconnectWallet(true,true);if(attempt!==state.walletAttempt)return;state.walletConnecting=false;state.modalLocked=false;
+      var restoreChooser=walletChooserIsOpen(modalId)||(isWalletConnectChoice(choice)&&$("modalLayer").hidden);
+      if(canceled)toast("WalletConnect pairing canceled. Choose a wallet when you are ready.","success");
+      else if(rejected)toast("Wallet connection was canceled. Reopen the request and approve it when you are ready.","error");
+      else toast(safeError(err),"error");
+      if(restoreChooser)openWalletModal()
+    }finally{
+      if(state.walletAttempt===attempt){state.walletConnecting=false;state.modalLocked=false;if(walletChooserIsOpen())renderWalletChoices(state.walletChooserModal)}
+    }
   }
   async function syncWallet(){
     var token=++state.syncToken,raw=state.rawWallet;if(!raw)return;
