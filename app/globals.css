@@ -490,11 +490,13 @@ h3 {
 
 .hero-art {
   position: relative;
+  width: 100%;
 }
 
 .hero-art img {
   display: block;
   width: min(100%, 1180px);
+  margin-inline: auto;
   border: 1px solid rgba(0, 246, 255, 0.22);
   border-radius: 7px;
   box-shadow: 0 30px 90px rgba(0, 0, 0, 0.45), 0 0 70px rgba(0, 246, 255, 0.08);
