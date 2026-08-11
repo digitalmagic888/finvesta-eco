@@ -46,7 +46,7 @@ const assets = {
 
 const nav = [
   { label: "👀 Pulsewatch", href: "https://pulsewatch.app/" },
-  { label: "📈 Tracker", href: "https://ogprinters.pulsewatch.app/" },
+  { label: "📈 Tracker", href: "https://ogprinters-tracker.pages.dev/" },
   { label: "Exchange", href: "/exchange/" },
   { label: "WHITE PAPER", href: "/whitepaper" },
   { label: "Flash Lending Docs", href: "/flash-lending-docs/", cta: true },
