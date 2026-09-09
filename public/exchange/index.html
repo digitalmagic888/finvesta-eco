@@ -9179,11 +9179,12 @@ lit-html/directives/ref.js:
         if(!nativeIn){var allowance=await criticalDualAllowanceAtSnapshot(freshSnapshot,from.address,account,"Final swap aggregator allowance");if(allowance<amount)throw new Error("Aggregator allowance no longer covers the reviewed input")}
         var finalDecoded=await criticalSnapshotAggregatorCall(freshSnapshot,"Final exact reviewed swap simulation",execution.method,execution.args,account,execution.value),finalOut=BigInt(finalDecoded.netAmountOut==null?finalDecoded[0]:finalDecoded.netAmountOut);
         if(finalOut<execution.minAmountOut)throw new Error("Market output moved below your protected minimum. Refresh this review to build a new route.");
+        var swapNonce=await criticalNextNonce(account,"Dual-V3 swap"),swapIntent=exactTransactionIntent(account,DUAL_AGGREGATOR_ADDRESS,execution.data,execution.value,swapNonce);
         progress("wallet");
-        var tx=await freshSigner.sendTransaction({to:DUAL_AGGREGATOR_ADDRESS,data:execution.data,value:execution.value,chainId:CHAIN.id});
-        validateExactTransactionIntent(tx,exactTransactionIntent(account,DUAL_AGGREGATOR_ADDRESS,execution.data,execution.value),"Dual-V3 swap wallet response");
+        var tx=await freshSigner.sendTransaction({to:DUAL_AGGREGATOR_ADDRESS,data:execution.data,value:execution.value,chainId:CHAIN.id,nonce:swapNonce});
+        validateExactTransactionIntent(tx,swapIntent,"Dual-V3 swap wallet response");
         progress("pending",tx.hash);
-        var receipt=await awaitReceipt(tx);if(!receipt||Number(receipt.status)!==1)throw new Error("Dual-V3 swap reverted on PulseChain");return receipt
+        return confirmExactTransaction(tx,swapIntent,"Dual-V3 swap")
       },
       onSuccess:async function(){state.simulatedOut=null;state.minOut=null;$("amountIn").value="";await refreshBalances();await discoverBestPool();updateJourney(4)}
     })
