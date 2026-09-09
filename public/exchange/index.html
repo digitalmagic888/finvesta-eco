@@ -1138,7 +1138,7 @@
         <section class="docs-section" aria-labelledby="docsSafeguardsTitle">
           <div class="docs-section__head"><p class="kicker">05 · Defensive controls</p><h2 id="docsSafeguardsTitle">Client-side safeguards</h2><p>These checks are defense in depth. Contract authorization and the user's wallet remain the final enforcement layers.</p></div>
           <div class="docs-grid three">
-            <article class="docs-card"><h3>Configuration</h3><ul class="docs-list"><li>Chain ID, venue manifests, WPLS, admin EOA, ABI fragments, and the four candidate fee tiers are fixed in source.</li><li>The configured main-swap aggregator is the published production address; an unavailable deployment disables main swaps.</li><li>Aggregator runtime hash, both router/factory/deployer triples, WPLS, and deterministic pool addresses are checked by preset-RPC quorum.</li></ul></article>
+            <article class="docs-card"><h3>Configuration</h3><ul class="docs-list"><li>Chain ID, venue manifests, WPLS, admin EOA, ABI fragments, and the four candidate fee tiers are fixed in source.</li><li>The configured main-swap aggregator is the published production address; an unavailable deployment disables main swaps.</li><li>Aggregator runtime bytecode, both router/factory/deployer triples, WPLS, and deterministic pool addresses are checked by preset-RPC quorum.</li></ul></article>
             <article class="docs-card"><h3>Wallet &amp; network</h3><ul class="docs-list"><li>Connection follows explicit EIP-6963, legacy-provider, or WalletConnect selection.</li><li>WalletConnect requests PulseChain 369 and <code>eth_sendTransaction</code>; QR, mobile/deep-link, and temporary copy-code pairing are available only after selection.</li><li>On screens up to 900px wide, compact pairing CTAs keep the wallet list unobstructed and reopen the same live code or QR view without creating a second pairing request. The visible cancel control expires the pending proposal and clears the pairing so another attempt can start without reloading the DApp.</li><li>On wider screens, dismissing the WalletConnect modal, desktop code helper, or its overlay/Escape route performs the same targeted cancellation. Intentional mobile code and QR transitions preserve the live pairing.</li><li>Automatic reconnection, email/social login, swaps, on-ramp, send/receive, history, and connector analytics features are disabled.</li><li>Malformed or duplicate browser-wallet announcements are ignored, and before signing the read RPC and wallet provider must be within 24 blocks.</li></ul></article>
             <article class="docs-card"><h3>Intent invalidation</h3><ul class="docs-list"><li>Account, chain, route, amount, range, RPC, or modal changes invalidate affected snapshots.</li><li>Signer address must match the reviewed account and intended recipient.</li><li>Broadcast status remains visible when an account changes after submission.</li></ul></article>
             <article class="docs-card"><h3>Amounts &amp; time</h3><ul class="docs-list"><li>Main swaps apply nonzero per-leg and global minima from the selected slippage setting.</li><li>Every main-swap quote and simulation in a plan uses one agreed block hash; the best evaluated sampled plan is recomputed immediately before send and any change forces a new review.</li><li>Deadlines derive from the agreed on-chain timestamp; balances and allowances are refreshed before prompts.</li></ul></article>
@@ -7636,10 +7636,7 @@ lit-html/directives/ref.js:
     var promise=buildCriticalRpcSnapshot(label);criticalSnapshotCache={at:now,promise:promise};try{return await promise}catch(err){if(criticalSnapshotCache&&criticalSnapshotCache.promise===promise)criticalSnapshotCache=null;throw err}
   }
   async function activeSwapRpcSnapshot(label){
-    if(!readProvider)throw new Error((label||"Swap")+" read provider is unavailable");
-    var values=await Promise.all([readProvider.send("eth_chainId",[]),readProvider.getBlock("latest")]),block=values[1];
-    if(BigInt(values[0])!==CHAIN.id||!validCriticalBlock(block))throw new Error((label||"Swap")+" could not obtain a fresh PulseChain block");
-    return {label:label||"Swap",blockNumber:Number(block.number),blockHash:String(block.hash).toLowerCase(),blockTimestamp:Number(block.timestamp),members:[{id:"active-read",label:"Active PulseChain RPC",url:activeRpcUrl||"",provider:readProvider}],swapSingle:true}
+    return criticalRpcSnapshot(label||"Swap",true)
   }
   async function criticalRpcSnapshotAt(label,blockNumber){
     blockNumber=Number(blockNumber);if(!Number.isSafeInteger(blockNumber)||blockNumber<0)throw new Error(label+": invalid historical block number");var operators=[],seen=new Set();RPC_PRESETS.forEach(function(item){try{var entry=criticalPresetProvider(item);if(!seen.has(entry.id)){seen.add(entry.id);operators.push(entry)}}catch(_){}});if(operators.length<CRITICAL_RPC_QUORUM)throw new Error(label+": fewer than two independent preset RPC operators are configured");
@@ -7665,11 +7662,6 @@ lit-html/directives/ref.js:
     blockHash=String(blockHash||"");if(!/^0x[0-9a-fA-F]{64}$/.test(blockHash))throw new Error("Signing-critical RPC snapshot has an invalid block hash");return {blockHash:blockHash,requireCanonical:true}
   }
   function snapshotRpcSelector(snapshot){
-    if(snapshot&&snapshot.swapSingle){
-      var number=Number(snapshot.blockNumber);
-      if(!Number.isSafeInteger(number)||number<0)throw new Error("Swap snapshot has an invalid block number");
-      return E.toQuantity(number)
-    }
     return criticalBlockSelector(snapshot&&snapshot.blockHash)
   }
   async function criticalEthCall(label,target,data,from,value,fresh){
@@ -7677,21 +7669,21 @@ lit-html/directives/ref.js:
     return {data:result.value,snapshot:result.snapshot}
   }
   async function criticalSnapshotEthCall(snapshot,label,target,data,from,value){
-    if(!snapshot||!Array.isArray(snapshot.members)||!snapshot.members.length)throw new Error(label+": a pinned PulseChain snapshot is required");
-    var tx=criticalRpcTransaction(target,data,from,value),selector=snapshotRpcSelector(snapshot),members=snapshot.swapSingle?snapshot.members.slice(0,1):snapshot.members.slice(0,CRITICAL_RPC_QUORUM),settled=await Promise.allSettled(members.map(function(entry){return entry.provider.send("eth_call",[tx,selector])}));
+    if(!snapshot||!Array.isArray(snapshot.members)||snapshot.members.length<CRITICAL_RPC_QUORUM)throw new Error(label+": a quorum-pinned PulseChain snapshot is required");
+    var tx=criticalRpcTransaction(target,data,from,value),selector=snapshotRpcSelector(snapshot),members=snapshot.members.slice(0,CRITICAL_RPC_QUORUM),settled=await Promise.allSettled(members.map(function(entry){return entry.provider.send("eth_call",[tx,selector])}));
     if(settled.some(function(result){return result.status!=="fulfilled"})){var failed=settled.find(function(result){return result.status!=="fulfilled"}),reason=failed&&failed.reason?safeError(failed.reason):"RPC call failed";throw new Error(label+": "+reason)}
     var raw=settled.map(function(result){return String(result.value||"").toLowerCase()});if(!/^0x[0-9a-f]*$/.test(raw[0]))throw new Error(label+": RPC returned invalid call bytes");
-    if(!snapshot.swapSingle&&raw.length>1&&raw[0]!==raw[1])throw new Error(label+": preset RPC operators returned different call bytes at block "+formatInteger(snapshot.blockNumber));return raw[0]
+    if(raw[0]!==raw[1])throw new Error(label+": preset RPC operators returned different call bytes at block "+formatInteger(snapshot.blockNumber));return raw[0]
   }
   async function criticalSnapshotCode(snapshot,label,target){
-    if(!snapshot||!Array.isArray(snapshot.members)||!snapshot.members.length)throw new Error(label+": a pinned PulseChain snapshot is required");
-    target=E.getAddress(target);var selector=snapshotRpcSelector(snapshot),members=snapshot.swapSingle?snapshot.members.slice(0,1):snapshot.members.slice(0,CRITICAL_RPC_QUORUM),settled=await Promise.allSettled(members.map(function(entry){return entry.provider.send("eth_getCode",[target,selector])}));
+    if(!snapshot||!Array.isArray(snapshot.members)||snapshot.members.length<CRITICAL_RPC_QUORUM)throw new Error(label+": a quorum-pinned PulseChain snapshot is required");
+    target=E.getAddress(target);var selector=snapshotRpcSelector(snapshot),members=snapshot.members.slice(0,CRITICAL_RPC_QUORUM),settled=await Promise.allSettled(members.map(function(entry){return entry.provider.send("eth_getCode",[target,selector])}));
     if(settled.some(function(result){return result.status!=="fulfilled"})){var failed=settled.find(function(result){return result.status!=="fulfilled"}),reason=failed&&failed.reason?safeError(failed.reason):"RPC bytecode read failed";throw new Error(label+": "+reason)}
     var raw=settled.map(function(result){return String(result.value||"").toLowerCase()});if(!/^0x(?:[0-9a-f]{2})*$/.test(raw[0]))throw new Error(label+": RPC returned invalid bytecode");
-    if(!snapshot.swapSingle&&raw.length>1&&raw[0]!==raw[1])throw new Error(label+": preset RPC operators returned different bytecode at block "+formatInteger(snapshot.blockNumber));return raw[0]
+    if(raw[0]!==raw[1])throw new Error(label+": preset RPC operators returned different bytecode at block "+formatInteger(snapshot.blockNumber));return raw[0]
   }
   async function criticalSnapshotBalance(snapshot,label,account){
-    if(!snapshot||!Array.isArray(snapshot.members)||!snapshot.members.length)throw new Error(label+": a pinned PulseChain snapshot is required");account=E.getAddress(account);var selector=snapshotRpcSelector(snapshot),members=snapshot.swapSingle?snapshot.members.slice(0,1):snapshot.members.slice(0,CRITICAL_RPC_QUORUM),settled=await Promise.allSettled(members.map(function(entry){return entry.provider.send("eth_getBalance",[account,selector])}));if(settled.some(function(result){return result.status!=="fulfilled"})){var failed=settled.find(function(result){return result.status!=="fulfilled"}),reason=failed&&failed.reason?safeError(failed.reason):"RPC balance read failed";throw new Error(label+": "+reason)}var values=settled.map(function(result){return BigInt(result.value)});if(!snapshot.swapSingle&&values.length>1&&values[0]!==values[1])throw new Error(label+": public RPCs reported different state at block "+formatInteger(snapshot.blockNumber));return values[0]
+    if(!snapshot||!Array.isArray(snapshot.members)||snapshot.members.length<CRITICAL_RPC_QUORUM)throw new Error(label+": a quorum-pinned PulseChain snapshot is required");account=E.getAddress(account);var selector=snapshotRpcSelector(snapshot),members=snapshot.members.slice(0,CRITICAL_RPC_QUORUM),settled=await Promise.allSettled(members.map(function(entry){return entry.provider.send("eth_getBalance",[account,selector])}));if(settled.some(function(result){return result.status!=="fulfilled"})){var failed=settled.find(function(result){return result.status!=="fulfilled"}),reason=failed&&failed.reason?safeError(failed.reason):"RPC balance read failed";throw new Error(label+": "+reason)}var values=settled.map(function(result){return BigInt(result.value)});if(values[0]!==values[1])throw new Error(label+": public RPCs reported different state at block "+formatInteger(snapshot.blockNumber));return values[0]
   }
   async function criticalNextNonce(account,label){
     account=E.getAddress(account);
@@ -7737,7 +7729,7 @@ lit-html/directives/ref.js:
     Object.freeze({venue:0,name:"Finvesta",router:ADDR.router,factory:ADDR.factory,deployer:ADDR.poolDeployer}),
     Object.freeze({venue:1,name:"LibertySwap",router:"0x48e8100374ae6Ff2Cc8871Db6224B296718EeB0d",factory:"0x796fcbDC956b85797EFe21145Aa97599B7FB36a6",deployer:"0x9d90e9ad086D7515FAa2548470B4810f765C3Ab6"})
   ]);
-  var DUAL_POOL_INIT_CODE_HASH="0x41f1cef9cad64f7a40b662646053e6b5b0548eb8ff910a4932adc50d3a3934a8",DUAL_AGGREGATOR_EXPECTED_RUNTIME_HASH="0x317227cd5be316c183625326c292f56bde41154e2dfd1aca10829fa16e4d853d",DUAL_AGGREGATOR_CONFIG_RAW="",DUAL_AGGREGATOR_CONFIG_ERROR=null,DUAL_AGGREGATOR_ADDRESS=E.ZeroAddress;
+  var DUAL_POOL_INIT_CODE_HASH="0x41f1cef9cad64f7a40b662646053e6b5b0548eb8ff910a4932adc50d3a3934a8",DUAL_AGGREGATOR_CONFIG_RAW="",DUAL_AGGREGATOR_CONFIG_ERROR=null,DUAL_AGGREGATOR_ADDRESS=E.ZeroAddress;
   try{
     DUAL_AGGREGATOR_CONFIG_RAW=String(globalThis.FINVESTA_DUAL_V3_AGGREGATOR_ADDRESS||"0xcB3dd3Fa0b24c53a7B87AbBcB6D79c57A2bA9137").trim();
     if(DUAL_AGGREGATOR_CONFIG_RAW){DUAL_AGGREGATOR_ADDRESS=E.getAddress(DUAL_AGGREGATOR_CONFIG_RAW);if(same(DUAL_AGGREGATOR_ADDRESS,E.ZeroAddress))throw new Error("the zero address is not a deployment")}
@@ -8225,7 +8217,7 @@ lit-html/directives/ref.js:
     if(!topology.codeHash||!same(topology.factory,ADDR.factory)||!same(topology.wpls,ADDR.wpls)||!same(topology.deployer,ADDR.poolDeployer))throw new Error("Preset RPC quorum found an unexpected position-manager deployment relationship");topology.snapshot=result.snapshot;return topology
   }
   async function criticalPoolSlot0(address,fresh){
-    address=E.getAddress(address);var poolInterface=new E.Interface(ABI.pool),data=poolInterface.encodeFunctionData("slot0",[]),snapshot=await activeSwapRpcSnapshot("Pool initialization state"),raw=await readProvider.send("eth_call",[{to:address,data:data},snapshotRpcSelector(snapshot)]),slot=poolInterface.decodeFunctionResult("slot0",raw);
+    address=E.getAddress(address);var poolInterface=new E.Interface(ABI.pool),data=poolInterface.encodeFunctionData("slot0",[]),snapshot=await activeSwapRpcSnapshot("Pool initialization state"),raw=await criticalSnapshotEthCall(snapshot,"Pool initialization state",address,data),slot=poolInterface.decodeFunctionResult("slot0",raw);
     return {sqrtPriceX96:BigInt(slot.sqrtPriceX96==null?slot[0]:slot.sqrtPriceX96),tick:Number(slot.tick==null?slot[1]:slot.tick),feeProtocol:BigInt(slot.feeProtocol==null?slot[5]:slot.feeProtocol),unlocked:Boolean(slot.unlocked==null?slot[6]:slot.unlocked),snapshot:snapshot}
   }
   async function criticalMulticallResults(label,target,contractInterface,calls,account,value,fresh){
@@ -9046,7 +9038,7 @@ lit-html/directives/ref.js:
   }
   async function planDualV3Swap(tokenIn,tokenOut,amount){
     tokenIn=E.getAddress(tokenIn);tokenOut=E.getAddress(tokenOut);amount=BigInt(amount);if(amount<=0n||same(tokenIn,tokenOut))throw new Error("Enter a positive amount for two different tokens");
-    var finOnly=finvestaOnlyRoutes(),snapshot=await activeSwapRpcSnapshot(finOnly?"Finvesta-only sampled plan":"Dual-V3 sampled plan");await verifyDualAggregatorManifest(snapshot);
+    var finOnly=finvestaOnlyRoutes(),snapshot=await activeSwapRpcSnapshot(finOnly?"Finvesta-only sampled plan":"Dual-V3 sampled plan"),manifest=await verifyDualAggregatorManifest(snapshot);
     var batch=finOnly?await quoteFinvestaBatchAtSnapshot(snapshot,tokenIn,tokenOut,amount):await quoteDualBatchAtSnapshot(snapshot,tokenIn,tokenOut,amount);
     if(!batch.best)throw new Error(finOnly?"No positive direct quote exists across the four Finvesta V3 fee tiers":"No positive direct quote exists across either venue and all four fee tiers");
     var bestSingle={kind:"single",amountIn:amount,totalOut:batch.best.amountOut,routes:[Object.assign({},batch.best,{amountIn:amount})]},bestSplit=null;
@@ -9056,7 +9048,7 @@ lit-html/directives/ref.js:
       if(coarseResults.length){var seed=coarseResults[0],finePcts=[];for(var fine=Math.max(1,seed.pct-9);fine<=Math.min(99,seed.pct+9);fine++)if(fine!==seed.pct)finePcts.push(fine);var fineResults=await quoteDualSplitGrid(snapshot,tokenIn,tokenOut,amount,finePcts,batch.quotes),combined=coarseResults.concat(fineResults);combined.sort(function(a,b){return a.totalOut===b.totalOut?0:a.totalOut>b.totalOut?-1:1});bestSplit=combined[0]||null}
     }
     var chosen=bestSplit&&bestSplit.totalOut>bestSingle.totalOut?bestSplit:bestSingle;if(chosen.routes.reduce(function(total,route){return total+route.amountIn},0n)!==amount)throw new Error("Selected allocations do not sum to the exact input");
-    return Object.assign(chosen,{venueMode:finOnly?"finvesta":"dual",tokenIn:tokenIn,tokenOut:tokenOut,candidates:batch.quotes,snapshot:snapshot,manifestHash:DUAL_AGGREGATOR_ADDRESS.toLowerCase(),bestSingle:{kind:"single",amountIn:bestSingle.amountIn,totalOut:bestSingle.totalOut,routes:bestSingle.routes}})
+    return Object.assign(chosen,{venueMode:finOnly?"finvesta":"dual",tokenIn:tokenIn,tokenOut:tokenOut,candidates:batch.quotes,snapshot:snapshot,aggregatorCodeHash:manifest.codeHash,manifestHash:DUAL_AGGREGATOR_ADDRESS.toLowerCase(),bestSingle:{kind:"single",amountIn:bestSingle.amountIn,totalOut:bestSingle.totalOut,routes:bestSingle.routes}})
   }
   async function discoverBestPool(){
     var nonce=++state.quoteNonce,from=state.from,to=state.to,amount=swapAmount();state.pool=null;state.swapPlan=null;state.routeCandidates=[];state.aggregatorError=null;state.spotOut=null;state.simulatedOut=null;state.minOut=null;state.quoteSource="none";$("amountOut").textContent="0";renderPoolState();refreshSwapState();
@@ -9157,14 +9149,14 @@ lit-html/directives/ref.js:
     }
   }
   function dualSingleAlternative(plan){
-    if(!plan||plan.kind!=="split"||!plan.bestSingle)return null;return {kind:"single",amountIn:plan.bestSingle.amountIn,totalOut:plan.bestSingle.totalOut,routes:plan.bestSingle.routes,tokenIn:plan.tokenIn,tokenOut:plan.tokenOut,candidates:plan.candidates,snapshot:plan.snapshot,manifestHash:plan.manifestHash,bestSingle:plan.bestSingle}
+    if(!plan||plan.kind!=="split"||!plan.bestSingle)return null;return {kind:"single",amountIn:plan.bestSingle.amountIn,totalOut:plan.bestSingle.totalOut,routes:plan.bestSingle.routes,tokenIn:plan.tokenIn,tokenOut:plan.tokenOut,candidates:plan.candidates,snapshot:plan.snapshot,aggregatorCodeHash:plan.aggregatorCodeHash,manifestHash:plan.manifestHash,bestSingle:plan.bestSingle}
   }
   async function measureAndProtectDualPlan(plan,account,nativeIn,nativeOut,deadline){
     var exploratory=await simulateDualExecution(buildDualExecution(plan,account,nativeIn,nativeOut,deadline,"exploratory")),singlePlan=dualSingleAlternative(plan);if(singlePlan){var singleExploratory=await simulateDualExecution(buildDualExecution(singlePlan,account,nativeIn,nativeOut,deadline,"exploratory"));if(exploratory.measuredOut<=singleExploratory.measuredOut){plan=singlePlan;exploratory=singleExploratory}}
-    var legMeasured;if(plan.kind==="single")legMeasured=[exploratory.measuredOut];else legMeasured=await Promise.all(plan.routes.map(async function(route){var legPlan={kind:"single",amountIn:route.amountIn,totalOut:route.amountOut,routes:[route],tokenIn:plan.tokenIn,tokenOut:plan.tokenOut,candidates:plan.candidates,snapshot:plan.snapshot,manifestHash:plan.manifestHash,bestSingle:plan.bestSingle},legExecution=await simulateDualExecution(buildDualExecution(legPlan,account,nativeIn,nativeOut,deadline,"exploratory"));return legExecution.measuredOut}));var execution=await simulateDualExecution(buildDualExecution(plan,account,nativeIn,nativeOut,deadline,"protected",exploratory.measuredOut,legMeasured));if(execution.measuredOut!==exploratory.measuredOut)throw new Error("Aggregator recipient output was not stable across same-block exploratory and protected simulations");return {plan:plan,exploratory:exploratory,legMeasured:legMeasured,execution:execution}
+    var legMeasured;if(plan.kind==="single")legMeasured=[exploratory.measuredOut];else legMeasured=await Promise.all(plan.routes.map(async function(route){var legPlan={kind:"single",amountIn:route.amountIn,totalOut:route.amountOut,routes:[route],tokenIn:plan.tokenIn,tokenOut:plan.tokenOut,candidates:plan.candidates,snapshot:plan.snapshot,aggregatorCodeHash:plan.aggregatorCodeHash,manifestHash:plan.manifestHash,bestSingle:plan.bestSingle},legExecution=await simulateDualExecution(buildDualExecution(legPlan,account,nativeIn,nativeOut,deadline,"exploratory"));return legExecution.measuredOut}));var execution=await simulateDualExecution(buildDualExecution(plan,account,nativeIn,nativeOut,deadline,"protected",exploratory.measuredOut,legMeasured));if(execution.measuredOut!==exploratory.measuredOut)throw new Error("Aggregator recipient output was not stable across same-block exploratory and protected simulations");return {plan:plan,exploratory:exploratory,legMeasured:legMeasured,execution:execution}
   }
   function dualExecutionFingerprint(execution){
-    return JSON.stringify({target:DUAL_AGGREGATOR_ADDRESS.toLowerCase(),runtimeHash:DUAL_AGGREGATOR_EXPECTED_RUNTIME_HASH,tokenIn:execution.plan.tokenIn.toLowerCase(),tokenOut:execution.plan.tokenOut.toLowerCase(),kind:execution.plan.kind,amountIn:String(execution.plan.amountIn),totalOut:String(execution.plan.totalOut),routes:execution.plan.routes.map(function(route,index){return {venue:Number(route.venue),fee:Number(route.fee),pool:String(route.pool).toLowerCase(),amountIn:String(route.amountIn),amountOut:String(route.amountOut),minAmountOut:String(execution.routes[index].minAmountOut),sqrtPriceLimitX96:"0"}}),recipient:execution.account.toLowerCase(),deadline:String(execution.deadline),globalMin:String(execution.minAmountOut),nativeIn:execution.nativeIn,nativeOut:execution.nativeOut,value:String(execution.value),data:execution.data.toLowerCase(),measuredOut:String(execution.measuredOut)})
+    return JSON.stringify({target:DUAL_AGGREGATOR_ADDRESS.toLowerCase(),runtimeHash:execution.plan.aggregatorCodeHash,tokenIn:execution.plan.tokenIn.toLowerCase(),tokenOut:execution.plan.tokenOut.toLowerCase(),kind:execution.plan.kind,amountIn:String(execution.plan.amountIn),totalOut:String(execution.plan.totalOut),routes:execution.plan.routes.map(function(route,index){return {venue:Number(route.venue),fee:Number(route.fee),pool:String(route.pool).toLowerCase(),amountIn:String(route.amountIn),amountOut:String(route.amountOut),minAmountOut:String(execution.routes[index].minAmountOut),sqrtPriceLimitX96:"0"}}),recipient:execution.account.toLowerCase(),deadline:String(execution.deadline),globalMin:String(execution.minAmountOut),nativeIn:execution.nativeIn,nativeOut:execution.nativeOut,value:String(execution.value),data:execution.data.toLowerCase(),measuredOut:String(execution.measuredOut)})
   }
   async function previewSwap(){
     if(!dualAggregatorConfigured())throw new Error(DUAL_AGGREGATOR_CONFIG_ERROR||"Configure the reviewed dual-V3 aggregator deployment first");var amount=swapAmount(),from=state.from,to=state.to,account=state.account,nativeMode=state.swapNativePls,nativeIn=swapNativeInput(),nativeOut=swapNativeOutput(),slippageBps=state.settings.slippageBps,deadlineMinutes=state.settings.deadlineMinutes;
@@ -9182,7 +9174,7 @@ lit-html/directives/ref.js:
         var freshSigner=await getSigner();if(!same(await freshSigner.getAddress(),account))throw new Error("Connected signer changed after review");
         var freshSnapshot=await activeSwapRpcSnapshot("Final protected swap");
         if(BigInt(freshSnapshot.blockTimestamp)+30n>=deadline)throw new Error("This review expired. Use Refresh inside this modal to prepare a new deadline.");
-        await verifyDualAggregatorManifest(freshSnapshot);
+        var freshManifest=await verifyDualAggregatorManifest(freshSnapshot);if(freshManifest.codeHash!==execution.plan.aggregatorCodeHash)throw new Error("Aggregator runtime changed after review. Refresh the swap plan.");
         if(nativeIn&&await criticalSnapshotBalance(freshSnapshot,"Final native swap funding",account)<amount)throw new Error("Native PLS balance no longer covers the reviewed input");
         if(!nativeIn){var allowance=await criticalDualAllowanceAtSnapshot(freshSnapshot,from.address,account,"Final swap aggregator allowance");if(allowance<amount)throw new Error("Aggregator allowance no longer covers the reviewed input")}
         var finalDecoded=await criticalSnapshotAggregatorCall(freshSnapshot,"Final exact reviewed swap simulation",execution.method,execution.args,account,execution.value),finalOut=BigInt(finalDecoded.netAmountOut==null?finalDecoded[0]:finalDecoded.netAmountOut);
