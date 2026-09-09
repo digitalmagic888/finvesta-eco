@@ -1116,7 +1116,7 @@
                 <tr><th scope="row">Decrease / withdraw</th><td>Fixed position manager multicall</td><td>Protected decrease and collection settle to the connected owner. Ownership is checked before review and again before prompt.</td></tr>
                 <tr><th scope="row">Claim &amp; compound</th><td>Fixed manager + optional fixed router</td><td>Fees first enter the user's wallet; an optional reviewed balancing swap may follow before a reviewed liquidity increase. Recovery state prevents silent duplicate progression.</td></tr>
                 <tr><th scope="row">Burn empty LP NFT</th><td>Fixed position manager</td><td>Allowed only for the connected owner after zero liquidity and no-collectible-fee conditions are verified.</td></tr>
-                <tr><th scope="row">Dropped-nonce recovery</th><td>Connected account → itself</td><td>A compound-recovery flow may offer an explicitly reviewed zero-value self-transfer at one exact nonce to cancel a dropped journaled transaction.</td></tr>
+                <tr><th scope="row">Pending-nonce recovery</th><td>Connected account → itself</td><td>The account menu can replace any wallet-reported pending nonce with an explicitly reviewed zero-value self-transfer. Compound recovery can also offer the same action for a dropped journaled transaction.</td></tr>
                 <tr><th scope="row">Factory administration</th><td>Fixed factory</td><td>Only the configured EOA after live factory-owner verification. Calls are limited to pool protocol fee and distribution configuration exposed by the fixed ABI.</td></tr>
               </tbody>
             </table>
@@ -7700,6 +7700,20 @@ lit-html/directives/ref.js:
     }
     throw new Error((label||"Transaction")+": could not read the wallet pending nonce"+(lastError?": "+safeError(lastError):""))
   }
+  async function walletNonceState(account){
+    if(!state.browserProvider||state.walletChain!==CHAIN.id)throw new Error("Connect a wallet on PulseChain to inspect pending nonces");
+    account=E.getAddress(account);var values=await Promise.all([state.browserProvider.send("eth_getTransactionCount",[account,"latest"]),state.browserProvider.send("eth_getTransactionCount",[account,"pending"])]),latest=Number(BigInt(values[0])),pending=Number(BigInt(values[1]));
+    if(!Number.isSafeInteger(latest)||!Number.isSafeInteger(pending)||latest<0||pending<latest)throw new Error("The wallet returned an invalid nonce range");return {latest:latest,pending:pending}
+  }
+  async function openNonceManager(){
+    var account=state.account;if(!account)return openWalletModal();
+    try{
+      var nonces=await walletNonceState(account),hasPending=nonces.pending>nonces.latest;
+      openModal(modalHeader("Pending transaction recovery","Manage nonces")+"<form class='modal-body' id='nonceRecoveryForm'><div class='review-box'><dl><div><dt>Account</dt><dd class='mono'>"+esc(account)+"</dd></div><div><dt>Next confirmed nonce</dt><dd>"+formatInteger(nonces.latest)+"</dd></div><div><dt>Wallet pending nonce</dt><dd>"+formatInteger(nonces.pending)+"</dd></div></dl></div><div class='notice "+(hasPending?"caution":"info")+"'>"+(hasPending?"Choose a pending nonce to replace it with a zero-value transfer to this same account. Start with the lowest nonce when several transactions are blocked. Your wallet controls the replacement network fee.":"This wallet reports no pending nonce gap. A failed simulation does not create a transaction and cannot block a nonce.")+"</div>"+(hasPending?"<div class='field' style='margin-top:14px'><label class='field-label' for='nonceRecoveryValue'>Nonce to cancel</label><input id='nonceRecoveryValue' type='number' inputmode='numeric' min='"+nonces.latest+"' max='"+(nonces.pending-1)+"' step='1' value='"+nonces.latest+"'><small>Allowed pending range: "+formatInteger(nonces.latest)+"–"+formatInteger(nonces.pending-1)+". This replaces, rather than deletes, that transaction.</small></div><div class='review-actions'><button type='button' class='secondary' data-close>Back</button><button type='submit' class='primary'><span>Review cancellation</span><span>→</span></button></div>":"<button type='button' class='secondary' data-close style='width:100%;margin-top:12px'>Close</button>")+"</form>");
+      if(!hasPending)return;
+      $("nonceRecoveryForm").addEventListener("submit",function(event){event.preventDefault();var nonce=Number($("nonceRecoveryValue").value);if(!Number.isSafeInteger(nonce)||nonce<nonces.latest||nonce>=nonces.pending)return toast("Choose a nonce inside the displayed pending range","error");closeModal();reviewTransaction({kicker:"Pending nonce recovery",title:"Cancel transaction at nonce "+formatInteger(nonce),notice:"This sends a zero-value transaction from your account back to itself at the selected nonce. It can replace a pending transaction only if the wallet supplies a sufficiently higher network fee.",rows:[["From",account,"mono"],["To",account,"mono"],["Nonce",formatInteger(nonce)],["Value","0 PLS"],["Data","None (0x)"],["Network","PulseChain · 369"]],confirmLabel:"Cancel in wallet",successMessage:"Nonce cancellation confirmed on PulseChain",execute:async function(progress){if(!same(state.account,account))throw new Error("Connected account changed after review");var fresh=await walletNonceState(account);if(nonce<fresh.latest)throw new Error("This nonce is already confirmed and no longer needs cancellation");if(nonce>=fresh.pending)throw new Error("This nonce is no longer reported as pending. Reopen Manage nonces to refresh.");var signer=await getSigner();if(!same(await signer.getAddress(),account))throw new Error("Connected signer changed after review");var intent=exactTransactionIntent(account,account,"0x",0n,nonce),fees=await state.browserProvider.getFeeData(),overrides={to:account,value:0n,data:"0x",nonce:nonce,chainId:CHAIN.id,gasLimit:21000n};if(fees.maxFeePerGas!=null&&fees.maxPriorityFeePerGas!=null){overrides.maxFeePerGas=fees.maxFeePerGas*5n/4n;overrides.maxPriorityFeePerGas=fees.maxPriorityFeePerGas*5n/4n}else if(fees.gasPrice!=null)overrides.gasPrice=fees.gasPrice*5n/4n;progress("wallet");var tx=await signer.sendTransaction(overrides);validateExactTransactionIntent(tx,intent,"Nonce cancellation wallet response");progress("pending",tx.hash);return confirmExactTransaction(tx,intent,"Nonce cancellation")}})});
+    }catch(err){toast("Could not inspect pending nonces: "+safeError(err),"error")}
+  }
   async function criticalAllowance(token,owner,spender,label,fresh){
     token=E.getAddress(token);owner=E.getAddress(owner);spender=E.getAddress(spender);var tokenInterface=new E.Interface(ABI.erc20),data=tokenInterface.encodeFunctionData("allowance",[owner,spender]),response=await criticalEthCall(label||"Token allowance",token,data,null,0n,fresh),decoded=tokenInterface.decodeFunctionResult("allowance",response.data);return {value:BigInt(decoded[0]),snapshot:response.snapshot}
   }
@@ -7951,7 +7965,7 @@ lit-html/directives/ref.js:
       try{if(typeof v.shortMessage==="string")msgs.push(v.shortMessage);else if(typeof v.message==="string")msgs.push(v.message)}catch(_){}
       ["data","error","cause","originalError"].forEach(function(k){try{if(v[k])q.push(v[k])}catch(_){}})
     }
-    var msg=(decodedAggregator?decodedAggregator+(msgs.length?" · ":""):"")+msgs.join(" · ");msg=msg.replace(/execution reverted(?:: )?/i,"Transaction would revert: ");
+    var msg=decodedAggregator&&/^TransferFailed\(/.test(decodedAggregator)?decodedAggregator+" · The input token rejected transferFrom. Check live balance and aggregator allowance; restricted or fee-on-transfer tokens may be incompatible. Nothing was sent and no nonce was used.":(decodedAggregator?decodedAggregator+(msgs.length?" · ":""):"")+msgs.join(" · ");msg=msg.replace(/execution reverted(?:: )?/i,"Transaction would revert: ");
     try{[activeRpcUrl,rpcPreference&&rpcPreference.url].filter(Boolean).forEach(function(url){msg=msg.split(url).join(rpcPublicLabel(url))})}catch(_){}
     return clampText(msg||"Unknown wallet or RPC error","Unknown error",260)
   }
@@ -8498,8 +8512,9 @@ lit-html/directives/ref.js:
       openModal(modalHeader("Connected wallet","Account")+
         "<div class='modal-body'><div class='review-box'><dl><div><dt>Account</dt><dd class='mono'>"+esc(state.account)+"</dd></div><div><dt>Connection</dt><dd>"+esc(state.selectedWallet&&state.selectedWallet.info?state.selectedWallet.info.name:"Wallet")+"</dd></div><div><dt>Wallet network</dt><dd>"+(state.walletChain===CHAIN.id?"PulseChain · 369":"Wrong network")+"</dd></div><div><dt>Read RPC</dt><dd>"+esc(rpcPublicLabel(activeRpcUrl))+"</dd></div></dl></div>"+
         (state.walletChain!==CHAIN.id?"<button class='primary' id='switchChain'><span>Switch to PulseChain</span><span>→</span></button>":"")+
-        "<button class='secondary' id='disconnectButton' style='width:100%;margin-top:9px'>"+(remote?"Disconnect WalletConnect session":"Disconnect locally")+"</button></div>");
+        (state.walletChain===CHAIN.id?"<button class='secondary' id='manageNoncesButton' style='width:100%;margin-top:9px'>Manage pending nonces</button>":"")+"<button class='secondary' id='disconnectButton' style='width:100%;margin-top:9px'>"+(remote?"Disconnect WalletConnect session":"Disconnect locally")+"</button></div>");
       if($("switchChain"))$("switchChain").addEventListener("click",async function(){try{await ensurePulseChain();await syncWallet();closeModal()}catch(err){toast(safeError(err),"error")}});
+      if($("manageNoncesButton"))$("manageNoncesButton").addEventListener("click",function(){openNonceManager()});
       $("disconnectButton").addEventListener("click",async function(){var button=$("disconnectButton");setBusy(button,true,"Disconnecting…");await disconnectWallet(remote);closeModal(true)});return
     }
     openModal(modalHeader("Wallet providers","Connect wallet")+"<div class='modal-body'><p class='wallet-discovery-status' id='walletDiscoveryStatus' role='status' aria-live='polite'>Scanning injected providers…</p><div class='wallet-list' id='walletList'></div><p class='notice info'>Choose an injected browser wallet or WalletConnect for QR, mobile/deep-link, and web-wallet pairing. WalletConnect starts only after you select it, and no account request occurs before a wallet choice.</p></div>");
@@ -9142,7 +9157,8 @@ lit-html/directives/ref.js:
     }catch(err){
       var decodedReason=decodeAggregatorRevert(err);
       if(decodedReason){
-        var wrapped=new Error("Aggregator execution reverted with "+decodedReason);
+        var transferHelp=/^TransferFailed\(/.test(decodedReason)?" The input token rejected transferFrom; verify the connected account's live token balance and aggregator allowance. Fee-on-transfer, paused, denylisted, or otherwise non-standard tokens may remain unswappable. This simulation sent nothing and consumed no nonce.":"";
+        var wrapped=new Error("Aggregator execution reverted with "+decodedReason+"."+transferHelp);
         wrapped.cause=err;throw wrapped
       }
       throw err
