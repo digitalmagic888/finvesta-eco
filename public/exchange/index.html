@@ -7636,10 +7636,7 @@ lit-html/directives/ref.js:
     var promise=buildCriticalRpcSnapshot(label);criticalSnapshotCache={at:now,promise:promise};try{return await promise}catch(err){if(criticalSnapshotCache&&criticalSnapshotCache.promise===promise)criticalSnapshotCache=null;throw err}
   }
   async function activeSwapRpcSnapshot(label){
-    if(!readProvider)throw new Error((label||"Swap")+" read provider is unavailable");
-    var values=await Promise.all([readProvider.send("eth_chainId",[]),readProvider.getBlock("latest")]),block=values[1];
-    if(BigInt(values[0])!==CHAIN.id||!validCriticalBlock(block))throw new Error((label||"Swap")+" could not obtain a fresh PulseChain block");
-    return {label:label||"Swap",blockNumber:Number(block.number),blockHash:String(block.hash).toLowerCase(),blockTimestamp:Number(block.timestamp),members:[{id:"active-read",label:"Active PulseChain RPC",url:activeRpcUrl||"",provider:readProvider}],swapSingle:true}
+    return criticalRpcSnapshot(label||"Swap",true)
   }
   async function criticalRpcSnapshotAt(label,blockNumber){
     blockNumber=Number(blockNumber);if(!Number.isSafeInteger(blockNumber)||blockNumber<0)throw new Error(label+": invalid historical block number");var operators=[],seen=new Set();RPC_PRESETS.forEach(function(item){try{var entry=criticalPresetProvider(item);if(!seen.has(entry.id)){seen.add(entry.id);operators.push(entry)}}catch(_){}});if(operators.length<CRITICAL_RPC_QUORUM)throw new Error(label+": fewer than two independent preset RPC operators are configured");
@@ -7665,11 +7662,6 @@ lit-html/directives/ref.js:
     blockHash=String(blockHash||"");if(!/^0x[0-9a-fA-F]{64}$/.test(blockHash))throw new Error("Signing-critical RPC snapshot has an invalid block hash");return {blockHash:blockHash,requireCanonical:true}
   }
   function snapshotRpcSelector(snapshot){
-    if(snapshot&&snapshot.swapSingle){
-      var number=Number(snapshot.blockNumber);
-      if(!Number.isSafeInteger(number)||number<0)throw new Error("Swap snapshot has an invalid block number");
-      return E.toQuantity(number)
-    }
     return criticalBlockSelector(snapshot&&snapshot.blockHash)
   }
   async function criticalEthCall(label,target,data,from,value,fresh){
@@ -7677,21 +7669,21 @@ lit-html/directives/ref.js:
     return {data:result.value,snapshot:result.snapshot}
   }
   async function criticalSnapshotEthCall(snapshot,label,target,data,from,value){
-    if(!snapshot||!Array.isArray(snapshot.members)||!snapshot.members.length)throw new Error(label+": a pinned PulseChain snapshot is required");
-    var tx=criticalRpcTransaction(target,data,from,value),selector=snapshotRpcSelector(snapshot),members=snapshot.swapSingle?snapshot.members.slice(0,1):snapshot.members.slice(0,CRITICAL_RPC_QUORUM),settled=await Promise.allSettled(members.map(function(entry){return entry.provider.send("eth_call",[tx,selector])}));
+    if(!snapshot||!Array.isArray(snapshot.members)||snapshot.members.length<CRITICAL_RPC_QUORUM)throw new Error(label+": a quorum-pinned PulseChain snapshot is required");
+    var tx=criticalRpcTransaction(target,data,from,value),selector=snapshotRpcSelector(snapshot),members=snapshot.members.slice(0,CRITICAL_RPC_QUORUM),settled=await Promise.allSettled(members.map(function(entry){return entry.provider.send("eth_call",[tx,selector])}));
     if(settled.some(function(result){return result.status!=="fulfilled"})){var failed=settled.find(function(result){return result.status!=="fulfilled"}),reason=failed&&failed.reason?safeError(failed.reason):"RPC call failed";throw new Error(label+": "+reason)}
     var raw=settled.map(function(result){return String(result.value||"").toLowerCase()});if(!/^0x[0-9a-f]*$/.test(raw[0]))throw new Error(label+": RPC returned invalid call bytes");
-    if(!snapshot.swapSingle&&raw.length>1&&raw[0]!==raw[1])throw new Error(label+": preset RPC operators returned different call bytes at block "+formatInteger(snapshot.blockNumber));return raw[0]
+    if(raw[0]!==raw[1])throw new Error(label+": preset RPC operators returned different call bytes at block "+formatInteger(snapshot.blockNumber));return raw[0]
   }
   async function criticalSnapshotCode(snapshot,label,target){
-    if(!snapshot||!Array.isArray(snapshot.members)||!snapshot.members.length)throw new Error(label+": a pinned PulseChain snapshot is required");
-    target=E.getAddress(target);var selector=snapshotRpcSelector(snapshot),members=snapshot.swapSingle?snapshot.members.slice(0,1):snapshot.members.slice(0,CRITICAL_RPC_QUORUM),settled=await Promise.allSettled(members.map(function(entry){return entry.provider.send("eth_getCode",[target,selector])}));
+    if(!snapshot||!Array.isArray(snapshot.members)||snapshot.members.length<CRITICAL_RPC_QUORUM)throw new Error(label+": a quorum-pinned PulseChain snapshot is required");
+    target=E.getAddress(target);var selector=snapshotRpcSelector(snapshot),members=snapshot.members.slice(0,CRITICAL_RPC_QUORUM),settled=await Promise.allSettled(members.map(function(entry){return entry.provider.send("eth_getCode",[target,selector])}));
     if(settled.some(function(result){return result.status!=="fulfilled"})){var failed=settled.find(function(result){return result.status!=="fulfilled"}),reason=failed&&failed.reason?safeError(failed.reason):"RPC bytecode read failed";throw new Error(label+": "+reason)}
     var raw=settled.map(function(result){return String(result.value||"").toLowerCase()});if(!/^0x(?:[0-9a-f]{2})*$/.test(raw[0]))throw new Error(label+": RPC returned invalid bytecode");
-    if(!snapshot.swapSingle&&raw.length>1&&raw[0]!==raw[1])throw new Error(label+": preset RPC operators returned different bytecode at block "+formatInteger(snapshot.blockNumber));return raw[0]
+    if(raw[0]!==raw[1])throw new Error(label+": preset RPC operators returned different bytecode at block "+formatInteger(snapshot.blockNumber));return raw[0]
   }
   async function criticalSnapshotBalance(snapshot,label,account){
-    if(!snapshot||!Array.isArray(snapshot.members)||!snapshot.members.length)throw new Error(label+": a pinned PulseChain snapshot is required");account=E.getAddress(account);var selector=snapshotRpcSelector(snapshot),members=snapshot.swapSingle?snapshot.members.slice(0,1):snapshot.members.slice(0,CRITICAL_RPC_QUORUM),settled=await Promise.allSettled(members.map(function(entry){return entry.provider.send("eth_getBalance",[account,selector])}));if(settled.some(function(result){return result.status!=="fulfilled"})){var failed=settled.find(function(result){return result.status!=="fulfilled"}),reason=failed&&failed.reason?safeError(failed.reason):"RPC balance read failed";throw new Error(label+": "+reason)}var values=settled.map(function(result){return BigInt(result.value)});if(!snapshot.swapSingle&&values.length>1&&values[0]!==values[1])throw new Error(label+": public RPCs reported different state at block "+formatInteger(snapshot.blockNumber));return values[0]
+    if(!snapshot||!Array.isArray(snapshot.members)||snapshot.members.length<CRITICAL_RPC_QUORUM)throw new Error(label+": a quorum-pinned PulseChain snapshot is required");account=E.getAddress(account);var selector=snapshotRpcSelector(snapshot),members=snapshot.members.slice(0,CRITICAL_RPC_QUORUM),settled=await Promise.allSettled(members.map(function(entry){return entry.provider.send("eth_getBalance",[account,selector])}));if(settled.some(function(result){return result.status!=="fulfilled"})){var failed=settled.find(function(result){return result.status!=="fulfilled"}),reason=failed&&failed.reason?safeError(failed.reason):"RPC balance read failed";throw new Error(label+": "+reason)}var values=settled.map(function(result){return BigInt(result.value)});if(values[0]!==values[1])throw new Error(label+": public RPCs reported different state at block "+formatInteger(snapshot.blockNumber));return values[0]
   }
   async function criticalNextNonce(account,label){
     account=E.getAddress(account);
@@ -7875,7 +7867,7 @@ lit-html/directives/ref.js:
   async function verifyDualAggregatorManifest(snapshot){
     if(!dualAggregatorConfigured())throw new Error(DUAL_AGGREGATOR_CONFIG_ERROR||"The configured Finvesta Dual V3 Aggregator deployment is unavailable");
     snapshot=snapshot||await criticalRpcSnapshot("Dual-V3 aggregator manifest",true);var code=await criticalSnapshotCode(snapshot,"Dual-V3 aggregator runtime",DUAL_AGGREGATOR_ADDRESS);if(code==="0x")throw new Error("Configured dual-V3 aggregator has no deployed bytecode");
-    var actualHash=E.keccak256(code).toLowerCase();
+    var actualHash=E.keccak256(code).toLowerCase();if(actualHash!==DUAL_AGGREGATOR_EXPECTED_RUNTIME_HASH)throw new Error("Dual-V3 aggregator runtime hash does not match the reviewed deployment");
     var reads=[];DUAL_V3_MANIFEST.forEach(function(item){reads.push(criticalSnapshotAggregatorCall(snapshot,item.name+" router manifest","router",[item.venue]));reads.push(criticalSnapshotAggregatorCall(snapshot,item.name+" factory manifest","factory",[item.venue]));reads.push(criticalSnapshotAggregatorCall(snapshot,item.name+" deployer manifest","deployer",[item.venue]))});reads.push(criticalSnapshotAggregatorCall(snapshot,"WPLS manifest","WPLS",[]));
     var values=await Promise.all(reads),cursor=0;DUAL_V3_MANIFEST.forEach(function(item){if(!same(values[cursor++][0],item.router)||!same(values[cursor++][0],item.factory)||!same(values[cursor++][0],item.deployer))throw new Error(item.name+" aggregator manifest does not match the reviewed deployment")});if(!same(values[cursor][0],ADDR.wpls))throw new Error("Aggregator WPLS manifest does not match the configured wrapped-native asset");
     var constants=[{method:"FINVESTA_ROUTER",expected:DUAL_V3_MANIFEST[0].router},{method:"FINVESTA_FACTORY",expected:DUAL_V3_MANIFEST[0].factory},{method:"FINVESTA_DEPLOYER",expected:DUAL_V3_MANIFEST[0].deployer},{method:"LIBERTY_ROUTER",expected:DUAL_V3_MANIFEST[1].router},{method:"LIBERTY_FACTORY",expected:DUAL_V3_MANIFEST[1].factory},{method:"LIBERTY_DEPLOYER",expected:DUAL_V3_MANIFEST[1].deployer}],constantValues=await Promise.all(constants.map(function(item){return criticalSnapshotAggregatorCall(snapshot,item.method+" constant manifest",item.method,[])}));constants.forEach(function(item,index){if(!same(constantValues[index][0],item.expected))throw new Error(item.method+" does not match the reviewed deployment")});var chainAndPool=await Promise.all([criticalSnapshotAggregatorCall(snapshot,"Aggregator chain manifest","PULSECHAIN_ID",[]),criticalSnapshotAggregatorCall(snapshot,"Pool init-code manifest","POOL_INIT_CODE_HASH",[])]);if(BigInt(chainAndPool[0][0])!==CHAIN.id)throw new Error("Aggregator chain manifest does not match PulseChain 369");if(String(chainAndPool[1][0]).toLowerCase()!==DUAL_POOL_INIT_CODE_HASH)throw new Error("Aggregator pool init-code hash does not match the reviewed deployments");
@@ -8225,7 +8217,7 @@ lit-html/directives/ref.js:
     if(!topology.codeHash||!same(topology.factory,ADDR.factory)||!same(topology.wpls,ADDR.wpls)||!same(topology.deployer,ADDR.poolDeployer))throw new Error("Preset RPC quorum found an unexpected position-manager deployment relationship");topology.snapshot=result.snapshot;return topology
   }
   async function criticalPoolSlot0(address,fresh){
-    address=E.getAddress(address);var poolInterface=new E.Interface(ABI.pool),data=poolInterface.encodeFunctionData("slot0",[]),snapshot=await activeSwapRpcSnapshot("Pool initialization state"),raw=await readProvider.send("eth_call",[{to:address,data:data},snapshotRpcSelector(snapshot)]),slot=poolInterface.decodeFunctionResult("slot0",raw);
+    address=E.getAddress(address);var poolInterface=new E.Interface(ABI.pool),data=poolInterface.encodeFunctionData("slot0",[]),snapshot=await activeSwapRpcSnapshot("Pool initialization state"),raw=await criticalSnapshotEthCall(snapshot,"Pool initialization state",address,data),slot=poolInterface.decodeFunctionResult("slot0",raw);
     return {sqrtPriceX96:BigInt(slot.sqrtPriceX96==null?slot[0]:slot.sqrtPriceX96),tick:Number(slot.tick==null?slot[1]:slot.tick),feeProtocol:BigInt(slot.feeProtocol==null?slot[5]:slot.feeProtocol),unlocked:Boolean(slot.unlocked==null?slot[6]:slot.unlocked),snapshot:snapshot}
   }
   async function criticalMulticallResults(label,target,contractInterface,calls,account,value,fresh){
