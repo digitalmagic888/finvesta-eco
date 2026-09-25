@@ -8039,6 +8039,14 @@ lit-html/directives/ref.js:
       return parsed.name+(args.length?"("+args.join(", ")+")":"")
     }catch(_){return null}
   }
+  function isReplacementUnderpriced(error){
+    var seen=new Set(),q=[error],messages=[];
+    while(q.length){var value=q.shift();if(value==null)continue;if(typeof value==="string"){messages.push(value);continue}if(typeof value!=="object"||seen.has(value))continue;seen.add(value);
+      ["shortMessage","message","reason","details","body"].forEach(function(key){try{if(typeof value[key]==="string")messages.push(value[key])}catch(_){}});
+      ["error","cause","originalError","data"].forEach(function(key){try{if(value[key]!=null)q.push(value[key])}catch(_){}})
+    }
+    return /replacement\s+(?:transaction\s+)?underpriced|replacement\s+fee\s+(?:too\s+low|too\s+small)|transaction\s+underpriced|fee\s+too\s+low\s+to\s+replace/i.test(messages.join(" · "))
+  }
   function safeError(error){
     var decodedAggregator=decodeAggregatorRevert(error),seen=new Set(),q=[error],msgs=[];
     while(q.length){var v=q.shift();if(!v||typeof v!=="object"||seen.has(v))continue;seen.add(v);
@@ -8245,9 +8253,10 @@ lit-html/directives/ref.js:
       "<div class='review-box' style='margin-top:13px'><dl>"+rows+"</dl></div>"+
       "<div class='timeline' id='txTimeline'><div class='done'><i>✓</i><span>Parameters prepared<small>Amounts and destination exposed above</small></span></div><div id='txStepSim'><i>2</i><span>Fresh simulation<small>Revalidated before wallet prompt</small></span></div><div id='txStepWallet'><i>3</i><span>Wallet confirmation<small>No transaction is sent until approved</small></span></div><div id='txStepChain'><i>4</i><span>PulseChain settlement<small>Waiting for an on-chain receipt</small></span></div></div>"+
       "<div class='notice' id='reviewInlineStatus' hidden role='status' aria-live='polite'></div>"+
-      "<div class='review-actions'><button class='secondary' data-close>Cancel</button><button class='primary' id='reviewConfirm'><span>"+esc(options.confirmLabel||"Confirm in wallet")+"</span><span>→</span></button></div></div>",true);
-    var modalId=state.modalNonce,root=$("modal"),btn=$("reviewConfirm"),stepSim=$("txStepSim"),stepWallet=$("txStepWallet"),stepChain=$("txStepChain"),inlineStatus=$("reviewInlineStatus"),closers=Array.from(root.querySelectorAll("[data-close]")),broadcastHash=null,accountInvalidated=false;
+      "<div class='review-actions'><button class='secondary' data-close>Cancel</button><button class='secondary' id='reviewNonceRecovery' type='button' hidden>Review pending nonce cancellation</button><button class='primary' id='reviewConfirm'><span>"+esc(options.confirmLabel||"Confirm in wallet")+"</span><span>→</span></button></div></div>",true);
+    var modalId=state.modalNonce,root=$("modal"),btn=$("reviewConfirm"),recoveryBtn=$("reviewNonceRecovery"),stepSim=$("txStepSim"),stepWallet=$("txStepWallet"),stepChain=$("txStepChain"),inlineStatus=$("reviewInlineStatus"),closers=Array.from(root.querySelectorAll("[data-close]")),broadcastHash=null,accountInvalidated=false,walletRequested=false;
     function ownsModal(){return state.modalNonce===modalId&&!$("modalLayer").hidden}
+    recoveryBtn.addEventListener("click",function(){if(ownsModal())openNonceManager()});
     state.modalAccountHandler=function(phase){if(phase==="refresh"||!ownsModal())return;if(broadcastHash){toast("Connected account changed after transaction "+shortAddress(broadcastHash)+" was broadcast. This status view will remain open; do not resend while its receipt is unresolved.","error");return}if(state.modalLocked){accountInvalidated=true;toast("Connected account changed while the wallet request is active. This review will remain open until the request resolves; do not retry it elsewhere.","error");return}closeModal(true);toast("Connected account changed. The transaction review was closed before anything was submitted.","error")};
     function setCloseLock(locked){state.modalLocked=locked;closers.forEach(function(b){b.disabled=locked;b.title=locked?"Wait for the active wallet flow":""})}
     function safelyContinue(tx){return Promise.resolve().then(function(){if(!ownsModal())return;closeModal(true);return options.autoContinue(tx)}).catch(function(err){toast(safeError(err),"error")})}
@@ -8257,8 +8266,8 @@ lit-html/directives/ref.js:
       try{
         var tx=await options.execute(function(stage,detail){
           if(!ownsModal())return;
-          if(stage==="wallet"){stepSim.className="done";stepSim.querySelector("i").textContent="✓";stepWallet.className="active";btn.textContent="Confirm in wallet…"}
-          if(stage==="pending"){broadcastHash=String(detail||"");stepWallet.className="done";stepWallet.querySelector("i").textContent="✓";stepChain.className="active";stepChain.querySelector("small").textContent=shortAddress(detail);btn.textContent="Transaction pending…"}
+          if(stage==="wallet"){walletRequested=true;stepSim.className="done";stepSim.querySelector("i").textContent="✓";stepWallet.className="active";btn.textContent="Confirm in wallet…"}
+          if(stage==="pending"){var pendingHash=detail&&typeof detail==="object"?detail.hash:detail,pendingNonce=detail&&typeof detail==="object"?detail.nonce:null;broadcastHash=String(pendingHash||"");stepWallet.className="done";stepWallet.querySelector("i").textContent="✓";stepWallet.querySelector("small").textContent=pendingNonce==null?"Wallet submitted the transaction.":"Wallet submitted nonce "+String(pendingNonce)+".";stepChain.className="active";stepChain.querySelector("small").textContent=shortAddress(pendingHash);btn.textContent="Transaction pending…";if(inlineStatus){inlineStatus.hidden=false;inlineStatus.className="notice info";inlineStatus.textContent="Transaction broadcast. If it is stuck, use your wallet’s Activity to speed up or cancel this same nonce. A speed-up must keep the reviewed action details; cancellation means the action will not execute. The page will verify a replacement receipt. Do not submit a duplicate transaction."}}
         });
         if(!ownsModal())return;
         stepChain.className="active";stepChain.querySelector("small").textContent="Receipt found in block "+formatInteger(tx.blockNumber||"—")+" · verifying action…";
@@ -8273,9 +8282,11 @@ lit-html/directives/ref.js:
       }catch(err){
         if(!ownsModal())return;setCloseLock(false);
         if(tx&&tx.blockNumber!=null){btn.textContent="Receipt found · action unverified";btn.disabled=true;stepChain.className="";stepChain.querySelector("small").textContent="A receipt exists, but the reviewed action was not verified";toast("A transaction confirmed, but Finvesta could not verify the reviewed result: "+safeError(err),"error");return}
-        if(broadcastHash&&err&&err.code==="TRANSACTION_REPLACED"&&err.cancelled){btn.disabled=true;btn.textContent="Original action cancelled";stepWallet.className="done";stepWallet.querySelector("i").textContent="✓";stepChain.className="";stepChain.querySelector("small").textContent="The replacement cancelled the reviewed action";toast("The reviewed transaction was cancelled or replaced and did not settle. Close this review before trying again.","error");return}
+        if(broadcastHash&&err&&err.code==="TRANSACTION_REPLACED"&&err.cancelled){btn.disabled=true;btn.textContent="Original action cancelled";stepWallet.className="done";stepWallet.querySelector("i").textContent="✓";stepChain.className="";stepChain.querySelector("small").textContent="The replacement cancelled the reviewed action";if(inlineStatus){inlineStatus.hidden=false;inlineStatus.className="notice";inlineStatus.textContent="The wallet replaced this nonce with a cancellation. The reviewed action did not execute; you can safely prepare a new review."}toast("The reviewed transaction was cancelled or replaced and did not settle. Close this review before trying again.","error");return}
         if(broadcastHash){btn.disabled=true;btn.textContent="Broadcast · receipt status unknown";stepWallet.className="done";stepWallet.querySelector("i").textContent="✓";stepChain.className="active";stepChain.querySelector("small").textContent=String(broadcastHash)+" · verify before retry";closers.forEach(function(close){close.title="A wallet transaction hash was returned; verify it before retrying"});toast("Wallet returned transaction hash "+String(broadcastHash)+", but its receipt is not verified. Do not resend. Check this hash in your wallet or explorer. "+safeError(err),"error");return}
         if(accountInvalidated){closeModal(true);toast("The wallet request ended without a broadcast after the connected account changed. Reopen the flow for the active account. "+safeError(err),"error");return}
+        if(isReplacementUnderpriced(err)){btn.disabled=true;btn.textContent="Existing nonce needs attention";stepSim.className="";stepWallet.className="";stepChain.className="active";stepChain.querySelector("small").textContent="No replacement accepted · check the existing nonce";recoveryBtn.hidden=false;if(inlineStatus){inlineStatus.hidden=false;inlineStatus.className="notice caution";inlineStatus.textContent="The wallet or RPC rejected this replacement because its fee is too low. This attempt was not accepted; an earlier transaction at that nonce may still be pending. Stop retrying here. Use your wallet’s Activity to speed up or cancel the existing transaction, or review a pending-nonce cancellation below. Start a new action only after that nonce settles."}toast("Replacement fee too low. Check the existing transaction in your wallet Activity; do not retry this action yet.","error");return}
+        if(walletRequested&&nestedCode(err)!==4001&&(!err||err.code!=="ACTION_REJECTED")){btn.disabled=true;btn.textContent="Check wallet activity before retrying";stepWallet.className="active";stepChain.className="";stepWallet.querySelector("small").textContent="No transaction hash returned · status uncertain";recoveryBtn.hidden=false;if(inlineStatus){inlineStatus.hidden=false;inlineStatus.className="notice caution";inlineStatus.textContent="The wallet request ended without returning a transaction hash. It may still have reached the network. Check wallet Activity before trying again. Do not repeat this action unless you confirm there is no pending transaction; pending-nonce recovery is available below."}toast("Wallet submission status is uncertain. Check Activity before retrying.","error");return}
         var message=safeError(err);if(inlineStatus){inlineStatus.hidden=false;inlineStatus.className="notice";inlineStatus.textContent="Could not continue yet: "+message+" Nothing was sent. Stay in this review and press Revalidate & continue; you do not need to close the modal."}else toast(message,"error");
         setBusy(btn,false);btn.querySelector("span")?btn.querySelector("span").textContent="Revalidate & continue":btn.textContent="Revalidate & continue";stepSim.className="";stepWallet.className="";stepChain.className=""
       }
@@ -8366,7 +8377,7 @@ lit-html/directives/ref.js:
     await assertWalletOnPulseChain();
     progress("wallet");
     var tx=await send(intent.nonce);
-    progress("pending",tx&&tx.hash);
+    progress("pending",{hash:tx&&tx.hash,nonce:intent.nonce});
     validateExactTransactionIntent(tx,intent,label+" wallet response");
     return confirmExactTransaction(tx,intent,label)
   }
@@ -11083,7 +11094,7 @@ lit-html/directives/ref.js:
     controller:["function token() view returns(address)","function policy() view returns(address)","function vault() view returns(address)","function distributor() view returns(address)","function cyclesPaused() view returns(bool)","function remainingDailyCapacity() view returns(uint256)","function remainingBlockCapacity() view returns(uint256)","function maximumCycleNow() view returns(uint256)","function CYCLE_CAP() view returns(uint256)","function CYCLE_COOLDOWN() view returns(uint256)","function BLOCK_WINDOW_CAP() view returns(uint256)"],
     helper:["function token() view returns(address)","function controller() view returns(address)","function vault() view returns(address)","function distributor() view returns(address)","function checkUpkeep() view returns(bool accountingReady,uint256 maxAmount,uint256 pending,uint256 dayRemaining,uint256 blockRemaining)"]
   };
-  var injectedStakingState={context:null,selectedCandidate:null,selectedStakeId:null,refreshing:false,scanNonce:0};
+  var injectedStakingState={context:null,selectedCandidate:null,selectedStakeId:null,refreshing:false,refreshAgain:false,refreshPromise:null,progressRefreshing:false,progressPromise:null,lastFullRefreshAt:0,pollTimer:null,scanNonce:0};
   function iy$(id){return document.getElementById(id)}
   function iyTrimUnits(value,decimals){var s=E.formatUnits(value,decimals);return s.indexOf(".")<0?s:s.replace(/0+$/ ,"").replace(/\.$/,"")}
   function iySetText(id,value){var e=iy$(id);if(e)e.textContent=String(value)}
@@ -11185,30 +11196,66 @@ lit-html/directives/ref.js:
   async function iyCheckCandidate(){
     try{var id=iy$("iyCandidateId").value.trim();var ctx=await iyLoadContext(state.browserProvider||readProvider);if(!iyConnectedAccount())throw new Error("Connect your wallet to inspect positions you can stake.");var info=await iyLoadPosition(ctx,id,state.browserProvider||readProvider);iyShowCandidate(info,ctx)}catch(e){injectedStakingState.selectedCandidate=null;iySetButton("iyApproveNft",true);iySetButton("iyStakeNft",true);iySetText("iyCandidateStatus",safeError(e));iySetFacts("iyCandidateFacts",[])}
   }
+  async function iyRefreshCandidate(ctx,account,provider){
+    var id=iy$("iyCandidateId").value.trim();if(!id||!injectedStakingState.selectedCandidate)return;
+    if(!same(account,iyConnectedAccount()))return;
+    try{var info=await iyLoadPosition(ctx,id,provider);if(!same(account,iyConnectedAccount())||iy$("iyCandidateId").value.trim()!==id)return;iyShowCandidate(info,ctx)}
+    catch(e){injectedStakingState.selectedCandidate=null;iySetButton("iyApproveNft",true);iySetButton("iyStakeNft",true);iySetText("iyCandidateStatus","Could not refresh this position: "+safeError(e))}
+  }
   function iyCacheKey(account,ctx){return "injected-staked-ids-v1:"+String(ctx.vaultAddress).toLowerCase()+":"+String(account).toLowerCase()}
   function iySavedIds(account,ctx){try{var a=JSON.parse(localStorage.getItem(iyCacheKey(account,ctx))||"[]");return Array.isArray(a)?a.filter(function(x){return /^(0|[1-9][0-9]{0,77})$/.test(String(x))}).slice(0,50):[]}catch(_){return []}}
   function iySaveId(account,ctx,id,remove){var ids=iySavedIds(account,ctx).filter(function(x){return String(x)!==String(id)});if(!remove)ids.push(String(id));try{localStorage.setItem(iyCacheKey(account,ctx),JSON.stringify(ids.slice(-50)))}catch(_){} }
+  async function iyRenderStake(ctx,id,provider,head){
+    head=head==null?await provider.getBlockNumber():Number(head);
+    var blockTag=head,s=await ctx.vault.stakes(id,{blockTag:blockTag});
+    if(!same(s.owner,iyConnectedAccount()))throw new Error("This NFT is not registered to the connected staking owner.");
+    var custody=await ctx.manager.ownerOf(id,{blockTag:blockTag});if(!same(custody,ctx.vaultAddress))throw new Error("The position NFT is not in vault custody.");
+    var values=await Promise.all([ctx.manager.positions(id,{blockTag:blockTag}),ctx.vault.pendingLiquidity(id,{blockTag:blockTag}),ctx.vault.activationsPaused({blockTag:blockTag}),ctx.vault.depositsPaused({blockTag:blockTag})]);
+    var p=values[0],pending=values[1],activationsPaused=Boolean(values[2]),depositsPaused=Boolean(values[3]),activationAt=Number(s.depositedBlock)+Number(ctx.maturityBlocks),tranches=[];
+    for(var i=0;i<Number(ctx.maturityBlocks);i++){var tr=await ctx.vault.tranches(id,i,{blockTag:blockTag});if(BigInt(tr.liquidity)>0n)tranches.push({block:Number(tr.observedBlock),amount:BigInt(tr.liquidity),matures:Number(tr.observedBlock)+Number(ctx.maturityBlocks)})}
+    injectedStakingState.selectedStakeId=String(id);injectedStakingState.selectedStake={ctx:ctx,stake:s,position:p,pending:BigInt(pending),tranches:tranches,blockNumber:head};
+    iySetText("iyStakeStatus",s.active?"Active and earning on eligible synchronized liquidity.":head>=activationAt?"Maturity reached. Activate this position to begin earning.":"Waiting for the eight-block maturity period.");
+    iySetFacts("iyStakeFacts",[["Token ID",String(id)],["Staking owner",s.owner],["Active",s.active?"Yes":"No"],["Eligible liquidity",s.eligibleLiquidity.toString()],["Tracked liquidity",s.trackedLiquidity.toString()],["Unobserved / pending liquidity",String(pending)],["Deposited at block",String(s.depositedBlock)],["Current block",String(head)],["Pool fees recorded at last checkpoint",String(p.tokensOwed0)+" / "+String(p.tokensOwed1)]]);
+    var track=iy$("iyMaturityTrack"),pct=Math.max(0,Math.min(100,Math.floor((head-Number(s.depositedBlock))/Number(ctx.maturityBlocks)*100)));track.hidden=Boolean(s.active);iy$("iyMaturityProgress").style.width=pct+"%";
+    iySetButton("iyActivate",!(!s.active&&head>=activationAt&&!activationsPaused&&ctx.infrastructureReady&&ctx.mainReady));
+    var syncNeeded=BigInt(pending)>0n||tranches.some(function(t){return head>=t.matures});iySetButton("iySync",!(!activationsPaused&&!depositsPaused&&ctx.infrastructureReady&&ctx.mainReady&&syncNeeded));
+    iySetButton("iyCollectFees",false);iySetButton("iyUnstake",false)
+  }
   async function iyLoadStake(){
     try{
-      var id=iy$("iyStakeId").value.trim();if(!/^(0|[1-9][0-9]{0,77})$/.test(id)||BigInt(id)>((1n<<256n)-1n))throw new Error("Enter a valid NFT token ID.");if(!iyConnectedAccount())throw new Error("Connect the staking-owner wallet on PulseChain.");var ctx=await iyLoadContext(state.browserProvider||readProvider);var s=await ctx.vault.stakes(id);
-      if(!same(s.owner,iyConnectedAccount()))throw new Error("This NFT is not registered to the connected staking owner.");
-      var custody=await ctx.manager.ownerOf(id);if(!same(custody,ctx.vaultAddress))throw new Error("The position NFT is not in vault custody.");
-      var p=await ctx.manager.positions(id),pending=await ctx.vault.pendingLiquidity(id),head=ctx.blockNumber,activationAt=Number(s.depositedBlock)+Number(ctx.maturityBlocks),tranches=[];
-      for(var i=0;i<Number(ctx.maturityBlocks);i++){var tr=await ctx.vault.tranches(id,i);if(BigInt(tr.liquidity)>0n)tranches.push({block:Number(tr.observedBlock),amount:BigInt(tr.liquidity),matures:Number(tr.observedBlock)+Number(ctx.maturityBlocks)})}
-      injectedStakingState.selectedStakeId=String(id);injectedStakingState.selectedStake={ctx:ctx,stake:s,position:p,pending:BigInt(pending),tranches:tranches};
-      iySetText("iyStakeStatus",s.active?"Active and earning on eligible synchronized liquidity.":head>=activationAt?"Maturity reached. Activate this position to begin earning.":"Waiting for the eight-block maturity period.");
-      iySetFacts("iyStakeFacts",[["Token ID",String(id)],["Staking owner",s.owner],["Active",s.active?"Yes":"No"],["Eligible liquidity",s.eligibleLiquidity.toString()],["Tracked liquidity",s.trackedLiquidity.toString()],["Unobserved / pending liquidity",String(pending)],["Deposited at block",String(s.depositedBlock)],["Current block",String(head)],["Pool fees recorded at last checkpoint",String(p.tokensOwed0)+" / "+String(p.tokensOwed1)]]);
-      var track=iy$("iyMaturityTrack"),pct=Math.max(0,Math.min(100,Math.floor((head-Number(s.depositedBlock))/Number(ctx.maturityBlocks)*100)));track.hidden=Boolean(s.active);iy$("iyMaturityProgress").style.width=pct+"%";
-      iySetButton("iyActivate",!(!s.active&&head>=activationAt&&!ctx.activationsPaused&&ctx.infrastructureReady&&ctx.mainReady));
-      var syncNeeded=BigInt(pending)>0n||tranches.some(function(t){return head>=t.matures});iySetButton("iySync",!(!ctx.activationsPaused&&ctx.infrastructureReady&&ctx.mainReady&&syncNeeded));
-      iySetButton("iyCollectFees",false);
-      iySetButton("iyUnstake",false)
+      var id=iy$("iyStakeId").value.trim();if(!/^(0|[1-9][0-9]{0,77})$/.test(id)||BigInt(id)>((1n<<256n)-1n))throw new Error("Enter a valid NFT token ID.");if(!iyConnectedAccount())throw new Error("Connect the staking-owner wallet on PulseChain.");var provider=state.browserProvider||readProvider,ctx=await iyLoadContext(provider);await iyRenderStake(ctx,id,provider,ctx.blockNumber)
     }catch(e){injectedStakingState.selectedStakeId=null;injectedStakingState.selectedStake=null;iySetText("iyStakeStatus",safeError(e));iySetFacts("iyStakeFacts",[]);iy$("iyMaturityTrack").hidden=true;["iyActivate","iySync","iyCollectFees","iyUnstake"].forEach(function(id){iySetButton(id,true)})}
   }
-  async function iyRefresh(silent){
-    if(injectedStakingState.refreshing)return;injectedStakingState.refreshing=true;
+  async function iyRefreshStakeProgress(){
+    if(injectedStakingState.progressRefreshing||injectedStakingState.refreshing||!iyConnectedAccount()||!injectedStakingState.context)return;
+    var id=injectedStakingState.selectedStakeId;if(!id)return;injectedStakingState.progressRefreshing=true;
+    var run=(async function(){try{var provider=state.browserProvider||readProvider,head=await provider.getBlockNumber();await iyRenderStake(injectedStakingState.context,id,provider,head)}catch(e){iySetText("iyStakeStatus","Live refresh delayed: "+safeError(e))}})();injectedStakingState.progressPromise=run;
+    try{await run}finally{injectedStakingState.progressRefreshing=false;if(injectedStakingState.progressPromise===run)injectedStakingState.progressPromise=null}
+  }
+  function iyStartProgressPolling(){
+    if(injectedStakingState.pollTimer)return;
+    injectedStakingState.pollTimer=setInterval(async function(){
+      if(document.hidden||!iy$("view-staking").classList.contains("active")||!iyConnectedAccount()||injectedStakingState.refreshing||injectedStakingState.progressRefreshing)return;
+      if(!injectedStakingState.context||Date.now()-injectedStakingState.lastFullRefreshAt>60000){await iyRefresh(true);return}
+      injectedStakingState.progressRefreshing=true;
+      var progressRun=(async function(){try{
+        var ctx=injectedStakingState.context,account=iyConnectedAccount(),provider=state.browserProvider||readProvider;
+        if(injectedStakingState.selectedCandidate)await iyRefreshCandidate(ctx,account,provider);
+        if(injectedStakingState.selectedStakeId){var head=await provider.getBlockNumber();await iyRenderStake(ctx,injectedStakingState.selectedStakeId,provider,head)}
+      }catch(e){if(injectedStakingState.selectedStakeId)iySetText("iyStakeStatus","Live refresh delayed: "+safeError(e))}
+      })();injectedStakingState.progressPromise=progressRun;
+      try{await progressRun}finally{injectedStakingState.progressRefreshing=false;if(injectedStakingState.progressPromise===progressRun)injectedStakingState.progressPromise=null}
+    },12000)
+  }
+  function iyRefresh(silent){
+    if(injectedStakingState.progressPromise)return injectedStakingState.progressPromise.then(function(){return iyRefresh(silent)});
+    if(injectedStakingState.refreshPromise){injectedStakingState.refreshAgain=true;return injectedStakingState.refreshPromise}
+    var run=(async function(){injectedStakingState.refreshing=true;try{do{injectedStakingState.refreshAgain=false;await iyRefreshPass(silent)}while(injectedStakingState.refreshAgain)}finally{injectedStakingState.refreshing=false}})();
+    injectedStakingState.refreshPromise=run;run.then(function(){if(injectedStakingState.refreshPromise===run)injectedStakingState.refreshPromise=null},function(){if(injectedStakingState.refreshPromise===run)injectedStakingState.refreshPromise=null});return run
+  }
+  async function iyRefreshPass(silent){
     try{
-      if(!iyIsConfigured()){injectedStakingState.context=null;iySetDeploymentState("warn","Staking deployment not configured — wallet actions are disabled.");iySetText("iyUpkeepStatus","Set the deployed vault address and runtime code hash to read protocol state.");iySetButton("iyScanPositions",true);iySetButton("iyRefresh",false);["iyCheckCandidate","iyApproveNft","iyStakeNft","iyLoadStake","iyActivate","iySync","iyCollectFees","iyUnstake","iyClaimInjector","iyClaimWeth","iyClaimKeeper","iyProcessBatch"].forEach(function(id){iySetButton(id,true)});injectedStakingState.refreshing=false;return}
+      if(!iyIsConfigured()){injectedStakingState.context=null;iySetDeploymentState("warn","Staking deployment not configured — wallet actions are disabled.");iySetText("iyUpkeepStatus","Set the deployed vault address and runtime code hash to read protocol state.");iySetButton("iyScanPositions",true);iySetButton("iyRefresh",false);["iyCheckCandidate","iyApproveNft","iyStakeNft","iyLoadStake","iyActivate","iySync","iyCollectFees","iyUnstake","iyClaimInjector","iyClaimWeth","iyClaimKeeper","iyProcessBatch"].forEach(function(id){iySetButton(id,true)});return}
       var ctx=await iyLoadContext(readProvider);injectedStakingState.context=ctx;
       if(!ctx.infrastructureReady)iySetDeploymentState("bad","Deployment loaded, but the policy's pinned infrastructure check failed: "+ctx.infrastructureError);
       else if(!ctx.mainReady)iySetDeploymentState("warn","Vault and contract wiring verified. The exact 1% main pool is not registered, so staking, activation and liquidity sync are unavailable; deposits and activations are also paused.");
@@ -11228,13 +11275,14 @@ lit-html/directives/ref.js:
         iySetText("iyUpkeepStatus",Boolean(parts[13])?"Cycles are paused. The helper result is accounting-only.":Boolean(parts[11].accountingReady)?"Accounting limits allow a cycle amount; the execution still must pass quote/TWAP or owner price-limit checks.":"No cycle amount is currently available under the on-chain accounting limits.");
         iySetButton("iyLoadStake",false);
         var cached=iySavedIds(account,ctx),autoId=null;for(var ci=0;ci<cached.length;ci++){var cs=await ctx.vault.stakes(cached[ci]);if(same(cs.owner,account)){autoId=cached[ci];break}}
-        if(autoId){iy$("iyStakeId").value=autoId;injectedStakingState.selectedStakeId=autoId;await iyLoadStake()}
-        else if(injectedStakingState.selectedStakeId&&iy$("iyStakeId").value===injectedStakingState.selectedStakeId)await iyLoadStake()
+         if(autoId){iy$("iyStakeId").value=autoId;injectedStakingState.selectedStakeId=autoId;await iyRenderStake(ctx,autoId,state.browserProvider||readProvider,ctx.blockNumber)}
+         else if(injectedStakingState.selectedStakeId&&iy$("iyStakeId").value===injectedStakingState.selectedStakeId)await iyRenderStake(ctx,injectedStakingState.selectedStakeId,state.browserProvider||readProvider,ctx.blockNumber)
+         await iyRefreshCandidate(ctx,account,state.browserProvider||readProvider)
       }else{
         ["iyShares","iyBeneficiaryCount","iyUnpaidInjector","iyUnpaidWeth","iyKeeperCredit","iyBatchWhen","iyPendingMint","iyMaxCycle","iyDayRemaining","iyBlockRemaining"].forEach(function(id){iySetText(id,"Connect wallet" )});iySetText("iyBatchStatus","Connect your wallet on PulseChain to read personal rewards and submit an optional claim.");iySetText("iyUpkeepStatus","Wallet connection is required for a live accounting check.");["iyScanPositions","iyCheckCandidate","iyApproveNft","iyStakeNft","iyLoadStake","iyActivate","iySync","iyCollectFees","iyUnstake","iyClaimInjector","iyClaimWeth","iyClaimKeeper","iyProcessBatch"].forEach(function(id){iySetButton(id,true)})
       }
     }catch(e){injectedStakingState.context=null;iySetDeploymentState("bad","Could not verify the staking deployment: "+safeError(e));["iyScanPositions","iyCheckCandidate","iyApproveNft","iyStakeNft","iyLoadStake","iyActivate","iySync","iyCollectFees","iyUnstake","iyClaimInjector","iyClaimWeth","iyClaimKeeper","iyProcessBatch"].forEach(function(id){iySetButton(id,true)});["iyShares","iyBeneficiaryCount","iyUnpaidInjector","iyUnpaidWeth","iyKeeperCredit","iyBatchWhen","iyPendingMint","iyMaxCycle","iyDayRemaining","iyBlockRemaining"].forEach(function(id){iySetText(id,"Unavailable")});if(!silent)toast("Staking state could not be verified. No transaction was prepared.","error")}
-    finally{injectedStakingState.refreshing=false}
+    finally{injectedStakingState.lastFullRefreshAt=Date.now()}
   }
   function iyReviewTx(spec){
     var account=iyConnectedAccount();if(!account)return toast("Connect the staking owner wallet on PulseChain first.","error");
@@ -11282,7 +11330,7 @@ lit-html/directives/ref.js:
 
   async function init(){
     restoreTokenLogoCache();await migrateLegacyCompoundSessions();restorePendingCompoundSessions();
-    bindUi();bindInjectedStaking();await iyRefresh(true);renderWallet();renderPositions();renderRangeBars($("rangeBars"));renderAdminAccess(false);
+    bindUi();bindInjectedStaking();iyStartProgressPolling();await iyRefresh(true);renderWallet();renderPositions();renderRangeBars($("rangeBars"));renderAdminAccess(false);
     navigate(location.hash.slice(1)||"swap",true);await runStartup()
   }
   init().catch(function(err){console.error(err);failPreloader(err)});
