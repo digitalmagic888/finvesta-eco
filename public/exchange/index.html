@@ -7774,7 +7774,7 @@ lit-html/directives/ref.js:
       var nonces=await walletNonceState(account),hasPending=nonces.pending>nonces.latest;
       openModal(modalHeader("Pending transaction recovery","Manage nonces")+"<form class='modal-body' id='nonceRecoveryForm'><div class='review-box'><dl><div><dt>Account</dt><dd class='mono'>"+esc(account)+"</dd></div><div><dt>Next confirmed nonce</dt><dd>"+formatInteger(nonces.latest)+"</dd></div><div><dt>Wallet pending nonce</dt><dd>"+formatInteger(nonces.pending)+"</dd></div></dl></div><div class='notice "+(hasPending?"caution":"info")+"'>"+(hasPending?"Choose a pending nonce to replace it with a zero-value transfer to this same account. Start with the lowest nonce when several transactions are blocked. Your wallet controls the replacement network fee.":"This wallet reports no pending nonce gap. A failed simulation does not create a transaction and cannot block a nonce.")+"</div>"+(hasPending?"<div class='field' style='margin-top:14px'><label class='field-label' for='nonceRecoveryValue'>Nonce to cancel</label><input id='nonceRecoveryValue' type='number' inputmode='numeric' min='"+nonces.latest+"' max='"+(nonces.pending-1)+"' step='1' value='"+nonces.latest+"'><small>Allowed pending range: "+formatInteger(nonces.latest)+"–"+formatInteger(nonces.pending-1)+". This replaces, rather than deletes, that transaction.</small></div><div class='review-actions'><button type='button' class='secondary' data-close>Back</button><button type='submit' class='primary'><span>Review cancellation</span><span>→</span></button></div>":"<button type='button' class='secondary' data-close style='width:100%;margin-top:12px'>Close</button>")+"</form>");
       if(!hasPending)return;
-      $("nonceRecoveryForm").addEventListener("submit",function(event){event.preventDefault();var nonce=Number($("nonceRecoveryValue").value);if(!Number.isSafeInteger(nonce)||nonce<nonces.latest||nonce>=nonces.pending)return toast("Choose a nonce inside the displayed pending range","error");closeModal();reviewTransaction({kicker:"Pending nonce recovery",title:"Cancel transaction at nonce "+formatInteger(nonce),notice:"This sends a zero-value transaction from your account back to itself at the selected nonce. It can replace a pending transaction only if the wallet supplies a sufficiently higher network fee.",rows:[["From",account,"mono"],["To",account,"mono"],["Nonce",formatInteger(nonce)],["Value","0 PLS"],["Data","None (0x)"],["Network","PulseChain · 369"]],confirmLabel:"Cancel in wallet",successMessage:"Nonce cancellation confirmed on PulseChain",execute:async function(progress){if(!same(state.account,account))throw new Error("Connected account changed after review");var fresh=await walletNonceState(account);if(nonce<fresh.latest)throw new Error("This nonce is already confirmed and no longer needs cancellation");if(nonce>=fresh.pending)throw new Error("This nonce is no longer reported as pending. Reopen Manage nonces to refresh.");var signer=await getSigner();if(!same(await signer.getAddress(),account))throw new Error("Connected signer changed after review");var intent=exactTransactionIntent(account,account,"0x",0n,nonce),fees=await state.browserProvider.getFeeData(),overrides={to:account,value:0n,data:"0x",nonce:nonce,chainId:CHAIN.id,gasLimit:21000n};if(fees.maxFeePerGas!=null&&fees.maxPriorityFeePerGas!=null){overrides.maxFeePerGas=fees.maxFeePerGas*5n/4n;overrides.maxPriorityFeePerGas=fees.maxPriorityFeePerGas*5n/4n}else if(fees.gasPrice!=null)overrides.gasPrice=fees.gasPrice*5n/4n;progress("wallet");var tx=await signer.sendTransaction(overrides);validateExactTransactionIntent(tx,intent,"Nonce cancellation wallet response");progress("pending",tx.hash);return confirmExactTransaction(tx,intent,"Nonce cancellation")}})});
+      $("nonceRecoveryForm").addEventListener("submit",function(event){event.preventDefault();var nonce=Number($("nonceRecoveryValue").value);if(!Number.isSafeInteger(nonce)||nonce<nonces.latest||nonce>=nonces.pending)return toast("Choose a nonce inside the displayed pending range","error");closeModal();reviewTransaction({kicker:"Pending nonce recovery",title:"Cancel transaction at nonce "+formatInteger(nonce),notice:"This sends a zero-value transaction from your account back to itself at the selected nonce. It can replace a pending transaction only if the wallet supplies a sufficiently higher network fee.",rows:[["From",account,"mono"],["To",account,"mono"],["Nonce",formatInteger(nonce)],["Value","0 PLS"],["Data","None (0x)"],["Network","PulseChain · 369"]],confirmLabel:"Cancel in wallet",successMessage:"Nonce cancellation confirmed on PulseChain",execute:async function(progress){if(!same(state.account,account))throw new Error("Connected account changed after review");var fresh=await walletNonceState(account);if(nonce<fresh.latest)throw new Error("This nonce is already confirmed and no longer needs cancellation");if(nonce>=fresh.pending)throw new Error("This nonce is no longer reported as pending. Reopen Manage nonces to refresh.");var signer=await getSigner();if(!same(await signer.getAddress(),account))throw new Error("Connected signer changed after review");var intent=exactTransactionIntent(account,account,"0x",0n,nonce),fees=await state.browserProvider.getFeeData(),overrides={to:account,value:0n,data:"0x",nonce:nonce,chainId:CHAIN.id,gasLimit:21000n};if(fees.maxFeePerGas!=null&&fees.maxPriorityFeePerGas!=null){overrides.maxFeePerGas=fees.maxFeePerGas*5n/4n;overrides.maxPriorityFeePerGas=fees.maxPriorityFeePerGas*5n/4n}else if(fees.gasPrice!=null)overrides.gasPrice=fees.gasPrice*5n/4n;await assertWalletOnPulseChain();progress("wallet");var tx=await signer.sendTransaction(overrides);progress("pending",tx&&tx.hash);validateExactTransactionIntent(tx,intent,"Nonce cancellation wallet response");return confirmExactTransaction(tx,intent,"Nonce cancellation")}})});
     }catch(err){toast("Could not inspect pending nonces: "+safeError(err),"error")}
   }
   async function criticalAllowance(token,owner,spender,label,fresh){
@@ -8274,7 +8274,7 @@ lit-html/directives/ref.js:
         if(!ownsModal())return;setCloseLock(false);
         if(tx&&tx.blockNumber!=null){btn.textContent="Receipt found · action unverified";btn.disabled=true;stepChain.className="";stepChain.querySelector("small").textContent="A receipt exists, but the reviewed action was not verified";toast("A transaction confirmed, but Finvesta could not verify the reviewed result: "+safeError(err),"error");return}
         if(broadcastHash&&err&&err.code==="TRANSACTION_REPLACED"&&err.cancelled){btn.disabled=true;btn.textContent="Original action cancelled";stepWallet.className="done";stepWallet.querySelector("i").textContent="✓";stepChain.className="";stepChain.querySelector("small").textContent="The replacement cancelled the reviewed action";toast("The reviewed transaction was cancelled or replaced and did not settle. Close this review before trying again.","error");return}
-        if(broadcastHash){btn.disabled=true;btn.textContent="Broadcast · receipt status unknown";stepWallet.className="done";stepWallet.querySelector("i").textContent="✓";stepChain.className="active";stepChain.querySelector("small").textContent=shortAddress(broadcastHash)+" · verify in wallet/explorer";closers.forEach(function(close){close.title="Transaction was broadcast; closing cannot cancel it"});toast("Transaction "+shortAddress(broadcastHash)+" was broadcast. Do not resend; verify its receipt in your wallet or explorer.","error");return}
+        if(broadcastHash){btn.disabled=true;btn.textContent="Broadcast · receipt status unknown";stepWallet.className="done";stepWallet.querySelector("i").textContent="✓";stepChain.className="active";stepChain.querySelector("small").textContent=String(broadcastHash)+" · verify before retry";closers.forEach(function(close){close.title="A wallet transaction hash was returned; verify it before retrying"});toast("Wallet returned transaction hash "+String(broadcastHash)+", but its receipt is not verified. Do not resend. Check this hash in your wallet or explorer. "+safeError(err),"error");return}
         if(accountInvalidated){closeModal(true);toast("The wallet request ended without a broadcast after the connected account changed. Reopen the flow for the active account. "+safeError(err),"error");return}
         var message=safeError(err);if(inlineStatus){inlineStatus.hidden=false;inlineStatus.className="notice";inlineStatus.textContent="Could not continue yet: "+message+" Nothing was sent. Stay in this review and press Revalidate & continue; you do not need to close the modal."}else toast(message,"error");
         setBusy(btn,false);btn.querySelector("span")?btn.querySelector("span").textContent="Revalidate & continue":btn.textContent="Revalidate & continue";stepSim.className="";stepWallet.className="";stepChain.className=""
@@ -8322,12 +8322,18 @@ lit-html/directives/ref.js:
     var intent={from:E.getAddress(account),to:E.getAddress(target),data:String(data||"0x").toLowerCase(),value:BigInt(value||0),chainId:CHAIN.id};
     if(!/^0x(?:[0-9a-fA-F]{2})*$/.test(intent.data))throw new Error("Reviewed transaction calldata is invalid");if(nonce!=null)intent.nonce=Number(nonce);return intent
   }
+  async function assertWalletOnPulseChain(){
+    if(!state.rawWallet)throw new Error("Connect a wallet on PulseChain before submitting");
+    var walletChain=BigInt(await state.rawWallet.request({method:"eth_chainId"}));
+    if(walletChain!==CHAIN.id){await syncWallet();throw new Error("The connected wallet reports chain ID "+walletChain+"; expected PulseChain 369. Switch networks and revalidate.")}
+  }
   function validateExactTransactionIntent(tx,intent,label){
     label=label||"transaction";
     if(!tx||!/^0x[0-9a-fA-F]{64}$/.test(String(tx.hash||"")))throw new Error("The "+label+" did not return a valid transaction hash");
     if(!same(tx.from,intent.from))throw new Error("The "+label+" sender does not match the reviewed wallet");
     if(!same(tx.to,intent.to))throw new Error("The "+label+" destination does not match the reviewed contract");
-    if(tx.chainId==null||BigInt(tx.chainId)!==intent.chainId)throw new Error("The "+label+" chain does not match PulseChain 369");
+    // Wallet send responses can carry stale chain metadata. Verify chain identity from the canonical RPC quorum after inclusion instead.
+    if(!/wallet response$/.test(label)&&(tx.chainId==null||BigInt(tx.chainId)!==intent.chainId))throw new Error("The "+label+" chain does not match PulseChain 369");
     if(BigInt(tx.value||0)!==intent.value)throw new Error("The "+label+" native value does not match the reviewed amount");
     if(transactionData(tx).toLowerCase()!==intent.data)throw new Error("The "+label+" calldata does not match the reviewed action");
     if(intent.nonce!=null&&Number(tx.nonce)!==intent.nonce)throw new Error("The "+label+" nonce does not match the reviewed action");
@@ -8357,10 +8363,11 @@ lit-html/directives/ref.js:
   }
   async function sendExactTransaction(label,intent,send,progress){
     if(intent.nonce==null)intent=Object.assign({},intent,{nonce:await criticalNextNonce(intent.from,label)});
+    await assertWalletOnPulseChain();
     progress("wallet");
     var tx=await send(intent.nonce);
+    progress("pending",tx&&tx.hash);
     validateExactTransactionIntent(tx,intent,label+" wallet response");
-    progress("pending",tx.hash);
     return confirmExactTransaction(tx,intent,label)
   }
   async function waitForReadBlock(blockNumber){
@@ -9328,7 +9335,7 @@ lit-html/directives/ref.js:
         var freshPlan=await planInjectedDirectSwap(from,to,amount,account),freshSnapshot=freshPlan.snapshot;if(freshPlan.accrualPaused!==plan.accrualPaused)throw new Error("INJECTED accrual status changed after review. Refresh the swap to review its current state.");if(BigInt(freshSnapshot.blockTimestamp)+30n>=deadline)throw new Error("This review expired. Refresh to prepare a new deadline.");
         var freshBalanceRaw=await criticalSnapshotEthCall(freshSnapshot,"Final INJECTED direct-route balance",from.address,tokenInterface.encodeFunctionData("balanceOf",[account])),freshBalance=BigInt(tokenInterface.decodeFunctionResult("balanceOf",freshBalanceRaw)[0]),freshAllowance=await criticalAllowanceAtSnapshot(freshSnapshot,from.address,account,ADDR.router,"Final official router allowance");if(freshBalance<amount)throw new Error("The connected wallet no longer has enough input tokens");if(freshAllowance<amount)throw new Error("Official router allowance no longer covers the reviewed input");
         var finalResult=await simulateInjectedDirectAtSnapshot(freshSnapshot,protectedParams,account,"Final exact official-pool swap simulation");if(finalResult.amountOut<minimum)throw new Error("Official-pool output moved below the reviewed minimum. Reopen the simulation.");
-        var swapNonce=await criticalNextNonce(account,"Official INJECTED pool swap"),swapIntent=exactTransactionIntent(account,ADDR.router,protectedResult.data,0n,swapNonce);progress("wallet");var tx=await freshSigner.sendTransaction({to:ADDR.router,data:protectedResult.data,value:0n,chainId:CHAIN.id,nonce:swapNonce});validateExactTransactionIntent(tx,swapIntent,"Official-pool swap wallet response");progress("pending",tx.hash);return confirmExactTransaction(tx,swapIntent,"Official-pool swap")
+        var swapNonce=await criticalNextNonce(account,"Official INJECTED pool swap"),swapIntent=exactTransactionIntent(account,ADDR.router,protectedResult.data,0n,swapNonce);await assertWalletOnPulseChain();progress("wallet");var tx=await freshSigner.sendTransaction({to:ADDR.router,data:protectedResult.data,value:0n,chainId:CHAIN.id,nonce:swapNonce});progress("pending",tx&&tx.hash);validateExactTransactionIntent(tx,swapIntent,"Official-pool swap wallet response");return confirmExactTransaction(tx,swapIntent,"Official-pool swap")
       },
       onSuccess:async function(){state.simulatedOut=null;state.minOut=null;$("amountIn").value="";await refreshBalances();await discoverBestPool();updateJourney(4)}
     })
@@ -9356,10 +9363,11 @@ lit-html/directives/ref.js:
         var finalDecoded=await criticalSnapshotAggregatorCall(freshSnapshot,"Final exact reviewed swap simulation",execution.method,execution.args,account,execution.value),finalOut=BigInt(finalDecoded.netAmountOut==null?finalDecoded[0]:finalDecoded.netAmountOut);
         if(finalOut<execution.minAmountOut)throw new Error("Market output moved below your protected minimum. Refresh this review to build a new route.");
         var swapNonce=await criticalNextNonce(account,"Dual-V3 swap"),swapIntent=exactTransactionIntent(account,DUAL_AGGREGATOR_ADDRESS,execution.data,execution.value,swapNonce);
+        await assertWalletOnPulseChain();
         progress("wallet");
         var tx=await freshSigner.sendTransaction({to:DUAL_AGGREGATOR_ADDRESS,data:execution.data,value:execution.value,chainId:CHAIN.id,nonce:swapNonce});
+        progress("pending",tx&&tx.hash);
         validateExactTransactionIntent(tx,swapIntent,"Dual-V3 swap wallet response");
-        progress("pending",tx.hash);
         return confirmExactTransaction(tx,swapIntent,"Dual-V3 swap")
       },
       onSuccess:async function(){state.simulatedOut=null;state.minOut=null;$("amountIn").value="";await refreshBalances();await discoverBestPool();updateJourney(4)}
@@ -9751,7 +9759,7 @@ lit-html/directives/ref.js:
     assertCompoundNonceTransaction(tx,account,nonce);if(!same(tx.to,target))throw new Error("The submitted transaction destination does not match the protected review")
   }
   function validateExactPositionTransaction(tx,account,nonce,target,data,value){
-    return validateExactTransactionIntent(tx,exactTransactionIntent(account,target,data,value,nonce),"position transaction")
+    return validateExactTransactionIntent(tx,exactTransactionIntent(account,target,data,value,nonce),"position transaction wallet response")
   }
   function validateCompoundTransactionIntent(p,seed,kind,tx){
     var nonce=Number(seed[compoundKindField(kind,"Nonce")]),target=kind==="swap"?ADDR.router:ADDR.positionManager;assertSubmittedCompoundTransaction(tx,p.owner||seed.account||state.account,nonce,target);if(BigInt(tx.value||0)!==0n)throw new Error("The protected compound action unexpectedly carries native PLS");var parsed,params;
