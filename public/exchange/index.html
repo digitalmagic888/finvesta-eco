@@ -62,6 +62,7 @@
     .staking-coming-soon p{max-width:680px;margin:0;color:var(--muted);font-size:clamp(15px,2vw,20px);line-height:1.7}
     .staking-coming-soon strong{color:var(--text);white-space:nowrap}
     .staking-coming-soon h1{margin:0;color:var(--cyan);font:900 clamp(30px,6vw,72px)/1.05 var(--display);letter-spacing:-.035em;text-wrap:balance}
+    .iy-wrap{padding:clamp(24px,4vw,54px) 0 72px}.iy-head{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:26px}.iy-head h1{margin:6px 0 10px;font:800 clamp(32px,5vw,58px)/1.02 var(--display);letter-spacing:-.04em}.iy-head p{max-width:760px;color:var(--muted);line-height:1.65;margin:0}.iy-state{display:inline-flex;align-items:center;gap:9px;padding:10px 13px;border:1px solid var(--line);border-radius:999px;background:var(--panel);font-size:12px;white-space:nowrap}.iy-state i{width:8px;height:8px;border-radius:50%;background:var(--amber);display:inline-block}.iy-state.good i{background:var(--green)}.iy-state.bad i{background:var(--red)}.iy-banner{padding:15px 17px;border:1px solid var(--line);border-radius:14px;background:var(--panel);color:var(--muted);line-height:1.55;margin:0 0 18px}.iy-banner strong{color:var(--text)}.iy-banner.warn{border-color:color-mix(in srgb,var(--amber) 50%,var(--line))}.iy-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:16px}.iy-card{grid-column:span 6;min-width:0;padding:20px;border:1px solid var(--line);border-radius:18px;background:var(--panel);box-shadow:0 16px 45px #0002}.iy-card.wide{grid-column:1/-1}.iy-card h2{margin:0 0 7px;font:750 20px/1.2 var(--display)}.iy-card>p{margin:0 0 16px;color:var(--muted);line-height:1.55;font-size:14px}.iy-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:12px 0}.iy-row input{flex:1 1 150px;min-width:0}.iy-card input{width:100%;height:44px;padding:0 12px;color:var(--text);background:var(--bg);border:1px solid var(--line);border-radius:10px;font:500 14px var(--mono,monospace)}.iy-card button{min-height:40px;padding:0 14px;border:1px solid var(--line);border-radius:10px;color:var(--text);background:var(--panel2,var(--bg));font:650 12px var(--display);cursor:pointer}.iy-card button.primary{border-color:transparent;background:var(--cyan);color:#061113}.iy-card button:disabled{opacity:.48;cursor:not-allowed}.iy-note{font-size:12px!important;color:var(--muted);line-height:1.6}.iy-status{min-height:22px;margin:9px 0;color:var(--muted);font-size:13px;line-height:1.5}.iy-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:14px 0}.iy-fact{padding:11px 12px;border:1px solid var(--line);border-radius:11px;min-width:0}.iy-fact span{display:block;color:var(--muted);font-size:11px;margin-bottom:5px}.iy-fact strong{display:block;overflow-wrap:anywhere;font:650 13px var(--mono,monospace)}.iy-list{display:grid;gap:9px;margin-top:12px}.iy-item{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px;border:1px solid var(--line);border-radius:12px}.iy-item small{display:block;color:var(--muted);margin-top:4px;line-height:1.5}.iy-item .iy-item-right{display:flex;align-items:center;gap:8px}.iy-item .iy-ok{color:var(--green)}.iy-item .iy-no{color:var(--amber)}.iy-section-label{margin:17px 0 6px;color:var(--muted);font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}.iy-callout{padding:12px 14px;border-left:3px solid var(--cyan);background:color-mix(in srgb,var(--cyan) 8%,var(--panel));border-radius:0 10px 10px 0;color:var(--muted);font-size:13px;line-height:1.6}.iy-mono{font-family:var(--mono,monospace);overflow-wrap:anywhere}.iy-inline-actions{display:flex;flex-wrap:wrap;gap:8px}.iy-progress{height:6px;overflow:hidden;border-radius:99px;background:var(--line);margin:9px 0}.iy-progress span{display:block;height:100%;background:var(--cyan);transition:width .2s ease}@media(max-width:760px){.iy-head{display:block}.iy-state{margin-top:15px}.iy-card{grid-column:1/-1}.iy-facts{grid-template-columns:1fr 1fr}.iy-wrap{padding-top:24px}}
     .hero{padding:76px 0 44px;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(290px,.8fr);gap:70px;align-items:end}
     .eyebrow,.kicker{margin:0 0 14px;color:var(--cyan);font-size:9px;font-weight:900;letter-spacing:.2em;text-transform:uppercase}
     .eyebrow{display:flex;align-items:center;gap:10px}
@@ -957,12 +958,59 @@
       </div>
     </section>
 
-    <section class="view" id="view-staking" aria-label="Staking" aria-describedby="stakingMessage stakingDistribution">
-      <div class="shell">
-        <div class="panel staking-coming-soon">
-          <p id="stakingMessage">Earn <strong>$INJECTOR</strong> &amp; <strong>$WETH</strong> for staking eligible LP NFT position.</p>
-          <p id="stakingDistribution"><strong>$INJECTOR</strong> &amp; <strong>$WETH</strong> outputs are automatically distributed. No claims are required.</p>
-          <h1>COMING SOON!</h1>
+    <section class="view" id="view-staking" aria-label="INJECTED LP staking">
+      <div class="shell iy-wrap">
+        <header class="iy-head">
+          <div><p class="eyebrow"><i></i>INJECTED · LIQUIDITY POSITIONS</p><h1>Stake your LP NFT.</h1><p>Stake a full-range, 1% INJECTED/INJECTOR position to earn the two rewards deposited by successful protocol cycles. The vault tracks liquidity by NFT and gives new liquidity an eight-block maturity period.</p></div>
+          <div class="iy-state" id="iyVaultState"><i></i><span>Checking staking deployment</span></div>
+        </header>
+        <div class="iy-banner warn" id="iyDeploymentNotice" role="status" aria-live="polite">The staking vault address and runtime hash are pinned for PulseChain. Refresh to verify the live contract wiring and see which actions are currently available.</div>
+        <div class="iy-grid">
+          <article class="iy-card">
+            <h2>Eligible positions</h2><p>Connect a wallet, then scan its position NFTs or check a token ID. The app verifies ownership, exact pool, 1% fee tier, full range, minimum liquidity, and the vault's deposit status against chain state.</p>
+            <div class="iy-row"><button class="primary" id="iyScanPositions">Scan my position NFTs</button><button id="iyRefresh">Refresh status</button></div>
+            <div class="iy-row"><input id="iyCandidateId" inputmode="numeric" autocomplete="off" placeholder="Position NFT token ID" aria-label="Position NFT token ID"><button id="iyCheckCandidate">Check token ID</button></div>
+            <div class="iy-status" id="iyCandidateStatus" role="status" aria-live="polite">No position selected.</div>
+            <div class="iy-facts" id="iyCandidateFacts" hidden></div>
+            <div class="iy-inline-actions"><button class="primary" id="iyApproveNft" disabled>Approve this NFT only</button><button class="primary" id="iyStakeNft" disabled>Stake position</button></div>
+            <p class="iy-note">Approval is limited to <span class="iy-mono">approve(vault, tokenId)</span>. This page never requests blanket NFT approval.</p>
+            <div class="iy-list" id="iyOwnedPositions"></div>
+          </article>
+          <article class="iy-card">
+            <h2>Manage a staked position</h2><p>Load one of your staked token IDs. Activation becomes available after eight blocks, once the vault has synchronized eligible liquidity.</p>
+            <div class="iy-row"><input id="iyStakeId" inputmode="numeric" autocomplete="off" placeholder="Your staked NFT token ID" aria-label="Your staked NFT token ID"><button id="iyLoadStake">Load position</button></div>
+            <div class="iy-status" id="iyStakeStatus" role="status" aria-live="polite">No staked position loaded.</div>
+            <div class="iy-facts" id="iyStakeFacts" hidden></div>
+            <div class="iy-progress" id="iyMaturityTrack" hidden><span id="iyMaturityProgress" style="width:0%"></span></div>
+            <div class="iy-inline-actions"><button class="primary" id="iyActivate" disabled>Activate rewards</button><button id="iySync" disabled>Sync liquidity</button><button id="iyCollectFees" disabled>Collect pool fees</button><button id="iyUnstake" disabled>Unstake to my wallet</button></div>
+            <p class="iy-note">Collecting v3 pool fees is separate from reward distributions. The position's displayed “tokens owed” may not include fees accrued since its last checkpoint, so the collect action stays available and is simulated before you review it. Unstaking returns the NFT to the connected staking owner; it does not require TWAP history or successful reward-token transfers.</p>
+          </article>
+          <article class="iy-card">
+            <h2>Your rewards</h2><p>Rewards are credited in proportion to active eligible liquidity. Batch processing pushes payments to stakers in FIFO order, up to ten accounts per transaction; you can also claim your own accrued balance directly.</p>
+            <div class="iy-facts">
+              <div class="iy-fact"><span>Active liquidity shares</span><strong id="iyShares">—</strong></div>
+              <div class="iy-fact"><span>Registered beneficiaries</span><strong id="iyBeneficiaryCount">—</strong></div>
+              <div class="iy-fact"><span>Unpaid INJECTOR</span><strong id="iyUnpaidInjector">—</strong></div>
+              <div class="iy-fact"><span>Unpaid WETH</span><strong id="iyUnpaidWeth">—</strong></div>
+              <div class="iy-fact"><span>Keeper WETH credit</span><strong id="iyKeeperCredit">—</strong></div>
+              <div class="iy-fact"><span>Next distribution window</span><strong id="iyBatchWhen">—</strong></div>
+            </div>
+            <div class="iy-inline-actions"><button id="iyClaimInjector" disabled>Claim INJECTOR</button><button id="iyClaimWeth" disabled>Claim WETH</button><button id="iyClaimKeeper" disabled>Claim keeper WETH</button></div>
+            <div class="iy-row"><button class="primary" id="iyProcessBatch" disabled>Process due batch (up to 10)</button></div>
+            <div class="iy-status" id="iyBatchStatus" role="status" aria-live="polite">Connect a wallet to read reward balances.</div>
+            <p class="iy-note">The 30-minute interval makes a batch eligible; it does not submit a transaction by itself. A keeper or any other account must call the distributor. Direct claims remain available if batch payment fails or has not reached your place in the queue.</p>
+          </article>
+          <article class="iy-card">
+            <h2>Upkeep readiness</h2><p>This is an on-chain accounting check from the maintenance helper. It is not a quote, TWAP, or guarantee that a swap will execute.</p>
+            <div class="iy-facts">
+              <div class="iy-fact"><span>Pending accrued print</span><strong id="iyPendingMint">—</strong></div>
+              <div class="iy-fact"><span>Maximum cycle amount now</span><strong id="iyMaxCycle">—</strong></div>
+              <div class="iy-fact"><span>Daily capacity remaining</span><strong id="iyDayRemaining">—</strong></div>
+              <div class="iy-fact"><span>10-block capacity remaining</span><strong id="iyBlockRemaining">—</strong></div>
+            </div>
+            <div class="iy-status" id="iyUpkeepStatus" role="status" aria-live="polite">Refresh to check the helper.</div>
+            <div class="iy-callout">Permissionless keeper cycles still require the contract's mature TWAP and quote checks. The owner has a separate cycle path with reviewed spot-based price limits. Token transfers accrue print; they do not run the helper or send transactions.</div>
+          </article>
         </div>
       </div>
     </section>
@@ -7753,6 +7801,20 @@ lit-html/directives/ref.js:
     router:"0x02111F79b8fd68f76cc616214fe7662f93273FEF",
     wpls:"0xA1077a294dDE1B09bB078844df40758a5D0f9a27"
   });
+  // INJECTED is deliberately routed around the dual-venue aggregator. Its token
+  // contract permits swaps only through this exact Finvesta router and pool.
+  var INJECTED_DIRECT=Object.freeze({
+    token:"0x7f36B9Cb3891105C49A1b3a3Aca6620ba2574337",
+    injector:"0xBbea0fe1F2280E81C17E21256160895301CC1Ad4",
+    pool:"0xd60F6b39FE3c84da7130fDaC1f190C8aA0C2397E",
+    fee:10000,
+    tokenHash:"0xdc086263b4b557ddb4097ddb477e82f150c13b8ac21e87c89ea1ff608d52e291",
+    injectorHash:"0x2ad3373e76aeb21206440751d44d4a5756e7572af5c0fbbc6726d339514282fe",
+    routerHash:"0x35d76677d26a579c06a83c9ca4bd9f1c448fe9fcfa8868bf22c3aba7f4976874",
+    factoryHash:"0x17ba457c88d03ec8e7b939bac14339fef0e821f0adc4013b0863b222d0d1d59f",
+    deployerHash:"0x66e233c5102c59a95c11ba49c40eb164d8ed119a6e5a3d26b550ee830ea95360",
+    poolHash:"0xfea5a3ffcb43e4476b03ae2ff7c23f10f9edaac3e61f26414067438897eac450"
+  });
   var DUAL_V3_FEES=Object.freeze([100,500,2500,10000]);
   var DUAL_V3_MANIFEST=Object.freeze([
     Object.freeze({venue:0,name:"Finvesta",router:ADDR.router,factory:ADDR.factory,deployer:ADDR.poolDeployer}),
@@ -7780,7 +7842,8 @@ lit-html/directives/ref.js:
     "0x95B303987A60C71504D99Aa1b13B4DA07b0790ab",
     "0xc10A4Ed9b4042222d69ff0B374eddd47ed90fC1F",
     "0x2fa878Ab3F87CC1C9737Fc071108F904c0B0C95d",
-    "0xBbea0fe1F2280E81C17E21256160895301CC1Ad4" // INJECTOR
+    INJECTED_DIRECT.token,
+    INJECTED_DIRECT.injector // INJECTOR
   ]);
   var TOKEN_LOGO_OVERRIDES=Object.freeze({
     "0x15d38573d2feeb82e7ad5187ab8c1d52810b1f07":"0x15D38573d2feeb82e7ad5187aB8c1D52810B1f07.png"
@@ -7795,6 +7858,7 @@ lit-html/directives/ref.js:
       "function decimals() view returns(uint8)","function balanceOf(address) view returns(uint256)",
       "function allowance(address,address) view returns(uint256)","function approve(address,uint256) returns(bool)"
     ],
+    injectedToken:["function officialPool() view returns(address)","function accrualPaused() view returns(bool)"],
     factory:[
       "function owner() view returns(address)","function poolDeployer() view returns(address)",
       "function getPool(address,address,uint24) view returns(address)",
@@ -8348,6 +8412,7 @@ lit-html/directives/ref.js:
     if(!replace)history.replaceState(null,"","#"+name);
     if(name==="positions")loadPositions();
     if(name==="protocol"){if(!document.body.classList.contains("app-loading"))loadProtocol();renderAdminAccess(true)}
+    if(name==="staking")refreshInjectedStaking();
     window.scrollTo({top:0,behavior:"smooth"})
   }
 
@@ -8597,7 +8662,8 @@ lit-html/directives/ref.js:
   }
   function renderWallet(){
     $("walletLabel").textContent=state.account?shortAddress(state.account):"Connect wallet";
-    $("walletButton").title=state.account?(state.walletChain===CHAIN.id?"Connected to PulseChain":"Connected · wrong network"):"Connect a wallet"
+    $("walletButton").title=state.account?(state.walletChain===CHAIN.id?"Connected to PulseChain":"Connected · wrong network"):"Connect a wallet";
+    window.dispatchEvent(new Event("iy-wallet-state"))
   }
   function isUnknownChain(error){var msg=safeError(error);return nestedCode(error)===4902||/\b(?:unknown|unrecognized|not added|does not exist)\b.{0,40}\b(?:chain|network)\b/i.test(msg)}
   async function ensurePulseChain(){
@@ -9019,6 +9085,39 @@ lit-html/directives/ref.js:
     var control=$("finvestaOnlyRoutes");return Boolean(control&&control.checked)
   }
   function activeSwapVenueLabel(){return finvestaOnlyRoutes()?"Finvesta V3 only":"Finvesta + LibertySwap V3"}
+  function isInjectedProtocolToken(token){if(!token)return false;var ctx=injectedStakingState.context;return Boolean((ctx&&same(token.address,ctx.tokenAddress))||String(token.symbol||"").toUpperCase()==="INJECTED"||String(token.name||"").toUpperCase()==="ADHD")}
+  function isInjectedOfficialPair(tokenIn,tokenOut){return Boolean(tokenIn&&tokenOut&&(same(tokenIn.address,INJECTED_DIRECT.token)&&same(tokenOut.address,INJECTED_DIRECT.injector)||same(tokenIn.address,INJECTED_DIRECT.injector)&&same(tokenOut.address,INJECTED_DIRECT.token)))}
+  async function verifyInjectedDirectSnapshot(tokenIn,tokenOut,topology,account){
+    if(!isInjectedOfficialPair({address:tokenIn},{address:tokenOut}))throw new Error("This direct route is limited to the exact INJECTED/INJECTOR pair");
+    var snapshot=topology&&topology.snapshot;if(!snapshot)throw new Error("A fresh quorum-pinned PulseChain snapshot is required");
+    if(!same(topology.pool,INJECTED_DIRECT.pool)||!topology.poolInfo||!same(topology.poolInfo.factory,ADDR.factory)||topology.poolInfo.fee!==INJECTED_DIRECT.fee||topology.poolInfo.codeHash!==INJECTED_DIRECT.poolHash)throw new Error("The exact official 1% INJECTED/INJECTOR pool did not match its reviewed deployment");
+    if(!(same(topology.poolInfo.token0,INJECTED_DIRECT.token)&&same(topology.poolInfo.token1,INJECTED_DIRECT.injector)||same(topology.poolInfo.token0,INJECTED_DIRECT.injector)&&same(topology.poolInfo.token1,INJECTED_DIRECT.token)))throw new Error("The official pool contains a different token pair");
+    var targets=[
+      ["INJECTED token",INJECTED_DIRECT.token,INJECTED_DIRECT.tokenHash],
+      ["INJECTOR token",INJECTED_DIRECT.injector,INJECTED_DIRECT.injectorHash],
+      ["Finvesta router",ADDR.router,INJECTED_DIRECT.routerHash],
+      ["Finvesta factory",ADDR.factory,INJECTED_DIRECT.factoryHash],
+      ["Finvesta pool deployer",ADDR.poolDeployer,INJECTED_DIRECT.deployerHash],
+      ["official INJECTED/INJECTOR pool",INJECTED_DIRECT.pool,INJECTED_DIRECT.poolHash]
+    ];
+    var bytecodes=await Promise.all(targets.map(function(item){return criticalSnapshotCode(snapshot,item[0],item[1])}));
+    targets.forEach(function(item,index){if(bytecodes[index]==="0x"||E.keccak256(bytecodes[index]).toLowerCase()!==item[2].toLowerCase())throw new Error(item[0]+" code does not match the pinned reviewed deployment")});
+    var tokenInterface=new E.Interface(ABI.injectedToken),poolInterface=new E.Interface(ABI.pool),reads=await Promise.all([
+      criticalSnapshotEthCall(snapshot,"INJECTED official pool",INJECTED_DIRECT.token,tokenInterface.encodeFunctionData("officialPool",[])),
+      criticalSnapshotEthCall(snapshot,"INJECTED accrual status",INJECTED_DIRECT.token,tokenInterface.encodeFunctionData("accrualPaused",[])),
+      criticalSnapshotEthCall(snapshot,"Official pool price state",INJECTED_DIRECT.pool,poolInterface.encodeFunctionData("slot0",[])),
+      criticalSnapshotEthCall(snapshot,"Official pool liquidity",INJECTED_DIRECT.pool,poolInterface.encodeFunctionData("liquidity",[]))
+    ]),officialPool=tokenInterface.decodeFunctionResult("officialPool",reads[0])[0],accrualPaused=Boolean(tokenInterface.decodeFunctionResult("accrualPaused",reads[1])[0]),slot=poolInterface.decodeFunctionResult("slot0",reads[2]),liquidity=BigInt(poolInterface.decodeFunctionResult("liquidity",reads[3])[0]);
+    if(!same(officialPool,INJECTED_DIRECT.pool))throw new Error("INJECTED does not report the pinned pool as its official pool");
+    if(liquidity<=0n||BigInt(slot.sqrtPriceX96==null?slot[0]:slot.sqrtPriceX96)===0n||!Boolean(slot.unlocked==null?slot[6]:slot.unlocked))throw new Error("The official pool is uninitialized, empty, or locked");
+    if(account){var walletCode=await criticalSnapshotCode(snapshot,"Swap wallet code check",account);if(walletCode!=="0x")throw new Error("INJECTED trading requires a code-empty wallet: its token rules reject transfers to or from smart-contract wallets")}
+    return {snapshot:snapshot,accrualPaused:accrualPaused,liquidity:liquidity,tick:Number(slot.tick==null?slot[1]:slot.tick),sqrtPriceX96:BigInt(slot.sqrtPriceX96==null?slot[0]:slot.sqrtPriceX96)}
+  }
+  async function planInjectedDirectSwap(tokenIn,tokenOut,amount,account){
+    if(!isInjectedOfficialPair(tokenIn,tokenOut))throw new Error("The direct INJECTED route only supports the exact INJECTED/INJECTOR pair");
+    var topology=await criticalSwapTopology(tokenIn.address,tokenOut.address,INJECTED_DIRECT.fee,true),verified=await verifyInjectedDirectSnapshot(tokenIn.address,tokenOut.address,topology,account),route={venue:0,fee:INJECTED_DIRECT.fee,pool:INJECTED_DIRECT.pool,amountIn:BigInt(amount||0),amountOut:0n,success:true};
+    return {kind:"injected-direct",venueMode:"official-pool",amountIn:BigInt(amount||0),totalOut:0n,tokenIn:E.getAddress(tokenIn.address),tokenOut:E.getAddress(tokenOut.address),routes:[route],candidates:[],snapshot:verified.snapshot,accrualPaused:verified.accrualPaused,poolLiquidity:verified.liquidity,tick:verified.tick}
+  }
   async function quoteFinvestaBatchAtSnapshot(snapshot,tokenIn,tokenOut,amount){
     var requests=DUAL_V3_FEES.map(function(fee){return [0,fee,amount,0n]}),
         decoded=await criticalSnapshotAggregatorCall(snapshot,"Finvesta-only four-pool quote","quoteDirectRequests",[tokenIn,tokenOut,requests]),
@@ -9045,11 +9144,12 @@ lit-html/directives/ref.js:
   }
   function dualRouteName(route){return dualVenue(route.venue).name+" "+feeLabel(route.fee)}
   function renderDualCandidates(){
-    var root=$("routeCandidates"),finOnly=finvestaOnlyRoutes();if(!root)return;if(!state.routeCandidates.length){root.innerHTML="<span>ⓘ</span><span>"+(finOnly?"Finvesta-only mode checks the 0.01%, 0.05%, 0.25%, and 1% Finvesta V3 pools.":"Aggregator mode checks both venues across 0.01%, 0.05%, 0.25%, and 1% pools, then samples cross-venue splits.")+"</span>";return}
+    var root=$("routeCandidates"),finOnly=finvestaOnlyRoutes();if(!root)return;if(state.swapPlan&&state.swapPlan.kind==="injected-direct"){root.innerHTML="<span>ⓘ</span><span>Direct official-pool path: exact INJECTED/INJECTOR pair, pinned 1% Finvesta V3 pool, and pinned router. Dual-venue routes and split routing are bypassed only for this pair.</span>";return}if(!state.routeCandidates.length){root.innerHTML="<span>ⓘ</span><span>"+(finOnly?"Finvesta-only mode checks the 0.01%, 0.05%, 0.25%, and 1% Finvesta V3 pools.":"Aggregator mode checks both venues across 0.01%, 0.05%, 0.25%, and 1% pools, then samples cross-venue splits.")+"</span>";return}
     root.innerHTML="<span>ⓘ</span><span>"+(finOnly?"Four Finvesta full-input routes.":"Eight full-input routes · sampled splits compare cross-venue fee pairs.")+"<br>"+state.routeCandidates.map(function(route){var status=same(route.pool,E.ZeroAddress)?"no registered pool":route.success?trimUnits(route.amountOut,state.to.decimals,6)+" "+swapSymbol(state.to):"pool found · no executable quote";return esc(dualRouteName(route)+" · "+shortAddress(route.pool)+" · "+status)}).join("<br>")+"</span>"
   }
   function renderPoolState(){
-    var plan=state.swapPlan,p=state.pool;$("detailSwapTarget").textContent=dualAggregatorConfigured()?shortAddress(DUAL_AGGREGATOR_ADDRESS):"Not configured";$("detailSwapTarget").title=dualAggregatorConfigured()?DUAL_AGGREGATOR_ADDRESS:"";renderDualCandidates();
+    var plan=state.swapPlan,p=state.pool;if(plan&&plan.kind==="injected-direct"){$("detailSwapTarget").textContent=shortAddress(ADDR.router);$("detailSwapTarget").title=ADDR.router;renderDualCandidates();$("routeStatus").innerHTML="<i class='live-dot online'></i>OFFICIAL POOL";$("routeFee").textContent="1.00%";$("routeLiquidity").textContent=state.simulatedOut&&state.to?trimUnits(state.simulatedOut,state.to.decimals,8)+" "+swapSymbol(state.to):"Simulation required";$("routeBlock").textContent=formatInteger(plan.snapshot.blockNumber);$("poolSignal").textContent="INJECTED/INJECTOR · exact Finvesta v3 pool · block "+formatInteger(plan.snapshot.blockNumber);$("detailFee").textContent="Official Finvesta v3 · 1% pool";$("detailPool").textContent=shortAddress(INJECTED_DIRECT.pool);$("detailPool").title=INJECTED_DIRECT.pool;$("detailQuoteSource").textContent=state.simulatedOut?"Official router · wallet-context simulation":"Official pool · fresh simulation required";return}
+    $("detailSwapTarget").textContent=dualAggregatorConfigured()?shortAddress(DUAL_AGGREGATOR_ADDRESS):"Not configured";$("detailSwapTarget").title=dualAggregatorConfigured()?DUAL_AGGREGATOR_ADDRESS:"";renderDualCandidates();
     if(!p||!plan){
       $("routeStatus").innerHTML="<i class='live-dot'></i>"+(dualAggregatorConfigured()?"NO ROUTE":"CONFIG NEEDED");$("routeFee").textContent="—";$("routeLiquidity").textContent="—";$("routeBlock").textContent="—";$("poolSignal").textContent=!dualAggregatorConfigured()?"Aggregator address required":state.from&&state.to?"Enter an amount":"Choose a pair";
       $("detailFee").textContent="—";$("detailPool").textContent="—";$("detailPool").title="";$("detailQuoteSource").textContent="No executable quote";return
@@ -9083,6 +9183,11 @@ lit-html/directives/ref.js:
   }
   async function discoverBestPool(){
     var nonce=++state.quoteNonce,from=state.from,to=state.to,amount=swapAmount();state.pool=null;state.swapPlan=null;state.routeCandidates=[];state.aggregatorError=null;state.spotOut=null;state.simulatedOut=null;state.minOut=null;state.quoteSource="none";$("amountOut").textContent="0";renderPoolState();refreshSwapState();
+    if(isInjectedProtocolToken(from)||isInjectedProtocolToken(to)){
+      if(!from||!to||!isInjectedOfficialPair(from,to)){state.aggregatorError="INJECTED is available only against INJECTOR in its exact official Finvesta v3 pool.";$("quoteFreshness").textContent="Official pair required";$("swapNotice").textContent=state.aggregatorError;refreshSwapState();return}
+      try{var direct=await planInjectedDirectSwap(from,to,amount,state.account);if(nonce!==state.quoteNonce||state.from!==from||state.to!==to||swapAmount()!==amount)return;state.swapPlan=direct;state.pool={address:INJECTED_DIRECT.pool,pool:INJECTED_DIRECT.pool,fee:INJECTED_DIRECT.fee,liquidity:direct.poolLiquidity,tokenIn:direct.tokenIn,tokenOut:direct.tokenOut};state.quoteSource="official-pool";$("quoteFreshness").textContent="Official 1% Finvesta pool · block "+formatInteger(direct.snapshot.blockNumber);$("swapNotice").textContent="Direct route to the pinned official INJECTED/INJECTOR pool. "+(direct.accrualPaused?"INJECTED transfer accrual is currently paused.":"INJECTED transfers currently accrue a 30% mint liability; the transferred amount is not reduced.")+" Wallet-context simulation and the selected slippage minimum are required before signing.";await checkSwapAllowance();renderPoolState();refreshSwapState();return}
+      catch(err){if(nonce!==state.quoteNonce)return;state.aggregatorError=safeError(err);$("quoteFreshness").textContent="Official pool unavailable";$("swapNotice").textContent="Official INJECTED route unavailable: "+state.aggregatorError;toast(state.aggregatorError,"error");renderPoolState();refreshSwapState();return}
+    }
     if(!dualAggregatorConfigured()){state.aggregatorError=DUAL_AGGREGATOR_CONFIG_ERROR||"The configured Finvesta Dual V3 Aggregator deployment is unavailable";$("quoteFreshness").textContent="Aggregator unavailable";refreshSwapState();return}
     if(!from||!to||same(from.address,to.address)){$("quoteFreshness").textContent="Waiting for token pair";return}if(!amount){$("quoteFreshness").textContent=finvestaOnlyRoutes()?"Enter an amount to compare Finvesta V3 routes":"Enter an amount to compare both V3 venues";renderPoolState();return}
     try{
@@ -9090,15 +9195,15 @@ lit-html/directives/ref.js:
     }catch(err){if(nonce!==state.quoteNonce)return;state.aggregatorError=safeError(err);state.pool=null;state.swapPlan=null;$("quoteFreshness").textContent="Dual-venue quote unavailable";$("swapNotice").textContent="Main swap disabled: "+state.aggregatorError;toast(state.aggregatorError,"error");renderPoolState();refreshSwapState()}
   }
   function computeSpotReference(){
-    var plan=state.swapPlan,amount=swapAmount();if(!state.from||!state.to||!plan||amount!==plan.amountIn){state.spotOut=null;$("amountOut").textContent="0";$("priceLabel").textContent="—";return}
+    var plan=state.swapPlan,amount=swapAmount();if(!state.from||!state.to||!plan||amount!==plan.amountIn){state.spotOut=null;$("amountOut").textContent="0";$("priceLabel").textContent="—";return}if(plan.kind==="injected-direct"){state.spotOut=state.simulatedOut||null;if(state.simulatedOut){$("amountOut").textContent="≈ "+trimUnits(state.simulatedOut,state.to.decimals,8);var directUnit=10n**BigInt(state.from.decimals),directOut=state.simulatedOut*directUnit/amount;$("priceLabel").textContent=directOut?"1 "+swapSymbol(state.from)+" ≈ "+trimUnits(directOut,state.to.decimals,6)+" "+swapSymbol(state.to):"—"}else{$("amountOut").textContent="0";$("priceLabel").textContent="—"}$("detailQuoteSource").textContent=state.simulatedOut?"Official router · wallet-context simulation":"Official pool · simulation required";$("detailMinimum").textContent=state.minOut&&state.to?trimUnits(state.minOut,state.to.decimals,8)+" "+swapSymbol(state.to):"Pending protected simulation";state.quoteSource="official-pool";updateJourney(0);return}
     state.spotOut=plan.totalOut;$("amountOut").textContent="≈ "+trimUnits(plan.totalOut,state.to.decimals,8);var unit=10n**BigInt(state.from.decimals),unitOut=plan.totalOut*unit/amount;$("priceLabel").textContent=unitOut?"1 "+swapSymbol(state.from)+" ≈ "+trimUnits(unitOut,state.to.decimals,6)+" "+swapSymbol(state.to):"—";$("detailQuoteSource").textContent=(plan.venueMode==="finvesta"?"Finvesta V3 only · aggregator":"Finvesta + LibertySwap · aggregator");$("detailMinimum").textContent="Pending protected simulation";state.quoteSource="aggregator";updateJourney(0)
   }
   async function checkSwapAllowance(){
     var nonce=++state.swapAllowanceNonce,account=state.account,token=state.from,plan=state.swapPlan,nativeIn=swapNativeInput();state.swapAllowance=null;state.swapAllowanceError=null;
-    if(!dualAggregatorConfigured()||!state.account||!state.from||!plan)return refreshSwapState();
+    var direct=Boolean(plan&&plan.kind==="injected-direct"),spender=direct?ADDR.router:DUAL_AGGREGATOR_ADDRESS;if((!direct&&!dualAggregatorConfigured())||!state.account||!state.from||!plan)return refreshSwapState();
     if(nativeIn){state.swapAllowance=E.MaxUint256;return refreshSwapState()}
     try{
-      var allowance=(await criticalAllowance(token.address,account,DUAL_AGGREGATOR_ADDRESS,"Dual-V3 aggregator allowance",true)).value;
+      var allowance=(await criticalAllowance(token.address,account,spender,direct?"Official Finvesta router allowance":"Dual-V3 aggregator allowance",true)).value;
       if(nonce!==state.swapAllowanceNonce||!same(account,state.account)||state.from!==token||state.swapPlan!==plan||swapNativeInput()!==nativeIn)return;
       state.swapAllowance=allowance
     }catch(err){if(nonce===state.swapAllowanceNonce){state.swapAllowance=null;state.swapAllowanceError=safeError(err)}}
@@ -9107,38 +9212,41 @@ lit-html/directives/ref.js:
   async function criticalDualAllowanceAtSnapshot(snapshot,token,owner,label){
     token=E.getAddress(token);owner=E.getAddress(owner);var tokenInterface=new E.Interface(ABI.erc20),data=tokenInterface.encodeFunctionData("allowance",[owner,DUAL_AGGREGATOR_ADDRESS]),raw=await criticalSnapshotEthCall(snapshot,label||"Dual-V3 aggregator allowance",token,data,null,0n),decoded=tokenInterface.decodeFunctionResult("allowance",raw);return BigInt(decoded[0])
   }
+  async function criticalAllowanceAtSnapshot(snapshot,token,owner,spender,label){
+    token=E.getAddress(token);owner=E.getAddress(owner);spender=E.getAddress(spender);var tokenInterface=new E.Interface(ABI.erc20),data=tokenInterface.encodeFunctionData("allowance",[owner,spender]),raw=await criticalSnapshotEthCall(snapshot,label||"Token allowance",token,data),decoded=tokenInterface.decodeFunctionResult("allowance",raw);return BigInt(decoded[0])
+  }
   function swapAmount(){
     try{return state.from?parseAmount($("amountIn").value,state.from.decimals):0n}catch(_){return 0n}
   }
   function refreshSwapState(){
     renderSwapUsd();requestDisplayUsd([state.from,state.to]);
-    var amount=swapAmount(),label="Select two tokens",disabled=false,nativeIn=swapNativeInput(),nativeOut=swapNativeOutput(),available=state.from?swapBalance(state.from):null,fromSymbol=state.from?swapSymbol(state.from):"token";
-    if(!dualAggregatorConfigured()){label="Configure swap aggregator";disabled=true}
+    var amount=swapAmount(),label="Select two tokens",disabled=false,nativeIn=swapNativeInput(),nativeOut=swapNativeOutput(),available=state.from?swapBalance(state.from):null,fromSymbol=state.from?swapSymbol(state.from):"token",injectedPair=isInjectedProtocolToken(state.from)||isInjectedProtocolToken(state.to),direct=Boolean(state.swapPlan&&state.swapPlan.kind==="injected-direct");
+    if(!injectedPair&&!dualAggregatorConfigured()){label="Configure swap aggregator";disabled=true}
     else if(!state.from||!state.to){label="Select two tokens";disabled=true}
     else if(!amount){label="Enter an amount";disabled=true}
-    else if(state.aggregatorError){label="Protected route unavailable";disabled=true}
-    else if(!state.swapPlan||state.swapPlan.amountIn!==amount){label="Comparing dual-V3 routes…";disabled=true}
+    else if(injectedPair&&!isInjectedOfficialPair(state.from,state.to)){label="Official INJECTOR pair required";disabled=true}
+    else if(state.aggregatorError){label=injectedPair?"Official pool unavailable":"Protected route unavailable";disabled=true}
+    else if(!state.swapPlan||state.swapPlan.amountIn!==amount){label=injectedPair?"Verifying official pool…":"Comparing dual-V3 routes…";disabled=true}
     else if(!state.account){label="Connect wallet"}
     else if(state.walletChain!==CHAIN.id){label="Switch to PulseChain"}
     else if(typeof available!=="bigint"){label=(nativeIn?"Native PLS":"Token")+" balance unavailable";disabled=true}
     else if(available<amount){label="Insufficient "+fromSymbol+" balance";disabled=true}
     else if(state.swapAllowanceError){label="Allowance check unavailable";disabled=true}
     else if(state.swapAllowance==null){label="Checking allowance…";disabled=true}
-    else if(state.swapAllowance<amount){label="Approve "+fromSymbol+" & continue";updateJourney(1)}
-    else{label=state.simulatedOut?"Review protected swap":nativeIn?"Preview native PLS route":nativeOut?"Preview route to native PLS":"Simulate protected route";updateJourney(state.simulatedOut?3:2)}
+    else if(state.swapAllowance<amount){label="Approve "+fromSymbol+(direct?" to official router":" & continue");updateJourney(1)}
+    else{label=state.simulatedOut?(direct?"Review official-pool swap":"Review protected swap"):direct?"Simulate official-pool swap":nativeIn?"Preview native PLS route":nativeOut?"Preview route to native PLS":"Simulate protected route";updateJourney(state.simulatedOut?3:2)}
     $("swapCtaLabel").textContent=label;$("swapCta").disabled=disabled;
-    $("quotePill").textContent=state.simulatedOut?"PROTECTED SIM":state.swapPlan?(state.swapPlan.kind==="split"?"SPLIT EVALUATED":"BEST EVALUATED"):"NO QUOTE";
+    $("quotePill").textContent=state.simulatedOut?(direct?"OFFICIAL SIM":"PROTECTED SIM"):state.swapPlan?(direct?"OFFICIAL POOL":state.swapPlan.kind==="split"?"SPLIT EVALUATED":"BEST EVALUATED"):"NO QUOTE";
     $("detailSlippage").textContent=(state.settings.slippageBps/100).toFixed(2)+"%";$("detailDeadline").textContent=String(state.settings.deadlineMinutes)+" minutes";
     $("detailMinimum").textContent=state.minOut&&state.to?trimUnits(state.minOut,state.to.decimals,8)+" "+swapSymbol(state.to):"Pending simulation";
     $("detailSettlement").textContent=nativeIn?"PLS wraps to WPLS atomically":nativeOut?"WPLS unwraps to PLS atomically":isWpls(state.from)||isWpls(state.to)?"WPLS PRC-20 selected":"Not used";
-    if(state.swapPlan&&!state.aggregatorError)$("swapNotice").textContent=nativeIn?"Native PLS is sent directly to the verified aggregator, wrapped, and routed atomically; existing WPLS is untouched.":nativeOut?"The verified aggregator unwraps routed WPLS and delivers native PLS only to the connected recipient.":isWpls(state.from)||isWpls(state.to)?"WPLS PRC-20 settlement uses the verified aggregator as the exact spender and transaction target.":state.swapPlan.venueMode==="finvesta"?"Finvesta V3 only is enabled; LibertySwap routes and split allocations are excluded.":"Aggregator mode is active; Finvesta and LibertySwap V3 liquidity are compared and a split may be used when it improves output."
+    if(state.swapPlan&&!state.aggregatorError)$("swapNotice").textContent=direct?"Direct official-pool route. Only the pinned Finvesta router can spend INJECTED or INJECTOR. "+(state.swapPlan.accrualPaused?"INJECTED transfer accrual is paused at the verified block.":"Eligible INJECTED transfers accrue 30% mint liability; the swap transfer itself is not reduced."):nativeIn?"Native PLS is sent directly to the verified aggregator, wrapped, and routed atomically; existing WPLS is untouched.":nativeOut?"The verified aggregator unwraps routed WPLS and delivers native PLS only to the connected recipient.":isWpls(state.from)||isWpls(state.to)?"WPLS PRC-20 settlement uses the verified aggregator as the exact spender and transaction target.":state.swapPlan.venueMode==="finvesta"?"Finvesta V3 only is enabled; LibertySwap routes and split allocations are excluded.":"Aggregator mode is active; Finvesta and LibertySwap V3 liquidity are compared and a split may be used when it improves output."
   }
   async function approveSwap(manual){
     try{
       if(swapNativeInput())throw new Error("Native PLS swaps do not require a WPLS approval");
-      if(!dualAggregatorConfigured())throw new Error(DUAL_AGGREGATOR_CONFIG_ERROR||"Swap aggregator unavailable");
-      var amount=swapAmount(),from=state.from,to=state.to,account=state.account,nativeMode=state.swapNativePls;if(!from)throw new Error("Choose an input token first");
-      return openTokenApproval(from,amount,DUAL_AGGREGATOR_ADDRESS,{flowName:"Swap funding",validate:function(){if(!same(state.account,account)||state.from!==from||state.to!==to||swapAmount()!==amount||state.swapNativePls!==nativeMode)throw new Error("Swap inputs changed after allowance review")},continue:async function(){state.simulatedOut=null;state.minOut=null;await checkSwapAllowance();refreshSwapState();if(manual===true||amount===0n)return;if(state.swapAllowance==null||state.swapAllowance<amount)throw new Error("The allowance does not cover this swap");await previewSwap()}})
+      var amount=swapAmount(),from=state.from,to=state.to,account=state.account,nativeMode=state.swapNativePls,direct=Boolean(state.swapPlan&&state.swapPlan.kind==="injected-direct"),spender=direct?ADDR.router:DUAL_AGGREGATOR_ADDRESS;if(!from)throw new Error("Choose an input token first");if(!direct&&!dualAggregatorConfigured())throw new Error(DUAL_AGGREGATOR_CONFIG_ERROR||"Swap aggregator unavailable");if(direct&&!isInjectedOfficialPair(from,to))throw new Error("INJECTED approvals are limited to the official INJECTED/INJECTOR pair");
+      return openTokenApproval(from,amount,spender,{flowName:direct?"Official INJECTED pool funding":"Swap funding",validate:async function(){if(!same(state.account,account)||state.from!==from||state.to!==to||swapAmount()!==amount||state.swapNativePls!==nativeMode)throw new Error("Swap inputs changed after allowance review");if(direct){var topology=await criticalSwapTopology(from.address,to.address,INJECTED_DIRECT.fee,true);await verifyInjectedDirectSnapshot(from.address,to.address,topology,account)}},continue:async function(){state.simulatedOut=null;state.minOut=null;await checkSwapAllowance();refreshSwapState();if(manual===true||amount===0n)return;if(state.swapAllowance==null||state.swapAllowance<amount)throw new Error("The allowance does not cover this swap");await previewSwap()}})
     }catch(err){toast(safeError(err),"error")}
   }
   function swapCallPlan(router,params,nativeIn,nativeOut,account){
@@ -9190,7 +9298,43 @@ lit-html/directives/ref.js:
   function dualExecutionFingerprint(execution){
     return JSON.stringify({target:DUAL_AGGREGATOR_ADDRESS.toLowerCase(),runtimeHash:execution.plan.aggregatorCodeHash,tokenIn:execution.plan.tokenIn.toLowerCase(),tokenOut:execution.plan.tokenOut.toLowerCase(),kind:execution.plan.kind,amountIn:String(execution.plan.amountIn),totalOut:String(execution.plan.totalOut),routes:execution.plan.routes.map(function(route,index){return {venue:Number(route.venue),fee:Number(route.fee),pool:String(route.pool).toLowerCase(),amountIn:String(route.amountIn),amountOut:String(route.amountOut),minAmountOut:String(execution.routes[index].minAmountOut),sqrtPriceLimitX96:"0"}}),recipient:execution.account.toLowerCase(),deadline:String(execution.deadline),globalMin:String(execution.minAmountOut),nativeIn:execution.nativeIn,nativeOut:execution.nativeOut,value:String(execution.value),data:execution.data.toLowerCase(),measuredOut:String(execution.measuredOut)})
   }
+  async function simulateInjectedDirectAtSnapshot(snapshot,params,account,label){
+    var routerInterface=new E.Interface(ABI.router),data=routerInterface.encodeFunctionData("exactInputSingle",[params]),raw=await criticalSnapshotEthCall(snapshot,label,ADDR.router,data,account,0n),decoded=routerInterface.decodeFunctionResult("exactInputSingle",raw),amountOut=BigInt(decoded.amountOut==null?decoded[0]:decoded.amountOut);if(amountOut<=0n)throw new Error("Official-pool simulation returned no positive output");return {amountOut:amountOut,data:data}
+  }
+  async function previewInjectedDirectSwap(){
+    var amount=swapAmount(),from=state.from,to=state.to,account=state.account,slippageBps=state.settings.slippageBps,deadlineMinutes=state.settings.deadlineMinutes;
+    if(!amount||!from||!to||!account||!isInjectedOfficialPair(from,to))throw new Error("Choose a positive amount for the exact INJECTED/INJECTOR pair");
+    var signer=await getSigner();if(!same(await signer.getAddress(),account))throw new Error("Connected signer does not match the swap recipient");$("quoteFreshness").textContent="Checking the official pool and simulating through the Finvesta router…";
+    var plan=await planInjectedDirectSwap(from,to,amount,account),snapshot=plan.snapshot;if(state.from!==from||state.to!==to||swapAmount()!==amount)throw new Error("Swap inputs changed while the official pool was being verified");
+    var tokenInterface=new E.Interface(ABI.erc20),balanceRaw=await criticalSnapshotEthCall(snapshot,"INJECTED direct-route balance",from.address,tokenInterface.encodeFunctionData("balanceOf",[account])),balance=BigInt(tokenInterface.decodeFunctionResult("balanceOf",balanceRaw)[0]),allowance=await criticalAllowanceAtSnapshot(snapshot,from.address,account,ADDR.router,"Official router allowance");
+    if(balance<amount)throw new Error("The connected wallet's exact input balance is no longer sufficient");if(allowance<amount)throw new Error("Approve the exact official Finvesta router allowance before simulation");
+    var deadline=BigInt(snapshot.blockTimestamp+deadlineMinutes*60);if(BigInt(snapshot.blockTimestamp)+30n>=deadline)throw new Error("The swap deadline is too close; increase it and refresh");
+    var params={tokenIn:E.getAddress(from.address),tokenOut:E.getAddress(to.address),fee:INJECTED_DIRECT.fee,recipient:E.getAddress(account),deadline:deadline,amountIn:amount,amountOutMinimum:1n,sqrtPriceLimitX96:0n},exploratory=await simulateInjectedDirectAtSnapshot(snapshot,params,account,"Official INJECTED/INJECTOR exploratory wallet simulation"),minimum=dualProtectedMinimum(exploratory.amountOut),protectedParams=Object.assign({},params,{amountOutMinimum:minimum}),protectedResult=await simulateInjectedDirectAtSnapshot(snapshot,protectedParams,account,"Official INJECTED/INJECTOR protected wallet simulation");
+    if(protectedResult.amountOut!==exploratory.amountOut||protectedResult.amountOut<minimum)throw new Error("The protected simulation did not match the measured official-pool output");
+    plan.amountIn=amount;plan.totalOut=protectedResult.amountOut;plan.minimumOut=minimum;plan.params=protectedParams;plan.data=protectedResult.data;state.swapPlan=plan;state.routeCandidates=[];state.pool={address:INJECTED_DIRECT.pool,pool:INJECTED_DIRECT.pool,fee:INJECTED_DIRECT.fee,liquidity:plan.poolLiquidity,tokenIn:plan.tokenIn,tokenOut:plan.tokenOut};state.spotOut=exploratory.amountOut;state.simulatedOut=protectedResult.amountOut;state.minOut=minimum;state.quoteSource="official-router-simulation";$("amountOut").textContent=trimUnits(protectedResult.amountOut,to.decimals,8);$("quoteFreshness").textContent="Official pool simulation · block "+formatInteger(snapshot.blockNumber);$("detailQuoteSource").textContent="Pinned Finvesta router · wallet-context simulation";renderPoolState();refreshSwapState();
+    var accrualText=plan.accrualPaused?"Paused at simulation block":"Active at simulation block · this eligible transfer accrues a 30% mint liability; the swap amount itself is not reduced",rows=[
+      ["Route","Official INJECTED/INJECTOR pool · Finvesta v3"],["Pool",INJECTED_DIRECT.pool,"mono"],["Pool fee","1.00%"],["Router",ADDR.router,"mono"],
+      ["You pay",trimUnits(amount,from.decimals,8)+" "+from.symbol],["Measured output",trimUnits(protectedResult.amountOut,to.decimals,8)+" "+to.symbol],["Minimum output",trimUnits(minimum,to.decimals,8)+" "+to.symbol],
+      ["INJECTED transfer accrual",accrualText],["Spender","Exact Finvesta v3 router only"],["Recipient",account,"mono"],["Verified block",formatInteger(snapshot.blockNumber)],
+      ["Deadline",new Date(Number(deadline)*1000).toLocaleTimeString()],["Network","PulseChain · 369"]
+    ];
+    reviewTransaction({
+      kicker:"Official INJECTED pool · direct route",title:"Review "+from.symbol+" → "+to.symbol+" swap",flowStep:3,
+      notice:"This path overrides the aggregator route block only for the exact reviewed INJECTED/INJECTOR pool. The transaction calls the pinned Finvesta router directly, and the wallet-context simulation, minimum output, recipient, fee tier, and deadline are rechecked before the wallet prompt.",
+      rows:rows,confirmLabel:"Swap in wallet",successMessage:"Official-pool swap confirmed on PulseChain",
+      execute:async function(progress){
+        if(!same(state.account,account)||state.walletChain!==CHAIN.id||state.from!==from||state.to!==to||swapAmount()!==amount||state.settings.slippageBps!==slippageBps||state.settings.deadlineMinutes!==deadlineMinutes)throw new Error("Wallet, swap inputs, or safeguards changed while this review was open. Reopen the simulation.");
+        var freshSigner=await getSigner();if(!same(await freshSigner.getAddress(),account))throw new Error("Connected signer changed after review");
+        var freshPlan=await planInjectedDirectSwap(from,to,amount,account),freshSnapshot=freshPlan.snapshot;if(freshPlan.accrualPaused!==plan.accrualPaused)throw new Error("INJECTED accrual status changed after review. Refresh the swap to review its current state.");if(BigInt(freshSnapshot.blockTimestamp)+30n>=deadline)throw new Error("This review expired. Refresh to prepare a new deadline.");
+        var freshBalanceRaw=await criticalSnapshotEthCall(freshSnapshot,"Final INJECTED direct-route balance",from.address,tokenInterface.encodeFunctionData("balanceOf",[account])),freshBalance=BigInt(tokenInterface.decodeFunctionResult("balanceOf",freshBalanceRaw)[0]),freshAllowance=await criticalAllowanceAtSnapshot(freshSnapshot,from.address,account,ADDR.router,"Final official router allowance");if(freshBalance<amount)throw new Error("The connected wallet no longer has enough input tokens");if(freshAllowance<amount)throw new Error("Official router allowance no longer covers the reviewed input");
+        var finalResult=await simulateInjectedDirectAtSnapshot(freshSnapshot,protectedParams,account,"Final exact official-pool swap simulation");if(finalResult.amountOut<minimum)throw new Error("Official-pool output moved below the reviewed minimum. Reopen the simulation.");
+        var swapNonce=await criticalNextNonce(account,"Official INJECTED pool swap"),swapIntent=exactTransactionIntent(account,ADDR.router,protectedResult.data,0n,swapNonce);progress("wallet");var tx=await freshSigner.sendTransaction({to:ADDR.router,data:protectedResult.data,value:0n,chainId:CHAIN.id,nonce:swapNonce});validateExactTransactionIntent(tx,swapIntent,"Official-pool swap wallet response");progress("pending",tx.hash);return confirmExactTransaction(tx,swapIntent,"Official-pool swap")
+      },
+      onSuccess:async function(){state.simulatedOut=null;state.minOut=null;$("amountIn").value="";await refreshBalances();await discoverBestPool();updateJourney(4)}
+    })
+  }
   async function previewSwap(){
+    if(state.swapPlan&&state.swapPlan.kind==="injected-direct")return previewInjectedDirectSwap();
     if(!dualAggregatorConfigured())throw new Error(DUAL_AGGREGATOR_CONFIG_ERROR||"Configure the reviewed dual-V3 aggregator deployment first");var amount=swapAmount(),from=state.from,to=state.to,account=state.account,nativeMode=state.swapNativePls,nativeIn=swapNativeInput(),nativeOut=swapNativeOutput(),slippageBps=state.settings.slippageBps,deadlineMinutes=state.settings.deadlineMinutes;
     if(!amount||!from||!to||!account)throw new Error("Complete the swap form before simulation");var signer=await getSigner();if(!same(await signer.getAddress(),account))throw new Error("Connected signer does not match the swap recipient");$("quoteFreshness").textContent="Replanning and simulating aggregator…";
     var plan=await planDualV3Swap(from.address,to.address,amount),deadline=BigInt(plan.snapshot.blockTimestamp+deadlineMinutes*60);if(BigInt(plan.snapshot.blockTimestamp)+30n>=deadline)throw new Error("The swap deadline is too close");if(nativeIn&&await criticalSnapshotBalance(plan.snapshot,"Native swap funding",account)<amount)throw new Error("Native PLS balance no longer covers the exact swap value");if(!nativeIn){var initialAllowance=await criticalDualAllowanceAtSnapshot(plan.snapshot,from.address,account,"Protected swap aggregator allowance");if(initialAllowance<amount)throw new Error("Aggregator allowance no longer covers the exact input")}
@@ -9224,7 +9368,7 @@ lit-html/directives/ref.js:
   async function handleSwapCta(){
     if(!state.account)return openWalletModal();
     if(state.walletChain!==CHAIN.id){try{await ensurePulseChain();refreshSwapState()}catch(err){toast(safeError(err),"error")}return}
-    var amount=swapAmount();if(!dualAggregatorConfigured())return toast(DUAL_AGGREGATOR_CONFIG_ERROR||"Configure the reviewed dual-V3 aggregator deployment first","error");if(state.swapAllowanceError)return toast("Aggregator allowance could not be verified: "+state.swapAllowanceError,"error");if(state.swapAllowance==null)return;if(state.swapAllowance<amount)return approveSwap();
+    var amount=swapAmount(),direct=Boolean(state.swapPlan&&state.swapPlan.kind==="injected-direct");if(!direct&&!dualAggregatorConfigured())return toast(DUAL_AGGREGATOR_CONFIG_ERROR||"Configure the reviewed dual-V3 aggregator deployment first","error");if(state.swapAllowanceError)return toast((direct?"Official router":"Aggregator")+" allowance could not be verified: "+state.swapAllowanceError,"error");if(state.swapAllowance==null)return;if(state.swapAllowance<amount)return approveSwap();
     try{await previewSwap()}catch(err){var message=safeError(err);$("quoteFreshness").textContent="Simulation unavailable";$("swapNotice").textContent="Protected simulation could not complete: "+message;toast(message,"error")}
   }
   function openSettings(){
@@ -9237,7 +9381,7 @@ lit-html/directives/ref.js:
       "<div class='field' id='settingCustomRpcField' hidden><label for='settingCustomRpc'>Custom RPC URL</label><input id='settingCustomRpc' type='url' inputmode='url' maxlength='2048' placeholder='https://your-rpc.example' autocomplete='off' autocapitalize='off' autocorrect='off' spellcheck='false' aria-describedby='settingRpcMessage'></div>"+
       "<p class='preloader-rpc-message' id='settingRpcMessage' role='status' aria-live='polite'></p>"+
       "<div class='notice info'>Active read endpoint: <strong>"+esc(rpcPublicLabel(activeRpcUrl))+"</strong>. A preferred endpoint is tried first; the other trusted presets remain automatic fallbacks.</div>"+
-      "<div class='notice'>Main-swap slippage is applied per leg and globally to one hash-pinned dual-venue plan, then the exact aggregator call is simulated in the connected-wallet context.</div>"+
+      "<div class='notice'>Dual-V3 swaps use per-leg and global minimums from a hash-pinned plan. The exact INJECTED/INJECTOR pair uses its pinned official Finvesta pool and router, with a wallet-context simulation and the same slippage setting.</div>"+
       "<button class='primary' id='saveSettings'><span>Apply settings</span><span>✓</span></button></div>");
     renderRpcControl("settingRpcMode","settingCustomRpcField","settingCustomRpc",rpcPreference);
     $("settingRpcMode").addEventListener("change",function(){this.removeAttribute("aria-invalid");toggleRpcCustomField("settingRpcMode","settingCustomRpcField","settingCustomRpc");$("settingRpcMessage").textContent="";$("settingRpcMessage").className="preloader-rpc-message"});
@@ -10893,9 +11037,244 @@ lit-html/directives/ref.js:
     try{var a=await loadToken(seed.tokenA,true),b=await loadToken(seed.tokenB,true),topology=await criticalSwapTopology(a.address,b.address,Number(seed.fee),true);if(!same(topology.pool,pool.id))throw new Error("The displayed pool does not match the on-chain Finvesta factory registry");if(!same(state.account,account)||state.modalNonce!==modalNonce)throw new Error("Wallet or active dialog changed while verifying this pool");if(!state.feeTiers.some(function(t){return t.fee===Number(seed.fee)}))state.feeTiers.push({fee:Number(seed.fee),spacing:Number(topology.tickSpacing)});openNewPositionModal(seed)}catch(err){toast(safeError(err),"error")}finally{if(trigger&&trigger.isConnected)setBusy(trigger,false)}
   }
 
+  // Pinned to the deployed PulseChain release after matching the compiled runtime
+  // with immutable references masked and checking the live constructor bindings.
+  // The exact hash includes this deployment's immutable values; do not reuse it
+  // for a different vault deployment.
+  var INJECTED_STAKING_CONFIG=Object.freeze({vaultAddress:"0xbeFD1e71e451289E0164C2c00Facb516Db42B48c",vaultRuntimeCodeHash:"0x8cd6c4b3f926df555a40ac4a649c87af75ee63304684bc217c7626ae3e82950d"});
+  var INJECTED_STAKING_ZERO=E.ZeroAddress;
+  var INJECTED_STAKING_INJECTOR="0xbbea0fe1f2280e81c17e21256160895301cc1ad4";
+  var INJECTED_STAKING_WETH="0x02dcdd04e3f455d838cd1249292c58f3b79e3c3c";
+  var INJECTED_STAKING_LIMIT=100;
+  var INJECTED_STAKING_ABI={
+    vault:[
+      "function policy() view returns(address)","function manager() view returns(address)","function distributor() view returns(address)",
+      "function minPositionLiquidity() view returns(uint128)","function depositsPaused() view returns(bool)","function activationsPaused() view returns(bool)",
+      "function MATURITY_BLOCKS() view returns(uint256)","function stakes(uint256) view returns(address owner,uint128 eligibleLiquidity,uint128 trackedLiquidity,uint64 depositedBlock,bool active)",
+      "function tranches(uint256,uint256) view returns(uint64 observedBlock,uint128 liquidity)","function pendingLiquidity(uint256) view returns(uint256)",
+      "function stake(uint256)","function activate(uint256)","function syncLiquidity(uint256)","function collectFees(uint256) returns(uint256 amount0,uint256 amount1)",
+      "function unstake(uint256,address)"
+    ],
+    policy:["function injected() view returns(address)","function manager() view returns(address)","function mainPool() view returns(address)","function mainFee() view returns(uint24)","function fullRange() view returns(int24 lower,int24 upper)","function assertInfrastructure() view","function assertMain() view"],
+    distributor:[
+      "function controller() view returns(address)","function vault() view returns(address)","function asset(uint8) view returns(address)",
+      "function sharesOf(address) view returns(uint256)","function unpaid(address,uint8) view returns(uint256)","function beneficiaryCount() view returns(uint256)",
+      "function keeperCredit(address) view returns(uint256)","function nextEpochAt() view returns(uint256)","function epochOpen() view returns(bool)",
+      "function cursor() view returns(uint256)","function epochEnd() view returns(uint256)","function epochId() view returns(uint256)","function claim(uint8) returns(uint256)",
+      "function claimKeeperFor(address) returns(uint256)","function process(uint256) returns(uint256 examined)"
+    ],
+    manager:[
+      "function factory() view returns(address)","function balanceOf(address) view returns(uint256)","function tokenOfOwnerByIndex(address,uint256) view returns(uint256)",
+      "function ownerOf(uint256) view returns(address)","function getApproved(uint256) view returns(address)","function isApprovedForAll(address,address) view returns(bool)",
+      "function approve(address,uint256)",
+      "function positions(uint256) view returns(uint96 nonce,address operator,address token0,address token1,uint24 fee,int24 tickLower,int24 tickUpper,uint128 liquidity,uint256 feeGrowthInside0LastX128,uint256 feeGrowthInside1LastX128,uint128 tokensOwed0,uint128 tokensOwed1)"
+    ],
+    factory:["function getPool(address,address,uint24) view returns(address)"],
+    pool:["function token0() view returns(address)","function token1() view returns(address)","function fee() view returns(uint24)","function factory() view returns(address)"],
+    token:["function maintenanceHelper() view returns(address)","function pendingMint() view returns(uint256)","function symbol() view returns(string)","function decimals() view returns(uint8)"],
+    controller:["function token() view returns(address)","function policy() view returns(address)","function vault() view returns(address)","function distributor() view returns(address)","function cyclesPaused() view returns(bool)","function remainingDailyCapacity() view returns(uint256)","function remainingBlockCapacity() view returns(uint256)","function maximumCycleNow() view returns(uint256)","function CYCLE_CAP() view returns(uint256)","function CYCLE_COOLDOWN() view returns(uint256)","function BLOCK_WINDOW_CAP() view returns(uint256)"],
+    helper:["function token() view returns(address)","function controller() view returns(address)","function vault() view returns(address)","function distributor() view returns(address)","function checkUpkeep() view returns(bool accountingReady,uint256 maxAmount,uint256 pending,uint256 dayRemaining,uint256 blockRemaining)"]
+  };
+  var injectedStakingState={context:null,selectedCandidate:null,selectedStakeId:null,refreshing:false,scanNonce:0};
+  function iy$(id){return document.getElementById(id)}
+  function iyTrimUnits(value,decimals){var s=E.formatUnits(value,decimals);return s.indexOf(".")<0?s:s.replace(/0+$/ ,"").replace(/\.$/,"")}
+  function iySetText(id,value){var e=iy$(id);if(e)e.textContent=String(value)}
+  function iySetButton(id,disabled){var e=iy$(id);if(e)e.disabled=Boolean(disabled)}
+  function iyIsConfigured(){return !same(INJECTED_STAKING_CONFIG.vaultAddress,INJECTED_STAKING_ZERO)&&/^0x[0-9a-fA-F]{40}$/.test(INJECTED_STAKING_CONFIG.vaultAddress)&&/^0x[0-9a-fA-F]{64}$/.test(INJECTED_STAKING_CONFIG.vaultRuntimeCodeHash)}
+  function iyCode(provider,address,label){return provider.getCode(address).then(function(code){if(!code||code==="0x")throw new Error(label+" has no deployed code");return code})}
+  function iyContract(address,abi,provider){return new E.Contract(E.getAddress(address),abi,provider)}
+  async function iyLoadContext(provider){
+    if(!iyIsConfigured())throw new Error("The deployed vault address and runtime code hash have not been pinned in this file yet.");
+    var network=await provider.getNetwork();if(BigInt(network.chainId)!==CHAIN.id)throw new Error("Connect to PulseChain (chain ID 369) to use staking.");
+    var vaultAddress=E.getAddress(INJECTED_STAKING_CONFIG.vaultAddress),vaultCode=await iyCode(provider,vaultAddress,"Configured staking vault");
+    if(E.keccak256(vaultCode).toLowerCase()!==INJECTED_STAKING_CONFIG.vaultRuntimeCodeHash.toLowerCase())throw new Error("Configured vault runtime code hash does not match the pinned deployment record.");
+    var vault=iyContract(vaultAddress,INJECTED_STAKING_ABI.vault,provider);
+    var base=await Promise.all([vault.policy(),vault.manager(),vault.distributor(),vault.minPositionLiquidity(),vault.depositsPaused(),vault.activationsPaused(),vault.MATURITY_BLOCKS()]);
+    var policyAddress=E.getAddress(base[0]),managerAddress=E.getAddress(base[1]),distributorAddress=E.getAddress(base[2]);
+    if(!same(managerAddress,ADDR.positionManager))throw new Error("Vault manager does not match the pinned PulseChain v3 position manager.");
+    var policy=iyContract(policyAddress,INJECTED_STAKING_ABI.policy,provider),distributor=iyContract(distributorAddress,INJECTED_STAKING_ABI.distributor,provider);
+    await Promise.all([iyCode(provider,policyAddress,"Vault policy"),iyCode(provider,distributorAddress,"Reward distributor"),iyCode(provider,ADDR.positionManager,"Pinned position manager"),iyCode(provider,ADDR.factory,"Pinned v3 factory"),iyCode(provider,INJECTED_STAKING_INJECTOR,"INJECTOR reward token"),iyCode(provider,INJECTED_STAKING_WETH,"WETH reward token")]);
+    var links=await Promise.all([policy.manager(),policy.injected(),policy.mainPool(),policy.mainFee(),distributor.vault(),distributor.controller(),distributor.asset(0),distributor.asset(1),vault.manager()]);
+    var injectedAddress=E.getAddress(links[1]),mainPool=E.getAddress(links[2]),controllerAddress=E.getAddress(links[5]);
+    if(!same(links[0],ADDR.positionManager)||!same(links[8],ADDR.positionManager))throw new Error("Policy and vault manager bindings disagree with the pinned manager.");
+    if(!same(links[4],vaultAddress))throw new Error("Reward distributor is not bound to this vault.");
+    if(!same(links[6],INJECTED_STAKING_INJECTOR)||!same(links[7],INJECTED_STAKING_WETH))throw new Error("Distributor reward assets do not match the pinned INJECTOR and WETH contracts.");
+    if(same(injectedAddress,INJECTED_STAKING_INJECTOR)||same(injectedAddress,INJECTED_STAKING_WETH))throw new Error("Policy token overlaps a reward asset.");
+    var controller=iyContract(controllerAddress,INJECTED_STAKING_ABI.controller,provider);
+    await iyCode(provider,controllerAddress,"Cycle controller");
+    var ctrLinks=await Promise.all([controller.token(),controller.policy(),controller.vault(),controller.distributor()]);
+    if(!same(ctrLinks[0],injectedAddress)||!same(ctrLinks[1],policyAddress)||!same(ctrLinks[2],vaultAddress)||!same(ctrLinks[3],distributorAddress))throw new Error("Controller wiring does not match the vault, policy, token and distributor.");
+    var token=iyContract(injectedAddress,INJECTED_STAKING_ABI.token,provider),helperAddress=E.getAddress(await token.maintenanceHelper());
+    await iyCode(provider,injectedAddress,"INJECTED token");await iyCode(provider,helperAddress,"Maintenance helper");
+    var helper=iyContract(helperAddress,INJECTED_STAKING_ABI.helper,provider),helpLinks=await Promise.all([helper.token(),helper.controller(),helper.vault(),helper.distributor()]);
+    if(!same(helpLinks[0],injectedAddress)||!same(helpLinks[1],controllerAddress)||!same(helpLinks[2],vaultAddress)||!same(helpLinks[3],distributorAddress))throw new Error("Maintenance helper wiring does not match the deployed system.");
+    var manager=iyContract(managerAddress,INJECTED_STAKING_ABI.manager,provider),factory=iyContract(ADDR.factory,INJECTED_STAKING_ABI.factory,provider);
+    if(!same(await manager.factory(),ADDR.factory))throw new Error("Position manager factory does not match the pinned v3 factory.");
+    var infrastructureReady=false,infrastructureError="",mainReady=false,mainError="",fullRange=null;
+    try{await policy.assertInfrastructure();infrastructureReady=true}catch(e){infrastructureError=safeError(e)}
+    if(!same(mainPool,INJECTED_STAKING_ZERO)){
+      try{
+        if(Number(links[3])!==10000)throw new Error("Registered main-pool fee is not 1%.");
+        var pair0=same(injectedAddress,INJECTED_STAKING_INJECTOR)?null:(BigInt(injectedAddress)<BigInt(INJECTED_STAKING_INJECTOR)?injectedAddress:INJECTED_STAKING_INJECTOR);
+        var pair1=pair0===null?null:(same(pair0,injectedAddress)?INJECTED_STAKING_INJECTOR:injectedAddress);
+        if(!pair0||!same(await factory.getPool(pair0,pair1,10000),mainPool))throw new Error("Registered pool does not match the expected exact factory pair.");
+        var pool=iyContract(mainPool,INJECTED_STAKING_ABI.pool,provider);await iyCode(provider,mainPool,"Registered main pool");
+        var poolIds=await Promise.all([pool.token0(),pool.token1(),pool.fee(),pool.factory()]);
+        if(!same(poolIds[0],pair0)||!same(poolIds[1],pair1)||Number(poolIds[2])!==10000||!same(poolIds[3],ADDR.factory))throw new Error("Registered main-pool identity check failed.");
+        await policy.assertMain();fullRange=await policy.fullRange();mainReady=true
+      }catch(e){mainError=safeError(e)}
+    }else mainError="The owner has not registered the main pool yet.";
+    var [latestBlock,head]=await Promise.all([provider.getBlockNumber(),provider.getBlock("latest")]);
+    return {vaultAddress:vaultAddress,vault:vault,policy:policy,policyAddress:policyAddress,distributor:distributor,distributorAddress:distributorAddress,manager:manager,managerAddress:managerAddress,factory:factory,token:token,tokenAddress:injectedAddress,helper:helper,helperAddress:helperAddress,controller:controller,controllerAddress:controllerAddress,mainPool:mainPool,mainReady:mainReady,mainError:mainError,fullRange:fullRange,infrastructureReady:infrastructureReady,infrastructureError:infrastructureError,minLiquidity:BigInt(base[3]),depositsPaused:Boolean(base[4]),activationsPaused:Boolean(base[5]),maturityBlocks:BigInt(base[6]),blockNumber:Number(latestBlock),timestamp:Number(head.timestamp)}
+  }
+  function iyConnectedAccount(){return state.account&&state.walletChain===CHAIN.id?E.getAddress(state.account):null}
+  function iySetDeploymentState(kind,message){var box=iy$("iyVaultState"),notice=iy$("iyDeploymentNotice");if(box){box.className="iy-state"+(kind==="good"?" good":kind==="bad"?" bad":"");box.querySelector("span").textContent=message}if(notice){notice.className="iy-banner"+(kind==="good"?"":" warn");notice.textContent=message}}
+  function iySetFacts(id,rows){var box=iy$(id);if(!box)return;box.innerHTML=rows.map(function(row){return "<div class='iy-fact'><span>"+esc(row[0])+"</span><strong>"+esc(row[1])+"</strong></div>"}).join("");box.hidden=rows.length===0}
+  function iyPositionReason(p,owner,ctx,approved){
+    if(!ctx.infrastructureReady)return "Staking unavailable: "+ctx.infrastructureError;
+    if(!ctx.mainReady)return "Staking unavailable: "+ctx.mainError;
+    if(ctx.depositsPaused)return "Vault deposits are paused.";
+    if(!same(owner,iyConnectedAccount()))return "This wallet does not own the position NFT.";
+    var pair0=BigInt(ctx.tokenAddress)<BigInt(INJECTED_STAKING_INJECTOR)?ctx.tokenAddress:INJECTED_STAKING_INJECTOR,pair1=same(pair0,ctx.tokenAddress)?INJECTED_STAKING_INJECTOR:ctx.tokenAddress;
+    if(!same(p.token0,pair0)||!same(p.token1,pair1))return "Wrong token pair.";
+    if(Number(p.fee)!==10000)return "Position fee tier is not 1%.";
+    if(!ctx.fullRange||Number(p.tickLower)!==Number(ctx.fullRange[0])||Number(p.tickUpper)!==Number(ctx.fullRange[1]))return "Position does not use the pool's exact full-range ticks.";
+    if(BigInt(p.liquidity)<ctx.minLiquidity)return "Position is below the vault's minimum liquidity.";
+    if(approved===false)return "Eligible; approve this NFT to the vault first.";
+    return "Eligible to stake."
+  }
+  async function iyLoadPosition(ctx,id,provider){
+    if(!/^(0|[1-9][0-9]{0,77})$/.test(String(id)))throw new Error("Enter a valid NFT token ID.");
+    var tokenId=BigInt(id);if(tokenId>((1n<<256n)-1n))throw new Error("NFT token ID exceeds uint256.");var owner=await ctx.manager.ownerOf(tokenId),p=await ctx.manager.positions(tokenId);
+    var approved=await ctx.manager.getApproved(tokenId),approvedForAll=await ctx.manager.isApprovedForAll(iyConnectedAccount(),ctx.vaultAddress);
+    var eligible=iyPositionReason(p,owner,ctx,same(approved,ctx.vaultAddress)||approvedForAll);
+    var stake=await ctx.vault.stakes(tokenId);
+    return {id:tokenId,owner:owner,position:p,approved:approved,approvedForAll:approvedForAll,eligible:eligible,stake:stake}
+  }
+  function iyShowCandidate(info,ctx){
+    injectedStakingState.selectedCandidate=info;
+    iySetText("iyCandidateStatus",info.eligible);
+    iySetFacts("iyCandidateFacts",[["Token ID",info.id.toString()],["NFT owner",info.owner],["Pool fee",(Number(info.position.fee)/10000).toFixed(2)+"%"],["Liquidity",info.position.liquidity.toString()],["Liquidity minimum",ctx.minLiquidity.toString()],["NFT approval",same(info.approved,ctx.vaultAddress)||info.approvedForAll?"Ready":"Not approved"]]);
+    var eligible=Boolean(iyConnectedAccount()&&ctx.infrastructureReady&&ctx.mainReady&&!ctx.depositsPaused&&info.eligible.indexOf("Eligible")===0&&same(info.stake.owner,INJECTED_STAKING_ZERO)),approved=same(info.approved,ctx.vaultAddress)||info.approvedForAll;
+    iySetButton("iyStakeNft",!eligible||!approved);iySetButton("iyApproveNft",!eligible||approved);
+  }
+  async function iyScanPositions(){
+    var account=iyConnectedAccount();if(!account){iySetText("iyOwnedPositions","Connect a wallet on PulseChain first.");return}
+    var nonce=++injectedStakingState.scanNonce;iySetText("iyOwnedPositions","Scanning owned position NFTs…");
+    try{
+      var ctx=await iyLoadContext(state.browserProvider||readProvider),block=ctx.blockNumber,count=Number(await ctx.manager.balanceOf(account,{blockTag:block}));
+      if(count>INJECTED_STAKING_LIMIT)throw new Error("Wallet has "+count+" position NFTs. Automatic scanning is capped at "+INJECTED_STAKING_LIMIT+"; use the token-ID check for a specific position.");
+      var ids=[];for(var i=0;i<count;i++)ids.push(await ctx.manager.tokenOfOwnerByIndex(account,i,{blockTag:block}));
+      var items=[];for(var j=0;j<ids.length;j+=5){var page=await Promise.all(ids.slice(j,j+5).map(async function(id){var p=await ctx.manager.positions(id,{blockTag:block}),owner=await ctx.manager.ownerOf(id,{blockTag:block}),approved=await ctx.manager.getApproved(id,{blockTag:block}),approvedForAll=await ctx.manager.isApprovedForAll(account,ctx.vaultAddress,{blockTag:block});return {id:BigInt(id),position:p,owner:owner,approved:approved,approvedForAll:approvedForAll,stake:await ctx.vault.stakes(id,{blockTag:block})}}));items=items.concat(page)}
+      if(nonce!==injectedStakingState.scanNonce)return;
+      var list=iy$("iyOwnedPositions");
+      if(!items.length){list.textContent="No position NFTs found in this wallet.";return}
+      list.innerHTML=items.map(function(item){var reason=iyPositionReason(item.position,item.owner,ctx,same(item.approved,ctx.vaultAddress)||item.approvedForAll),ok=reason.indexOf("Eligible to stake")===0&&same(item.stake.owner,INJECTED_STAKING_ZERO);return "<div class='iy-item'><div><strong>Position #"+esc(item.id.toString())+"</strong><small>"+esc(reason)+"</small></div><div class='iy-item-right'><span class='"+(ok?"iy-ok":"iy-no")+"'>"+(ok?"Eligible":"Not eligible")+"</span><button data-iy-select='"+esc(item.id.toString())+"'>Use ID</button></div></div>"}).join("");
+      list.querySelectorAll("[data-iy-select]").forEach(function(button){button.addEventListener("click",function(){iy$("iyCandidateId").value=button.dataset.iySelect;iyCheckCandidate()})});
+      iySetText("iyCandidateStatus","Scan complete at block "+formatInteger(block)+". Each position is rechecked again immediately before any wallet action.")
+    }catch(e){iySetText("iyOwnedPositions",safeError(e))}
+  }
+  async function iyCheckCandidate(){
+    try{var id=iy$("iyCandidateId").value.trim();var ctx=await iyLoadContext(state.browserProvider||readProvider);if(!iyConnectedAccount())throw new Error("Connect your wallet to inspect positions you can stake.");var info=await iyLoadPosition(ctx,id,state.browserProvider||readProvider);iyShowCandidate(info,ctx)}catch(e){injectedStakingState.selectedCandidate=null;iySetButton("iyApproveNft",true);iySetButton("iyStakeNft",true);iySetText("iyCandidateStatus",safeError(e));iySetFacts("iyCandidateFacts",[])}
+  }
+  function iyCacheKey(account,ctx){return "injected-staked-ids-v1:"+String(ctx.vaultAddress).toLowerCase()+":"+String(account).toLowerCase()}
+  function iySavedIds(account,ctx){try{var a=JSON.parse(localStorage.getItem(iyCacheKey(account,ctx))||"[]");return Array.isArray(a)?a.filter(function(x){return /^(0|[1-9][0-9]{0,77})$/.test(String(x))}).slice(0,50):[]}catch(_){return []}}
+  function iySaveId(account,ctx,id,remove){var ids=iySavedIds(account,ctx).filter(function(x){return String(x)!==String(id)});if(!remove)ids.push(String(id));try{localStorage.setItem(iyCacheKey(account,ctx),JSON.stringify(ids.slice(-50)))}catch(_){} }
+  async function iyLoadStake(){
+    try{
+      var id=iy$("iyStakeId").value.trim();if(!/^(0|[1-9][0-9]{0,77})$/.test(id)||BigInt(id)>((1n<<256n)-1n))throw new Error("Enter a valid NFT token ID.");if(!iyConnectedAccount())throw new Error("Connect the staking-owner wallet on PulseChain.");var ctx=await iyLoadContext(state.browserProvider||readProvider);var s=await ctx.vault.stakes(id);
+      if(!same(s.owner,iyConnectedAccount()))throw new Error("This NFT is not registered to the connected staking owner.");
+      var custody=await ctx.manager.ownerOf(id);if(!same(custody,ctx.vaultAddress))throw new Error("The position NFT is not in vault custody.");
+      var p=await ctx.manager.positions(id),pending=await ctx.vault.pendingLiquidity(id),head=ctx.blockNumber,activationAt=Number(s.depositedBlock)+Number(ctx.maturityBlocks),tranches=[];
+      for(var i=0;i<Number(ctx.maturityBlocks);i++){var tr=await ctx.vault.tranches(id,i);if(BigInt(tr.liquidity)>0n)tranches.push({block:Number(tr.observedBlock),amount:BigInt(tr.liquidity),matures:Number(tr.observedBlock)+Number(ctx.maturityBlocks)})}
+      injectedStakingState.selectedStakeId=String(id);injectedStakingState.selectedStake={ctx:ctx,stake:s,position:p,pending:BigInt(pending),tranches:tranches};
+      iySetText("iyStakeStatus",s.active?"Active and earning on eligible synchronized liquidity.":head>=activationAt?"Maturity reached. Activate this position to begin earning.":"Waiting for the eight-block maturity period.");
+      iySetFacts("iyStakeFacts",[["Token ID",String(id)],["Staking owner",s.owner],["Active",s.active?"Yes":"No"],["Eligible liquidity",s.eligibleLiquidity.toString()],["Tracked liquidity",s.trackedLiquidity.toString()],["Unobserved / pending liquidity",String(pending)],["Deposited at block",String(s.depositedBlock)],["Current block",String(head)],["Pool fees recorded at last checkpoint",String(p.tokensOwed0)+" / "+String(p.tokensOwed1)]]);
+      var track=iy$("iyMaturityTrack"),pct=Math.max(0,Math.min(100,Math.floor((head-Number(s.depositedBlock))/Number(ctx.maturityBlocks)*100)));track.hidden=Boolean(s.active);iy$("iyMaturityProgress").style.width=pct+"%";
+      iySetButton("iyActivate",!(!s.active&&head>=activationAt&&!ctx.activationsPaused&&ctx.infrastructureReady&&ctx.mainReady));
+      var syncNeeded=BigInt(pending)>0n||tranches.some(function(t){return head>=t.matures});iySetButton("iySync",!(!ctx.activationsPaused&&ctx.infrastructureReady&&ctx.mainReady&&syncNeeded));
+      iySetButton("iyCollectFees",false);
+      iySetButton("iyUnstake",false)
+    }catch(e){injectedStakingState.selectedStakeId=null;injectedStakingState.selectedStake=null;iySetText("iyStakeStatus",safeError(e));iySetFacts("iyStakeFacts",[]);iy$("iyMaturityTrack").hidden=true;["iyActivate","iySync","iyCollectFees","iyUnstake"].forEach(function(id){iySetButton(id,true)})}
+  }
+  async function iyRefresh(silent){
+    if(injectedStakingState.refreshing)return;injectedStakingState.refreshing=true;
+    try{
+      if(!iyIsConfigured()){injectedStakingState.context=null;iySetDeploymentState("warn","Staking deployment not configured — wallet actions are disabled.");iySetText("iyUpkeepStatus","Set the deployed vault address and runtime code hash to read protocol state.");iySetButton("iyScanPositions",true);iySetButton("iyRefresh",false);["iyCheckCandidate","iyApproveNft","iyStakeNft","iyLoadStake","iyActivate","iySync","iyCollectFees","iyUnstake","iyClaimInjector","iyClaimWeth","iyClaimKeeper","iyProcessBatch"].forEach(function(id){iySetButton(id,true)});injectedStakingState.refreshing=false;return}
+      var ctx=await iyLoadContext(readProvider);injectedStakingState.context=ctx;
+      if(!ctx.infrastructureReady)iySetDeploymentState("bad","Deployment loaded, but the policy's pinned infrastructure check failed: "+ctx.infrastructureError);
+      else if(!ctx.mainReady)iySetDeploymentState("warn","Vault and contract wiring verified. The exact 1% main pool is not registered, so staking, activation and liquidity sync are unavailable; deposits and activations are also paused.");
+      else if(ctx.depositsPaused||ctx.activationsPaused)iySetDeploymentState("warn","Vault and main pool verified. Owner pause controls currently pause deposits or activation and liquidity sync.");
+      else iySetDeploymentState("good","Vault, code hash, wiring, infrastructure and registered 1% pool verified.");
+      iySetButton("iyScanPositions",!iyConnectedAccount()||!ctx.infrastructureReady||!ctx.mainReady||ctx.depositsPaused);
+      iySetButton("iyCheckCandidate",!iyConnectedAccount());
+      var account=iyConnectedAccount();
+      if(account){
+        var batch=ctx.distributor,parts=await Promise.all([batch.sharesOf(account),batch.beneficiaryCount(),batch.unpaid(account,0),batch.unpaid(account,1),batch.keeperCredit(account),batch.nextEpochAt(),batch.epochOpen(),batch.cursor(),batch.epochEnd(),ctx.distributor.asset(0),ctx.distributor.asset(1),ctx.helper.checkUpkeep(),ctx.token.pendingMint(),ctx.controller.cyclesPaused()]);
+        iySetText("iyShares",String(parts[0]));iySetText("iyBeneficiaryCount",String(parts[1]));iySetText("iyUnpaidInjector",iyTrimUnits(parts[2],18)+" INJECTOR");iySetText("iyUnpaidWeth",iyTrimUnits(parts[3],18)+" WETH");iySetText("iyKeeperCredit",iyTrimUnits(parts[4],18)+" WETH");
+        var batchReady=Boolean(parts[6])||ctx.timestamp>=Number(parts[5]);
+        iySetText("iyBatchWhen",batchReady?"Eligible now":new Date(Number(parts[5])*1000).toLocaleString());
+        iySetText("iyBatchStatus",Boolean(parts[6])?"Batch "+String(await batch.epochId())+" is in progress: FIFO cursor "+String(parts[7])+" of "+String(parts[8])+". Up to 10 accounts per call.":batchReady?"A distribution batch is eligible. Any account can process up to 10 registered beneficiaries.":"Next batch eligibility is after the displayed time. The timer does not submit a transaction.");
+        iySetButton("iyClaimInjector",BigInt(parts[2])===0n);iySetButton("iyClaimWeth",BigInt(parts[3])===0n);iySetButton("iyClaimKeeper",BigInt(parts[4])===0n);iySetButton("iyProcessBatch",!batchReady||BigInt(parts[1])===0n);
+        iySetText("iyPendingMint",iyTrimUnits(parts[12],18)+" INJECTED");iySetText("iyMaxCycle",iyTrimUnits(parts[11].maxAmount,18)+" INJECTED");iySetText("iyDayRemaining",iyTrimUnits(parts[11].dayRemaining,18)+" INJECTED");iySetText("iyBlockRemaining",iyTrimUnits(parts[11].blockRemaining,18)+" INJECTED");
+        iySetText("iyUpkeepStatus",Boolean(parts[13])?"Cycles are paused. The helper result is accounting-only.":Boolean(parts[11].accountingReady)?"Accounting limits allow a cycle amount; the execution still must pass quote/TWAP or owner price-limit checks.":"No cycle amount is currently available under the on-chain accounting limits.");
+        iySetButton("iyLoadStake",false);
+        var cached=iySavedIds(account,ctx),autoId=null;for(var ci=0;ci<cached.length;ci++){var cs=await ctx.vault.stakes(cached[ci]);if(same(cs.owner,account)){autoId=cached[ci];break}}
+        if(autoId){iy$("iyStakeId").value=autoId;injectedStakingState.selectedStakeId=autoId;await iyLoadStake()}
+        else if(injectedStakingState.selectedStakeId&&iy$("iyStakeId").value===injectedStakingState.selectedStakeId)await iyLoadStake()
+      }else{
+        ["iyShares","iyBeneficiaryCount","iyUnpaidInjector","iyUnpaidWeth","iyKeeperCredit","iyBatchWhen","iyPendingMint","iyMaxCycle","iyDayRemaining","iyBlockRemaining"].forEach(function(id){iySetText(id,"Connect wallet" )});iySetText("iyBatchStatus","Connect your wallet on PulseChain to read personal rewards and submit an optional claim.");iySetText("iyUpkeepStatus","Wallet connection is required for a live accounting check.");["iyScanPositions","iyCheckCandidate","iyApproveNft","iyStakeNft","iyLoadStake","iyActivate","iySync","iyCollectFees","iyUnstake","iyClaimInjector","iyClaimWeth","iyClaimKeeper","iyProcessBatch"].forEach(function(id){iySetButton(id,true)})
+      }
+    }catch(e){injectedStakingState.context=null;iySetDeploymentState("bad","Could not verify the staking deployment: "+safeError(e));["iyScanPositions","iyCheckCandidate","iyApproveNft","iyStakeNft","iyLoadStake","iyActivate","iySync","iyCollectFees","iyUnstake","iyClaimInjector","iyClaimWeth","iyClaimKeeper","iyProcessBatch"].forEach(function(id){iySetButton(id,true)});["iyShares","iyBeneficiaryCount","iyUnpaidInjector","iyUnpaidWeth","iyKeeperCredit","iyBatchWhen","iyPendingMint","iyMaxCycle","iyDayRemaining","iyBlockRemaining"].forEach(function(id){iySetText(id,"Unavailable")});if(!silent)toast("Staking state could not be verified. No transaction was prepared.","error")}
+    finally{injectedStakingState.refreshing=false}
+  }
+  function iyReviewTx(spec){
+    var account=iyConnectedAccount();if(!account)return toast("Connect the staking owner wallet on PulseChain first.","error");
+    var target=E.getAddress(spec.target),args=spec.args||[];
+    reviewTransaction({kicker:spec.kicker||"INJECTED staking",title:spec.title,notice:"The page checks the exact action against current contract state, simulates it through the connected wallet and independent RPC quorum, and shows the exact destination and calldata before the wallet prompt.",rows:[["Network","PulseChain · chain ID 369"],["From",account,"mono"],["To",target,"mono"],["Action",spec.method],["Position NFT",spec.tokenId==null?"—":String(spec.tokenId)],["Value","0 PLS"]],confirmLabel:spec.confirmLabel||"Confirm in wallet",execute:async function(progress){
+      await ensurePulseChain();if(!same(state.account,account)||!state.rawWallet)throw new Error("Connected wallet changed after review.");
+      var signer=await getSigner(),ctx=await iyLoadContext(signer.provider);if(!same(state.account,account))throw new Error("Connected account changed before simulation.");
+      if(spec.preflight)await spec.preflight(ctx,account,signer.provider);
+      var contract=iyContract(target,spec.abi,signer),fn=contract[spec.method],data=contract.interface.encodeFunctionData(spec.method,args);
+      await criticalEthCall(spec.title+" independent simulation",target,data,account,0n,true);
+      await fn.staticCall.apply(fn,args.concat([{from:account}]));
+      await fn.estimateGas.apply(fn,args);
+      return sendExactTransaction(spec.title,exactTransactionIntent(account,target,data,0n),function(nonce){return fn.apply(fn,args.concat([{nonce:nonce,chainId:CHAIN.id}]))},progress)
+    },onSuccess:async function(receipt){await waitForReadBlock(receipt.blockNumber);if(spec.after)await spec.after(account);toast(spec.success||"Confirmed on PulseChain.","success");await iyRefresh(true);if(spec.refreshStake)await iyLoadStake()}})
+  }
+  async function iyEnsureStakePosition(ctx,account,id,needEmpty,provider){
+    if(!ctx.infrastructureReady||!ctx.mainReady)throw new Error("Policy infrastructure and the finalized 1% main pool must pass on-chain checks.");
+    if(ctx.depositsPaused)throw new Error("Vault deposits are paused.");
+    var info=await iyLoadPosition(ctx,id,provider||state.browserProvider||readProvider);
+    if(!same(info.owner,account))throw new Error("The connected wallet no longer owns this NFT.");
+    if(info.eligible.indexOf("Eligible")!==0)throw new Error(info.eligible);
+    if(needEmpty&&!same(info.stake.owner,INJECTED_STAKING_ZERO))throw new Error("This NFT is already registered in the vault.");
+    return info
+  }
+  function iyApproveCandidate(){var id=iy$("iyCandidateId").value.trim();try{var tokenId=BigInt(id);iyReviewTx({target:ADDR.positionManager,abi:INJECTED_STAKING_ABI.manager,method:"approve",args:[INJECTED_STAKING_CONFIG.vaultAddress,tokenId],title:"Approve one LP NFT",tokenId:id,preflight:async function(ctx,account,provider){await iyEnsureStakePosition(ctx,account,id,true,provider)},success:"Exact NFT approval confirmed. Review and submit the separate stake transaction when ready."})}catch(e){toast(safeError(e),"error")}}
+  function iyStakeCandidate(){var id=iy$("iyCandidateId").value.trim();try{var tokenId=BigInt(id);iyReviewTx({target:INJECTED_STAKING_CONFIG.vaultAddress,abi:INJECTED_STAKING_ABI.vault,method:"stake",args:[tokenId],title:"Stake eligible LP NFT",tokenId:id,preflight:async function(ctx,account,provider){var info=await iyEnsureStakePosition(ctx,account,id,true,provider);if(!same(info.approved,ctx.vaultAddress)&&!info.approvedForAll)throw new Error("Approve this exact NFT to the vault first.")},after:function(account){var ctx=injectedStakingState.context;if(ctx)iySaveId(account,ctx,id,false)},success:"LP position staked. It becomes eligible for activation after eight blocks."})}catch(e){toast(safeError(e),"error")}}
+  function iyActionFromStake(action){var id=injectedStakingState.selectedStakeId;if(!id)return toast("Load a staked NFT first.","error");var common={tokenId:id,kicker:"LP position #"+id};
+    if(action==="activate")iyReviewTx(Object.assign(common,{target:INJECTED_STAKING_CONFIG.vaultAddress,abi:INJECTED_STAKING_ABI.vault,method:"activate",args:[BigInt(id)],title:"Activate eligible LP position",preflight:async function(ctx,account,provider){var s=await ctx.vault.stakes(id);if(!same(s.owner,account)||s.active)throw new Error("This position is not awaiting activation for this wallet.");if(ctx.activationsPaused||!ctx.mainReady||!ctx.infrastructureReady)throw new Error("Activation is paused or the main pool policy checks are not ready.");if(await provider.getBlockNumber()<Number(s.depositedBlock)+Number(ctx.maturityBlocks))throw new Error("The eight-block maturity period has not passed.")},success:"LP position activated. Eligible liquidity now contributes reward shares.",refreshStake:true}));
+    else if(action==="sync")iyReviewTx(Object.assign(common,{target:INJECTED_STAKING_CONFIG.vaultAddress,abi:INJECTED_STAKING_ABI.vault,method:"syncLiquidity",args:[BigInt(id)],title:"Synchronize LP liquidity",preflight:async function(ctx,account){var s=await ctx.vault.stakes(id);if(same(s.owner,INJECTED_STAKING_ZERO)||!same(await ctx.manager.ownerOf(id),ctx.vaultAddress))throw new Error("This NFT is no longer staked.");if(ctx.activationsPaused||!ctx.infrastructureReady||!ctx.mainReady)throw new Error("Liquidity synchronization is paused or main-pool policy checks are not ready.")},success:"Liquidity synchronization confirmed. Newly observed liquidity starts its own eight-block maturity period.",refreshStake:true}));
+    else if(action==="collect")iyReviewTx(Object.assign(common,{target:INJECTED_STAKING_CONFIG.vaultAddress,abi:INJECTED_STAKING_ABI.vault,method:"collectFees",args:[BigInt(id)],title:"Collect v3 pool fees",preflight:async function(ctx,account){var s=await ctx.vault.stakes(id);if(!same(s.owner,account))throw new Error("Only the staking owner can collect this position's pool fees.")},success:"Pool fees collected to the staking owner wallet.",refreshStake:true}));
+    else if(action==="unstake")iyReviewTx(Object.assign(common,{target:INJECTED_STAKING_CONFIG.vaultAddress,abi:INJECTED_STAKING_ABI.vault,method:"unstake",args:[BigInt(id),iyConnectedAccount()],title:"Unstake LP NFT to connected wallet",preflight:async function(ctx,account){var s=await ctx.vault.stakes(id);if(!same(s.owner,account))throw new Error("Only the recorded staking owner can unstake this NFT.");if(!same(iyConnectedAccount(),account))throw new Error("Recipient must remain the connected staking owner.")},after:function(account){var ctx=injectedStakingState.context;if(ctx)iySaveId(account,ctx,id,true)},success:"LP NFT returned to the connected staking owner. Previously earned reward debt remains claimable."}))
+  }
+  function iyRewardAction(method,args,title){var ctx=injectedStakingState.context;if(!ctx)return toast("Refresh and verify the staking deployment first.","error");iyReviewTx({target:ctx.distributorAddress,abi:INJECTED_STAKING_ABI.distributor,method:method,args:args,title:title,kicker:"Dual reward distributor",preflight:async function(fresh,account){if(!same(fresh.distributorAddress,ctx.distributorAddress))throw new Error("Distributor address changed after review.");if(method==="claim"&&BigInt(await fresh.distributor.unpaid(account,args[0]))===0n)throw new Error("No accrued amount is currently available for this reward asset.");if(method==="claimKeeperFor"&&BigInt(await fresh.distributor.keeperCredit(account))===0n)throw new Error("No keeper WETH credit is currently available for this wallet.");if(method==="process"){var due=Boolean(await fresh.distributor.epochOpen())||fresh.timestamp>=Number(await fresh.distributor.nextEpochAt());if(!due||BigInt(await fresh.distributor.beneficiaryCount())===0n)throw new Error("No distribution batch is currently eligible.")}},success:title+" confirmed."})}
+  function bindInjectedStaking(){
+    if(iy$("iyScanPositions").dataset.bound)return;iy$("iyScanPositions").dataset.bound="1";
+    iy$("iyScanPositions").addEventListener("click",iyScanPositions);iy$("iyRefresh").addEventListener("click",function(){iyRefresh(false)});
+    iy$("iyCheckCandidate").addEventListener("click",iyCheckCandidate);iy$("iyApproveNft").addEventListener("click",iyApproveCandidate);iy$("iyStakeNft").addEventListener("click",iyStakeCandidate);
+    iy$("iyCandidateId").addEventListener("input",function(){injectedStakingState.selectedCandidate=null;iySetFacts("iyCandidateFacts",[]);iySetButton("iyApproveNft",true);iySetButton("iyStakeNft",true);iySetText("iyCandidateStatus","Check this token ID again before continuing.")});
+    iy$("iyLoadStake").addEventListener("click",iyLoadStake);iy$("iyActivate").addEventListener("click",function(){iyActionFromStake("activate")});iy$("iySync").addEventListener("click",function(){iyActionFromStake("sync")});iy$("iyCollectFees").addEventListener("click",function(){iyActionFromStake("collect")});iy$("iyUnstake").addEventListener("click",function(){iyActionFromStake("unstake")});
+    iy$("iyStakeId").addEventListener("input",function(){injectedStakingState.selectedStakeId=null;injectedStakingState.selectedStake=null;iySetFacts("iyStakeFacts",[]);iy$("iyMaturityTrack").hidden=true;["iyActivate","iySync","iyCollectFees","iyUnstake"].forEach(function(id){iySetButton(id,true)});iySetText("iyStakeStatus","Load this token ID again before taking an action.")});
+    iy$("iyClaimInjector").addEventListener("click",function(){iyRewardAction("claim",[0],"Claim accrued INJECTOR")});iy$("iyClaimWeth").addEventListener("click",function(){iyRewardAction("claim",[1],"Claim accrued WETH")});iy$("iyClaimKeeper").addEventListener("click",function(){iyRewardAction("claimKeeperFor",[iyConnectedAccount()],"Claim keeper WETH credit")});iy$("iyProcessBatch").addEventListener("click",function(){iyRewardAction("process",[10],"Process reward batch (up to 10 accounts)")});
+    window.addEventListener("iy-wallet-state",function(){iyRefresh(true)})
+  }
+  function refreshInjectedStaking(){if(iy$("view-staking")&&iy$("view-staking").classList.contains("active"))iyRefresh(true)}
+
   async function init(){
     restoreTokenLogoCache();await migrateLegacyCompoundSessions();restorePendingCompoundSessions();
-    bindUi();renderWallet();renderPositions();renderRangeBars($("rangeBars"));renderAdminAccess(false);
+    bindUi();bindInjectedStaking();await iyRefresh(true);renderWallet();renderPositions();renderRangeBars($("rangeBars"));renderAdminAccess(false);
     navigate(location.hash.slice(1)||"swap",true);await runStartup()
   }
   init().catch(function(err){console.error(err);failPreloader(err)});
