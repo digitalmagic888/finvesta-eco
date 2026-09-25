@@ -58,6 +58,10 @@
     .main{min-height:calc(100vh - 70px)}
     .view{display:none;padding-bottom:100px}
     .view.active{display:block}
+    .staking-coming-soon{min-height:340px;margin:clamp(35px,6vw,68px) auto 0;padding:clamp(24px,6vw,72px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;text-align:center}
+    .staking-coming-soon p{max-width:680px;margin:0;color:var(--muted);font-size:clamp(15px,2vw,20px);line-height:1.7}
+    .staking-coming-soon strong{color:var(--text);white-space:nowrap}
+    .staking-coming-soon h1{margin:0;color:var(--cyan);font:900 clamp(30px,6vw,72px)/1.05 var(--display);letter-spacing:-.035em;text-wrap:balance}
     .hero{padding:76px 0 44px;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(290px,.8fr);gap:70px;align-items:end}
     .eyebrow,.kicker{margin:0 0 14px;color:var(--cyan);font-size:9px;font-weight:900;letter-spacing:.2em;text-transform:uppercase}
     .eyebrow{display:flex;align-items:center;gap:10px}
@@ -717,7 +721,7 @@
     @keyframes toastIn{from{opacity:0;transform:translateY(8px)}}
     @media(max-height:720px){.app-preloader.has-error{place-items:start center;padding-block:12px}.app-preloader.has-error .preloader-visual{display:none}.app-preloader.has-error .preloader-card{margin:auto 0}}
     @media(max-width:900px){
-      .nav{display:none}.status-chip{display:none}.hero{grid-template-columns:1fr;gap:24px;padding-top:56px}.grid-2,.positions-layout{grid-template-columns:1fr}.position-detail{position:static}.protocol-grid{grid-template-columns:1fr}.journey-grid{grid-template-columns:1fr;gap:20px}.journey-node__track{grid-template-columns:auto 1fr}.journey-node p{max-width:none}.position-card__summary{grid-template-columns:1fr 1fr}.position-card__quick-stats{grid-template-columns:1fr 1fr}.summary-grid{grid-template-columns:1fr 1fr}.mobile-nav{position:fixed;display:grid;grid-template-columns:repeat(4,1fr);left:0;right:0;bottom:0;z-index:60;padding:8px 12px calc(8px + env(safe-area-inset-bottom));border-top:1px solid var(--line2);background:rgba(7,10,12,.94);backdrop-filter:blur(16px)}.mobile-nav button{min-height:43px;border:0;border-radius:4px;background:transparent;color:#77909b;font-size:9px;font-weight:900}.mobile-nav button.active{background:rgba(0,246,255,.07);color:var(--cyan)}.footer{padding-bottom:120px}
+      .nav{display:none}.status-chip{display:none}.hero{grid-template-columns:1fr;gap:24px;padding-top:56px}.grid-2,.positions-layout{grid-template-columns:1fr}.position-detail{position:static}.protocol-grid{grid-template-columns:1fr}.journey-grid{grid-template-columns:1fr;gap:20px}.journey-node__track{grid-template-columns:auto 1fr}.journey-node p{max-width:none}.position-card__summary{grid-template-columns:1fr 1fr}.position-card__quick-stats{grid-template-columns:1fr 1fr}.summary-grid{grid-template-columns:1fr 1fr}.mobile-nav{position:fixed;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));left:0;right:0;bottom:0;z-index:60;padding:8px 12px calc(8px + env(safe-area-inset-bottom));border-top:1px solid var(--line2);background:rgba(7,10,12,.94);backdrop-filter:blur(16px)}.mobile-nav button{min-height:43px;border:0;border-radius:4px;background:transparent;color:#77909b;font-size:9px;font-weight:900}.mobile-nav button.active{background:rgba(0,246,255,.07);color:var(--cyan)}.footer{padding-bottom:120px}
     }
     @media(max-width:620px){
       .shell{width:min(100% - 24px,1220px)}.topbar__in{height:62px;gap:10px}.brand__copy{display:none}.brand__mark{width:37px;height:37px}.wallet-button{max-width:150px;padding:0 10px}.hero{padding-top:42px}.hero h1{font-size:42px}.hero__copy{font-size:12px}.panel-pad{padding:17px}.panel-head h2{font-size:21px}.pill{display:none}.token-select{min-width:132px}.amount-row input,.amount-row output{font-size:32px}.route-map{grid-template-columns:50px 1fr 42px 1fr 50px}.route-core{width:42px;height:42px}.metric-grid{grid-template-columns:1fr}.metric-grid div{border-right:0;border-bottom:1px solid rgba(101,219,232,.1)}.section-head{align-items:flex-start;flex-direction:column}.summary-grid{grid-template-columns:1fr}.position-tabs{display:grid;grid-template-columns:1fr;margin-bottom:13px}.position-tab{width:100%;display:flex;align-items:center;justify-content:space-between;text-align:left}.position-actions{display:grid;grid-template-columns:1fr;gap:8px}.position-sort{width:100%;grid-template-columns:auto repeat(2,minmax(0,1fr))}.position-sort__option{padding-inline:8px}.position-card__summary{grid-template-columns:1fr}.position-card .secondary{width:100%}.position-card__quick-stats,.position-card__drawer-actions{grid-template-columns:1fr}.position-card__drawer-head{align-items:flex-start;flex-direction:column}.position-detail__value{align-items:flex-start;flex-direction:column}.field-row,.funding-grid,.field-action-row,.mint-token-grid,.admin-grid{grid-template-columns:1fr}.field-label{align-items:flex-start;flex-direction:column}.field-percentages{justify-content:flex-start}.field-percent,.range-presets button{min-height:40px;padding-inline:11px}.balance-actions button{min-height:30px}.range-composer__head,.price-source-panel__head,.admin-panel__head{align-items:flex-start;flex-direction:column}.range-slider-row{grid-template-columns:55px minmax(0,1fr);}.range-slider-row output{grid-column:2}.price-input-wrap{grid-template-columns:1fr}.price-input-wrap span{max-width:none;padding:0 12px 10px;text-align:left}.range-strategy{width:100%}.range-strategy button{flex:1;min-height:42px}.footer__in{align-items:flex-start;flex-direction:column}.topbar__actions .icon-button{display:none}.topbar__actions #settingsButton{display:grid}
@@ -795,6 +799,7 @@
       <nav class="nav" aria-label="Primary">
         <button data-nav="swap" class="active">Swap</button>
         <button data-nav="positions">Positions</button>
+        <button type="button" data-nav="staking" aria-controls="view-staking">Staking</button>
         <button data-nav="protocol">Protocol Fees</button>
         <button data-nav="docs">Docs</button>
       </nav>
@@ -949,6 +954,15 @@
             <article class="journey-node"><div class="journey-node__track"><b>05</b><i></i></div><h3>MANAGE</h3><p>Submit only after an explicit wallet confirmation.</p></article>
           </div>
         </section>
+      </div>
+    </section>
+
+    <section class="view" id="view-staking" aria-label="Staking" aria-describedby="stakingMessage">
+      <div class="shell">
+        <div class="panel staking-coming-soon">
+          <p id="stakingMessage">Earn <strong>$INJECTOR</strong> &amp; <strong>$WETH</strong> for staking eligible LP NFT position.</p>
+          <h1>COMING SOON!</h1>
+        </div>
       </div>
     </section>
 
@@ -1226,7 +1240,7 @@
   </main>
 
   <footer class="footer"><div class="shell footer__in"><span>FINVESTA V3 · PULSECHAIN</span><span>Self-custodial interface · <a href="#docs">Technical &amp; security docs</a></span><span id="footerBlock">RPC —</span></div></footer>
-  <nav class="mobile-nav" aria-label="Mobile navigation"><button data-nav="swap" class="active">SWAP</button><button data-nav="positions">POSITIONS</button><button data-nav="protocol">FEES</button><button data-nav="docs">DOCS</button></nav>
+  <nav class="mobile-nav" aria-label="Mobile navigation"><button data-nav="swap" class="active">SWAP</button><button data-nav="positions">POSITIONS</button><button type="button" data-nav="staking" aria-controls="view-staking">STAKING</button><button data-nav="protocol">FEES</button><button data-nav="docs">DOCS</button></nav>
   <div class="modal-layer" id="modalLayer" hidden><div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"></div></div>
   <aside class="wc-pairing-tools" id="wcPairingTools" aria-labelledby="wcPairingToolsState" hidden>
     <div class="wc-pairing-tools__head"><span class="wc-pairing-tools__state" id="wcPairingToolsState" role="status"><i aria-hidden="true"></i>WalletConnect pairing ready</span><button type="button" class="wc-pairing-tools__close" id="cancelWcPairing" aria-label="Cancel WalletConnect pairing" title="Cancel pairing">×</button></div>
@@ -8325,8 +8339,8 @@ lit-html/directives/ref.js:
   }
 
   function navigate(name,replace){
-    if(["swap","positions","protocol","docs"].indexOf(name)<0)name="swap";
-    if(startupState.readOnlyBypass&&name!=="positions"&&name!=="docs"){name="positions";replace=false}
+    if(["swap","positions","staking","protocol","docs"].indexOf(name)<0)name="swap";
+    if(startupState.readOnlyBypass&&name!=="positions"&&name!=="docs"&&name!=="staking"){name="positions";replace=false}
     document.querySelectorAll(".view").forEach(function(v){v.classList.toggle("active",v.id==="view-"+name)});
     document.querySelectorAll("[data-nav]").forEach(function(b){b.classList.toggle("active",b.dataset.nav===name)});
     if(!replace)history.replaceState(null,"","#"+name);
