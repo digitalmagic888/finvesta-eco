@@ -1254,7 +1254,6 @@ body.has-mobile-swap-dock .view.active{padding-bottom:calc(178px + env(safe-area
     .surf-wave--mid{z-index:2;bottom:3%;height:52%;opacity:.86;animation:surfWaveDrift 14s linear infinite reverse}
     .surf-wave--front{z-index:5;bottom:-15%;height:59%;filter:drop-shadow(0 -7px 17px rgba(57,236,226,.12));animation:surfWaveDrift 9s linear infinite}
     .surf-board{position:absolute;z-index:3;left:50%;top:54%;width:clamp(180px,27vw,330px);height:clamp(27px,4vw,42px);border-radius:90% 12% 75% 18% / 60% 22% 80% 40%;transform:translate(-46%,-50%) rotate(-8deg);background:linear-gradient(105deg,#fff3b5 0%,#ffb15c 27%,#ff58ad 58%,#8b6cff 100%);box-shadow:0 8px 17px rgba(4,10,24,.45),0 0 22px rgba(255,104,186,.48),inset 0 2px 1px rgba(255,255,255,.75);animation:surfBoardRide 2.35s ease-in-out infinite}
-    .surf-board::after{content:"";position:absolute;left:50%;bottom:-10px;width:14px;height:13px;clip-path:polygon(50% 0,100% 100%,0 100%);background:linear-gradient(140deg,#ff9f7c,#7355d8);filter:drop-shadow(0 3px 3px rgba(0,0,0,.35))}
     .surf-board i{position:absolute;left:13%;right:12%;top:5px;height:1px;border-radius:50%;background:rgba(255,255,255,.82);transform:rotate(-2deg)}
     .surf-finny{position:absolute;z-index:4;left:50%;top:25%;width:clamp(245px,38vw,495px);height:clamp(245px,38vw,495px);overflow:visible;transform:translateX(-50%);filter:drop-shadow(0 22px 25px rgba(2,10,23,.42)) drop-shadow(0 0 26px rgba(71,255,246,.2));animation:finnySurfRide 2.35s cubic-bezier(.43,0,.57,1) infinite;transform-origin:50% 73%}
     .surf-scene__label{position:absolute;z-index:7;top:22px;left:24px;display:inline-flex;align-items:center;gap:8px;padding:9px 12px;border:1px solid rgba(127,238,241,.22);border-radius:999px;background:rgba(7,18,31,.54);backdrop-filter:blur(12px);color:#b9f9f5;font-size:8px;font-weight:950;letter-spacing:.16em}
@@ -1310,6 +1309,27 @@ body.has-mobile-swap-dock .view.active{padding-bottom:calc(178px + env(safe-area
     @media(max-height:690px) and (min-width:621px){.finny-surf-card{min-height:0}.finny-surf-scene{height:min(62vh,480px)}.preloader-content .preloader-steps{margin-top:14px}.preloader-content .preloader-note{margin-top:10px}}
     @media(max-height:620px) and (max-width:620px){.app-preloader{place-items:start center;padding:8px}.finny-surf-card{margin:auto 0}.finny-surf-scene{height:190px;min-height:190px}.surf-finny{width:195px;height:195px;top:17%}.surf-board{top:57%}}
     @media(prefers-reduced-motion:reduce){.finny-surf-scene *, .finny-surf-scene::before{animation:none!important;scroll-behavior:auto!important}.surf-wave--far{transform:translateX(-18%)}.surf-wave--mid{transform:translateX(-29%)}.surf-wave--front{transform:translateX(-11%)}.surf-finny{transform:translateX(-50%) rotate(-2deg)}.surf-board{rotate:-8deg}}
+      /* One ride rig keeps Finny's fins planted on the deck through every wave phase. */
+    .app-preloader{align-items:safe center}
+    .finny-surf-scene{--surf-scene-height:clamp(390px,61vh,650px);height:var(--surf-scene-height)}
+    .surf-rider{position:absolute;z-index:5;left:50%;bottom:22%;width:min(78%,calc(var(--surf-scene-height)*.66),430px);aspect-ratio:1;transform:translateX(-50%);transform-origin:50% 98%;animation:surfRiderRide 2.35s cubic-bezier(.43,0,.57,1) infinite;pointer-events:none}
+    .surf-rider .surf-finny{z-index:2;inset:0;width:100%;height:100%;transform:none;animation:none;filter:drop-shadow(0 10px 12px #020a174d) drop-shadow(0 0 18px #47fff626)}
+    .surf-rider .surf-board{z-index:1;left:50%;top:98%;width:114%;height:8%;min-height:14px;max-height:34px;transform:translate(-50%,-50%) rotate(-6deg);translate:none;rotate:none;animation:none}
+    .surf-rider .surf-board::before{content:"";position:absolute;left:35%;right:24%;top:16%;height:37%;border-radius:50%;background:#402a354f;filter:blur(3px)}
+    .surf-rider::after{content:"";position:absolute;z-index:0;left:-13%;right:-13%;top:102%;height:7%;border-top:2px solid #d8ffffb3;border-radius:50%;transform:rotate(-6deg);background:radial-gradient(ellipse at 50% 0,#7bfff936,transparent 70%);filter:drop-shadow(0 0 8px #55fff566)}
+    .finny-surf-scene .surf-wave{left:0}
+    .finny-surf-scene .surf-wave--front{z-index:4;bottom:-24%;height:59%}
+    .surf-ripple{top:81%;z-index:3;width:43%}
+    .spray-a{left:66%;top:77%}.spray-b{left:26%;top:76%}
+    .glint-one{top:85%}.glint-two{top:90%}
+    @keyframes surfRiderRide{0%,100%{transform:translate(-50%,0) rotate(-2deg)}25%{transform:translate(-50%,-7px) rotate(1deg)}52%{transform:translate(-50%,2px) rotate(2deg)}76%{transform:translate(-50%,-4px) rotate(-1deg)}}
+    @media(max-width:900px){.finny-surf-scene{--surf-scene-height:clamp(270px,43svh,390px)}}
+    @media(max-width:620px){.finny-surf-scene{--surf-scene-height:clamp(218px,37svh,315px)}}
+    @media(max-width:380px){.finny-surf-scene{--surf-scene-height:clamp(205px,34svh,270px)}}
+    @media(max-height:690px) and (min-width:621px){.finny-surf-scene{--surf-scene-height:min(62vh,480px)}}
+    @media(max-height:620px) and (max-width:620px){.finny-surf-scene{--surf-scene-height:190px}}
+    @media(prefers-reduced-motion:reduce){.surf-rider{animation:none!important;transform:translateX(-50%) rotate(-2deg)}.surf-rider .surf-finny{transform:none}.surf-rider .surf-board{rotate:none}}
+
   </style>
 
 <style id="iy-wallet-observatory-styles">
@@ -1349,17 +1369,19 @@ body.has-mobile-swap-dock .view.active{padding-bottom:calc(178px + env(safe-area
         <div class="surf-scene__sun"></div>
         <div class="surf-scene__spray spray-a"></div><div class="surf-scene__spray spray-b"></div>
         <svg class="surf-wave surf-wave--far" viewBox="0 0 1600 520" preserveAspectRatio="none">
-          <defs><linearGradient id="surfFarFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4ce8e7" stop-opacity=".65"/><stop offset=".24" stop-color="#207ca5" stop-opacity=".82"/><stop offset="1" stop-color="#111b35"/></linearGradient><pattern id="surfFarPattern" width="800" height="520" patternUnits="userSpaceOnUse"><path d="M0 156 C110 111 202 111 304 153 S510 207 620 157 S729 112 800 151 L800 520 L0 520Z" fill="url(#surfFarFill)"/><path d="M0 156 C110 111 202 111 304 153 S510 207 620 157 S729 112 800 151" fill="none" stroke="#b3ffff" stroke-opacity=".56" stroke-width="3"/></pattern></defs><rect width="1600" height="520" fill="url(#surfFarPattern)"/>
+          <defs><linearGradient id="surfFarFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4ce8e7" stop-opacity=".65"/><stop offset=".24" stop-color="#207ca5" stop-opacity=".82"/><stop offset="1" stop-color="#111b35"/></linearGradient><pattern id="surfFarPattern" width="800" height="520" patternUnits="userSpaceOnUse"><path d="M0 156 C133 111 267 111 400 156 S667 201 800 156 L800 520 L0 520Z" fill="url(#surfFarFill)"/><path d="M0 156 C133 111 267 111 400 156 S667 201 800 156" fill="none" stroke="#b3ffff" stroke-opacity=".56" stroke-width="3"/></pattern></defs><rect width="1600" height="520" fill="url(#surfFarPattern)"/>
         </svg>
         <svg class="surf-wave surf-wave--mid" viewBox="0 0 1600 520" preserveAspectRatio="none">
-          <defs><linearGradient id="surfMidFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#32dce5" stop-opacity=".9"/><stop offset=".2" stop-color="#2373a5"/><stop offset="1" stop-color="#12182d"/></linearGradient><pattern id="surfMidPattern" width="800" height="520" patternUnits="userSpaceOnUse"><path d="M0 190 C120 128 220 134 325 179 S525 238 630 183 S733 130 800 174 L800 520 L0 520Z" fill="url(#surfMidFill)"/><path d="M0 190 C120 128 220 134 325 179 S525 238 630 183 S733 130 800 174" fill="none" stroke="#e1ffff" stroke-opacity=".72" stroke-width="4" stroke-linecap="round"/></pattern></defs><rect width="1600" height="520" fill="url(#surfMidPattern)"/>
+          <defs><linearGradient id="surfMidFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#32dce5" stop-opacity=".9"/><stop offset=".2" stop-color="#2373a5"/><stop offset="1" stop-color="#12182d"/></linearGradient><pattern id="surfMidPattern" width="800" height="520" patternUnits="userSpaceOnUse"><path d="M0 190 C133 132 267 132 400 190 S667 248 800 190 L800 520 L0 520Z" fill="url(#surfMidFill)"/><path d="M0 190 C133 132 267 132 400 190 S667 248 800 190" fill="none" stroke="#e1ffff" stroke-opacity=".72" stroke-width="4" stroke-linecap="round"/></pattern></defs><rect width="1600" height="520" fill="url(#surfMidPattern)"/>
         </svg>
-        <div class="surf-board" aria-hidden="true"><i></i></div>
-        <svg class="surf-finny" viewBox="0 0 1 1" focusable="false"><use href="#fv-art-mascot"/></svg>
+        <div class="surf-rider">
+          <div class="surf-board" aria-hidden="true"><i></i></div>
+          <svg class="surf-finny" viewBox="0 0 1 1" focusable="false"><use href="#fv-art-mascot"/></svg>
+        </div>
         <div class="surf-ripple ripple-one"></div><div class="surf-ripple ripple-two"></div>
         <span class="surf-scene__label"><b></b> CRUISING PULSECHAIN 369</span>
         <svg class="surf-wave surf-wave--front" viewBox="0 0 1600 520" preserveAspectRatio="none">
-          <defs><linearGradient id="surfFrontFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#38ecdc" stop-opacity=".88"/><stop offset=".16" stop-color="#12a9b7" stop-opacity=".93"/><stop offset=".55" stop-color="#155271"/><stop offset="1" stop-color="#101624"/></linearGradient><pattern id="surfFrontPattern" width="800" height="520" patternUnits="userSpaceOnUse"><path d="M0 221 C104 160 207 165 311 213 S513 269 618 216 S728 162 800 204 L800 520 L0 520Z" fill="url(#surfFrontFill)"/><path d="M0 221 C104 160 207 165 311 213 S513 269 618 216 S728 162 800 204" fill="none" stroke="#d8ffff" stroke-opacity=".83" stroke-width="5" stroke-linecap="round"/></pattern></defs><rect width="1600" height="520" fill="url(#surfFrontPattern)"/>
+          <defs><linearGradient id="surfFrontFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#38ecdc" stop-opacity=".88"/><stop offset=".16" stop-color="#12a9b7" stop-opacity=".93"/><stop offset=".55" stop-color="#155271"/><stop offset="1" stop-color="#101624"/></linearGradient><pattern id="surfFrontPattern" width="800" height="520" patternUnits="userSpaceOnUse"><path d="M0 221 C133 162 267 162 400 221 S667 280 800 221 L800 520 L0 520Z" fill="url(#surfFrontFill)"/><path d="M0 221 C133 162 267 162 400 221 S667 280 800 221" fill="none" stroke="#d8ffff" stroke-opacity=".83" stroke-width="5" stroke-linecap="round"/></pattern></defs><rect width="1600" height="520" fill="url(#surfFrontPattern)"/>
         </svg>
         <div class="surf-scene__glint glint-one"></div><div class="surf-scene__glint glint-two"></div>
       </div>
